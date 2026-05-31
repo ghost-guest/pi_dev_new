@@ -1,0 +1,535 @@
+internal/agent/gate_test.go:37:	a := New(nil, reg, NewSession(""), Options{Gate: g}, event.Discard)
+internal/agent/gate_test.go:39:	blocked := a.executeOne(context.Background(), provider.ToolCall{Name: "bash", Arguments: `{"command":"rm -rf /"}`})
+internal/agent/gate_test.go:40:	if !strings.HasPrefix(blocked.output, "blocked:") {
+internal/agent/gate_test.go:47:	ok := a.executeOne(context.Background(), provider.ToolCall{Name: "read_file", Arguments: `{"path":"/a"}`})
+internal/agent/gate_test.go:63:	a := New(nil, reg, NewSession(""), Options{}, event.Discard) // no Gate
+internal/agent/gate_test.go:64:	out := a.executeOne(context.Background(), provider.ToolCall{Name: "write_file", Arguments: `{"path":"/a"}`})
+internal/agent/gate_test.go:65:	if strings.HasPrefix(out.output, "blocked:") {
+internal/agent/ask.go:4:	"context"
+internal/agent/ask.go:18:// context (CallContext); with no asker (headless runs) it returns a "decide for
+internal/agent/ask.go:70:func (*AskTool) Execute(ctx context.Context, args json.RawMessage) (string, error) {
+internal/agent/ask.go:107:	_, _, asker, ok := CallContext(ctx)
+internal/agent/ask.go:120:// formatAnswers renders the user's selections as a compact, model-facing summary,
+internal/agent/ask.go:141:	return strings.TrimRight(b.String(), "\n")
+internal/agent/usage_test.go:21:		PromptTokens:     1000,
+internal/agent/usage_test.go:22:		CompletionTokens: 200,
+internal/agent/usage_test.go:23:		TotalTokens:      1200,
+internal/agent/usage_test.go:24:		CacheHitTokens:   900,
+internal/agent/usage_test.go:25:		CacheMissTokens:  100,
+internal/agent/usage_test.go:28:	if out := renderUsage(u, nil); !strings.Contains(out, "1200 tok") || !strings.Contains(out, "900 cached / 100 new") {
+internal/agent/usage_test.go:29:		t.Errorf("usage line = %q (want 1200 tok and 900 cached / 100 new)", out)
+internal/agent/usage_test.go:33:	if out := renderUsage(u, &provider.Pricing{CacheHit: 0.02, Input: 1, Output: 2, Currency: "¥"}); !strings.Contains(out, "¥0.0005") {
+internal/agent/usage_test.go:44:// cached count is reported; the displayed "new" value comes from
+internal/agent/usage_test.go:45:// PromptTokens - CacheHitTokens. Verifies the absolute split doesn't show 0.
+internal/agent/usage_test.go:48:		PromptTokens:     3540,
+internal/agent/usage_test.go:49:		CompletionTokens: 378,
+internal/agent/usage_test.go:50:		TotalTokens:      3918,
+internal/agent/usage_test.go:51:		CacheHitTokens:   1133,
+internal/agent/usage_test.go:52:		// CacheMissTokens deliberately 0 — provider only reported the hit
+internal/agent/usage_test.go:54:	if out := renderUsage(u, nil); !strings.Contains(out, "1133 cached / 2407 new") {
+internal/agent/usage_test.go:55:		t.Errorf("usage line = %q (want 1133 cached / 2407 new)", out)
+internal/agent/coordinator_test.go:4:	"context"
+internal/agent/coordinator_test.go:22:func (m *mockProvider) Stream(ctx context.Context, req provider.Request) (<-chan provider.Chunk, error) {
+internal/agent/coordinator_test.go:33:	for i := len(req.Messages) - 1; i >= 0; i-- {
+internal/agent/coordinator_test.go:34:		if req.Messages[i].Role == provider.RoleUser {
+internal/agent/coordinator_test.go:35:			return req.Messages[i].Content
+internal/agent/coordinator_test.go:41:// TestCoordinatorHandsPlanToExecutor checks the two-session handoff: the planner
+internal/agent/coordinator_test.go:42:// sees the raw task in its own session, and the executor receives the plan.
+internal/agent/coordinator_test.go:44:	planner := &mockProvider{name: "planner", chunks: []provider.Chunk{
+internal/agent/coordinator_test.go:53:	executor := New(exec, tool.NewRegistry(), NewSession("exec-sys"), Options{}, event.Discard)
+internal/agent/coordinator_test.go:54:	plannerSess := NewSession("planner-sys")
+internal/agent/coordinator_test.go:55:	coord := NewCoordinator(planner, plannerSess, nil, executor, 0, event.Discard)
+internal/agent/coordinator_test.go:57:	if err := coord.Run(context.Background(), "fix the bug"); err != nil {
+internal/agent/coordinator_test.go:61:	if got := lastUser(planner.lastReq); !strings.Contains(got, "fix the bug") {
+internal/agent/coordinator_test.go:62:		t.Errorf("planner saw user %q, want it to contain the task", got)
+internal/agent/coordinator_test.go:67:	// planner session must accumulate (system, user, assistant-plan) so its
+internal/agent/coordinator_test.go:68:	// prefix grows prepend-only and stays cache-stable.
+internal/agent/coordinator_test.go:69:	if n := len(plannerSess.Messages); n != 3 {
+internal/agent/coordinator_test.go:70:		t.Errorf("planner session has %d messages, want 3", n)
+internal/hook/hook_test.go:4:	"context"
+internal/hook/hook_test.go:119:	spawner := func(_ context.Context, in SpawnInput) SpawnResult {
+internal/hook/hook_test.go:123:	rep := Run(context.Background(), Payload{Event: PreToolUse, ToolName: "bash"}, hooks, spawner)
+internal/hook/hook_test.go:139:	spawner := func(_ context.Context, in SpawnInput) SpawnResult {
+internal/hook/hook_test.go:143:	Run(context.Background(), Payload{Event: PreToolUse, ToolName: "bash"}, hooks, spawner)
+internal/hook/hook_test.go:167:	ctx := context.Background()
+internal/hook/hook_test.go:195:	r := DefaultSpawner(context.Background(), SpawnInput{
+internal/agent/guards_test.go:4:	"context"
+internal/agent/guards_test.go:37:	if !strings.HasPrefix(out, "H") || !strings.HasSuffix(out, "T") {
+internal/agent/guards_test.go:99:func (f fakeTool) Execute(ctx context.Context, _ json.RawMessage) (string, error) {
+internal/agent/guards_test.go:154:	a := New(nil, reg, NewSession(""), Options{}, event.Discard)
+internal/agent/guards_test.go:157:	results := a.executeBatch(context.Background(), []provider.ToolCall{{Name: "a"}, {Name: "b"}, {Name: "c"}})
+internal/agent/guards_test.go:180:	a := New(nil, reg, NewSession(""), Options{}, event.Discard)
+internal/agent/guards_test.go:183:	a.executeBatch(context.Background(), []provider.ToolCall{{Name: "ro"}, {Name: "rw"}, {Name: "ro"}})
+internal/agent/session.go:1:// Package agent wires a Provider, a tool Registry, and a Session into the
+internal/agent/session.go:7:// Session holds the conversation history for one task.
+internal/agent/session.go:8:type Session struct {
+internal/agent/session.go:9:	Messages []provider.Message
+internal/agent/session.go:12:// NewSession initializes a session with an optional system prompt.
+internal/agent/session.go:13:func NewSession(system string) *Session {
+internal/agent/session.go:14:	s := &Session{}
+internal/agent/session.go:16:		s.Messages = append(s.Messages, provider.Message{Role: provider.RoleSystem, Content: system})
+internal/agent/session.go:22:func (s *Session) Add(m provider.Message) {
+internal/agent/session.go:23:	s.Messages = append(s.Messages, m)
+internal/agent/session.go:26:// HasContent returns true when the session carries at least one user,
+internal/agent/session.go:28:// "empty" conversation that has never been used should not be persisted.
+internal/agent/session.go:29:func (s *Session) HasContent() bool {
+internal/agent/session.go:30:	for _, m := range s.Messages {
+internal/agent/task.go:4:	"context"
+internal/agent/task.go:17:// it doesn't see the parent's conversation so it must self-contain.
+internal/agent/task.go:23:// TaskTool spawns a sub-agent in its own session for a focused sub-task. The
+internal/agent/task.go:28:// exploration, repeated grep / read_file) out of the parent's context budget, or
+internal/agent/task.go:36:	contextWindow int
+internal/agent/task.go:50:	maxSteps, contextWindow int, temperature float64, archiveDir, sysPrompt string, gate Gate) *TaskTool {
+internal/agent/task.go:59:		contextWindow: contextWindow,
+internal/agent/task.go:70:	return "Spawn a sub-agent for a focused sub-task. The sub-agent runs in its own session with the same provider and a filtered tool list (defaults to every parent tool except 'task' — no recursive nesting). Only its final answer is returned. Use this to (a) keep long exploration sequences out of the parent's context budget, or (b) delegate self-contained work like 'find every place that calls X and summarise the patterns'."
+internal/agent/task.go:77:  "prompt":{"type":"string","description":"What the sub-agent should accomplish. Be specific about the deliverable — the sub-agent does not see this conversation."},
+internal/agent/task.go:92:func (t *TaskTool) Execute(ctx context.Context, args json.RawMessage) (string, error) {
+internal/agent/task.go:113:		// stops it, and it compacts its own context — the same bounds the parent has.
+internal/agent/task.go:125:	// session context (so it survives this turn) and return immediately. The
+internal/agent/task.go:129:		jm, ok := jobs.FromContext(ctx)
+internal/agent/task.go:131:			return "", fmt.Errorf("background execution is not available in this context")
+internal/agent/task.go:133:		parentID, parent, _, _ := CallContext(ctx)
+internal/agent/task.go:139:		job := jm.Start("task", label, func(jobCtx context.Context, _ io.Writer) (string, error) {
+internal/agent/task.go:183:func (t *TaskTool) runSub(ctx context.Context, prompt string, subReg *tool.Registry, sink event.Sink, maxSteps int) (string, error) {
+internal/agent/task.go:189:		ContextWindow: t.contextWindow,
+internal/agent/task.go:194:// RunSubAgent runs prompt to completion in a fresh sub-agent session over reg,
+internal/agent/task.go:199:func RunSubAgent(ctx context.Context, prov provider.Provider, reg *tool.Registry, sysPrompt, prompt string, opts Options, sink event.Sink) (string, error) {
+internal/agent/task.go:200:	sess := NewSession(sysPrompt)
+internal/agent/task.go:205:	// Walk the session backwards for the last assistant message with content —
+internal/agent/task.go:206:	// that's the sub-agent's final answer. Intermediate assistant messages with
+internal/agent/task.go:208:	for i := len(sess.Messages) - 1; i >= 0; i-- {
+internal/agent/task.go:209:		m := sess.Messages[i]
+internal/agent/task.go:210:		if m.Role == provider.RoleAssistant && strings.TrimSpace(m.Content) != "" {
+internal/agent/task.go:220:// sink when ctx carries no call context. Used by subagent skills.
+internal/agent/task.go:221:func NestedSink(ctx context.Context, fallback event.Sink) event.Sink {
+internal/agent/task.go:222:	parentID, parent, _, ok := CallContext(ctx)
+internal/agent/task.go:237:func subSink(ctx context.Context) event.Sink {
+internal/agent/task.go:238:	parentID, parent, _, ok := CallContext(ctx)
+internal/agent/task.go:246:// for the background path where the job runs under a context that no longer
+internal/agent/task.go:247:// carries the call context. Falls back to Discard when there's no parent stream.
+internal/agent/hooks_test.go:4:	"context"
+internal/agent/hooks_test.go:21:func (h *stubHooks) PreToolUse(_ context.Context, name string, _ json.RawMessage) (bool, string) {
+internal/agent/hooks_test.go:29:func (h *stubHooks) PostToolUse(_ context.Context, name string, _ json.RawMessage, _ string) {
+internal/agent/hooks_test.go:42:	a := New(nil, reg, NewSession(""), Options{Hooks: h}, event.Discard)
+internal/agent/hooks_test.go:44:	blocked := a.executeOne(context.Background(), provider.ToolCall{Name: "bash", Arguments: `{"command":"x"}`})
+internal/agent/hooks_test.go:45:	if !blocked.blocked || !strings.HasPrefix(blocked.output, "blocked:") {
+internal/agent/hooks_test.go:52:	ok := a.executeOne(context.Background(), provider.ToolCall{Name: "read_file", Arguments: `{"path":"/a"}`})
+internal/agent/cachehit_e2e_test.go:5:	"context"
+internal/agent/cachehit_e2e_test.go:21:// each call appends an assistant(tool_call) + tool(result) pair to the history,
+internal/agent/cachehit_e2e_test.go:22:// growing the request prefix the way a real multi-turn session does.
+internal/agent/cachehit_e2e_test.go:31:func (echoTool) Execute(_ context.Context, args json.RawMessage) (string, error) {
+internal/agent/cachehit_e2e_test.go:39:// collectSink captures the per-turn Usage events plus any compaction notices the
+internal/agent/cachehit_e2e_test.go:57:// --- a mock DeepSeek endpoint that derives cache-hit tokens from the byte-
+internal/agent/cachehit_e2e_test.go:58:// identical message prefix it shares with the previous *conversation* request.
+internal/agent/cachehit_e2e_test.go:60:// client keeps its request prefix turn over turn. ---
+internal/agent/cachehit_e2e_test.go:64:	prevMessages []json.RawMessage // last conversation request's messages
+internal/agent/cachehit_e2e_test.go:65:	reqChars     []int             // total prompt chars per conversation request
+internal/agent/cachehit_e2e_test.go:66:	hitChars     []int             // cached prefix chars per conversation request
+internal/agent/cachehit_e2e_test.go:75:	// Compaction issues a tool-less summarize request whose system prompt is the
+internal/agent/cachehit_e2e_test.go:77:	// the conversation-prefix bookkeeping.
+internal/agent/cachehit_e2e_test.go:87:	msgs := decodeMessages(body)
+internal/agent/cachehit_e2e_test.go:88:	common := commonPrefixMsgs(m.prevMessages, msgs)
+internal/agent/cachehit_e2e_test.go:91:	m.prevMessages = msgs
+internal/agent/cachehit_e2e_test.go:129:	denom := u.CacheHitTokens + u.CacheMissTokens
+internal/agent/cachehit_e2e_test.go:131:		denom = u.PromptTokens
+internal/agent/cachehit_e2e_test.go:136:	return u.CacheHitTokens * 100 / denom
+internal/agent/cachehit_e2e_test.go:140:	"This system prompt is the cacheable head of every request and must never change between turns."
+internal/agent/cachehit_e2e_test.go:148:// TestCacheHitPrefixStable proves the standard path keeps a byte-stable prefix:
+internal/agent/cachehit_e2e_test.go:149:// every request re-sends the full prior history untouched, and the displayed
+internal/agent/cachehit_e2e_test.go:150:// hit% equals hit/prompt%. This rules out "something is breaking the cache" and
+internal/agent/cachehit_e2e_test.go:151:// "the display math is wrong" for the no-compaction path.
+internal/agent/cachehit_e2e_test.go:152:func TestCacheHitPrefixStable(t *testing.T) {
+internal/agent/cachehit_e2e_test.go:157:	a, sink := newAgent(t, srv.URL, mock.tools(), 0 /*no compaction*/, 0)
+internal/agent/cachehit_e2e_test.go:158:	if err := a.Run(context.Background(), "echo a couple things then finish"); err != nil {
+internal/agent/cachehit_e2e_test.go:162:	// Reconstruct the requests to check prefix stability. Replay equality is
+internal/agent/cachehit_e2e_test.go:163:	// already encoded in hitChars==full-previous-prefix, but assert it directly.
+internal/agent/cachehit_e2e_test.go:165:		// On request i the cached prefix should be the ENTIRE request i-1.
+internal/agent/cachehit_e2e_test.go:167:			t.Errorf("PREFIX BROKEN at req %d: cached %d chars but the full prior request was %d chars",
+internal/agent/cachehit_e2e_test.go:171:	t.Logf("prefix STABLE across %d requests — nothing in the client breaks the cache", len(mock.reqChars))
+internal/agent/cachehit_e2e_test.go:176:		if u.PromptTokens > 0 {
+internal/agent/cachehit_e2e_test.go:177:			want = 100 * u.CacheHitTokens / u.PromptTokens
+internal/agent/cachehit_e2e_test.go:179:		t.Logf("turn %d: prompt=%d hit=%d miss=%d → 'cache %d%%' (hit/prompt=%d%%) | %s",
+internal/agent/cachehit_e2e_test.go:180:			i, u.PromptTokens, u.CacheHitTokens, u.CacheMissTokens, hitRate(u), want,
+internal/agent/cachehit_e2e_test.go:181:			strings.TrimSpace(FormatUsageLine(u, nil)))
+internal/agent/cachehit_e2e_test.go:182:		if u.CacheHitTokens+u.CacheMissTokens != u.PromptTokens {
+internal/agent/cachehit_e2e_test.go:184:				u.CacheHitTokens+u.CacheMissTokens, u.PromptTokens)
+internal/agent/cachehit_e2e_test.go:189:// TestCacheHitClimbsWithoutCompaction runs a long multi-turn conversation with
+internal/agent/cachehit_e2e_test.go:190:// compaction DISABLED and prints the hit-rate curve. With a stable prefix the
+internal/agent/cachehit_e2e_test.go:191:// rate should climb past 90% as history dwarfs each turn's fresh tail.
+internal/agent/cachehit_e2e_test.go:192:func TestCacheHitClimbsWithoutCompaction(t *testing.T) {
+internal/agent/cachehit_e2e_test.go:197:	a, sink := newAgent(t, srv.URL, mock.tools(), 0 /*no compaction*/, 0)
+internal/agent/cachehit_e2e_test.go:202:		if err := a.Run(context.Background(), userMsg); err != nil {
+internal/agent/cachehit_e2e_test.go:207:	t.Logf("==== hit-rate curve, NO compaction (%d turns) ====", turns)
+internal/agent/cachehit_e2e_test.go:214:		t.Logf("turn %2d: prompt=%5d hit=%5d miss=%4d → cache %d%%", i, u.PromptTokens, u.CacheHitTokens, u.CacheMissTokens, r)
+internal/agent/cachehit_e2e_test.go:216:	t.Logf("peak hit rate without compaction: %d%%", peak)
+internal/agent/cachehit_e2e_test.go:218:		t.Logf("NOTE: even with a perfectly stable prefix the rate plateaus below 90%% — "+
+internal/agent/cachehit_e2e_test.go:223:// TestCacheHitCollapsesOnCompaction is the smoking gun: a long tool-loop with
+internal/agent/cachehit_e2e_test.go:224:// compaction enabled. maybeCompact only runs after a tool-call step (agent.go
+internal/agent/cachehit_e2e_test.go:226:// calls. Each time the prompt nears the window the prefix is rewritten to
+internal/agent/cachehit_e2e_test.go:228:func TestCacheHitCollapsesOnCompaction(t *testing.T) {
+internal/agent/cachehit_e2e_test.go:233:	// Small window + small recentKeep so compaction fires several times over the
+internal/agent/cachehit_e2e_test.go:234:	// loop — exactly the regime a misconfigured context_window puts a long
+internal/agent/cachehit_e2e_test.go:235:	// session in.
+internal/agent/cachehit_e2e_test.go:239:	if err := a.Run(context.Background(), strings.Repeat("please consider this requirement. ", 6)); err != nil {
+internal/agent/cachehit_e2e_test.go:243:	t.Logf("==== hit-rate curve, compaction ON (window=900 tok, recentKeep=4) ====")
+internal/agent/cachehit_e2e_test.go:249:			marker = "   <<< COLLAPSED — prefix rewritten by compaction"
+internal/agent/cachehit_e2e_test.go:252:		t.Logf("step %2d: prompt=%5d hit=%5d miss=%4d → cache %3d%%%s", i, u.PromptTokens, u.CacheHitTokens, u.CacheMissTokens, r, marker)
+internal/agent/cachehit_e2e_test.go:257:	t.Logf("compaction-induced hit-rate collapses: %d", collapses)
+internal/agent/cachehit_e2e_test.go:259:		t.Errorf("expected compaction to crater the hit rate at least once, saw none")
+internal/agent/cachehit_e2e_test.go:266:// counts it as uncached prompt — drags the hit rate down at each turn.
+internal/agent/cachehit_e2e_test.go:275:			if err := a.Run(context.Background(), strings.Repeat("please consider this requirement. ", 6)); err != nil {
+internal/agent/cachehit_e2e_test.go:306:// TestSessionAggregateCacheRate verifies the session-aggregate hit-rate the
+internal/agent/cachehit_e2e_test.go:307:// status line now shows: Agent.SessionCache() accumulates every turn's hit/miss
+internal/agent/cachehit_e2e_test.go:310:func TestSessionAggregateCacheRate(t *testing.T) {
+internal/agent/cachehit_e2e_test.go:318:		if err := a.Run(context.Background(), strings.Repeat("please consider this requirement. ", 6)); err != nil {
+internal/agent/cachehit_e2e_test.go:326:		sumHit += u.CacheHitTokens
+internal/agent/cachehit_e2e_test.go:327:		sumMiss += u.CacheMissTokens
+internal/agent/cachehit_e2e_test.go:329:	hit, miss := a.SessionCache()
+internal/agent/cachehit_e2e_test.go:331:		t.Errorf("SessionCache()=%d/%d but per-turn sums are %d/%d", hit, miss, sumHit, sumMiss)
+internal/agent/cachehit_e2e_test.go:336:	single := 100 * last.CacheHitTokens / last.PromptTokens
+internal/agent/cachehit_e2e_test.go:337:	t.Logf("after %d turns: aggregate(session) = %d%%  vs  single(last turn) = %d%%", turns, agg, single)
+internal/agent/cachehit_e2e_test.go:344:func newAgent(t *testing.T, url string, reg *tool.Registry, contextWindow, recentKeep int) (*Agent, *collectSink) {
+internal/agent/cachehit_e2e_test.go:357:	a := New(prov, reg, NewSession(systemPrompt), Options{
+internal/agent/cachehit_e2e_test.go:359:		ContextWindow: contextWindow,
+internal/agent/cachehit_e2e_test.go:367:func decodeMessages(body []byte) []json.RawMessage {
+internal/agent/cachehit_e2e_test.go:369:		Messages []json.RawMessage `json:"messages"`
+internal/agent/cachehit_e2e_test.go:372:	return req.Messages
+internal/agent/cachehit_e2e_test.go:376:	msgs := decodeMessages(body)
+internal/agent/cachehit_e2e_test.go:385:	return m.Role == "system" && strings.Contains(m.Content, "compacting the earlier part")
+internal/agent/cachehit_e2e_test.go:388:func commonPrefixMsgs(a, b []json.RawMessage) int {
+internal/agent/cachehit_e2e_test.go:433:	PromptTokens          int `json:"prompt_tokens"`
+internal/agent/cachehit_e2e_test.go:434:	CompletionTokens      int `json:"completion_tokens"`
+internal/agent/cachehit_e2e_test.go:435:	TotalTokens           int `json:"total_tokens"`
+internal/agent/cachehit_e2e_test.go:436:	PromptCacheHitTokens  int `json:"prompt_cache_hit_tokens"`
+internal/agent/cachehit_e2e_test.go:437:	PromptCacheMissTokens int `json:"prompt_cache_miss_tokens"`
+internal/agent/cachehit_e2e_test.go:455:		PromptTokens:          prompt,
+internal/agent/cachehit_e2e_test.go:456:		CompletionTokens:      completion,
+internal/agent/cachehit_e2e_test.go:457:		TotalTokens:           prompt + completion,
+internal/agent/cachehit_e2e_test.go:458:		PromptCacheHitTokens:  hit,
+internal/agent/cachehit_e2e_test.go:459:		PromptCacheMissTokens: miss,
+internal/agent/textsink_test.go:23:		PromptTokens: 1000, CompletionTokens: 200, TotalTokens: 1200,
+internal/agent/textsink_test.go:24:		CacheHitTokens: 900, CacheMissTokens: 100,
+internal/agent/textsink_test.go:30:	s.Emit(event.Event{Kind: event.Notice, Level: event.LevelWarn, Text: "response truncated: hit max output tokens"})
+internal/agent/textsink_test.go:37:		"  · 1200 tok · in 1000 (900 cached / 100 new) · out 200\n" + // usage
+internal/agent/textsink_test.go:42:		"  ! response truncated: hit max output tokens\n" // warn notice
+internal/agent/task_test.go:4:	"context"
+internal/agent/task_test.go:23:	out, err := task.Execute(context.Background(), []byte(`{"prompt":"find callers of Foo"}`))
+internal/agent/task_test.go:32:	// the configured system prompt at the top — proving the session was
+internal/agent/task_test.go:34:	if sys := sub.lastReq.Messages[0]; sys.Role != provider.RoleSystem || sys.Content != "test-sys-prompt" {
+internal/agent/task_test.go:58:	if _, err := task.Execute(context.Background(), args); err != nil {
+internal/agent/task_test.go:84:	if _, err := task.Execute(context.Background(), []byte(`{"prompt":"x"}`)); err != nil {
+internal/agent/agent.go:4:	"context"
+internal/agent/agent.go:19:// context. ~32KB is roughly 8K tokens — enough for a full file read or a busy
+internal/agent/agent.go:21:// window before the next compaction runs.
+internal/agent/agent.go:39:	Ask(ctx context.Context, questions []event.AskQuestion) ([]event.AskAnswer, error)
+internal/agent/agent.go:42:// callContextKey carries the executing tool call's identity into Execute.
+internal/agent/agent.go:43:type callContextKey struct{}
+internal/agent/agent.go:45:// callContext is the per-call context a tool can read. parentID is the call being
+internal/agent/agent.go:48:type callContext struct {
+internal/agent/agent.go:54:// withCallContext stamps ctx with the executing call's ID, the agent's sink, and
+internal/agent/agent.go:56:// CallContext) to nest sub-agent events, and `ask` reads the asker to prompt.
+internal/agent/agent.go:57:func withCallContext(ctx context.Context, parentID string, sink event.Sink, asker Asker) context.Context {
+internal/agent/agent.go:58:	return context.WithValue(ctx, callContextKey{}, callContext{parentID: parentID, sink: sink, asker: asker})
+internal/agent/agent.go:61:// CallContext returns the executing call's ID, the agent's sink, and the asker,
+internal/agent/agent.go:62:// if the context was set by an agent's executeOne. ok is false for a plain
+internal/agent/agent.go:63:// context (headless tool tests, calls made outside the run loop).
+internal/agent/agent.go:64:func CallContext(ctx context.Context) (parentID string, sink event.Sink, asker Asker, ok bool) {
+internal/agent/agent.go:65:	cc, ok := ctx.Value(callContextKey{}).(callContext)
+internal/agent/agent.go:80:	Check(ctx context.Context, toolName string, args json.RawMessage, readOnly bool) (allow bool, reason string, err error)
+internal/agent/agent.go:89:	PreToolUse(ctx context.Context, name string, args json.RawMessage) (block bool, message string)
+internal/agent/agent.go:90:	PostToolUse(ctx context.Context, name string, args json.RawMessage, result string)
+internal/agent/agent.go:93:// Agent drives a single task: a Provider, a tool Registry, and a Session wired
+internal/agent/agent.go:98:	session     *Session
+internal/agent/agent.go:109:	// lastUsage caches the most recent per-turn telemetry the provider
+internal/agent/agent.go:110:	// reported so the CLI can expose a context gauge without re-scraping the
+internal/agent/agent.go:114:	// sessCacheHit/sessCacheMiss accumulate cache tokens across every API call
+internal/agent/agent.go:115:	// this session, so frontends can show the aggregate hit-rate (Σhit/Σ(hit+miss))
+internal/agent/agent.go:117:	// reset on compaction (compaction only rewrites session.Messages), so the
+internal/agent/agent.go:118:	// aggregate never craters when the prefix is summarized away.
+internal/agent/agent.go:119:	sessCacheHit  int
+internal/agent/agent.go:120:	sessCacheMiss int
+internal/agent/agent.go:124:	// prompt-cache prefix stays valid; the gating happens at execute time
+internal/agent/agent.go:148:	// jobs, when non-nil, is the session's background-job manager. executeOne
+internal/agent/agent.go:149:	// stamps it onto each tool call's context so the background tools (bash
+internal/agent/agent.go:154:	// Context management: when a turn's prompt nears contextWindow, the older
+internal/agent/agent.go:155:	// middle of the session is summarized away, keeping recentKeep messages
+internal/agent/agent.go:157:	contextWindow int
+internal/agent/agent.go:158:	compactRatio  float64
+internal/agent/agent.go:165:// running it. The cache-friendly bits — system prompt, tools schema, message
+internal/agent/agent.go:166:// history — are left untouched, so the toggle costs nothing in cache hits.
+internal/agent/agent.go:179:// controller wires it to its per-session checkpoint store; nil disables capture.
+internal/agent/agent.go:182:// Session returns the agent's current conversation, useful for persistence
+internal/agent/agent.go:184:func (a *Agent) Session() *Session { return a.session }
+internal/agent/agent.go:186:// SetSession replaces the agent's conversation wholesale. Used by
+internal/agent/agent.go:189:func (a *Agent) SetSession(s *Session) { a.session = s }
+internal/agent/agent.go:191:// LastUsage returns the most recent per-turn token telemetry the provider
+internal/agent/agent.go:192:// reported (nil if no turn has run yet). The TUI uses it to show a context
+internal/agent/agent.go:193:// gauge alongside the prompt; the actual cache decisions still live inside
+internal/agent/agent.go:194:// maybeCompact.
+internal/agent/agent.go:197:// SessionCache returns the cumulative cache hit/miss prompt tokens across every
+internal/agent/agent.go:198:// API call this session — the basis for the status line's aggregate hit-rate.
+internal/agent/agent.go:199:func (a *Agent) SessionCache() (hit, miss int) { return a.sessCacheHit, a.sessCacheMiss }
+internal/agent/agent.go:201:// ContextWindow returns the configured context-window size in tokens. 0
+internal/agent/agent.go:202:// means compaction is disabled for this agent.
+internal/agent/agent.go:203:func (a *Agent) ContextWindow() int { return a.contextWindow }
+internal/agent/agent.go:205:// CompactNow runs one compaction pass immediately, regardless of the
+internal/agent/agent.go:206:// usage-ratio threshold maybeCompact normally honours. Used by the chat
+internal/agent/agent.go:207:// TUI's `/compact` command so the user can reset the prefix before it
+internal/agent/agent.go:209:func (a *Agent) CompactNow(ctx context.Context) error { return a.compact(ctx) }
+internal/agent/agent.go:224:	// Jobs is the session's background-job manager (nil disables background tools).
+internal/agent/agent.go:227:	// Context management. ContextWindow <= 0 disables compaction. CompactRatio
+internal/agent/agent.go:229:	ContextWindow int
+internal/agent/agent.go:230:	CompactRatio  float64
+internal/agent/agent.go:236:// until the model gives a final answer, the context is cancelled, or the
+internal/agent/agent.go:237:// provider errors (compaction keeps the context bounded). A nil sink is replaced
+internal/agent/agent.go:239:func New(prov provider.Provider, tools *tool.Registry, session *Session, opts Options, sink event.Sink) *Agent {
+internal/agent/agent.go:240:	if opts.CompactRatio <= 0 {
+internal/agent/agent.go:241:		opts.CompactRatio = defaultCompactRatio
+internal/agent/agent.go:252:		session:       session,
+internal/agent/agent.go:260:		contextWindow: opts.ContextWindow,
+internal/agent/agent.go:261:		compactRatio:  opts.CompactRatio,
+internal/agent/agent.go:268:// final answer (no tool calls), the context is cancelled, or the provider errors.
+internal/agent/agent.go:270:// finishing, and the real safety bounds are user cancellation and compaction, not
+internal/agent/agent.go:273:func (a *Agent) Run(ctx context.Context, input string) error {
+internal/agent/agent.go:275:	a.session.Add(provider.Message{Role: provider.RoleUser, Content: input})
+internal/agent/agent.go:282:		if usage != nil && usage.TotalTokens > 0 {
+internal/agent/agent.go:284:				SessionHit: a.sessCacheHit, SessionMiss: a.sessCacheMiss})
+internal/agent/agent.go:290:		// Keep reasoning_content on the assistant turn for display and session
+internal/agent/agent.go:293:		// ordinary prompt input (~500 tok/turn) for no cache or coherence gain.
+internal/agent/agent.go:294:		a.session.Add(provider.Message{
+internal/agent/agent.go:307:			a.session.Add(provider.Message{
+internal/agent/agent.go:315:		// The prompt only grows from here; compact before the next turn so it
+internal/agent/agent.go:317:		a.maybeCompact(ctx, usage)
+internal/agent/agent.go:320:	// is already in the session, so the user can just send another message to pick
+internal/agent/agent.go:330:func (a *Agent) stream(ctx context.Context) (string, string, []provider.ToolCall, *provider.Usage, error) {
+internal/agent/agent.go:332:		Messages:    a.session.Messages,
+internal/agent/agent.go:366:			a.sessCacheHit += chunk.Usage.CacheHitTokens
+internal/agent/agent.go:367:			a.sessCacheMiss += chunk.Usage.CacheMissTokens
+internal/agent/agent.go:388:func (a *Agent) executeBatch(ctx context.Context, calls []provider.ToolCall) []string {
+internal/agent/agent.go:451:// (without the "· " prefix) when the output was head+tailed.
+internal/agent/agent.go:463:func (a *Agent) executeOne(ctx context.Context, call provider.ToolCall) toolOutcome {
+internal/agent/agent.go:520:	cctx := withCallContext(ctx, call.ID, a.sink, a.asker)
+internal/agent/agent.go:569:// trimmed body plus a one-line user-facing notice when truncation happened
+internal/agent/agent.go:570:// (empty when it didn't, without the "· " display prefix).
+internal/agent/agent.go:598:// nil usage. The sink renders the message; the "! " prefix is presentation.
+internal/agent/agent.go:605:		return "response truncated: hit max output tokens", true
+internal/agent/coordinator.go:4:	"context"
+internal/agent/coordinator.go:15:	Run(ctx context.Context, input string) error
+internal/agent/coordinator.go:18:// DefaultPlannerPrompt steers the planner toward concise plans, not execution.
+internal/agent/coordinator.go:19:const DefaultPlannerPrompt = `You are the planner in a two-model coding agent.
+internal/agent/coordinator.go:24:// Coordinator runs two models in separate sessions to keep each one's prompt
+internal/agent/coordinator.go:25:// prefix cache-stable: a low-frequency planner proposes an approach, then the
+internal/agent/coordinator.go:26:// executor (a full tool-using Agent) carries it out. The sessions never mix, so
+internal/agent/coordinator.go:27:// neither model's prefix is disturbed by the other's turns.
+internal/agent/coordinator.go:29:	planner        provider.Provider
+internal/agent/coordinator.go:30:	plannerSess    *Session
+internal/agent/coordinator.go:31:	plannerPricing *provider.Pricing
+internal/agent/coordinator.go:37:// NewCoordinator wires a planner provider (with its own session) to an executor.
+internal/agent/coordinator.go:38:// sink receives the planner's phase/text/usage events; the executor emits its
+internal/agent/coordinator.go:41:func NewCoordinator(planner provider.Provider, plannerSession *Session, plannerPricing *provider.Pricing, executor *Agent, temperature float64, sink event.Sink) *Coordinator {
+internal/agent/coordinator.go:46:		planner:        planner,
+internal/agent/coordinator.go:47:		plannerSess:    plannerSession,
+internal/agent/coordinator.go:48:		plannerPricing: plannerPricing,
+internal/agent/coordinator.go:55:// Run plans with the planner model, then hands the plan to the executor.
+internal/agent/coordinator.go:56:func (c *Coordinator) Run(ctx context.Context, input string) error {
+internal/agent/coordinator.go:58:	c.sink.Emit(event.Event{Kind: event.Phase, Text: c.planner.Name() + " · planning"})
+internal/agent/coordinator.go:61:		return fmt.Errorf("planner: %w", err)
+internal/agent/coordinator.go:67:// plan streams a plan from the planner (no tools) and appends it to the planner
+internal/agent/coordinator.go:68:// session, so that session grows prepend-only and stays cache-friendly.
+internal/agent/coordinator.go:69:func (c *Coordinator) plan(ctx context.Context, input string) (string, error) {
+internal/agent/coordinator.go:70:	c.plannerSess.Add(provider.Message{Role: provider.RoleUser, Content: input})
+internal/agent/coordinator.go:72:	ch, err := c.planner.Stream(ctx, provider.Request{
+internal/agent/coordinator.go:73:		Messages:    c.plannerSess.Messages,
+internal/agent/coordinator.go:93:	// Closes the planner's raw text block (no markdown redraw) and prints its
+internal/agent/coordinator.go:95:	c.sink.Emit(event.Event{Kind: event.Usage, Usage: usage, Pricing: c.plannerPricing})
+internal/agent/coordinator.go:98:	c.plannerSess.Add(provider.Message{Role: provider.RoleAssistant, Content: plan})
+internal/agent/coordinator.go:103:	return fmt.Sprintf("Task: %s\n\nA planner proposed this approach:\n%s\n\nCarry it out, adapting as needed.", task, plan)
+internal/hook/runner.go:4:	"context"
+internal/hook/runner.go:10:// Runner binds a set of resolved hooks to a session: a working directory, the
+internal/hook/runner.go:11:// spawner, and a notify callback that surfaces non-blocking hook messages to the
+internal/hook/runner.go:23:// non-blocking messages.
+internal/hook/runner.go:41:func (r *Runner) PreToolUse(ctx context.Context, name string, args json.RawMessage) (block bool, message string) {
+internal/hook/runner.go:51:func (r *Runner) PostToolUse(ctx context.Context, name string, args json.RawMessage, result string) {
+internal/hook/runner.go:61:func (r *Runner) PromptSubmit(ctx context.Context, prompt string, turn int) (block bool, message string) {
+internal/hook/runner.go:70:func (r *Runner) Stop(ctx context.Context, lastAssistant string, turn int) {
+internal/hook/runner.go:99:	detail := strings.TrimSpace(o.Stderr)
+internal/hook/runner.go:101:		detail = strings.TrimSpace(o.Stdout)
+internal/agent/planmode_test.go:4:	"context"
+internal/agent/planmode_test.go:21:	a := New(nil, reg, NewSession(""), Options{}, event.Discard)
+internal/agent/planmode_test.go:24:	ro := a.executeOne(context.Background(), provider.ToolCall{Name: "read_only_tool"})
+internal/agent/planmode_test.go:29:	wr := a.executeOne(context.Background(), provider.ToolCall{Name: "writer_tool"})
+internal/agent/planmode_test.go:30:	if !strings.HasPrefix(wr.output, "blocked:") {
+internal/agent/planmode_test.go:35:// TestPlanModeDoesNotMutateSystemOrTools is the cache-stability test. Toggling
+internal/agent/planmode_test.go:37:// tool list seen by the provider — those are the cache-key prefix, and any
+internal/agent/planmode_test.go:38:// change there forces an expensive cache miss.
+internal/agent/planmode_test.go:48:	a := New(prov, reg, NewSession("STABLE-SYS"), Options{}, event.Discard)
+internal/agent/planmode_test.go:51:	if err := a.Run(context.Background(), "explore"); err != nil {
+internal/agent/planmode_test.go:54:	autoSys := prov.lastReq.Messages[0]
+internal/agent/planmode_test.go:64:	if err := a.Run(context.Background(), "now in plan mode"); err != nil {
+internal/agent/planmode_test.go:67:	planSys := prov.lastReq.Messages[0]
+internal/agent/save_test.go:20:// session written to disk reloads byte-for-byte, including tool calls and
+internal/agent/save_test.go:21:// reasoning content (which the model wants to keep across resumes for cache
+internal/agent/save_test.go:24:	s := NewSession("you are reasonix")
+internal/agent/save_test.go:44:	loaded, err := LoadSession(path)
+internal/agent/save_test.go:46:		t.Fatalf("LoadSession: %v", err)
+internal/agent/save_test.go:48:	if got, want := len(loaded.Messages), len(s.Messages); got != want {
+internal/agent/save_test.go:51:	for i, m := range s.Messages {
+internal/agent/save_test.go:52:		if loaded.Messages[i].Role != m.Role {
+internal/agent/save_test.go:55:		if loaded.Messages[i].Content != m.Content {
+internal/agent/save_test.go:58:		if loaded.Messages[i].ReasoningContent != m.ReasoningContent {
+internal/agent/save_test.go:61:		if len(loaded.Messages[i].ToolCalls) != len(m.ToolCalls) {
+internal/agent/save_test.go:67:// TestListSessionsOrdersByMTime makes sure the picker shows the most
+internal/agent/save_test.go:68:// recently used conversation first — that's what users reach for when they
+internal/agent/save_test.go:70:func TestListSessionsOrdersByMTime(t *testing.T) {
+internal/agent/save_test.go:72:	// Write two sessions with explicit mtimes so the order is deterministic.
+internal/agent/save_test.go:74:		s := NewSession("")
+internal/agent/save_test.go:89:	got, err := ListSessions(dir)
+internal/agent/save_test.go:104:// TestListSessionsMissingDir returns nil + no error so callers can fall
+internal/agent/save_test.go:105:// through to a fresh session without special-casing.
+internal/agent/save_test.go:106:func TestListSessionsMissingDir(t *testing.T) {
+internal/agent/save_test.go:107:	got, err := ListSessions(filepath.Join(t.TempDir(), "never-created"))
+internal/agent/dispatch_test.go:4:	"context"
+internal/agent/dispatch_test.go:28:	a := New(prov, reg, NewSession(""), Options{MaxSteps: 1}, sink)
+internal/agent/dispatch_test.go:29:	_ = a.Run(context.Background(), "go") // errors at the 1-step cap; we only want the events
+internal/agent/compact_test.go:4:	"context"
+internal/agent/compact_test.go:15:// fakeProvider returns a fixed reply and records the messages it was asked to
+internal/agent/compact_test.go:24:func (f *fakeProvider) Stream(_ context.Context, req provider.Request) (<-chan provider.Chunk, error) {
+internal/agent/compact_test.go:25:	f.got = req.Messages
+internal/agent/compact_test.go:33:func TestCompactBounds(t *testing.T) {
+internal/agent/compact_test.go:53:		{"below-min-compact", []provider.Message{sys, u, as, u}, 2, 1, 0, false},
+internal/agent/compact_test.go:58:			head, start, ok := compactBounds(tc.msgs, tc.keep, minCompactMessages)
+internal/agent/compact_test.go:76:func TestCompactReplacesHistory(t *testing.T) {
+internal/agent/compact_test.go:78:	sess := &Session{Messages: []provider.Message{
+internal/agent/compact_test.go:90:	if err := a.compact(context.Background()); err != nil {
+internal/agent/compact_test.go:91:		t.Fatalf("compact: %v", err)
+internal/agent/compact_test.go:95:	if got := len(sess.Messages); got != 4 {
+internal/agent/compact_test.go:96:		t.Fatalf("len = %d, want 4: %+v", got, sess.Messages)
+internal/agent/compact_test.go:98:	if sess.Messages[0].Role != provider.RoleSystem {
+internal/agent/compact_test.go:99:		t.Errorf("message 0 = %s, want system", sess.Messages[0].Role)
+internal/agent/compact_test.go:101:	summary := sess.Messages[1]
+internal/agent/compact_test.go:105:	if sess.Messages[2].Content != "next" || sess.Messages[3].Content != "ok" {
+internal/agent/compact_test.go:106:		t.Errorf("recent tail not preserved: %+v", sess.Messages[2:])
+internal/agent/compact_test.go:118:	if lines := strings.Count(strings.TrimSpace(string(data)), "\n") + 1; lines != 4 {
+internal/agent/compact_test.go:126:func TestMaybeCompactThreshold(t *testing.T) {
+internal/agent/compact_test.go:127:	newSess := func() *Session {
+internal/agent/compact_test.go:128:		return &Session{Messages: []provider.Message{
+internal/agent/compact_test.go:141:	a := New(&fakeProvider{reply: "s"}, tool.NewRegistry(), sess, Options{ContextWindow: 100, RecentKeep: 2, ArchiveDir: t.TempDir()}, event.Discard)
+internal/agent/compact_test.go:142:	a.maybeCompact(context.Background(), &provider.Usage{PromptTokens: 50})
+internal/agent/compact_test.go:143:	if len(sess.Messages) != 7 {
+internal/agent/compact_test.go:144:		t.Errorf("below threshold should not compact, len = %d", len(sess.Messages))
+internal/agent/compact_test.go:147:	// At/above 80%: compacts.
+internal/agent/compact_test.go:149:	a = New(&fakeProvider{reply: "s"}, tool.NewRegistry(), sess, Options{ContextWindow: 100, RecentKeep: 2, ArchiveDir: t.TempDir()}, event.Discard)
+internal/agent/compact_test.go:150:	a.maybeCompact(context.Background(), &provider.Usage{PromptTokens: 90})
+internal/agent/compact_test.go:151:	if len(sess.Messages) >= 7 {
+internal/agent/compact_test.go:152:		t.Errorf("above threshold should compact, len = %d", len(sess.Messages))
+internal/agent/compact_test.go:155:	// No context window: compaction disabled.
+internal/agent/compact_test.go:158:	a.maybeCompact(context.Background(), &provider.Usage{PromptTokens: 1 << 30})
+internal/agent/compact_test.go:159:	if len(sess.Messages) != 7 {
+internal/agent/compact_test.go:160:		t.Errorf("no window should disable compaction, len = %d", len(sess.Messages))
+internal/hook/hook.go:15:	"context"
+internal/hook/hook.go:152:			if strings.TrimSpace(cfg.Command) != "" {
+internal/hook/hook.go:178:			if strings.TrimSpace(cfg.Command) == "" {
+internal/hook/hook.go:281:type Spawner func(ctx context.Context, in SpawnInput) SpawnResult
+internal/hook/hook.go:290:func Run(ctx context.Context, payload Payload, hooks []ResolvedHook, spawner Spawner) Report {
+internal/hook/hook.go:346:// parent context's cancellation.
+internal/hook/hook.go:347:func DefaultSpawner(ctx context.Context, in SpawnInput) SpawnResult {
+internal/hook/hook.go:348:	cctx, cancel := context.WithTimeout(ctx, in.Timeout)
+internal/hook/hook.go:352:	cmd := exec.CommandContext(cctx, name, args...)
+internal/hook/hook.go:365:		Stdout:    strings.TrimSpace(outBuf.String()),
+internal/hook/hook.go:366:		Stderr:    strings.TrimSpace(errBuf.String()),
+internal/hook/hook.go:370:	case cctx.Err() == context.DeadlineExceeded:
+internal/hook/hook.go:372:	case cctx.Err() == context.Canceled:
+internal/agent/save.go:16:// Save writes the session's messages to path in JSONL — one provider.Message
+internal/agent/save.go:17:// per line — so a user can resume the conversation later. The file is
+internal/agent/save.go:18:// rewritten in full on every save: chat sessions are small (kilobytes), and
+internal/agent/save.go:19:// append-only would have to be reconciled with the compaction pass that
+internal/agent/save.go:20:// mutates the middle of session.Messages.
+internal/agent/save.go:21:func (s *Session) Save(path string) error {
+internal/agent/save.go:23:		return fmt.Errorf("empty session path")
+internal/agent/save.go:26:		return fmt.Errorf("create session dir: %w", err)
+internal/agent/save.go:30:	tmp, err := os.CreateTemp(filepath.Dir(path), ".session.*.tmp")
+internal/agent/save.go:32:		return fmt.Errorf("create session tmp: %w", err)
+internal/agent/save.go:36:	for _, m := range s.Messages {
+internal/agent/save.go:50:// LoadSession reads a JSONL file written by Save into a fresh Session value.
+internal/agent/save.go:52:// new session.
+internal/agent/save.go:53:func LoadSession(path string) (*Session, error) {
+internal/agent/save.go:60:	s := &Session{}
+internal/agent/save.go:62:	// Chat messages can be large after a long read_file result; raise the
+internal/agent/save.go:70:		s.Messages = append(s.Messages, m)
+internal/agent/save.go:78:// SessionInfo summarises a saved session for the --resume picker: where it
+internal/agent/save.go:81:type SessionInfo struct {
+internal/agent/save.go:88:// ListSessions returns every *.jsonl session under dir, newest first, each
+internal/agent/save.go:92:func ListSessions(dir string) ([]SessionInfo, error) {
+internal/agent/save.go:100:	var out []SessionInfo
+internal/agent/save.go:110:		preview, turns := previewSession(full)
+internal/agent/save.go:112:			// Skip sessions that have never had user interaction — they are
+internal/agent/save.go:113:			// empty conversations that should not appear in the history panel
+internal/agent/save.go:117:		out = append(out, SessionInfo{
+internal/agent/save.go:130:// previewSession returns the first user message (truncated) and the number of
+internal/agent/save.go:131:// user-role messages so the picker can show "5 turns · 'help me debug the…'".
+internal/agent/save.go:133:func previewSession(path string) (string, int) {
+internal/agent/save.go:151:				s := strings.TrimSpace(m.Content)
+internal/agent/save.go:162:// NewSessionPath returns the path to use for a fresh session, namespaced by
+internal/agent/save.go:163:// the model so the filename hints at what the conversation was with. dir is
+internal/agent/save.go:164:// typically config.SessionDir().
+internal/agent/save.go:165:func NewSessionPath(dir, model string) string {
+internal/agent/save.go:168:		safe = "session"
+internal/agent/compact.go:4:	"context"
+internal/agent/compact.go:16:// Compaction defaults. Compaction is a low-frequency cache-reset point: prompts
+internal/agent/compact.go:17:// grow prepend-only (high cache hits) until a turn's prompt nears the model's
+internal/agent/compact.go:18:// context window, then we compact once — summarizing the older history and
+internal/agent/compact.go:21:	defaultCompactRatio = 0.8 // compact when prompt_tokens reach this fraction of the window
+internal/agent/compact.go:22:	defaultRecentKeep   = 8   // recent messages kept verbatim, never summarized
+internal/agent/compact.go:23:	minCompactMessages  = 2   // skip compaction below this many compactable messages
+internal/agent/compact.go:26:// summarySystemPrompt steers the executor to distill older history into a
+internal/agent/compact.go:28:const summarySystemPrompt = `You are compacting the earlier part of a coding agent's conversation to save context.
+internal/agent/compact.go:29:Summarize the messages below into a compact briefing the agent can rely on to continue the task. Preserve:
+internal/agent/compact.go:37:// maybeCompact compacts the session when the last turn's prompt has grown to the
+internal/agent/compact.go:38:// configured fraction of the context window. It is a no-op when compaction is
+internal/agent/compact.go:40:func (a *Agent) maybeCompact(ctx context.Context, u *provider.Usage) {
+internal/agent/compact.go:41:	if a.contextWindow <= 0 || u == nil || u.PromptTokens == 0 {
+internal/agent/compact.go:44:	if u.PromptTokens < int(float64(a.contextWindow)*a.compactRatio) {
+internal/agent/compact.go:47:	if err := a.compact(ctx); err != nil {
+internal/agent/compact.go:48:		a.sink.Emit(event.Event{Kind: event.Notice, Level: event.LevelInfo, Text: fmt.Sprintf("compaction skipped: %v", err)})
+internal/agent/compact.go:52:// compact summarizes the older middle of the session and replaces it in place:
+internal/agent/compact.go:53:// the session becomes system + summary + recent tail. The dropped originals are
+internal/agent/compact.go:54:// archived first, so the full history stays traceable.
+internal/agent/compact.go:55:func (a *Agent) compact(ctx context.Context) error {
+internal/agent/compact.go:56:	msgs := a.session.Messages
+internal/agent/compact.go:57:	head, start, ok := compactBounds(msgs, a.recentKeep, minCompactMessages)
+internal/agent/compact.go:65:		path, err := archiveMessages(a.archiveDir, region)
+internal/agent/compact.go:77:	compacted := make([]provider.Message, 0, head+1+len(msgs)-start)
+internal/agent/compact.go:78:	compacted = append(compacted, msgs[:head]...)
+internal/agent/compact.go:79:	compacted = append(compacted, provider.Message{
+internal/agent/compact.go:81:		Content: "Summary of earlier conversation (older messages were compacted to save context):\n" + summary,
+internal/agent/compact.go:83:	compacted = append(compacted, msgs[start:]...)
+internal/agent/compact.go:84:	a.session.Messages = compacted
+internal/agent/compact.go:86:	note := fmt.Sprintf("compacted %d messages → summary", len(region))
+internal/agent/compact.go:94:// SummarizeFrom replaces the messages from fromIdx onward with a single summary,
+internal/agent/compact.go:98:func (a *Agent) SummarizeFrom(ctx context.Context, fromIdx int) error {
+internal/agent/compact.go:99:	msgs := a.session.Messages
+internal/agent/compact.go:105:		_, _ = archiveMessages(a.archiveDir, region) // best-effort traceability
+internal/agent/compact.go:115:		Content: "Summary of the later conversation (compacted from here on):\n" + summary,
+internal/agent/compact.go:117:	a.session.Messages = next
+internal/agent/compact.go:119:		Text: fmt.Sprintf("summarized %d later messages → summary", len(region))})
+internal/agent/compact.go:123:// SummarizeUpTo replaces the messages before toIdx (after the system prompt) with
+internal/agent/compact.go:126:func (a *Agent) SummarizeUpTo(ctx context.Context, toIdx int) error {
+internal/agent/compact.go:127:	msgs := a.session.Messages
+internal/agent/compact.go:137:		_, _ = archiveMessages(a.archiveDir, region)
+internal/agent/compact.go:147:		Content: "Summary of earlier conversation (compacted up to here):\n" + summary,
+internal/agent/compact.go:150:	a.session.Messages = next
+internal/agent/compact.go:152:		Text: fmt.Sprintf("summarized %d earlier messages → summary", len(region))})
+internal/agent/compact.go:156:// compactBounds locates the region to summarize. head is the count of leading
+internal/agent/compact.go:157:// messages preserved verbatim (the system prompt, if any); start is where the
+internal/agent/compact.go:158:// preserved recent tail begins, so msgs[head:start] is compacted. The boundary
+internal/agent/compact.go:161:// false when there is too little to compact.
+internal/agent/compact.go:162:func compactBounds(msgs []provider.Message, recentKeep, minCompact int) (head, start int, ok bool) {
+internal/agent/compact.go:173:	if start-head < minCompact {
+internal/agent/compact.go:181:func (a *Agent) summarize(ctx context.Context, region []provider.Message) (string, error) {
+internal/agent/compact.go:183:		Messages: []provider.Message{
+internal/agent/compact.go:202:	s := strings.TrimSpace(b.String())
+internal/agent/compact.go:209:// renderTranscript flattens messages into a readable transcript for summarization.
+internal/agent/compact.go:233:// archiveMessages writes the dropped originals to a timestamped .jsonl (one
+internal/agent/compact.go:235:func archiveMessages(dir string, msgs []provider.Message) (string, error) {
+
+[Showing lines 1991-2523 of 2523 (50.0KB limit). Full output: /var/folders/7m/csfvhz791k527kby7nxl7cbc0000h_/T/pi-bash-89b916dc480ba7eb.log]

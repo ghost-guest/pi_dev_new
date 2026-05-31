@@ -1,0 +1,220 @@
+packages/ai/src/types.ts:66:/** Token budgets for each thinking level (token-based providers only) */
+packages/ai/src/types.ts:77:export type Transport = "sse" | "websocket" | "websocket-cached" | "auto";
+packages/ai/src/types.ts:86:	maxTokens?: number;
+packages/ai/src/types.ts:95:	 * Prompt cache retention preference. Providers map this to their supported values.
+packages/ai/src/types.ts:98:	cacheRetention?: CacheRetention;
+packages/ai/src/types.ts:257:	cacheRead: number;
+packages/ai/src/types.ts:258:	cacheWrite: number;
+packages/ai/src/types.ts:259:	totalTokens: number;
+packages/ai/src/types.ts:263:		cacheRead: number;
+packages/ai/src/types.ts:264:		cacheWrite: number;
+packages/ai/src/types.ts:286:	usage: Usage;
+packages/ai/src/types.ts:319:	usage?: Usage;
+packages/ai/src/types.ts:372:	/** Whether the provider supports `stream_options: { include_usage: true }` for token usage in streaming responses. Default: true. */
+packages/ai/src/types.ts:375:	maxTokensField?: "max_completion_tokens" | "max_tokens";
+packages/ai/src/types.ts:394:	/** Cache control convention for prompt caching. "anthropic" applies Anthropic-style `cache_control` markers to the system prompt, last tool definition, and last user/assistant text content. */
+packages/ai/src/types.ts:395:	cacheControlFormat?: "anthropic";
+packages/ai/src/types.ts:398:	/** Whether the provider supports long prompt cache retention (`prompt_cache_retention: "24h"` or Anthropic-style `cache_control.ttl: "1h"`, depending on format). Default: true. */
+packages/ai/src/types.ts:404:	/** Whether to send the OpenAI `session_id` cache-affinity header from `options.sessionId` when caching is enabled. Default: true. */
+packages/ai/src/types.ts:406:	/** Whether the provider supports `prompt_cache_retention: "24h"`. Default: true. */
+packages/ai/src/types.ts:420:	/** Whether the provider supports Anthropic long cache retention (`cache_control.ttl: "1h"`). Default: true. */
+packages/ai/src/types.ts:425:	 * session affinity for prompt cache routing (requests to the same replica
+packages/ai/src/types.ts:426:	 * maximize cache hits).
+packages/ai/src/types.ts:431:	 * Whether the provider supports Anthropic-style `cache_control` markers on
+packages/ai/src/types.ts:432:	 * tool definitions. When false, `cache_control` is omitted from tool params.
+packages/ai/src/types.ts:554:		cacheRead: number; // $/million tokens
+packages/ai/src/types.ts:555:		cacheWrite: number; // $/million tokens
+packages/ai/src/types.ts:558:	maxTokens: number;
+packages/ai/src/types.ts:571:	extends Omit<Model<Api>, "api" | "provider" | "reasoning" | "contextWindow" | "maxTokens" | "compat"> {
+packages/coding-agent/src/core/model-registry.ts:34:	resolveConfigValueUncached,
+packages/coding-agent/src/core/model-registry.ts:100:	maxTokensField: Type.Optional(Type.Union([Type.Literal("max_completion_tokens"), Type.Literal("max_tokens")])),
+packages/coding-agent/src/core/model-registry.ts:116:	cacheControlFormat: Type.Optional(Type.Literal("anthropic")),
+packages/coding-agent/src/core/model-registry.ts:156:			cacheRead: Type.Number(),
+packages/coding-agent/src/core/model-registry.ts:157:			cacheWrite: Type.Number(),
+packages/coding-agent/src/core/model-registry.ts:161:	maxTokens: Type.Optional(Type.Number()),
+packages/coding-agent/src/core/model-registry.ts:176:			cacheRead: Type.Optional(Type.Number()),
+packages/coding-agent/src/core/model-registry.ts:177:			cacheWrite: Type.Optional(Type.Number()),
+packages/coding-agent/src/core/model-registry.ts:181:	maxTokens: Type.Optional(Type.Number()),
+packages/coding-agent/src/core/model-registry.ts:311:	if (override.maxTokens !== undefined) result.maxTokens = override.maxTokens;
+packages/coding-agent/src/core/model-registry.ts:318:			cacheRead: override.cost.cacheRead ?? model.cost.cacheRead,
+packages/coding-agent/src/core/model-registry.ts:319:			cacheWrite: override.cost.cacheWrite ?? model.cost.cacheWrite,
+packages/coding-agent/src/core/model-registry.ts:329:/** Clear the config value command cache. Exported for testing. */
+packages/coding-agent/src/core/model-registry.ts:554:				// Validate contextWindow/maxTokens only if provided (they have defaults)
+packages/coding-agent/src/core/model-registry.ts:557:				if (modelDef.maxTokens !== undefined && modelDef.maxTokens <= 0)
+packages/coding-agent/src/core/model-registry.ts:558:					throw new Error(`Provider ${providerName}, model ${modelDef.id}: invalid maxTokens`);
+packages/coding-agent/src/core/model-registry.ts:595:				const defaultCost = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 };
+packages/coding-agent/src/core/model-registry.ts:607:					maxTokens: modelDef.maxTokens ?? 16384,
+packages/coding-agent/src/core/model-registry.ts:778:		return providerApiKey ? resolveConfigValueUncached(providerApiKey) : undefined;
+packages/coding-agent/src/core/model-registry.ts:905:					maxTokens: modelDef.maxTokens,
+packages/coding-agent/src/core/model-registry.ts:952:		cost: { input: number; output: number; cacheRead: number; cacheWrite: number };
+packages/coding-agent/src/core/model-registry.ts:954:		maxTokens: number;
+packages/agent/src/index.ts:15:	calculateContextTokens,
+packages/agent/src/index.ts:18:	estimateContextTokens,
+packages/agent/src/index.ts:19:	estimateTokens,
+packages/agent/src/proxy.ts:50:			usage: AssistantMessage["usage"];
+packages/agent/src/proxy.ts:56:			usage: AssistantMessage["usage"];
+packages/agent/src/proxy.ts:62:	| "maxTokens"
+packages/agent/src/proxy.ts:64:	| "cacheRetention"
+packages/agent/src/proxy.ts:77:	authToken: string;
+packages/agent/src/proxy.ts:95: *       authToken: await getAuthToken(),
+packages/agent/src/proxy.ts:104:		maxTokens: options.maxTokens,
+packages/agent/src/proxy.ts:106:		cacheRetention: options.cacheRetention,
+packages/agent/src/proxy.ts:128:			usage: {
+packages/agent/src/proxy.ts:131:				cacheRead: 0,
+packages/agent/src/proxy.ts:132:				cacheWrite: 0,
+packages/agent/src/proxy.ts:133:				totalTokens: 0,
+packages/agent/src/proxy.ts:134:				cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, total: 0 },
+packages/agent/src/proxy.ts:155:					Authorization: `Bearer ${options.authToken}`,
+packages/agent/src/proxy.ts:352:			partial.usage = proxyEvent.usage;
+packages/agent/src/proxy.ts:358:			partial.usage = proxyEvent.usage;
+packages/coding-agent/src/core/package-manager.ts:1828:			// Keep cached temporary checkout if refresh fails.
+packages/agent/src/harness/compaction/branch-summarization.ts:12:import { estimateTokens, SUMMARIZATION_SYSTEM_PROMPT } from "./compaction.ts";
+packages/agent/src/harness/compaction/branch-summarization.ts:39:	totalTokens: number;
+packages/agent/src/harness/compaction/branch-summarization.ts:64:	/** Tokens reserved for prompt and model output. Defaults to 16384. */
+packages/agent/src/harness/compaction/branch-summarization.ts:65:	reserveTokens?: number;
+packages/agent/src/harness/compaction/branch-summarization.ts:127:	let totalTokens = 0;
+packages/agent/src/harness/compaction/branch-summarization.ts:147:		const tokens = estimateTokens(message);
+packages/agent/src/harness/compaction/branch-summarization.ts:148:		if (tokenBudget > 0 && totalTokens + tokens > tokenBudget) {
+packages/agent/src/harness/compaction/branch-summarization.ts:150:				if (totalTokens < tokenBudget * 0.9) {
+packages/agent/src/harness/compaction/branch-summarization.ts:152:					totalTokens += tokens;
+packages/agent/src/harness/compaction/branch-summarization.ts:159:		totalTokens += tokens;
+packages/agent/src/harness/compaction/branch-summarization.ts:162:	return { messages, fileOps, totalTokens };
+packages/agent/src/harness/compaction/branch-summarization.ts:204:	const { model, apiKey, headers, signal, customInstructions, replaceInstructions, reserveTokens = 16384 } = options;
+packages/agent/src/harness/compaction/branch-summarization.ts:206:	const tokenBudget = contextWindow - reserveTokens;
+packages/agent/src/harness/compaction/branch-summarization.ts:235:		{ apiKey, headers, signal, maxTokens: 2048 },
+packages/coding-agent/src/core/compaction/branch-summarization.ts:18:import { estimateTokens } from "./compaction.ts";
+packages/coding-agent/src/core/compaction/branch-summarization.ts:55:	totalTokens: number;
+packages/coding-agent/src/core/compaction/branch-summarization.ts:78:	/** Tokens reserved for prompt + LLM response (default 16384) */
+packages/coding-agent/src/core/compaction/branch-summarization.ts:79:	reserveTokens?: number;
+packages/coding-agent/src/core/compaction/branch-summarization.ts:188:	let totalTokens = 0;
+packages/coding-agent/src/core/compaction/branch-summarization.ts:217:		const tokens = estimateTokens(message);
+packages/coding-agent/src/core/compaction/branch-summarization.ts:220:		if (tokenBudget > 0 && totalTokens + tokens > tokenBudget) {
+packages/coding-agent/src/core/compaction/branch-summarization.ts:223:				if (totalTokens < tokenBudget * 0.9) {
+packages/coding-agent/src/core/compaction/branch-summarization.ts:225:					totalTokens += tokens;
+packages/coding-agent/src/core/compaction/branch-summarization.ts:233:		totalTokens += tokens;
+packages/coding-agent/src/core/compaction/branch-summarization.ts:236:	return { messages, fileOps, totalTokens };
+packages/coding-agent/src/core/compaction/branch-summarization.ts:287:	const { model, apiKey, headers, signal, customInstructions, replaceInstructions, reserveTokens = 16384 } = options;
+packages/coding-agent/src/core/compaction/branch-summarization.ts:289:	// Token budget = context window minus reserved space for prompt + response
+packages/coding-agent/src/core/compaction/branch-summarization.ts:291:	const tokenBudget = contextWindow - reserveTokens;
+packages/coding-agent/src/core/compaction/branch-summarization.ts:327:		{ apiKey, headers, signal, maxTokens: 2048 },
+packages/coding-agent/src/core/export-html/vendor/highlight.min.js:164:r.contains||(r.contains=[]),r.contains=[].concat(...r.contains.map((e=>(e=>(e.variants&&!e.cachedVariants&&(e.cachedVariants=e.variants.map((n=>a(e,{
+packages/coding-agent/src/core/export-html/vendor/highlight.min.js:165:variants:null},n)))),e.cachedVariants?e.cachedVariants:X(e)?a(e,{
+packages/coding-agent/src/core/export-html/vendor/highlight.min.js:242:if(w.__emitTokens)w.__emitTokens(t,S);else{for(x.matcher.considerAll();;){
+packages/coding-agent/src/core/agent-session.ts:44:	calculateContextTokens,
+packages/coding-agent/src/core/agent-session.ts:47:	estimateContextTokens,
+packages/coding-agent/src/core/agent-session.ts:229:		cacheRead: number;
+packages/coding-agent/src/core/agent-session.ts:230:		cacheWrite: number;
+packages/coding-agent/src/core/agent-session.ts:1787:		// compaction boundary. This prevents a stale pre-compaction usage/error
+packages/coding-agent/src/core/agent-session.ts:1822:		// For error messages (no usage data), estimate from last successful response.
+packages/coding-agent/src/core/agent-session.ts:1824:		let contextTokens: number;
+packages/coding-agent/src/core/agent-session.ts:1827:			const estimate = estimateContextTokens(messages);
+packages/coding-agent/src/core/agent-session.ts:1828:			if (estimate.lastUsageIndex === null) return false; // No usage data at all
+packages/coding-agent/src/core/agent-session.ts:1829:			// Verify the usage source is post-compaction. Kept pre-compaction messages
+packages/coding-agent/src/core/agent-session.ts:1830:			// have stale usage reflecting the old (larger) context and would falsely
+packages/coding-agent/src/core/agent-session.ts:1832:			const usageMsg = messages[estimate.lastUsageIndex];
+packages/coding-agent/src/core/agent-session.ts:1835:				usageMsg.role === "assistant" &&
+packages/coding-agent/src/core/agent-session.ts:1836:				(usageMsg as AssistantMessage).timestamp <= new Date(compactionEntry.timestamp).getTime()
+packages/coding-agent/src/core/agent-session.ts:1840:			contextTokens = estimate.tokens;
+packages/coding-agent/src/core/agent-session.ts:1842:			contextTokens = calculateContextTokens(assistantMessage.usage);
+packages/coding-agent/src/core/agent-session.ts:1844:		if (shouldCompact(contextTokens, contextWindow, settings)) {
+packages/coding-agent/src/core/agent-session.ts:2757:					reserveTokens: branchSummarySettings.reserveTokens,
+packages/coding-agent/src/core/agent-session.ts:2900:				totalInput += assistantMsg.usage.input;
+packages/coding-agent/src/core/agent-session.ts:2901:				totalOutput += assistantMsg.usage.output;
+packages/coding-agent/src/core/agent-session.ts:2902:				totalCacheRead += assistantMsg.usage.cacheRead;
+packages/coding-agent/src/core/agent-session.ts:2903:				totalCacheWrite += assistantMsg.usage.cacheWrite;
+packages/coding-agent/src/core/agent-session.ts:2904:				totalCost += assistantMsg.usage.cost.total;
+packages/coding-agent/src/core/agent-session.ts:2919:				cacheRead: totalCacheRead,
+packages/coding-agent/src/core/agent-session.ts:2920:				cacheWrite: totalCacheWrite,
+packages/coding-agent/src/core/agent-session.ts:2935:		// After compaction, the last assistant usage reflects pre-compaction context size.
+packages/coding-agent/src/core/agent-session.ts:2936:		// We can only trust usage from an assistant that responded after the latest compaction.
+packages/coding-agent/src/core/agent-session.ts:2942:			// Check if there's a valid assistant usage after the compaction boundary
+packages/coding-agent/src/core/agent-session.ts:2950:						const contextTokens = calculateContextTokens(assistant.usage);
+packages/coding-agent/src/core/agent-session.ts:2951:						if (contextTokens > 0) {
+packages/coding-agent/src/core/agent-session.ts:2964:		const estimate = estimateContextTokens(this.messages);
+packages/coding-agent/src/core/compaction/compaction.ts:117:	reserveTokens: number;
+packages/coding-agent/src/core/compaction/compaction.ts:118:	keepRecentTokens: number;
+packages/coding-agent/src/core/compaction/compaction.ts:123:	reserveTokens: 16384,
+packages/coding-agent/src/core/compaction/compaction.ts:124:	keepRecentTokens: 20000,
+packages/coding-agent/src/core/compaction/compaction.ts:128:// Token calculation
+packages/coding-agent/src/core/compaction/compaction.ts:132: * Calculate total context tokens from usage.
+packages/coding-agent/src/core/compaction/compaction.ts:133: * Uses the native totalTokens field when available, falls back to computing from components.
+packages/coding-agent/src/core/compaction/compaction.ts:135:export function calculateContextTokens(usage: Usage): number {
+packages/coding-agent/src/core/compaction/compaction.ts:136:	return usage.totalTokens || usage.input + usage.output + usage.cacheRead + usage.cacheWrite;
+packages/coding-agent/src/core/compaction/compaction.ts:140: * Get usage from an assistant message if available.
+packages/coding-agent/src/core/compaction/compaction.ts:141: * Skips aborted and error messages as they don't have valid usage data.
+packages/coding-agent/src/core/compaction/compaction.ts:144:	if (msg.role === "assistant" && "usage" in msg) {
+packages/coding-agent/src/core/compaction/compaction.ts:146:		if (assistantMsg.stopReason !== "aborted" && assistantMsg.stopReason !== "error" && assistantMsg.usage) {
+packages/coding-agent/src/core/compaction/compaction.ts:147:			return assistantMsg.usage;
+packages/coding-agent/src/core/compaction/compaction.ts:154: * Find the last non-aborted assistant message usage from session entries.
+packages/coding-agent/src/core/compaction/compaction.ts:160:			const usage = getAssistantUsage(entry.message);
+packages/coding-agent/src/core/compaction/compaction.ts:161:			if (usage) return usage;
+packages/coding-agent/src/core/compaction/compaction.ts:169:	usageTokens: number;
+packages/coding-agent/src/core/compaction/compaction.ts:170:	trailingTokens: number;
+packages/coding-agent/src/core/compaction/compaction.ts:174:function getLastAssistantUsageInfo(messages: AgentMessage[]): { usage: Usage; index: number } | undefined {
+packages/coding-agent/src/core/compaction/compaction.ts:176:		const usage = getAssistantUsage(messages[i]);
+packages/coding-agent/src/core/compaction/compaction.ts:177:		if (usage) return { usage, index: i };
+packages/coding-agent/src/core/compaction/compaction.ts:183: * Estimate context tokens from messages, using the last assistant usage when available.
+packages/coding-agent/src/core/compaction/compaction.ts:184: * If there are messages after the last usage, estimate their tokens with estimateTokens.
+packages/coding-agent/src/core/compaction/compaction.ts:186:export function estimateContextTokens(messages: AgentMessage[]): ContextUsageEstimate {
+packages/coding-agent/src/core/compaction/compaction.ts:187:	const usageInfo = getLastAssistantUsageInfo(messages);
+packages/coding-agent/src/core/compaction/compaction.ts:189:	if (!usageInfo) {
+packages/coding-agent/src/core/compaction/compaction.ts:192:			estimated += estimateTokens(message);
+packages/coding-agent/src/core/compaction/compaction.ts:196:			usageTokens: 0,
+packages/coding-agent/src/core/compaction/compaction.ts:197:			trailingTokens: estimated,
+packages/coding-agent/src/core/compaction/compaction.ts:202:	const usageTokens = calculateContextTokens(usageInfo.usage);
+packages/coding-agent/src/core/compaction/compaction.ts:203:	let trailingTokens = 0;
+packages/coding-agent/src/core/compaction/compaction.ts:204:	for (let i = usageInfo.index + 1; i < messages.length; i++) {
+packages/coding-agent/src/core/compaction/compaction.ts:205:		trailingTokens += estimateTokens(messages[i]);
+packages/coding-agent/src/core/compaction/compaction.ts:209:		tokens: usageTokens + trailingTokens,
+packages/coding-agent/src/core/compaction/compaction.ts:210:		usageTokens,
+packages/coding-agent/src/core/compaction/compaction.ts:211:		trailingTokens,
+packages/coding-agent/src/core/compaction/compaction.ts:212:		lastUsageIndex: usageInfo.index,
+packages/coding-agent/src/core/compaction/compaction.ts:217: * Check if compaction should trigger based on context usage.
+packages/coding-agent/src/core/compaction/compaction.ts:219:export function shouldCompact(contextTokens: number, contextWindow: number, settings: CompactionSettings): boolean {
+packages/coding-agent/src/core/compaction/compaction.ts:221:	return contextTokens > contextWindow - settings.reserveTokens;
+packages/coding-agent/src/core/compaction/compaction.ts:232:export function estimateTokens(message: AgentMessage): number {
+packages/coding-agent/src/core/compaction/compaction.ts:371: * Find the cut point in session entries that keeps approximately `keepRecentTokens`.
+packages/coding-agent/src/core/compaction/compaction.ts:374: * Stop when we've accumulated >= keepRecentTokens. Cut at that point.
+packages/coding-agent/src/core/compaction/compaction.ts:390:	keepRecentTokens: number,
+packages/coding-agent/src/core/compaction/compaction.ts:399:	let accumulatedTokens = 0;
+packages/coding-agent/src/core/compaction/compaction.ts:407:		const messageTokens = estimateTokens(entry.message);
+packages/coding-agent/src/core/compaction/compaction.ts:408:		accumulatedTokens += messageTokens;
+packages/coding-agent/src/core/compaction/compaction.ts:411:		if (accumulatedTokens >= keepRecentTokens) {
+packages/coding-agent/src/core/compaction/compaction.ts:528:	maxTokens: number,
+packages/coding-agent/src/core/compaction/compaction.ts:534:	const options: SimpleStreamOptions = { maxTokens, signal, apiKey, headers };
+packages/coding-agent/src/core/compaction/compaction.ts:561:	reserveTokens: number,
+packages/coding-agent/src/core/compaction/compaction.ts:570:	const maxTokens = Math.min(
+packages/coding-agent/src/core/compaction/compaction.ts:571:		Math.floor(0.8 * reserveTokens),
+packages/coding-agent/src/core/compaction/compaction.ts:572:		model.maxTokens > 0 ? model.maxTokens : Number.POSITIVE_INFINITY,
+packages/coding-agent/src/core/compaction/compaction.ts:601:	const completionOptions = createSummarizationOptions(model, maxTokens, apiKey, headers, signal, thinkingLevel);
+packages/coding-agent/src/core/compaction/compaction.ts:670:	const tokensBefore = estimateContextTokens(buildSessionContext(pathEntries).messages).tokens;
+packages/coding-agent/src/core/compaction/compaction.ts:672:	const cutPoint = findCutPoint(pathEntries, boundaryStart, boundaryEnd, settings.keepRecentTokens);
+packages/coding-agent/src/core/compaction/compaction.ts:778:						settings.reserveTokens,
+packages/coding-agent/src/core/compaction/compaction.ts:791:				settings.reserveTokens,
+packages/coding-agent/src/core/compaction/compaction.ts:806:			settings.reserveTokens,
+packages/coding-agent/src/core/compaction/compaction.ts:839:	reserveTokens: number,
+packages/coding-agent/src/core/compaction/compaction.ts:846:	const maxTokens = Math.min(
+packages/coding-agent/src/core/compaction/compaction.ts:847:		Math.floor(0.5 * reserveTokens),
+packages/coding-agent/src/core/compaction/compaction.ts:848:		model.maxTokens > 0 ? model.maxTokens : Number.POSITIVE_INFINITY,
+packages/coding-agent/src/core/compaction/compaction.ts:864:		createSummarizationOptions(model, maxTokens, apiKey, headers, signal, thinkingLevel),
+packages/agent/src/harness/compaction/compaction.ts:105:	/** Tokens reserved for summary prompt and output. */
+packages/agent/src/harness/compaction/compaction.ts:106:	reserveTokens: number;
+packages/agent/src/harness/compaction/compaction.ts:108:	keepRecentTokens: number;
+packages/agent/src/harness/compaction/compaction.ts:114:	reserveTokens: 16384,
+packages/agent/src/harness/compaction/compaction.ts:115:	keepRecentTokens: 20000,
+packages/agent/src/harness/compaction/compaction.ts:118:/** Calculate total context tokens from provider usage. */
+packages/agent/src/harness/compaction/compaction.ts:119:export function calculateContextTokens(usage: Usage): number {
+packages/agent/src/harness/compaction/compaction.ts:120:	return usage.totalTokens || usage.input + usage.output + usage.cacheRead + usage.cacheWrite;
+packages/agent/src/harness/compaction/compaction.ts:123:	if (msg.role === "assistant" && "usage" in msg) {
+packages/agent/src/harness/compaction/compaction.ts:125:		if (assistantMsg.stopReason !== "aborted" && assistantMsg.stopReason !== "error" && assistantMsg.usage) {
+packages/agent/src/harness/compaction/compaction.ts:126:			return assistantMsg.usage;
+packages/agent/src/harness/compaction/compaction.ts:132:/** Return usage from the last successful assistant message in session entries. */
+packages/agent/src/harness/compaction/compaction.ts:137:			const usage = getAssistantUsage(entry.message as AgentMessage);
+packages/agent/src/harness/compaction/compaction.ts:138:			if (usage) return usage;
+packages/agent/src/harness/compaction/compaction.ts:144:/** Estimated context-token usage for a message list. */
+packages/agent/src/harness/compaction/compaction.ts:148:	/** Tokens reported by the most recent assistant usage block. */
+packages/agent/src/harness/compaction/compaction.ts:149:	usageTokens: number;
+packages/agent/src/harness/compaction/compaction.ts:150:	/** Estimated tokens after the most recent assistant usage block. */
+packages/agent/src/harness/compaction/compaction.ts:151:	trailingTokens: number;
+packages/agent/src/harness/compaction/compaction.ts:152:	/** Index of the message that provided usage, or null when none exists. */
+packages/agent/src/harness/compaction/compaction.ts:156:function getLastAssistantUsageInfo(messages: AgentMessage[]): { usage: Usage; index: number } | undefined {

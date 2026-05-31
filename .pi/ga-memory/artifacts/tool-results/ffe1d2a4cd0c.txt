@@ -1,0 +1,343 @@
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:49:		bash: createBashTool(cwd),
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:50:		edit: createEditTool(cwd),
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:51:		write: createWriteTool(cwd),
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:52:		find: createFindTool(cwd),
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:53:		grep: createGrepTool(cwd),
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:54:		ls: createLsTool(cwd),
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:58:function getBuiltInTools(cwd: string) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:61:		tools = createBuiltInTools(cwd);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:69:	// Read Tool
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:71:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:76:		parameters: getBuiltInTools(process.cwd()).read.parameters,
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:79:			const tools = getBuiltInTools(ctx.cwd);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:83:		renderCall(args, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:97:		renderResult(result, { expanded }, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:116:	// Bash Tool
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:118:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:123:		parameters: getBuiltInTools(process.cwd()).bash.parameters,
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:126:			const tools = getBuiltInTools(ctx.cwd);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:130:		renderCall(args, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:138:		renderResult(result, { expanded }, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:165:	// Write Tool
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:167:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:172:		parameters: getBuiltInTools(process.cwd()).write.parameters,
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:175:			const tools = getBuiltInTools(ctx.cwd);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:179:		renderCall(args, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:188:		renderResult(result, { expanded }, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:207:	// Edit Tool
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:209:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:214:		parameters: getBuiltInTools(process.cwd()).edit.parameters,
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:217:			const tools = getBuiltInTools(ctx.cwd);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:221:		renderCall(args, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:228:		renderResult(result, { expanded }, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:240:			// For errors, show the error message
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:252:	// Find Tool
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:254:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:259:		parameters: getBuiltInTools(process.cwd()).find.parameters,
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:262:			const tools = getBuiltInTools(ctx.cwd);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:266:		renderCall(args, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:280:		renderResult(result, { expanded }, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:310:	// Grep Tool
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:312:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:317:		parameters: getBuiltInTools(process.cwd()).grep.parameters,
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:320:			const tools = getBuiltInTools(ctx.cwd);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:324:		renderCall(args, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:342:		renderResult(result, { expanded }, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:372:	// Ls Tool
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:374:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:379:		parameters: getBuiltInTools(process.cwd()).ls.parameters,
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:382:			const tools = getBuiltInTools(ctx.cwd);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:386:		renderCall(args, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/minimal-mode.ts:398:		renderResult(result, { expanded }, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/provider-payload.ts:8:	pi.on("before_provider_request", (event) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/provider-payload.ts:15:	pi.on("after_provider_response", (event) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/pirate.ts:4: * Demonstrates modifying the system prompt in before_agent_start to dynamically
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/pirate.ts:27:	// Append to system prompt when pirate mode is enabled
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/pirate.ts:28:	pi.on("before_agent_start", async (event) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/protected-paths.ts:13:	pi.on("tool_call", async (event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/snake.ts:319:			// Load saved state from session
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/snake.ts:320:			const entries = ctx.sessionManager.getEntries();
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/rpc-demo.ts:10: * - confirm() - on session_before_switch
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/rpc-demo.ts:13: * - notify() - after each dialog completes
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/rpc-demo.ts:15: * - setWidget() - on session_start
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/rpc-demo.ts:16: * - setTitle() - on session_start
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/rpc-demo.ts:25:	// -- setTitle, setWidget, setStatus on session lifecycle --
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/rpc-demo.ts:27:	pi.on("session_start", async (event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/rpc-demo.ts:28:		ctx.ui.setTitle(event.reason === "new" ? "pi RPC Demo (new session)" : "pi RPC Demo");
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/rpc-demo.ts:35:	pi.on("turn_start", async (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/rpc-demo.ts:40:	pi.on("turn_end", async (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/rpc-demo.ts:46:	pi.on("tool_call", async (event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/rpc-demo.ts:68:	// -- confirm on session clear --
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/rpc-demo.ts:70:	pi.on("session_before_switch", async (event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/rpc-demo.ts:74:		const confirmed = await ctx.ui.confirm("Clear session?", "All messages will be lost.");
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/session-name.ts:4: * Shows setSessionName/getSessionName to give sessions friendly names
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/session-name.ts:5: * that appear in the session selector instead of the first message.
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/session-name.ts:7: * Usage: /session-name [name] - set or show session name
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/session-name.ts:13:	pi.registerCommand("session-name", {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/session-name.ts:14:		description: "Set or show session name (usage: /session-name [new name])",
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/session-name.ts:23:				ctx.ui.notify(current ? `Session: ${current}` : "No session name set", "info");
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:5: * and system prompt instructions. Presets are defined in JSON config files
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:20: *     "instructions": "You are in PLANNING MODE. Your job is to deeply understand the problem and create a detailed implementation plan.\n\nRules:\n- DO NOT make any changes. You cannot edit or write files.\n- Read files IN FULL (no offset/limit) to get complete context. Partial reads miss critical details.\n- Explore thoroughly: grep for related code, find similar patterns, understand the architecture.\n- Ask clarifying questions if requirements are ambiguous. Do not assume.\n- Identify risks, edge cases, and dependencies before proposing solutions.\n\nOutput:\n- Create a structured plan with numbered steps.\n- For each step: what to change, why, and potential risks.\n- List files that will be modified.\n- Note any tests that should be added or updated.\n\nWhen done, ask the user if they want you to:\n1. Write the plan to a markdown file (e.g., PLAN.md)\n2. Create a GitHub issue with the plan\n3. Proceed to implementation (they should switch to 'implement' preset)"
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:27: *     "instructions": "You are in IMPLEMENTATION MODE. Your job is to make focused, correct changes.\n\nRules:\n- Keep scope tight. Do exactly what was asked, no more.\n- Read files before editing to understand current state.\n- Make surgical edits. Prefer edit over write for existing files.\n- Explain your reasoning briefly before each change.\n- Run tests or type checks after changes if the project has them (npm test, npm run check, etc.).\n- If you encounter unexpected complexity, STOP and explain the issue rather than hacking around it.\n\nIf no plan exists:\n- Ask clarifying questions before starting.\n- Propose what you'll do and get confirmation for non-trivial changes.\n\nAfter completing changes:\n- Summarize what was done.\n- Note any follow-up work or tests that should be added."
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:34: * - `/preset` - show selector to switch presets mid-session
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:56:	/** Tools to enable (replaces default set) */
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:58:	/** Instructions to append to system prompt */
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:123:		// Snapshot state before the first preset is applied (i.e. only when transitioning from no-preset)
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:128:				tools: pi.getActiveTools(),
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:152:			const allToolNames = pi.getAllTools().map((t) => t.name);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:153:			const validTools = preset.tools.filter((t) => allToolNames.includes(t));
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:154:			const invalidTools = preset.tools.filter((t) => !allToolNames.includes(t));
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:156:			if (invalidTools.length > 0) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:157:				ctx.ui.notify(`Preset "${name}": Unknown tools: ${invalidTools.join(", ")}`, "warning");
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:160:			if (validTools.length > 0) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:161:				pi.setActiveTools(validTools);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:165:		// Store active preset for system prompt injection
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:276:				pi.setActiveTools(originalState.tools);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:278:				pi.setActiveTools(["read", "bash", "edit", "write"]);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:329:				pi.setActiveTools(originalState.tools);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:331:				pi.setActiveTools(["read", "bash", "edit", "write"]);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:379:	// Inject preset instructions into system prompt
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:380:	pi.on("before_agent_start", async (event) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:388:	// Initialize on session start
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:389:	pi.on("session_start", async (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:406:		// Restore preset from session state
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:407:		const entries = ctx.sessionManager.getEntries();
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/preset.ts:425:	pi.on("turn_start", async () => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/mac-system-theme.ts:28:	pi.on("session_start", async (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/mac-system-theme.ts:41:	pi.on("session_shutdown", () => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/rainbow-editor.ts:85:	pi.on("session_start", (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/permission-gate.ts:4: * Prompts for confirmation before running potentially dangerous bash commands.
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/permission-gate.ts:13:	pi.on("tool_call", async (event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/timed-confirm.ts:5: * - /timed - Shows confirm dialog that auto-cancels after 5 seconds with countdown
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/timed-confirm.ts:6: * - /timed-select - Shows select dialog that auto-cancels after 10 seconds with countdown
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/system-prompt-header.ts:2: * Displays a status widget showing the system prompt length.
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/system-prompt-header.ts:4: * Demonstrates ctx.getSystemPrompt() for accessing the effective system prompt.
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/system-prompt-header.ts:9:	pi.on("agent_start", (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/system-prompt-header.ts:10:		const prompt = ctx.getSystemPrompt();
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/system-prompt-header.ts:11:		ctx.ui.setStatus("system-prompt", `System: ${prompt.length} chars`);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/system-prompt-header.ts:14:	pi.on("session_shutdown", (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/system-prompt-header.ts:15:		ctx.ui.setStatus("system-prompt", undefined);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/reload-runtime.ts:15:		description: "Reload extensions, skills, prompts, and themes",
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/reload-runtime.ts:22:	// LLM-callable tool. Tools get ExtensionContext, so they cannot call ctx.reload() directly.
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/reload-runtime.ts:24:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/reload-runtime.ts:27:		description: "Reload extensions, skills, prompts, and themes",
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/structured-output.ts:2: * Structured Output Tool
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/structured-output.ts:8:import { defineTool, type ExtensionAPI } from "@earendil-works/pi-coding-agent";
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/structured-output.ts:18:const structuredOutputTool = defineTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/structured-output.ts:23:	promptSnippet: "Emit a final structured answer as a terminating tool result",
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/structured-output.ts:24:	promptGuidelines: [
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/structured-output.ts:64:	pi.registerTool(structuredOutputTool);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/send-user-message.ts:4: * Demonstrates pi.sendUserMessage() for sending user messages from extensions.
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/send-user-message.ts:5: * Unlike pi.sendMessage() which sends custom messages, sendUserMessage() sends
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/send-user-message.ts:6: * actual user messages that appear in the conversation as if typed by the user.
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/send-user-message.ts:9: *   /ask What is 2+2?     - Sends a user message (always triggers a turn)
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/send-user-message.ts:17:	// Simple command that sends a user message
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/send-user-message.ts:19:		description: "Send a user message to the agent",
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/send-user-message.ts:22:				ctx.ui.notify("Usage: /ask <message>", "warning");
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/send-user-message.ts:39:		description: "Send a steering message (interrupts current processing)",
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/send-user-message.ts:42:				ctx.ui.notify("Usage: /steer <message>", "warning");
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/send-user-message.ts:56:	// Command that queues a follow-up message
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/send-user-message.ts:58:		description: "Queue a follow-up message (waits for current processing)",
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/send-user-message.ts:61:				ctx.ui.notify("Usage: /followup <message>", "warning");
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/send-user-message.ts:78:		description: "Send a user message with structured content",
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/send-user-message.ts:81:				ctx.ui.notify("Usage: /askwith <message>", "warning");
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/overlay-qa-tests.ts:492:				# Add some colored status messages with long text
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/overlay-qa-tests.ts:510:		this.proc.stdout?.on("data", (data: Buffer) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/overlay-qa-tests.ts:511:			if (this.disposed) return; // Guard against callbacks after dispose
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/overlay-qa-tests.ts:522:		this.proc.stderr?.on("data", (data: Buffer) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/overlay-qa-tests.ts:523:			if (this.disposed) return; // Guard against callbacks after dispose
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/overlay-qa-tests.ts:528:		this.proc.on("close", () => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/overlay-qa-tests.ts:529:			if (this.disposed) return; // Guard against callbacks after dispose
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/overlay-qa-tests.ts:541:			this.tui.requestRender(); // Trigger re-render after scroll
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/overlay-qa-tests.ts:544:			this.tui.requestRender(); // Trigger re-render after scroll
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/overlay-qa-tests.ts:901:			// Auto-restore after 1 second to demonstrate the API
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/truncated-tool.ts:2: * Truncated Tool Example - Demonstrates proper output truncation for custom tools
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/truncated-tool.ts:4: * Custom tools MUST truncate their output to avoid overwhelming the LLM context.
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/truncated-tool.ts:49:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/truncated-tool.ts:80:				throw new Error(`ripgrep failed: ${err.message}`);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/truncated-tool.ts:137:		// Custom rendering of the tool call (shown before/during execution)
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/truncated-tool.ts:138:		renderCall(args, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/truncated-tool.ts:151:		renderResult(result, { expanded, isPartial }, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:12: *   - SSH key-based auth (no password prompts)
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:20:	createBashTool,
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:21:	createEditTool,
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:22:	createReadTool,
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:23:	createWriteTool,
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:34:		child.stdout.on("data", (data) => chunks.push(data));
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:35:		child.stderr.on("data", (data) => errChunks.push(data));
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:36:		child.on("error", reject);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:37:		child.on("close", (code) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:95:				child.stdout.on("data", onData);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:96:				child.stderr.on("data", onData);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:97:				child.on("error", (e) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:103:				child.on("close", (code) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:118:	const localRead = createReadTool(localCwd);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:119:	const localWrite = createWriteTool(localCwd);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:120:	const localEdit = createEditTool(localCwd);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:121:	const localBash = createBashTool(localCwd);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:123:	// Resolved lazily on session_start (CLI flags not available during factory)
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:128:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:133:				const tool = createReadTool(localCwd, {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:142:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:147:				const tool = createWriteTool(localCwd, {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:156:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:161:				const tool = createEditTool(localCwd, {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:170:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:175:				const tool = createBashTool(localCwd, {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:184:	pi.on("session_start", async (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:203:	pi.on("user_bash", (_event) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:209:	// Replace local cwd with remote cwd in system prompt
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/ssh.ts:210:	pi.on("before_agent_start", async (event) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/summarize.ts:15:	message?: {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/summarize.ts:45:const extractToolCallLines = (content: unknown): string[] => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/summarize.ts:62:		toolCalls.push(`Tool ${block.name} was called with args ${JSON.stringify(args)}`);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/summarize.ts:72:		if (entry.type !== "message" || !entry.message?.role) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/summarize.ts:76:		const role = entry.message.role;
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/summarize.ts:85:		const textParts = extractTextParts(entry.message.content);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/summarize.ts:88:			const messageText = textParts.join("\n").trim();
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/summarize.ts:89:			if (messageText.length > 0) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/summarize.ts:90:				entryLines.push(`${roleLabel}: ${messageText}`);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/summarize.ts:95:			entryLines.push(...extractToolCallLines(entry.message.content));
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/summarize.ts:149:			const branch = ctx.sessionManager.getBranch();
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/summarize.ts:190:				{ messages: summaryMessages },
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/working-indicator.ts:94:	pi.on("session_start", async (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/qna.ts:4: * Demonstrates the "prompt generator" pattern:
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/qna.ts:5: * 1. /qna command gets the last assistant message
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/qna.ts:19:- If no questions are found, output "No questions found in the last message."
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/qna.ts:32:		description: "Extract questions from last assistant message into editor",
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/qna.ts:44:			// Find the last assistant message on the current branch
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/qna.ts:45:			const branch = ctx.sessionManager.getBranch();
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/qna.ts:50:				if (entry.type === "message") {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/qna.ts:51:					const msg = entry.message;
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/qna.ts:54:							ctx.ui.notify(`Last assistant message incomplete (${msg.stopReason})`, "error");
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/qna.ts:69:				ctx.ui.notify("No assistant messages found", "error");
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/qna.ts:92:						{ systemPrompt: SYSTEM_PROMPT, messages: [userMessage] },
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/trigger-compact.ts:12:		ctx.compact({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/trigger-compact.ts:21:					ctx.ui.notify(`Compaction failed: ${error.message}`, "error");
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/trigger-compact.ts:27:	pi.on("turn_end", (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/trigger-compact.ts:43:	pi.registerCommand("trigger-compact", {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/trigger-compact.ts:44:		description: "Trigger compaction immediately",
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tool-override.ts:2: * Tool Override Example - Demonstrates overriding built-in tools
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tool-override.ts:69:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tool-override.ts:121:					content: [{ type: "text", text: `Error reading file: ${error.message}` }] as TextContent[],
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/questionnaire.ts:2: * Questionnaire Tool - Unified tool for asking single or multiple questions
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/questionnaire.ts:24:	prompt: string;
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/questionnaire.ts:54:			description: "Short contextual label for tab bar, e.g. 'Scope', 'Priority' (defaults to Q1, Q2)",
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/questionnaire.ts:57:	prompt: Type.String({ description: "The full question text to display" }),
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/questionnaire.ts:67:	message: string,
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/questionnaire.ts:71:		content: [{ type: "text", text: message }],
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/questionnaire.ts:77:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/questionnaire.ts:316:						add(theme.fg("text", ` ${q.prompt}`));
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/questionnaire.ts:348:						add(theme.fg("text", ` ${q.prompt}`));
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/questionnaire.ts:396:		renderCall(args, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/questionnaire.ts:408:		renderResult(result, _options, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:2: * Tools Extension
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:5: * Tool selection persists across session reloads and respects branch navigation.
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:12:import type { ExtensionAPI, ExtensionContext, ToolInfo } from "@earendil-works/pi-coding-agent";
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:16:// State persisted to session
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:17:interface ToolsState {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:18:	enabledTools: string[];
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:23:	let enabledTools: Set<string> = new Set();
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:24:	let allTools: ToolInfo[] = [];
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:28:		pi.appendEntry<ToolsState>("tools-config", {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:29:			enabledTools: Array.from(enabledTools),
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:34:	function applyTools() {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:35:		pi.setActiveTools(Array.from(enabledTools));
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:40:		allTools = pi.getAllTools();
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:43:		const branchEntries = ctx.sessionManager.getBranch();
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:44:		let savedTools: string[] | undefined;
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:48:				const data = entry.data as ToolsState | undefined;
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:49:				if (data?.enabledTools) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:50:					savedTools = data.enabledTools;
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:55:		if (savedTools) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:57:			const allToolNames = allTools.map((t) => t.name);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:58:			enabledTools = new Set(savedTools.filter((t: string) => allToolNames.includes(t)));
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:59:			applyTools();
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:62:			enabledTools = new Set(pi.getActiveTools());
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:71:			allTools = pi.getAllTools();
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:75:				const items: SettingItem[] = allTools.map((tool) => ({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:78:					currentValue: enabledTools.has(tool.name) ? "enabled" : "disabled",
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:86:							return [theme.fg("accent", theme.bold("Tool Configuration")), ""];
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:99:							enabledTools.add(id);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:101:							enabledTools.delete(id);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:103:						applyTools();
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:132:	// Restore state on session start
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:133:	pi.on("session_start", async (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:137:	// Restore state when navigating the session tree
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tools.ts:138:	pi.on("session_tree", async (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/status-line.ts:13:	pi.on("session_start", async (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/status-line.ts:18:	pi.on("turn_start", async (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/status-line.ts:26:	pi.on("turn_end", async (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/titlebar-spinner.ts:18:	const session = pi.getSessionName();
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/titlebar-spinner.ts:19:	return session ? `π - ${session} - ${cwd}` : `π - ${cwd}`;
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/titlebar-spinner.ts:40:			const session = pi.getSessionName();
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/titlebar-spinner.ts:41:			const title = session ? `${frame} π - ${session} - ${cwd}` : `${frame} π - ${cwd}`;
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/titlebar-spinner.ts:47:	pi.on("agent_start", async (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/titlebar-spinner.ts:51:	pi.on("agent_end", async (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/titlebar-spinner.ts:55:	pi.on("session_shutdown", async (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/shutdown-command.ts:20:	// You can also create a tool that shuts down after completing work
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/shutdown-command.ts:21:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/shutdown-command.ts:31:			// This return is sent to the LLM before shutdown occurs
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/shutdown-command.ts:33:				content: [{ type: "text", text: "Shutdown requested. Exiting after this response." }],
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/shutdown-command.ts:40:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/todo.ts:2: * Todo Extension - Demonstrates state management via session entries
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/todo.ts:106:	// In-memory state (reconstructed from session on load)
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/todo.ts:111:	 * Reconstruct state from session entries.
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/todo.ts:118:		for (const entry of ctx.sessionManager.getBranch()) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/todo.ts:119:			if (entry.type !== "message") continue;
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/todo.ts:120:			const msg = entry.message;
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/todo.ts:131:	// Reconstruct state on session events
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/todo.ts:132:	pi.on("session_start", async (_event, ctx) => reconstructState(ctx));
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/todo.ts:133:	pi.on("session_tree", async (_event, ctx) => reconstructState(ctx));
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/todo.ts:136:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/todo.ts:221:		renderCall(args, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/todo.ts:228:		renderResult(result, { expanded }, theme, _context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/space-invaders.ts:537:			// Load saved state from session
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/space-invaders.ts:538:			const entries = ctx.sessionManager.getEntries();
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/working-message-test.ts:4: * Sets a custom working message and indicator on session start so you can
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/working-message-test.ts:8: *   pi --extension examples/extensions/working-message-test.ts
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/working-message-test.ts:10: * Then send a few messages in interactive mode. The working message should
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/working-message-test.ts:21:	pi.on("session_start", async (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/widget-placement.ts:4:	pi.on("session_start", (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:11: * default parallel tool-execution mode this races: `play` can resolve before
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:21:import type { ExtensionAPI, ExtensionContext, Theme, ToolExecutionMode } from "@earendil-works/pi-coding-agent";
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:28:	constructor(message: string) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:29:		super(message);
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:70:// Agent cursor home: where the cursor is reset to after a SUCCESSFUL play.
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:248:	// results, move messages, and the game-over banner).
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:358:/** Static snapshot used inside tool results and custom messages. */
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:509:// Move-message renderer (full width banner)
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:512:// Full-width banner message with an optional board snapshot underneath.
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:631:	for (const entry of ctx.sessionManager.getBranch()) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:632:		if (entry.type !== "message") continue;
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:633:		const msg = entry.message;
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:659:	pi.on("session_start", async (_event, ctx) => reconstructState(ctx));
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:660:	pi.on("session_tree", async (_event, ctx) => reconstructState(ctx));
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:664:	// LLM (in case the message ends up in future context).
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:683:	// Custom message renderer for user move messages
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:685:	pi.registerMessageRenderer(MOVE_MESSAGE_TYPE, (message, { expanded }, theme) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:686:		const details = message.details as BoardDetails | undefined;
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:696:	// Custom message renderer for game-over messages
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:698:	pi.registerMessageRenderer(GAME_OVER_MESSAGE_TYPE, (message, _options, theme) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:699:		const details = message.details as BoardDetails | undefined;
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:705:	// before_agent_start - inject game instructions each turn
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:707:	pi.on("before_agent_start", async (event) => {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:719:When the human plays, you receive a message that contains the cell X marked,
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:720:the full board, and YOUR cursor position (Player O's cursor). The message is
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:724:only after a successful \`play\`. If a \`play\` fails (cell already taken), the
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:747:separate tool_use blocks, before you stop. Do not:
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:749:- wait for a move result before emitting the next move or \`play\`,
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:813:							// The agent cursor is only reset after a successful agent play.
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:859:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:863:			"Execute ONE tic-tac-toe action as Player O. `action` is exactly one of: move_up, move_down, move_left, move_right (move YOUR cursor one cell, clamped at edges), or play (place O under YOUR cursor; errors if the cell is not empty). There is no batched form. To play at (r, c) from your current cursor (r0, c0), emit the required move_down/move_up and move_right/move_left calls, then play, all as separate tool_use blocks in the SAME assistant response. Do not split the sequence across responses and do not wait for a result before emitting the next call. Your cursor position persists between turns and is reset to (0,0) only after a successful play.",
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:864:		promptSnippet: "Play a tic-tac-toe action (move_up/down/left/right or play) as Player O",
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:865:		promptGuidelines: [
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:867:			"Never ask the user for the board. The board and your cursor position are included in the user's move message; use tic_tac_toe_see_board if you need them restated.",
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:875:		executionMode: "sequential" as ToolExecutionMode,
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:955:		renderResult(result, { expanded }, theme, context) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:959:			const prefix = context?.isError ? theme.fg("error", "\u2717 ") : theme.fg("success", "\u2713 ");
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:972:	pi.registerTool({
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:976:			"Return the current tic-tac-toe board state and YOUR cursor position (Player O). Takes no arguments. Use this if you need the current state restated mid-turn (for example after a failed play). The user's cursor is never exposed.",
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/examples/extensions/tic-tac-toe.ts:977:		promptSnippet: "Inspect the tic-tac-toe board and your cursor",
+
+[Showing lines 690-1030 of 1030 (50.0KB limit). Full output: /var/folders/7m/csfvhz791k527kby7nxl7cbc0000h_/T/pi-bash-cff46adc53173d29.log]

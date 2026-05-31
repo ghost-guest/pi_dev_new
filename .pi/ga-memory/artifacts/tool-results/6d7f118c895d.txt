@@ -1,0 +1,414 @@
+packages/coding-agent/src/core/agent-session.ts:2954:				return { tokens: null, contextWindow, percent: null };
+packages/coding-agent/src/core/agent-session.ts:2959:		const percent = (estimate.tokens / contextWindow) * 100;
+packages/coding-agent/src/core/agent-session.ts:2963:			contextWindow,
+packages/coding-agent/src/core/agent-session.ts:3067:		const context = Object.defineProperties(
+packages/coding-agent/src/core/agent-session.ts:3071:		context.sendMessage = (message, options) => this.sendCustomMessage(message, options);
+packages/coding-agent/src/core/agent-session.ts:3072:		context.sendUserMessage = (content, options) => this.sendUserMessage(content, options);
+packages/coding-agent/src/core/agent-session.ts:3073:		return context;
+packages/coding-agent/src/core/agent-session.ts:3084:	 * Get the extension runner (for setting UI context and error handlers).
+packages/coding-agent/src/core/compaction/compaction.ts:77: * Returns undefined for entries that don't contribute to LLM context.
+packages/coding-agent/src/core/compaction/compaction.ts:132: * Calculate total context tokens from usage.
+packages/coding-agent/src/core/compaction/compaction.ts:183: * Estimate context tokens from messages, using the last assistant usage when available.
+packages/coding-agent/src/core/compaction/compaction.ts:217: * Check if compaction should trigger based on context usage.
+packages/coding-agent/src/core/compaction/compaction.ts:219:export function shouldCompact(contextTokens: number, contextWindow: number, settings: CompactionSettings): boolean {
+packages/coding-agent/src/core/compaction/compaction.ts:221:	return contextTokens > contextWindow - settings.reserveTokens;
+packages/coding-agent/src/core/compaction/compaction.ts:297: * BashExecutionMessage is treated like a user message (user-initiated context).
+packages/coding-agent/src/core/compaction/compaction.ts:454:const SUMMARIZATION_PROMPT = `The messages above are a conversation to summarize. Create a structured context checkpoint summary that another LLM will use to continue the work.
+packages/coding-agent/src/core/compaction/compaction.ts:491:- ADD new progress, decisions, and context from the new messages
+packages/coding-agent/src/core/compaction/compaction.ts:522:- [Preserve important context, add new if needed]
+packages/coding-agent/src/core/compaction/compaction.ts:543:	context: Context,
+packages/coding-agent/src/core/compaction/compaction.ts:548:		return completeSimple(model, context, options);
+packages/coding-agent/src/core/compaction/compaction.ts:550:	const stream = await streamFn(model, context, options);
+packages/coding-agent/src/core/compaction/compaction.ts:727:Summarize the prefix to provide context for the retained suffix:
+packages/coding-agent/src/core/sdk.ts:49:	/** Models available for cycling (Ctrl+P in interactive mode) */
+packages/coding-agent/src/core/sdk.ts:87:	/** Extensions result (for UI context setup in interactive mode) */
+packages/coding-agent/src/core/sdk.ts:89:	/** Warning if session was restored with a different model than saved */
+packages/coding-agent/src/core/sdk.ts:337:		streamFn: async (model, context, options) => {
+packages/coding-agent/src/core/sdk.ts:344:			return streamSimple(model, context, {
+packages/coding-agent/src/core/resource-loader.ts:5:import { loadThemeFromPath, type Theme } from "../modes/interactive/theme/theme.ts";
+packages/coding-agent/src/core/resource-loader.ts:49:			console.error(chalk.yellow(`Warning: Could not read ${description} file ${input}: ${error}`));
+packages/coding-agent/src/core/resource-loader.ts:68:				console.error(chalk.yellow(`Warning: Could not read ${filePath}: ${error}`));
+packages/coding-agent/src/core/resource-loader.ts:82:	const contextFiles: Array<{ path: string; content: string }> = [];
+packages/coding-agent/src/core/resource-loader.ts:87:		contextFiles.push(globalContext);
+packages/coding-agent/src/core/resource-loader.ts:97:		const contextFile = loadContextFileFromDir(currentDir);
+packages/coding-agent/src/core/resource-loader.ts:98:		if (contextFile && !seenPaths.has(contextFile.path)) {
+packages/coding-agent/src/core/resource-loader.ts:99:			ancestorContextFiles.unshift(contextFile);
+packages/coding-agent/src/core/resource-loader.ts:100:			seenPaths.add(contextFile.path);
+packages/coding-agent/src/core/resource-loader.ts:110:	contextFiles.push(...ancestorContextFiles);
+packages/coding-agent/src/core/resource-loader.ts:112:	return contextFiles;
+packages/coding-agent/src/modes/interactive/theme/dark.json:2:	"$schema": "https://raw.githubusercontent.com/earendil-works/pi/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
+packages/coding-agent/src/core/system-prompt.ts:2: * System prompt construction and project context loading
+packages/coding-agent/src/core/system-prompt.ts:21:	/** Pre-loaded context files. */
+packages/coding-agent/src/core/system-prompt.ts:22:	contextFiles?: Array<{ path: string; content: string }>;
+packages/coding-agent/src/core/system-prompt.ts:27:/** Build the system prompt with tools, guidelines, and context */
+packages/coding-agent/src/core/system-prompt.ts:36:		contextFiles: providedContextFiles,
+packages/coding-agent/src/core/system-prompt.ts:50:	const contextFiles = providedContextFiles ?? [];
+packages/coding-agent/src/core/system-prompt.ts:60:		// Append project context files
+packages/coding-agent/src/core/system-prompt.ts:61:		if (contextFiles.length > 0) {
+packages/coding-agent/src/core/system-prompt.ts:62:			prompt += "\n\n<project_context>\n\n";
+packages/coding-agent/src/core/system-prompt.ts:64:			for (const { path: filePath, content } of contextFiles) {
+packages/coding-agent/src/core/system-prompt.ts:67:			prompt += "</project_context>\n";
+packages/coding-agent/src/core/system-prompt.ts:155:	// Append project context files
+packages/coding-agent/src/core/system-prompt.ts:156:	if (contextFiles.length > 0) {
+packages/coding-agent/src/core/system-prompt.ts:157:		prompt += "\n\n<project_context>\n\n";
+packages/coding-agent/src/core/system-prompt.ts:159:		for (const { path: filePath, content } of contextFiles) {
+packages/coding-agent/src/core/system-prompt.ts:162:		prompt += "</project_context>\n";
+packages/coding-agent/src/core/tools/write.ts:6:import { keyHint } from "../../modes/interactive/components/keybinding-hints.ts";
+packages/coding-agent/src/core/tools/write.ts:7:import { getLanguageFromPath, highlightCode } from "../../modes/interactive/theme/theme.ts";
+packages/coding-agent/src/core/tools/write.ts:134:	theme: typeof import("../../modes/interactive/theme/theme.ts").theme,
+packages/coding-agent/src/core/tools/write.ts:166:	theme: typeof import("../../modes/interactive/theme/theme.ts").theme,
+packages/coding-agent/src/core/tools/write.ts:227:		renderCall(args, theme, context) {
+packages/coding-agent/src/core/tools/write.ts:232:				(context.lastComponent as WriteCallRenderComponent | undefined) ?? new WriteCallRenderComponent();
+packages/coding-agent/src/core/tools/write.ts:234:				component.cache = context.argsComplete
+packages/coding-agent/src/core/tools/write.ts:243:					{ expanded: context.expanded, isPartial: context.isPartial },
+packages/coding-agent/src/core/tools/write.ts:250:		renderResult(result, _options, theme, context) {
+packages/coding-agent/src/core/tools/write.ts:251:			const output = formatWriteResult({ ...result, isError: context.isError }, theme);
+packages/coding-agent/src/core/tools/write.ts:253:				const component = (context.lastComponent as Container | undefined) ?? new Container();
+packages/coding-agent/src/core/tools/write.ts:257:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/session-manager.ts:95: * Does NOT participate in LLM context (ignored by buildSessionContext).
+packages/coding-agent/src/core/session-manager.ts:96: * For injecting content into context, see CustomMessageEntry.
+packages/coding-agent/src/core/session-manager.ts:118: * Custom message entry for extensions to inject messages into LLM context.
+packages/coding-agent/src/core/session-manager.ts:121: * Unlike CustomEntry, this DOES participate in LLM context.
+packages/coding-agent/src/core/session-manager.ts:311: * Build the session context from entries using tree traversal.
+packages/coding-agent/src/core/session-manager.ts:980:	 * Append a custom message entry (for extensions) that participates in LLM context.
+packages/coding-agent/src/core/session-manager.ts:1088:	 * Build the session context (what gets sent to the LLM).
+packages/coding-agent/src/core/session-manager.ts:1186:	 * context from the abandoned conversation path.
+packages/coding-agent/src/utils/tools-manager.ts:217:			"-NonInteractive",
+packages/coding-agent/src/core/extensions/runner.ts:8:import { type Theme, theme } from "../../modes/interactive/theme/theme.ts";
+packages/coding-agent/src/core/extensions/runner.ts:269:		contextActions: ExtensionContextActions,
+packages/coding-agent/src/core/extensions/runner.ts:292:		this.getModel = contextActions.getModel;
+packages/coding-agent/src/core/extensions/runner.ts:293:		this.isIdleFn = contextActions.isIdle;
+packages/coding-agent/src/core/extensions/runner.ts:294:		this.getSignalFn = contextActions.getSignal;
+packages/coding-agent/src/core/extensions/runner.ts:295:		this.abortFn = contextActions.abort;
+packages/coding-agent/src/core/extensions/runner.ts:296:		this.hasPendingMessagesFn = contextActions.hasPendingMessages;
+packages/coding-agent/src/core/extensions/runner.ts:297:		this.shutdownHandler = contextActions.shutdown;
+packages/coding-agent/src/core/extensions/runner.ts:298:		this.getContextUsageFn = contextActions.getContextUsage;
+packages/coding-agent/src/core/extensions/runner.ts:299:		this.compactFn = contextActions.compact;
+packages/coding-agent/src/core/extensions/runner.ts:300:		this.getSystemPromptFn = contextActions.getSystemPrompt;
+packages/coding-agent/src/core/extensions/runner.ts:641:		const context = Object.defineProperties(
+packages/coding-agent/src/core/extensions/runner.ts:645:		context.waitForIdle = () => {
+packages/coding-agent/src/core/extensions/runner.ts:649:		context.newSession = (options) => {
+packages/coding-agent/src/core/extensions/runner.ts:653:		context.fork = (entryId, options) => {
+packages/coding-agent/src/core/extensions/runner.ts:657:		context.navigateTree = (targetId, options) => {
+packages/coding-agent/src/core/extensions/runner.ts:661:		context.switchSession = (sessionPath, options) => {
+packages/coding-agent/src/core/extensions/runner.ts:665:		context.reload = () => {
+packages/coding-agent/src/core/extensions/runner.ts:669:		return context;
+packages/coding-agent/src/core/extensions/runner.ts:864:			const handlers = ext.handlers.get("context");
+packages/coding-agent/src/core/extensions/runner.ts:869:					const event: ContextEvent = { type: "context", messages: currentMessages };
+packages/coding-agent/src/core/extensions/runner.ts:880:						event: "context",
+packages/coding-agent/src/modes/interactive/theme/theme.ts:859:			// Keep the last successfully loaded theme active if the file is temporarily missing
+packages/coding-agent/src/modes/interactive/theme/theme-schema.json:117:					"description": "Warning states"
+packages/coding-agent/src/modes/interactive/theme/light.json:2:	"$schema": "https://raw.githubusercontent.com/earendil-works/pi/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
+packages/coding-agent/src/core/extensions/wrapper.ts:4: * These wrappers only adapt tool execution so extension tools receive the runner context.
+packages/coding-agent/src/core/extensions/wrapper.ts:15: * Uses the runner's createContext() for consistent context across tools and event handlers.
+packages/coding-agent/src/core/extensions/wrapper.ts:23: * Uses the runner's createContext() for consistent context across tools and event handlers.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:15:import type { WarningSettings } from "../../../core/settings-manager.ts";
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:60:	warnings: WarningSettings;
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:88:	onWarningsChange: (warnings: WarningSettings) => void;
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:95:class WarningSettingsSubmenu extends Container {
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:97:	private state: WarningSettings;
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:99:	constructor(warnings: WarningSettings, onChange: (warnings: WarningSettings) => void, onCancel: () => void) {
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:212:		let currentWarnings = { ...config.warnings };
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:218:				description: "Automatically compact context when it gets too large",
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:296:				label: "Warnings",
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:300:					new WarningSettingsSubmenu(
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:301:						currentWarnings,
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:303:							currentWarnings = warnings;
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:304:							callbacks.onWarningsChange(warnings);
+packages/coding-agent/src/core/export-html/template.css:123:    .filter-btn.active {
+packages/coding-agent/src/core/export-html/template.css:167:    .tree-node.active {
+packages/coding-agent/src/core/export-html/template.css:171:    .tree-node.active .tree-content {
+packages/coding-agent/src/core/export-html/template.css:589:    .diff-context { color: var(--toolDiffContext); }
+packages/coding-agent/src/core/tools/bash.ts:7:import { keyHint } from "../../modes/interactive/components/keybinding-hints.ts";
+packages/coding-agent/src/core/tools/bash.ts:8:import { truncateToVisualLines } from "../../modes/interactive/components/visual-truncate.ts";
+packages/coding-agent/src/core/tools/bash.ts:9:import { theme } from "../../modes/interactive/theme/theme.ts";
+packages/coding-agent/src/core/tools/bash.ts:134:export type BashSpawnHook = (context: BashSpawnContext) => BashSpawnContext;
+packages/coding-agent/src/core/tools/bash.ts:405:		renderCall(args, _theme, context) {
+packages/coding-agent/src/core/tools/bash.ts:406:			const state = context.state;
+packages/coding-agent/src/core/tools/bash.ts:407:			if (context.executionStarted && state.startedAt === undefined) {
+packages/coding-agent/src/core/tools/bash.ts:411:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/tools/bash.ts:415:		renderResult(result, options, _theme, context) {
+packages/coding-agent/src/core/tools/bash.ts:416:			const state = context.state;
+packages/coding-agent/src/core/tools/bash.ts:418:				state.interval = setInterval(() => context.invalidate(), 1000);
+packages/coding-agent/src/core/tools/bash.ts:420:			if (!options.isPartial || context.isError) {
+packages/coding-agent/src/core/tools/bash.ts:428:				(context.lastComponent as BashResultRenderComponent | undefined) ?? new BashResultRenderComponent();
+packages/coding-agent/src/core/tools/bash.ts:433:				context.showImages,
+packages/coding-agent/src/core/export-html/template.js:183:      function flattenTree(roots, activePathIds) {
+packages/coding-agent/src/core/export-html/template.js:187:        // Mark which subtrees contain the active leaf
+packages/coding-agent/src/core/export-html/template.js:190:          let has = activePathIds.has(node.entry.id);
+packages/coding-agent/src/core/export-html/template.js:202:        // Add roots (prioritize branch containing active leaf)
+packages/coding-agent/src/core/export-html/template.js:219:          // Order children (active branch first)
+packages/coding-agent/src/core/export-html/template.js:702:        const activePathIds = buildActivePathIds(currentLeafId);
+packages/coding-agent/src/core/export-html/template.js:703:        const flatNodes = flattenTree(tree, activePathIds);
+packages/coding-agent/src/core/export-html/template.js:713:            const isOnPath = activePathIds.has(entry.id);
+packages/coding-agent/src/core/export-html/template.js:719:            if (isTarget) div.classList.add('active');
+packages/coding-agent/src/core/export-html/template.js:754:            const isOnPath = activePathIds.has(id);
+packages/coding-agent/src/core/export-html/template.js:758:            node.classList.toggle('active', isTarget);
+packages/coding-agent/src/core/export-html/template.js:769:        // Scroll active node into view after layout
+packages/coding-agent/src/core/export-html/template.js:771:          const activeNode = container.querySelector('.tree-node.active');
+packages/coding-agent/src/core/export-html/template.js:772:          if (activeNode) {
+packages/coding-agent/src/core/export-html/template.js:773:            activeNode.scrollIntoView({ block: 'nearest' });
+packages/coding-agent/src/core/export-html/template.js:986:                const cls = line.match(/^\+/) ? 'diff-added' : line.match(/^-/) ? 'diff-removed' : 'diff-context';
+packages/coding-agent/src/core/export-html/template.js:1098:        // If we have an injected base URL (iframe context), use it directly
+packages/coding-agent/src/core/export-html/template.js:1110:       * Uses navigator.clipboard with fallback to execCommand for HTTP contexts.
+packages/coding-agent/src/core/export-html/template.js:1641:          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+packages/coding-agent/src/core/export-html/template.js:1642:          btn.classList.add('active');
+packages/coding-agent/src/core/export-html/template.js:1824:        if (isEditableTarget(document.activeElement)) {
+packages/coding-agent/src/utils/changelog.ts:68:		console.error(`Warning: Could not parse changelog: ${error}`);
+packages/coding-agent/src/modes/interactive/components/extension-editor.ts:130:			// Node/libuv's console input read active after tui.stop() pauses stdin, racing
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:285:		// Enable all (filtered if search active, otherwise all)
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:295:		// Clear all (filtered if search active, otherwise all)
+packages/coding-agent/src/core/tools/edit.ts:6:import { renderDiff } from "../../modes/interactive/components/diff.ts";
+packages/coding-agent/src/core/tools/edit.ts:196:	theme: typeof import("../../modes/interactive/theme/theme.ts").theme,
+packages/coding-agent/src/core/tools/edit.ts:209:	theme: typeof import("../../modes/interactive/theme/theme.ts").theme,
+packages/coding-agent/src/core/tools/edit.ts:237:	theme: typeof import("../../modes/interactive/theme/theme.ts").theme,
+packages/coding-agent/src/core/tools/edit.ts:254:	theme: typeof import("../../modes/interactive/theme/theme.ts").theme,
+packages/coding-agent/src/core/tools/edit.ts:367:		renderCall(args, theme, context) {
+packages/coding-agent/src/core/tools/edit.ts:368:			const component = getEditCallRenderComponent(context.state, context.lastComponent);
+packages/coding-agent/src/core/tools/edit.ts:381:			if (context.argsComplete && previewInput && !component.preview && !component.previewPending) {
+packages/coding-agent/src/core/tools/edit.ts:384:				void computeEditsDiff(previewInput.path, previewInput.edits, context.cwd).then((preview) => {
+packages/coding-agent/src/core/tools/edit.ts:387:						context.invalidate();
+packages/coding-agent/src/core/tools/edit.ts:394:		renderResult(result, _options, theme, context) {
+packages/coding-agent/src/core/tools/edit.ts:395:			const callComponent = context.state.callComponent;
+packages/coding-agent/src/core/tools/edit.ts:396:			const previewInput = getRenderablePreviewInput(context.args as RenderableEditArgs | undefined);
+packages/coding-agent/src/core/tools/edit.ts:401:			const resultDiff = !context.isError ? typedResult.details?.diff : undefined;
+packages/coding-agent/src/core/tools/edit.ts:412:				if (callComponent.settledError !== context.isError) {
+packages/coding-agent/src/core/tools/edit.ts:413:					callComponent.settledError = context.isError;
+packages/coding-agent/src/core/tools/edit.ts:417:					buildEditCallComponent(callComponent, context.args as RenderableEditArgs | undefined, theme);
+packages/coding-agent/src/core/tools/edit.ts:421:			const output = formatEditResult(context.args, callComponent?.preview, typedResult, theme, context.isError);
+packages/coding-agent/src/core/tools/edit.ts:422:			const component = (context.lastComponent as Container | undefined) ?? new Container();
+packages/coding-agent/src/core/export-html/tool-renderer.ts:10:import type { Theme } from "../../modes/interactive/theme/theme.ts";
+packages/coding-agent/src/core/export-html/tool-renderer.ts:19:	/** Working directory for render context */
+packages/coding-agent/src/core/export-html/index.ts:5:import { getResolvedThemeColors, getThemeExportColors } from "../../modes/interactive/theme/theme.ts";
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:386:			this.onError?.("Cannot delete the currently active session");
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:414:					emptyMessage = `  No named sessions in current folder. Press ${toggleKey} to show all, or Tab to view all.`;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:420:				// "Current folder" scope - hint to try "all"
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:421:				emptyMessage = "  No sessions in current folder. Press Tab to view all.";
+packages/coding-agent/src/core/extensions/types.ts:43:import type { Theme } from "../../modes/interactive/theme/theme.ts";
+packages/coding-agent/src/core/extensions/types.ts:108:/** Working indicator configuration for the interactive streaming loader. */
+packages/coding-agent/src/core/extensions/types.ts:121: * UI context for extensions to request interactive UI.
+packages/coding-agent/src/core/extensions/types.ts:122: * Each mode (interactive, RPC, print) provides its own implementation.
+packages/coding-agent/src/core/extensions/types.ts:140:	/** Listen to raw terminal input (interactive mode only). Returns an unsubscribe function. */
+packages/coding-agent/src/core/extensions/types.ts:149:	/** Show or hide the built-in interactive working loader row during streaming. */
+packages/coding-agent/src/core/extensions/types.ts:153:	 * Configure the interactive working indicator shown during streaming.
+packages/coding-agent/src/core/extensions/types.ts:285:	/** Estimated context tokens, or null if unknown (e.g. right after compaction, before next LLM response). */
+packages/coding-agent/src/core/extensions/types.ts:287:	contextWindow: number;
+packages/coding-agent/src/core/extensions/types.ts:288:	/** Context usage as percentage of context window, or null if tokens is unknown. */
+packages/coding-agent/src/core/extensions/types.ts:322:	/** Gracefully shutdown pi and exit. Available in all contexts. */
+packages/coding-agent/src/core/extensions/types.ts:324:	/** Get current context usage for the active model. */
+packages/coding-agent/src/core/extensions/types.ts:333: * Extended context for command handlers.
+packages/coding-agent/src/core/extensions/types.ts:370: * Fresh command-capable context bound to the replacement session after a session switch.
+packages/coding-agent/src/core/extensions/types.ts:438:	/** Optional guideline bullets appended to the default system prompt Guidelines section when this tool is active. */
+packages/coding-agent/src/core/extensions/types.ts:467:	renderCall?: (args: Static<TParams>, theme: Theme, context: ToolRenderContext<TState, Static<TParams>>) => Component;
+packages/coding-agent/src/core/extensions/types.ts:474:		context: ToolRenderContext<TState, Static<TParams>>,
+packages/coding-agent/src/core/extensions/types.ts:484: * as `customTools`, where contextual typing would otherwise widen params to
+packages/coding-agent/src/core/extensions/types.ts:520:	/** Previously active session file. Present for "new", "resume", and "fork". */
+packages/coding-agent/src/core/extensions/types.ts:538:/** Fired before context compaction (can be cancelled or customized) */
+packages/coding-agent/src/core/extensions/types.ts:547:/** Fired after context compaction */
+packages/coding-agent/src/core/extensions/types.ts:609:	type: "context";
+packages/coding-agent/src/core/extensions/types.ts:740:	/** True if !! prefix was used (excluded from LLM context) */
+packages/coding-agent/src/core/extensions/types.ts:751:export type InputSource = "interactive" | "rpc" | "extension";
+packages/coding-agent/src/core/extensions/types.ts:1107:	on(event: "context", handler: ExtensionHandler<ContextEvent, ContextEventResult>): void;
+packages/coding-agent/src/core/extensions/types.ts:1214:	/** Get the list of currently active tool names. */
+packages/coding-agent/src/core/extensions/types.ts:1220:	/** Set the active tools by name. */
+packages/coding-agent/src/core/extensions/types.ts:1252:	 * runner has bound its context. After that it takes effect immediately, so
+packages/coding-agent/src/core/extensions/types.ts:1269:	 *       contextWindow: 200000,
+packages/coding-agent/src/core/extensions/types.ts:1331:	streamSimple?: (model: Model<Api>, context: Context, options?: SimpleStreamOptions) => AssistantMessageEventStream;
+packages/coding-agent/src/core/extensions/types.ts:1371:	/** Maximum context window size in tokens. */
+packages/coding-agent/src/core/extensions/types.ts:1372:	contextWindow: number;
+packages/coding-agent/src/core/extensions/types.ts:1510: * Only needed for interactive mode where extension commands are invokable.
+packages/coding-agent/src/core/export-html/template.html:21:          <button class="filter-btn active" data-filter="default" title="Hide settings entries">Default</button>
+packages/coding-agent/src/core/tools/grep.ts:8:import { keyHint } from "../../modes/interactive/components/keybinding-hints.ts";
+packages/coding-agent/src/core/tools/grep.ts:31:	context: Type.Optional(
+packages/coding-agent/src/core/tools/grep.ts:53:	/** Read file contents for context lines */
+packages/coding-agent/src/core/tools/grep.ts:69:	theme: typeof import("../../modes/interactive/theme/theme.ts").theme,
+packages/coding-agent/src/core/tools/grep.ts:93:	theme: typeof import("../../modes/interactive/theme/theme.ts").theme,
+packages/coding-agent/src/core/tools/grep.ts:141:				context,
+packages/coding-agent/src/core/tools/grep.ts:149:				context?: number;
+packages/coding-agent/src/core/tools/grep.ts:187:						const contextValue = context && context > 0 ? context : 0;
+packages/coding-agent/src/core/tools/grep.ts:254:							const start = contextValue > 0 ? Math.max(1, lineNumber - contextValue) : lineNumber;
+packages/coding-agent/src/core/tools/grep.ts:255:							const end = contextValue > 0 ? Math.min(lines.length, lineNumber + contextValue) : lineNumber;
+packages/coding-agent/src/core/tools/grep.ts:317:								if (contextValue === 0 && match.lineText !== undefined) {
+packages/coding-agent/src/core/tools/grep.ts:369:		renderCall(args, theme, context) {
+packages/coding-agent/src/core/tools/grep.ts:370:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/tools/grep.ts:374:		renderResult(result, options, theme, context) {
+packages/coding-agent/src/core/tools/grep.ts:375:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/tools/grep.ts:376:			text.setText(formatGrepResult(result as any, options, theme, context.showImages));
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:49:	private activeModels: ModelItem[] = [];
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:160:			this.activeModels = [];
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:176:		this.activeModels = this.scope === "scoped" ? this.scopedModelItems : this.allModels;
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:177:		this.filteredModels = this.activeModels;
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:209:		this.activeModels = this.scope === "scoped" ? this.scopedModelItems : this.allModels;
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:210:		const currentIndex = this.activeModels.findIndex((item) => modelsAreEqual(this.currentModel, item.model));
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:221:					this.activeModels,
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:225:			: this.activeModels;
+packages/coding-agent/src/modes/interactive/components/footer.ts:45: * Footer component that shows pwd, token stats, and context usage.
+packages/coding-agent/src/modes/interactive/components/footer.ts:46: * Computes token/context stats from session, gets git branch and extension statuses from provider.
+packages/coding-agent/src/modes/interactive/components/footer.ts:68:	 * Kept for compatibility with existing call sites in interactive-mode.
+packages/coding-agent/src/modes/interactive/components/footer.ts:102:		// Calculate context usage from session (handles compaction correctly).
+packages/coding-agent/src/modes/interactive/components/footer.ts:104:		const contextUsage = this.session.getContextUsage();
+packages/coding-agent/src/modes/interactive/components/footer.ts:105:		const contextWindow = contextUsage?.contextWindow ?? state.model?.contextWindow ?? 0;
+packages/coding-agent/src/modes/interactive/components/footer.ts:106:		const contextPercentValue = contextUsage?.percent ?? 0;
+packages/coding-agent/src/modes/interactive/components/footer.ts:107:		const contextPercent = contextUsage?.percent !== null ? contextPercentValue.toFixed(1) : "?";
+packages/coding-agent/src/modes/interactive/components/footer.ts:138:		// Colorize context percentage based on usage
+packages/coding-agent/src/modes/interactive/components/footer.ts:139:		let contextPercentStr: string;
+packages/coding-agent/src/modes/interactive/components/footer.ts:141:		const contextPercentDisplay =
+packages/coding-agent/src/modes/interactive/components/footer.ts:142:			contextPercent === "?"
+packages/coding-agent/src/modes/interactive/components/footer.ts:143:				? `?/${formatTokens(contextWindow)}${autoIndicator}`
+packages/coding-agent/src/modes/interactive/components/footer.ts:144:				: `${contextPercent}%/${formatTokens(contextWindow)}${autoIndicator}`;
+packages/coding-agent/src/modes/interactive/components/footer.ts:145:		if (contextPercentValue > 90) {
+packages/coding-agent/src/modes/interactive/components/footer.ts:146:			contextPercentStr = theme.fg("error", contextPercentDisplay);
+packages/coding-agent/src/modes/interactive/components/footer.ts:147:		} else if (contextPercentValue > 70) {
+packages/coding-agent/src/modes/interactive/components/footer.ts:148:			contextPercentStr = theme.fg("warning", contextPercentDisplay);
+packages/coding-agent/src/modes/interactive/components/footer.ts:150:			contextPercentStr = contextPercentDisplay;
+packages/coding-agent/src/modes/interactive/components/footer.ts:152:		statsParts.push(contextPercentStr);
+packages/coding-agent/src/modes/interactive/components/footer.ts:210:		// Apply dim to each part separately. statsLeft may contain color codes (for context %)
+packages/coding-agent/src/core/tools/ls.ts:6:import { keyHint } from "../../modes/interactive/components/keybinding-hints.ts";
+packages/coding-agent/src/core/tools/ls.ts:53:	theme: typeof import("../../modes/interactive/theme/theme.ts").theme,
+packages/coding-agent/src/core/tools/ls.ts:72:	theme: typeof import("../../modes/interactive/theme/theme.ts").theme,
+packages/coding-agent/src/core/tools/ls.ts:214:		renderCall(args, theme, context) {
+packages/coding-agent/src/core/tools/ls.ts:215:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/tools/ls.ts:219:		renderResult(result, options, theme, context) {
+packages/coding-agent/src/core/tools/ls.ts:220:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/tools/ls.ts:221:			text.setText(formatLsResult(result as any, options, theme, context.showImages));
+packages/coding-agent/src/modes/interactive/components/custom-editor.ts:44:		// Escape/interrupt - only if autocomplete is NOT active
+packages/coding-agent/src/core/tools/read.ts:9:import { keyHint, keyText } from "../../modes/interactive/components/keybinding-hints.ts";
+packages/coding-agent/src/core/tools/read.ts:10:import { getLanguageFromPath, highlightCode, type Theme } from "../../modes/interactive/theme/theme.ts";
+packages/coding-agent/src/core/tools/read.ts:343:		renderCall(args, theme, context) {
+packages/coding-agent/src/core/tools/read.ts:344:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/tools/read.ts:345:			const classification = !context.expanded ? getCompactReadClassification(args, context.cwd) : undefined;
+packages/coding-agent/src/core/tools/read.ts:351:		renderResult(result, options, theme, context) {
+packages/coding-agent/src/core/tools/read.ts:352:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/tools/read.ts:354:				formatReadResult(context.args, result, options, theme, context.showImages, context.cwd, context.isError),
+packages/coding-agent/src/core/model-resolver.ts:283:				console.warn(chalk.yellow(`Warning: No models match pattern "${pattern}"`));
+packages/coding-agent/src/core/model-resolver.ts:298:			console.warn(chalk.yellow(`Warning: ${warning}`));
+packages/coding-agent/src/core/model-resolver.ts:302:			console.warn(chalk.yellow(`Warning: No models match pattern "${pattern}"`));
+packages/coding-agent/src/core/model-resolver.ts:453:			const fallbackWarning = warning
+packages/coding-agent/src/core/model-resolver.ts:456:			return { model: fallbackModel, thinkingLevel: undefined, warning: fallbackWarning, error: undefined };
+packages/coding-agent/src/core/model-resolver.ts:591:		console.error(chalk.yellow(`Warning: Could not restore model ${savedProvider}/${savedModelId} (${reason}).`));
+packages/coding-agent/src/core/tools/find.ts:7:import { keyHint } from "../../modes/interactive/components/keybinding-hints.ts";
+packages/coding-agent/src/core/tools/find.ts:60:	theme: typeof import("../../modes/interactive/theme/theme.ts").theme,
+packages/coding-agent/src/core/tools/find.ts:84:	theme: typeof import("../../modes/interactive/theme/theme.ts").theme,
+packages/coding-agent/src/core/tools/find.ts:354:		renderCall(args, theme, context) {
+packages/coding-agent/src/core/tools/find.ts:355:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/tools/find.ts:359:		renderResult(result, options, theme, context) {
+packages/coding-agent/src/core/tools/find.ts:360:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/tools/find.ts:361:			text.setText(formatFindResult(result as any, options, theme, context.showImages));
+packages/coding-agent/src/modes/interactive/components/user-message-selector.ts:126:				theme.fg("muted", "Select a user message to copy the active path up to that point into a new session"),
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:36:		// Use dim border for excluded-from-context commands (!! prefix)
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:120:		// Apply truncation for LLM context limits (same limits as bash tool)
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:122:		const contextTruncation = truncateTail(fullOutput, {
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:127:		// Get the lines to potentially display (after context truncation)
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:128:		const availableLines = contextTruncation.content ? contextTruncation.content.split("\n") : [];
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:193:			// Add truncation warning (context truncation, not preview truncation)
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:194:			const wasTruncated = this.truncationResult?.truncated || contextTruncation.truncated;
+packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts:3:import { getBundledInteractiveAssetPath } from "../../../config.ts";
+packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts:20:		cachedImageBase64 = fs.readFileSync(getBundledInteractiveAssetPath(IMAGE_FILENAME)).toString("base64");
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:61:	private activePathIds: Set<string> = new Set();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:65:	private foldedNodes: Set<string> = new Set();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:124:		this.activePathIds.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:136:			this.activePathIds.add(currentId);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:156:		// Determine which subtrees contain the active leaf (to sort current branch first)
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:185:		// Add roots in reverse order, prioritizing the one containing the active leaf
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:216:			// Order children so the branch containing the active leaf comes first
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:287:			// Always show current leaf so active position is visible
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:342:		// Filter out descendants of folded nodes.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:343:		if (this.foldedNodes.size > 0) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:347:				if (parentId != null && (this.foldedNodes.has(parentId) || skipSet.has(parentId))) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:640:			const isFolded = this.foldedNodes.has(entry.id);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:654:					// Connector at this level, with fold indicator
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:658:						const foldable = this.isFoldable(entry.id);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:659:						prefixChars.push(isFolded ? "⊞" : foldable ? "⊟" : "─");
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:671:			const foldMarker = isFolded && !showsFoldInConnector ? theme.fg("accent", "⊞ ") : "";
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:674:			const isOnActivePath = this.activePathIds.has(entry.id);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:684:			let line = cursor + theme.fg("dim", prefix) + foldMarker + pathMarker + label + labelTimestamp + content;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:905:		} else if (kb.matches(keyData, "app.tree.foldOrUp")) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:907:			if (currentId && this.isFoldable(currentId) && !this.foldedNodes.has(currentId)) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:908:				this.foldedNodes.add(currentId);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:913:		} else if (kb.matches(keyData, "app.tree.unfoldOrDown")) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:915:			if (currentId && this.foldedNodes.has(currentId)) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:916:				this.foldedNodes.delete(currentId);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:935:				this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:943:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:948:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:953:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:958:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:963:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:970:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:977:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:982:				this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:999:				this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1006:	 * Whether a node can be folded. A node is foldable if it has visible children
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1143:	// Focusable implementation - propagate to labelInput when active for IME cursor positioning
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1150:		// Propagate to labelInput when it's active
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1192:		const branchKeys = `${keyText("app.tree.foldOrUp")}/${keyText("app.tree.unfoldOrDown")}`;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1197:					`  ↑/↓: move. ←/→: page. ${branchKeys}: fold/branch. ${keyText("app.tree.editLabel")}: label. ${filterKeys}: filters (${cycleKeys} cycle). ${keyText("app.tree.toggleLabelTimestamp")}: label time`,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2: * Interactive mode for the coding agent.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:187:	"Anthropic subscription auth is active. Third-party harness usage draws from extra usage and is billed per token, not your Claude plan limits. Manage extra usage at https://claude.ai/settings/usage.";
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:220: * Options for InteractiveMode initialization.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:222:export interface InteractiveModeOptions {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:225:	/** Warning message if session model couldn't be restored */
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:237:export class InteractiveMode {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:269:	private anthropicSubscriptionWarningShown = false;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:343:	private options: InteractiveModeOptions;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:359:	constructor(runtimeHost: AgentSessionRuntime, options: InteractiveModeOptions = {}) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:442:						? `Extension command '/${command.name}' conflicts with built-in interactive command. Skipping in autocomplete.`
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:443:						: `Extension command '/${command.name}' conflicts with built-in interactive command. Available as '/${command.invocationName}'.`,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:621:				rawKeyHint("!!", "to run bash (no context)"),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:673:		// Start the UI before initializing extensions so session_start handlers can use interactive dialogs
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:713:	 * Run the interactive mode. This is the main entry point.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:714:	 * Initializes the UI, shows warnings, processes initial messages, and starts the interactive loop.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:736:				this.showWarning(warning);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:744:			this.showWarning(`Migrated credentials to auth.json: ${migratedProviders.join(", ")}`);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:753:			this.showWarning(modelFallbackMessage);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:779:		// Main interactive loop
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1350:			const contextFiles = this.session.resourceLoader.getAgentsFiles().agentsFiles;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1351:			if (contextFiles.length > 0) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1353:				const contextList = contextFiles
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1356:				const contextCompactList = formatCompactList(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1357:					contextFiles.map((contextFile) => this.formatContextPath(contextFile.path)),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1360:				addLoadedSection("Context", contextCompactList, contextList);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1481:	 * Initialize the extension system with TUI-based UI context.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1630:		// Create a context for shortcut handlers
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1770:			for (const line of content.slice(0, InteractiveMode.MAX_WIDGET_LINES)) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1773:			if (content.length > InteractiveMode.MAX_WIDGET_LINES) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2271:			this.showWarning(message);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2383:		// so they work correctly regardless of which editor is active
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2598:			// Handle bash command (! for normal, !! for excluded from context)
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2604:						this.showWarning("A bash command is already running. Press Esc to cancel it first.");
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2669:				// Restore main escape handler if retry handler is still active
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2871:				// Keep editor active; submissions are queued during compaction.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2880:						? `Compacting context... ${cancelHint}`
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3123:	 * Render session context to chat. Used for initial load and rebuild after compaction.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3124:	 * @param sessionContext Session context to render
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3199:		// Get aligned messages and entries from session context
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3200:		const context = this.sessionManager.buildSessionContext();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3201:		this.renderSessionContext(context, {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3226:		const context = this.sessionManager.buildSessionContext();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3227:		this.renderSessionContext(context);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3487:		const activeHeader = this.customHeader ?? this.builtInHeader;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3488:		if (isExpandable(activeHeader)) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3489:			activeHeader.setExpanded(expanded);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3521:			this.showWarning("No editor configured. Set $VISUAL or $EDITOR environment variable.");
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3541:			// Node/libuv's console input read active after ui.stop() pauses stdin, racing
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3589:	showWarning(warningMessage: string): void {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3591:		this.chatContainer.addChild(new Text(theme.fg("warning", `Warning: ${warningMessage}`), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3872:					warnings: this.settingsManager.getWarnings(),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3991:					onWarningsChange: (warnings) => {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3992:						this.settingsManager.setWarnings(warnings);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4056:		if (this.settingsManager.getWarnings().anthropicExtraUsage === false) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4059:		if (this.anthropicSubscriptionWarningShown) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4068:			this.anthropicSubscriptionWarningShown = true;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4069:			this.showWarning(ANTHROPIC_SUBSCRIPTION_AUTH_WARNING);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4078:			this.anthropicSubscriptionWarningShown = true;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4079:			this.showWarning(ANTHROPIC_SUBSCRIPTION_AUTH_WARNING);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4873:			this.showWarning("Wait for the current response to finish before reloading.");
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4877:			this.showWarning("Wait for compaction to finish before reloading.");
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4911:			const activeHeader = this.customHeader ?? this.builtInHeader;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4912:			if (isExpandable(activeHeader)) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4913:				activeHeader.setExpanded(this.toolOutputExpanded);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5164:				this.showWarning("Usage: /name <name>");
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5335:| \`!!\` | Run bash command (excluded from context) |
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5532:			this.showWarning("Nothing to compact (no messages yet)");
+
+[Showing lines 221-632 of 632 (50.0KB limit). Full output: /var/folders/7m/csfvhz791k527kby7nxl7cbc0000h_/T/pi-bash-27f302e96116c47d.log]

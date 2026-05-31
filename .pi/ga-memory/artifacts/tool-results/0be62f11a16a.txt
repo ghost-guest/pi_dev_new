@@ -1,0 +1,200 @@
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/README.md:275:- `ANTHROPIC_AUTH_TOKEN`: API key from your configuration
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/README.md:276:- `ANTHROPIC_BASE_URL`: The local router endpoint (default: `http://127.0.0.1:3456`)
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/README.md:443:  const userMessage = req.body.messages.find((m) => m.role === "user")?.content;
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/README.md:526:          ANTHROPIC_BASE_URL: http://localhost:3456
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/README_zh.md:225:- `ANTHROPIC_AUTH_TOKEN`: 来自配置的 API 密钥
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/README_zh.md:226:- `ANTHROPIC_BASE_URL`: 本地路由器端点（默认：`http://127.0.0.1:3456`）
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/README_zh.md:391:  const userMessage = req.body.messages.find(m => m.role === 'user')?.content;
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/README_zh.md:474:          ANTHROPIC_BASE_URL: http://localhost:3456
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/loglevel/index.d.ts:137:         * or log.error("something") will output messages, but log.info("something") will not.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/loglevel/index.d.ts:177:         * This enables all log messages, and is equivalent to log.setLevel("trace").
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/loglevel/index.d.ts:186:         * This disables all log messages, and is equivalent to log.setLevel("silent").
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:14800:      if (opts.messages) {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:17365:        messages: (_t = o.messages) !== null && _t !== void 0 ? _t : true,
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:80234:  endPoint = "/v1/messages";
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:80250:    JSON.parse(JSON.stringify(e.messages || []))?.forEach((i) => {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:80278:    let o = { messages: t, model: e.model, max_tokens: e.max_tokens, temperature: e.temperature, stream: e.stream, tools: e.tools?.length ? this.convertAnthropicToolsToUnified(e.tools) : void 0, tool_choice: e.tool_choice };
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:80607:  let o = [], i = r.messages.filter((c) => c.role === "tool");
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:80608:  r.messages.filter((c) => c.role !== "tool").forEach((c) => {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:80641:  let e = r.contents, t = r.tools, n = r.model, o = r.max_tokens, i = r.temperature, u = r.stream, f = r.tool_choice, c = { messages: [], model: n, max_tokens: o, temperature: i, stream: u, tool_choice: f };
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:80643:    typeof h == "string" ? c.messages.push({ role: "user", content: h }) : typeof h.text == "string" ? c.messages.push({ role: "user", content: h.text || null }) : h.role === "user" ? c.messages.push({ role: "user", content: h?.parts?.map((d) => ({ type: "text", text: d.text || "" })) || [] }) : h.role === "model" && c.messages.push({ role: "assistant", content: h?.parts?.map((d) => ({ type: "text", text: d.text || "" })) || [] });
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:80898:    return e.messages.push({ role: "system", content: "<system-reminder>Tool mode is active. The user expects you to proactively execute the most suitable tool to help complete the task. \nBefore invoking a tool, you must carefully evaluate whether it matches the current task. If no available tool is appropriate for the task, you MUST call the `ExitTool` to exit tool mode \u2014 this is the only valid way to terminate tool mode.\nAlways prioritize completing the user's task effectively and efficiently by using tools whenever appropriate.</system-reminder>" }), e.tools?.length && (e.tool_choice = "required", e.tools.push({ type: "function", function: { name: "ExitTool", description: `Use this tool when you are in tool mode and have completed the task. This is the only valid way to exit tool mode.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:80997:    return e.model.includes("claude") ? e.messages.forEach((t) => {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:81001:    }) : e.messages.forEach((t) => {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:81129:    return e.messages.forEach((t) => {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:81228:    return Array.isArray(e.messages) && e.messages.forEach((t) => {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:81812:  for (let n = 0; n < r.messages.length; n++) {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:81813:    let o = r.messages[n], i = n === r.messages.length - 1, u = o.role === "assistant", f = [];
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:81818:  let t = { anthropic_version: "vertex-2023-10-16", messages: e, max_tokens: r.max_tokens || 1e3, stream: r.stream || false, ...r.temperature && { temperature: r.temperature } };
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:81822:  let e = r, n = { messages: e.messages.map((o) => {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:81990:    return e.model.includes("claude") ? e.messages.forEach((t) => {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:81994:    }) : e.messages.forEach((t) => {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:82113:    let t = [], n = e.messages.filter((o) => o.role === "system");
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:82121:    if (e.messages.forEach((o) => {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:82140:    }), e.input = t, delete e.messages, Array.isArray(e.tools)) {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:82310:    e.messages.filter((o) => o.role === "assistant").reverse().forEach((o) => {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:82314:    let n = e.messages[e.messages.length - 1];
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:82315:    return n.role === "user" && (Array.isArray(n.content) ? n.content.push({ type: "text", text: Dl }) : n.content = [{ type: "text", text: Dl }, { type: "text", text: n.content || "" }]), n.role === "tool" && e.messages.push({ role: "user", content: [{ type: "text", text: Dl }] }), e;
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:82545:        n.url.startsWith("/v1/messages") && n.body && (n.log.info({ data: n.body, type: "request body" }), n.body.stream, n.body.stream || (n.body.stream = false)), i();
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:84028:var calculateTokenCount = (messages, system, tools) => {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:84030:  if (Array.isArray(messages)) {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:84031:    messages.forEach((message) => {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:84165:  const { messages, system = [], tools } = req.body;
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:84172:      messages,
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:84245:  server.app.post("/v1/messages/count_tokens", async (req, reply) => {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:84246:    const { messages, tools, system } = req.body;
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:84247:    const tokenCount = calculateTokenCount(messages, system, tools);
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:85299:    const lastMessage = req.body.messages[req.body.messages.length - 1];
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:85318:    return req.body.messages.some(
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:85398:        const userMessage = context.req.body.messages[context.req.body.messages.length - 1];
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:85414:          `http://127.0.0.1:${context.config.PORT || 3456}/v1/messages`,
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:85432:              messages: [
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:85466:    const imageContents = req.body.messages.filter((item) => {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:85642:    if (req.url.startsWith("/v1/messages") && !req.url.startsWith("/v1/messages/count_tokens")) {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:85675:    if (req.sessionId && req.url.startsWith("/v1/messages") && !req.url.startsWith("/v1/messages/count_tokens")) {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:85732:                req.body.messages.push({
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:85736:                req.body.messages.push({
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:85740:                const response = await fetch(`http://127.0.0.1:${config.PORT || 3456}/v1/messages`, {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:85903:    ANTHROPIC_AUTH_TOKEN: apiKey,
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:85904:    ANTHROPIC_API_KEY: "",
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/dist/cli.js:85905:    ANTHROPIC_BASE_URL: `http://127.0.0.1:${port}`,
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/loglevel/README.md:157:This disables all logging below the given level, so that after a `log.setLevel("warn")` call `log.warn("something")` or `log.error("something")` will output messages, but `log.info("something")` will not.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/loglevel/README.md:181:These enable or disable all log messages, and are equivalent to `log.setLevel("trace")` and `log.setLevel("silent")`, respectively.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/loglevel/README.md:282:[loglevel-plugin-remote](https://github.com/kutuluk/loglevel-plugin-remote) - plugin for sending loglevel messages to a remote log server.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/loglevel/README.md:284:[loglevel-serverSend](https://github.com/artemyarulin/loglevel-serverSend) - Forward your log messages to a remote server.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/loglevel/README.md:290:Loglevel provides a simple, reliable, minimal base for console logging that works everywhere. This means it doesn't include lots of fancy functionality that might be useful in some cases, such as log formatting and redirection (e.g. also sending log messages to a server over AJAX)
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/loglevel/README.md:292:Including that would increase the size and complexity of the library, but more importantly would remove stacktrace information. Currently log methods are either disabled, or enabled with directly bound versions of the `console.log` methods (where possible). This means your browser shows the log message as coming from your code at the call to `log.info("message!")` not from within loglevel, since it really calls the bound console method directly, without indirection. The indirection required to dynamically format, further filter, or redirect log messages would stop this.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/loglevel/README.md:296:For example, a plugin to prefix all log messages with "Newsflash: " would look like:
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/loglevel/README.md:343:v0.4.0 - Use LocalStorage for level persistence if available, compatibility improvements for IE, improved error messages, multi-environment tests
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/MessageStream.ts:15:} from '../resources/messages';
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/MessageStream.ts:50:  messages: MessageParam[] = [];
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/MessageStream.ts:131:   * Note that messages sent to the model do not appear in `.on('message')`
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/MessageStream.ts:141:    messages: Messages,
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/MessageStream.ts:146:    for (const message of params.messages) {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/MessageStream.ts:151:        messages,
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/MessageStream.ts:167:    this.messages.push(message);
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/MessageStream.ts:178:    messages: Messages,
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/MessageStream.ts:188:    const { response, data: stream } = await messages
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/MessageStream.ts:516:   * Mutates this.#currentMessage with the current event. Handling the accumulation of multiple messages
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/MessageStream.ts:518:   * messages.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/BetaMessageStream.ts:16:} from '../resources/beta/messages/messages';
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/BetaMessageStream.ts:51:  messages: BetaMessageParam[] = [];
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/BetaMessageStream.ts:132:   * Note that messages sent to the model do not appear in `.on('message')`
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/BetaMessageStream.ts:142:    messages: BetaMessages,
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/BetaMessageStream.ts:147:    for (const message of params.messages) {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/BetaMessageStream.ts:152:        messages,
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/BetaMessageStream.ts:168:    this.messages.push(message);
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/BetaMessageStream.ts:179:    messages: BetaMessages,
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/BetaMessageStream.ts:189:    const { response, data: stream } = await messages
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/BetaMessageStream.ts:517:   * Mutates this.#currentMessage with the current event. Handling the accumulation of multiple messages
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/lib/BetaMessageStream.ts:519:   * messages.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/client.ts:144:} from './resources/messages/messages';
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/client.ts:148:   * Defaults to process.env['ANTHROPIC_API_KEY'].
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/client.ts:153:   * Defaults to process.env['ANTHROPIC_AUTH_TOKEN'].
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/client.ts:160:   * Defaults to process.env['ANTHROPIC_BASE_URL'].
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/client.ts:249:   * @param {string | null | undefined} [opts.apiKey=process.env['ANTHROPIC_API_KEY'] ?? null]
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/client.ts:250:   * @param {string | null | undefined} [opts.authToken=process.env['ANTHROPIC_AUTH_TOKEN'] ?? null]
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/client.ts:251:   * @param {string} [opts.baseURL=process.env['ANTHROPIC_BASE_URL'] ?? https://api.anthropic.com] - Override the default base URL for the API.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/client.ts:261:    baseURL = readEnv('ANTHROPIC_BASE_URL'),
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/client.ts:262:    apiKey = readEnv('ANTHROPIC_API_KEY') ?? null,
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/client.ts:263:    authToken = readEnv('ANTHROPIC_AUTH_TOKEN') ?? null,
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/client.ts:270:      baseURL: baseURL || `https://api.anthropic.com`,
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/client.ts:918:  messages: API.Messages = new API.Messages(this);
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/CHANGELOG.md:151:* **messages:** updates for server tools ([c2709b2](https://github.com/anthropics/anthropic-sdk-typescript/commit/c2709b27b17a5a80daf399b7bfca41b953706d51))
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/CHANGELOG.md:380:* **vertex:** add beta.messages.countTokens method ([51d3f23](https://github.com/anthropics/anthropic-sdk-typescript/commit/51d3f23a7cc1bea798cc8e4041e08114ebc3a4eb))
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/CHANGELOG.md:548:* **bedrock:** correct messages beta handling ([9b57586](https://github.com/anthropics/anthropic-sdk-typescript/commit/9b57586456221f8900902b8e85c7c017959c150a))
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/CHANGELOG.md:549:* **vertex:** correct messages beta handling ([26f21ee](https://github.com/anthropics/anthropic-sdk-typescript/commit/26f21ee5f524f4cbfb7a97d40aa62553608b1d99))
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/CHANGELOG.md:563:* **bedrock:** add beta.messages.create() method ([6317592](https://github.com/anthropics/anthropic-sdk-typescript/commit/63175920a016a2ad187dd1127d263357cf6c007e))
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/CHANGELOG.md:564:* **vertex:** add beta.messages.create() ([22cfdba](https://github.com/anthropics/anthropic-sdk-typescript/commit/22cfdba2a3a54e916f2efcbce62990544d3e5f5f))
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/CHANGELOG.md:1117:* **bedrock:** add messages API ([#305](https://github.com/anthropics/anthropic-sdk-typescript/issues/305)) ([8b7f89e](https://github.com/anthropics/anthropic-sdk-typescript/commit/8b7f89e1e60416f9ad5b575d43238a4259654395))
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/CHANGELOG.md:1130:* **messages:** add support for image inputs ([#303](https://github.com/anthropics/anthropic-sdk-typescript/issues/303)) ([7663bd6](https://github.com/anthropics/anthropic-sdk-typescript/commit/7663bd6e1a4427483cf5f13889bc5c63314e5bae))
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/CHANGELOG.md:1175:* **api:** messages is generally available ([#287](https://github.com/anthropics/anthropic-sdk-typescript/issues/287))
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/CHANGELOG.md:1179:* **api:** messages is generally available ([#287](https://github.com/anthropics/anthropic-sdk-typescript/issues/287)) ([be0a828](https://github.com/anthropics/anthropic-sdk-typescript/commit/be0a82883cf9b1b9d2944525b86e40f2b42cea4f))
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/CHANGELOG.md:1327:* **api:** add messages endpoint with streaming helpers ([#235](https://github.com/anthropics/anthropic-sdk-typescript/issues/235)) ([12b914f](https://github.com/anthropics/anthropic-sdk-typescript/commit/12b914f46f4aa625ff141ec0b6631400d0994f76))
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/CHANGELOG.md:1447:* improve status code in error messages ([#183](https://github.com/anthropics/anthropic-sdk-typescript/issues/183)) ([7d3bbd4](https://github.com/anthropics/anthropic-sdk-typescript/commit/7d3bbd485c9628bb7c3fb5d1660934198981fcc7))
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/depd/Readme.md:35:This library allows you to display deprecation messages to your users.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/depd/Readme.md:58:messages and will display the call site prior to the stack entering the
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/node-fetch/README.md:786:Service Worker can intercept such messages before it's sent to the server to
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/depd/History.md:33:  * Fix useless type name on auto-generated messages
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/internal/shims.ts:7: * messages in cases where an environment isn't fully supported.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/internal/uploads.ts:99: * confusing error messages later on.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/core/streaming.mjs:240:            // empty line and we didn't previously encounter any messages
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/index.ts:114:} from './messages/messages';
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/commander/Readme.md:1105:The normal display of error messages or version or help is not affected by the override which is called after the display.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/commander/Readme.md:1118:You can modify this behaviour for custom applications. In addition, you can modify the display of error messages.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/completions.ts:6:import * as MessagesAPI from './messages/messages';
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/completions.ts:17:   * [Messages API](https://docs.anthropic.com/en/api/messages) going forward.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/completions.ts:20:   * [migration guide](https://docs.anthropic.com/en/api/migrating-from-text-completions-to-messages)
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages.ts:3:export * from './messages/index';
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/index.ts:110:} from './messages';
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/core/streaming.js:245:            // empty line and we didn't previously encounter any messages
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:24:import * as MessagesAPI from './messages';
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:32:   * Send a structured list of input messages with text and/or image content, and the
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:42:   * const message = await client.messages.create({
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:44:   *   messages: [{ content: 'Hello, world', role: 'user' }],
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:74:    return this._client.post('/v1/messages', {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:101:   *   await client.messages.countTokens({
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:102:   *     messages: [{ content: 'string', role: 'user' }],
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:108:    return this._client.post('/v1/messages/count_tokens', { body, ...options });
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:338:   * If the request input `messages` ended with an `assistant` turn, then the
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:342:   * For example, if the input `messages` were:
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:486:   * The total number of tokens across the provided list of messages, system prompt,
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1220:   * Input messages.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1224:   * conversational turns with the `messages` parameter, and the model then generates
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1230:   * `assistant` messages.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1267:   * following input messages are equivalent:
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1299:   * See [examples](https://docs.anthropic.com/en/api/messages-examples#vision) for
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1305:   * messages in the Messages API.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1307:   * There is a limit of 100000 messages in a single request.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1309:  messages: Array<MessageParam>;
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1348:   * See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1500:   * See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1510:   * See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1520:   * Input messages.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1524:   * conversational turns with the `messages` parameter, and the model then generates
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1530:   * `assistant` messages.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1567:   * following input messages are equivalent:
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1599:   * See [examples](https://docs.anthropic.com/en/api/messages-examples#vision) for
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1605:   * messages in the Messages API.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1607:   * There is a limit of 100000 messages in a single request.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/messages.ts:1609:  messages: Array<MessageParam>;
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/batches.ts:5:import * as MessagesAPI from './messages';
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/batches.ts:27:   * const messageBatch = await client.messages.batches.create({
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/batches.ts:33:   *         messages: [
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/batches.ts:44:    return this._client.post('/v1/messages/batches', { body, ...options });
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/batches.ts:57:   * const messageBatch = await client.messages.batches.retrieve(
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/batches.ts:63:    return this._client.get(path`/v1/messages/batches/${messageBatchID}`, options);
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/batches.ts:76:   * for await (const messageBatch of client.messages.batches.list()) {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/batches.ts:85:    return this._client.getAPIList('/v1/messages/batches', Page<MessageBatch>, { query, ...options });
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/batches.ts:100:   *   await client.messages.batches.delete('message_batch_id');
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/batches.ts:104:    return this._client.delete(path`/v1/messages/batches/${messageBatchID}`, options);
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/batches.ts:123:   * const messageBatch = await client.messages.batches.cancel(
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/batches.ts:129:    return this._client.post(path`/v1/messages/batches/${messageBatchID}/cancel`, options);
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/batches.ts:145:   *   await client.messages.batches.results('message_batch_id');
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/messages/batches.ts:372:     * See the [Messages API reference](/en/api/messages) for full documentation on
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/index.ts:142:} from './messages/index';
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/beta.ts:18:import * as MessagesAPI from './messages/messages';
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/beta.ts:132:} from './messages/messages';
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/beta.ts:136:  messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages.ts:3:export * from './messages/index';
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/index.ts:136:} from './messages';
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:4:import * as MessagesMessagesAPI from './messages';
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:6:import * as MessagesAPI from '../../messages/messages';
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:31:import type { Model } from '../../messages/messages';
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:52:   * Send a structured list of input messages with text and/or image content, and the
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:62:   * const betaMessage = await client.beta.messages.create({
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:64:   *   messages: [{ content: 'Hello, world', role: 'user' }],
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:97:    return this._client.post('/v1/messages?beta=true', {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:128:   *   await client.beta.messages.countTokens({
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:129:   *     messages: [{ content: 'string', role: 'user' }],
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:139:    return this._client.post('/v1/messages/count_tokens?beta=true', {
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:601:   * If the request input `messages` ended with an `assistant` turn, then the
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:605:   * For example, if the input `messages` were:
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:724:   * The total number of tokens across the provided list of messages, system prompt,
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:1584:   * Body param: Input messages.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:1588:   * conversational turns with the `messages` parameter, and the model then generates
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:1594:   * `assistant` messages.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:1631:   * following input messages are equivalent:
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:1663:   * See [examples](https://docs.anthropic.com/en/api/messages-examples#vision) for
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:1669:   * messages in the Messages API.
+/opt/homebrew/lib/node_modules/@musistudio/claude-code-router/node_modules/@anthropic-ai/sdk/src/resources/beta/messages/messages.ts:1671:   * There is a limit of 100000 messages in a single request.

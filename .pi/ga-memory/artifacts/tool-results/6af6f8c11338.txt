@@ -1,0 +1,277 @@
+packages/ai/src/types.ts:205://   "error" or "aborted" and errorMessage, emitted via the stream protocol.
+packages/ai/src/types.ts:269:export type StopReason = "stop" | "length" | "toolUse" | "error" | "aborted";
+packages/ai/src/types.ts:293:	role: "toolResult";
+packages/ai/src/types.ts:311:export type ImagesStopReason = "stop" | "error" | "aborted";
+packages/ai/src/types.ts:344: * - `error` carrying the final AssistantMessage with stopReason "error" or "aborted"
+packages/ai/src/types.ts:359:	| { type: "error"; reason: Extract<StopReason, "aborted" | "error">; error: AssistantMessage };
+packages/ai/src/providers/amazon-bedrock.ts:243:			if (options.signal?.aborted) {
+packages/ai/src/providers/amazon-bedrock.ts:244:				throw new Error("Request was aborted");
+packages/ai/src/providers/amazon-bedrock.ts:247:			if (output.stopReason === "error" || output.stopReason === "aborted") {
+packages/ai/src/providers/amazon-bedrock.ts:259:			output.stopReason = options.signal?.aborted ? "aborted" : "error";
+packages/ai/src/providers/amazon-bedrock.ts:652:				// Skip assistant messages with empty content (e.g., from aborted requests)
+packages/ai/src/providers/amazon-bedrock.ts:714:			case "toolResult": {
+packages/ai/src/providers/amazon-bedrock.ts:715:				// Collect all consecutive toolResult messages into a single user message
+packages/ai/src/providers/amazon-bedrock.ts:717:				const toolResults: ContentBlock.ToolResultMember[] = [];
+packages/ai/src/providers/amazon-bedrock.ts:720:				toolResults.push({
+packages/ai/src/providers/amazon-bedrock.ts:721:					toolResult: {
+packages/ai/src/providers/amazon-bedrock.ts:732:				// Look ahead for consecutive toolResult messages
+packages/ai/src/providers/amazon-bedrock.ts:734:				while (j < transformedMessages.length && transformedMessages[j].role === "toolResult") {
+packages/ai/src/providers/amazon-bedrock.ts:736:					toolResults.push({
+packages/ai/src/providers/amazon-bedrock.ts:737:						toolResult: {
+packages/ai/src/providers/amazon-bedrock.ts:755:					content: toolResults,
+packages/coding-agent/src/modes/rpc/rpc-mode.ts:90:		if (opts?.signal?.aborted) return Promise.resolve(defaultValue);
+packages/ai/src/providers/openai-responses-shared.ts:217:		} else if (msg.role === "toolResult") {
+packages/ai/src/providers/openai-responses-shared.ts:515:				output.stopReason = "toolUse";
+packages/coding-agent/src/modes/print-mode.ts:134:				if (assistantMsg.stopReason === "error" || assistantMsg.stopReason === "aborted") {
+packages/ai/src/providers/mistral.ts:83:			if (options?.signal?.aborted) {
+packages/ai/src/providers/mistral.ts:84:				throw new Error("Request was aborted");
+packages/ai/src/providers/mistral.ts:87:			if (output.stopReason === "aborted" || output.stopReason === "error") {
+packages/ai/src/providers/mistral.ts:98:			output.stopReason = options?.signal?.aborted ? "aborted" : "error";
+packages/ai/src/providers/google-shared.ts:176:		} else if (msg.role === "toolResult") {
+packages/coding-agent/src/utils/sleep.ts:6:		if (signal?.aborted) {
+packages/ai/src/utils/oauth/device-code.ts:26:		if (signal?.aborted) {
+packages/ai/src/utils/oauth/device-code.ts:56:		if (options.signal?.aborted) {
+packages/ai/src/utils/oauth/github-copilot.ts:289:	if (options.signal?.aborted) {
+packages/ai/src/providers/google.ts:208:						output.stopReason = "toolUse";
+packages/ai/src/providers/google.ts:251:			if (options?.signal?.aborted) {
+packages/ai/src/providers/google.ts:252:				throw new Error("Request was aborted");
+packages/ai/src/providers/google.ts:255:			if (output.stopReason === "aborted" || output.stopReason === "error") {
+packages/ai/src/providers/google.ts:268:			output.stopReason = options?.signal?.aborted ? "aborted" : "error";
+packages/ai/src/providers/google.ts:381:		if (options.signal.aborted) {
+packages/ai/src/providers/google.ts:382:			throw new Error("Request aborted");
+packages/ai/src/providers/azure-openai-responses.ts:122:			if (options?.signal?.aborted) {
+packages/ai/src/providers/azure-openai-responses.ts:123:				throw new Error("Request was aborted");
+packages/ai/src/providers/azure-openai-responses.ts:126:			if (output.stopReason === "aborted" || output.stopReason === "error") {
+packages/ai/src/providers/azure-openai-responses.ts:138:			output.stopReason = options?.signal?.aborted ? "aborted" : "error";
+packages/ai/src/providers/github-copilot-headers.ts:16:		if (msg.role === "toolResult" && Array.isArray(msg.content)) {
+packages/ai/src/providers/google-vertex.ts:225:						output.stopReason = "toolUse";
+packages/ai/src/providers/google-vertex.ts:268:			if (options?.signal?.aborted) {
+packages/ai/src/providers/google-vertex.ts:269:				throw new Error("Request was aborted");
+packages/ai/src/providers/google-vertex.ts:272:			if (output.stopReason === "aborted" || output.stopReason === "error") {
+packages/ai/src/providers/google-vertex.ts:285:			output.stopReason = options?.signal?.aborted ? "aborted" : "error";
+packages/ai/src/providers/google-vertex.ts:471:		if (options.signal.aborted) {
+packages/ai/src/providers/google-vertex.ts:472:			throw new Error("Request aborted");
+packages/coding-agent/src/core/agent-session.ts:142:			aborted: boolean;
+packages/coding-agent/src/core/agent-session.ts:223:	toolResults: number;
+packages/coding-agent/src/core/agent-session.ts:512:				event.message.role === "toolResult"
+packages/coding-agent/src/core/agent-session.ts:566:	/** Find the last assistant message in agent state (including aborted ones) */
+packages/coding-agent/src/core/agent-session.ts:613:				toolResults: event.toolResults,
+packages/coding-agent/src/core/agent-session.ts:1041:			// Check if we need to compact before sending (catches aborted responses)
+packages/coding-agent/src/core/agent-session.ts:1688:			if (this._compactionAbortController.signal.aborted) {
+packages/coding-agent/src/core/agent-session.ts:1720:				aborted: false,
+packages/coding-agent/src/core/agent-session.ts:1726:			const aborted = message === "Compaction cancelled" || (error instanceof Error && error.name === "AbortError");
+packages/coding-agent/src/core/agent-session.ts:1731:				aborted,
+packages/coding-agent/src/core/agent-session.ts:1733:				errorMessage: aborted ? undefined : `Compaction failed: ${message}`,
+packages/coding-agent/src/core/agent-session.ts:1766:	 * @param skipAbortedCheck If false, include aborted messages (for pre-prompt check). Default: true
+packages/coding-agent/src/core/agent-session.ts:1772:		// Skip if message was aborted (user cancelled) - unless skipAbortedCheck is false
+packages/coding-agent/src/core/agent-session.ts:1773:		if (skipAbortedCheck && assistantMessage.stopReason === "aborted") return false;
+packages/coding-agent/src/core/agent-session.ts:1801:					aborted: false,
+packages/coding-agent/src/core/agent-session.ts:1863:					aborted: false,
+packages/coding-agent/src/core/agent-session.ts:1878:						aborted: false,
+packages/coding-agent/src/core/agent-session.ts:1897:					aborted: false,
+packages/coding-agent/src/core/agent-session.ts:1920:						aborted: true,
+packages/coding-agent/src/core/agent-session.ts:1961:			if (this._autoCompactionAbortController.signal.aborted) {
+packages/coding-agent/src/core/agent-session.ts:1966:					aborted: true,
+packages/coding-agent/src/core/agent-session.ts:1996:			this._emit({ type: "compaction_end", reason, result, aborted: false, willRetry });
+packages/coding-agent/src/core/agent-session.ts:2016:				aborted: false,
+packages/coding-agent/src/core/agent-session.ts:2660:	): Promise<{ editorText?: string; cancelled: boolean; aborted?: boolean; summaryEntry?: BranchSummaryEntry }> {
+packages/coding-agent/src/core/agent-session.ts:2753:				if (result.aborted) {
+packages/coding-agent/src/core/agent-session.ts:2754:					return { cancelled: true, aborted: true };
+packages/coding-agent/src/core/agent-session.ts:2881:		const toolResults = state.messages.filter((m) => m.role === "toolResult").length;
+packages/coding-agent/src/core/agent-session.ts:2908:			toolResults,
+packages/coding-agent/src/core/agent-session.ts:2943:					if (assistant.stopReason !== "aborted" && assistant.stopReason !== "error") {
+packages/coding-agent/src/core/agent-session.ts:3045:				// Skip aborted messages with no content
+packages/coding-agent/src/core/agent-session.ts:3046:				if (msg.stopReason === "aborted" && msg.content.length === 0) return false;
+packages/ai/src/providers/anthropic.ts:358:			if (signal?.aborted) {
+packages/ai/src/providers/anthropic.ts:359:				throw new Error("Request was aborted");
+packages/ai/src/providers/anthropic.ts:528:					// This ensures we have input token counts even if the stream is aborted early
+packages/ai/src/providers/anthropic.ts:682:			if (options?.signal?.aborted) {
+packages/ai/src/providers/anthropic.ts:683:				throw new Error("Request was aborted");
+packages/ai/src/providers/anthropic.ts:686:			if (output.stopReason === "aborted" || output.stopReason === "error") {
+packages/ai/src/providers/anthropic.ts:698:			output.stopReason = options?.signal?.aborted ? "aborted" : "error";
+packages/ai/src/providers/anthropic.ts:1071:					// If thinking signature is missing/empty (e.g., from aborted stream),
+packages/ai/src/providers/anthropic.ts:1100:		} else if (msg.role === "toolResult") {
+packages/ai/src/providers/anthropic.ts:1101:			// Collect all consecutive toolResult messages, needed for z.ai Anthropic endpoint
+packages/ai/src/providers/anthropic.ts:1102:			const toolResults: ContentBlockParam[] = [];
+packages/ai/src/providers/anthropic.ts:1105:			toolResults.push({
+packages/ai/src/providers/anthropic.ts:1112:			// Look ahead for consecutive toolResult messages
+packages/ai/src/providers/anthropic.ts:1114:			while (j < transformedMessages.length && transformedMessages[j].role === "toolResult") {
+packages/ai/src/providers/anthropic.ts:1115:				const nextMsg = transformedMessages[j] as ToolResultMessage; // We know it's a toolResult
+packages/ai/src/providers/anthropic.ts:1116:				toolResults.push({
+packages/ai/src/providers/anthropic.ts:1131:				content: toolResults,
+packages/ai/src/providers/transform-messages.ts:48:		if (msg.role === "toolResult") {
+packages/ai/src/providers/transform-messages.ts:80:		// Handle toolResult messages - normalize toolCallId if we have a mapping
+packages/ai/src/providers/transform-messages.ts:81:		if (msg.role === "toolResult") {
+packages/ai/src/providers/transform-messages.ts:165:						role: "toolResult",
+packages/ai/src/providers/transform-messages.ts:186:			// Skip errored/aborted assistant messages entirely.
+packages/ai/src/providers/transform-messages.ts:192:			if (assistantMsg.stopReason === "error" || assistantMsg.stopReason === "aborted") {
+packages/ai/src/providers/transform-messages.ts:204:		} else if (msg.role === "toolResult") {
+packages/ai/src/providers/openai-completions.ts:50:		if (msg.role === "toolResult") {
+packages/ai/src/providers/openai-completions.ts:390:			if (options?.signal?.aborted) {
+packages/ai/src/providers/openai-completions.ts:391:				throw new Error("Request was aborted");
+packages/ai/src/providers/openai-completions.ts:394:			if (output.stopReason === "aborted") {
+packages/ai/src/providers/openai-completions.ts:395:				throw new Error("Request was aborted");
+packages/ai/src/providers/openai-completions.ts:413:			output.stopReason = options?.signal?.aborted ? "aborted" : "error";
+packages/ai/src/providers/openai-completions.ts:777:		if (compat.requiresAssistantAfterToolResult && lastRole === "toolResult" && msg.role === "user") {
+packages/ai/src/providers/openai-completions.ts:903:			// This handles aborted assistant responses that got no content.
+packages/ai/src/providers/openai-completions.ts:913:		} else if (msg.role === "toolResult") {
+packages/ai/src/providers/openai-completions.ts:917:			for (; j < transformedMessages.length && transformedMessages[j].role === "toolResult"; j++) {
+packages/ai/src/providers/openai-completions.ts:930:				const toolResultMsg: ChatCompletionToolMessageParam = {
+packages/ai/src/providers/openai-completions.ts:936:					(toolResultMsg as any).name = toolMsg.toolName;
+packages/ai/src/providers/openai-completions.ts:938:				params.push(toolResultMsg);
+packages/ai/src/providers/openai-completions.ts:976:				lastRole = "toolResult";
+packages/ai/src/providers/openai-completions.ts:1052:			return { stopReason: "toolUse" };
+packages/ai/src/providers/images/openrouter.ts:101:		output.stopReason = options?.signal?.aborted ? "aborted" : "error";
+packages/coding-agent/src/core/sdk.ts:299:			if (msg.role === "user" || msg.role === "toolResult") {
+packages/ai/src/providers/openai-codex-responses.ts:112:		if (signal?.aborted) {
+packages/ai/src/providers/openai-codex-responses.ts:113:			reject(new Error("Request was aborted"));
+packages/ai/src/providers/openai-codex-responses.ts:119:			reject(new Error("Request was aborted"));
+packages/ai/src/providers/openai-codex-responses.ts:198:					if (options?.signal?.aborted) {
+packages/ai/src/providers/openai-codex-responses.ts:199:						throw new Error("Request was aborted");
+packages/ai/src/providers/openai-codex-responses.ts:203:						reason: output.stopReason as "stop" | "length" | "toolUse",
+packages/ai/src/providers/openai-codex-responses.ts:209:					const aborted = options?.signal?.aborted;
+packages/ai/src/providers/openai-codex-responses.ts:210:					if (aborted || isCodexNonTransportError(error)) {
+packages/ai/src/providers/openai-codex-responses.ts:236:				if (options?.signal?.aborted) {
+packages/ai/src/providers/openai-codex-responses.ts:237:					throw new Error("Request was aborted");
+packages/ai/src/providers/openai-codex-responses.ts:294:						if (error.name === "AbortError" || error.message === "Request was aborted") {
+packages/ai/src/providers/openai-codex-responses.ts:295:							throw new Error("Request was aborted");
+packages/ai/src/providers/openai-codex-responses.ts:320:			if (options?.signal?.aborted) {
+packages/ai/src/providers/openai-codex-responses.ts:321:				throw new Error("Request was aborted");
+packages/ai/src/providers/openai-codex-responses.ts:324:			stream.push({ type: "done", reason: output.stopReason as "stop" | "length" | "toolUse", message: output });
+packages/ai/src/providers/openai-codex-responses.ts:331:			output.stopReason = options?.signal?.aborted ? "aborted" : "error";
+packages/ai/src/providers/openai-codex-responses.ts:857:			socket.close(1000, "aborted");
+packages/ai/src/providers/openai-codex-responses.ts:858:			reject(new Error("Request was aborted"));
+packages/ai/src/providers/openai-codex-responses.ts:1079:		failed = new Error("Request was aborted");
+packages/ai/src/providers/openai-codex-responses.ts:1091:			if (signal?.aborted) {
+packages/ai/src/providers/openai-codex-responses.ts:1092:				throw new Error("Request was aborted");
+packages/ai/src/providers/openai-codex-responses.ts:1242:		if (options?.signal?.aborted) {
+packages/ai/src/providers/faux.ts:164:function toolResultToText(message: ToolResultMessage): string {
+packages/ai/src/providers/faux.ts:175:	return toolResultToText(message);
+packages/ai/src/providers/faux.ts:282:		stopReason: "aborted",
+packages/ai/src/providers/faux.ts:283:		errorMessage: "Request was aborted",
+packages/ai/src/providers/faux.ts:305:	if (signal?.aborted) {
+packages/ai/src/providers/faux.ts:306:		const aborted = createAbortedMessage(partial);
+packages/ai/src/providers/faux.ts:307:		stream.push({ type: "error", reason: "aborted", error: aborted });
+packages/ai/src/providers/faux.ts:308:		stream.end(aborted);
+packages/ai/src/providers/faux.ts:315:		if (signal?.aborted) {
+packages/ai/src/providers/faux.ts:316:			const aborted = createAbortedMessage(partial);
+packages/ai/src/providers/faux.ts:317:			stream.push({ type: "error", reason: "aborted", error: aborted });
+packages/ai/src/providers/faux.ts:318:			stream.end(aborted);
+packages/ai/src/providers/faux.ts:329:				if (signal?.aborted) {
+packages/ai/src/providers/faux.ts:330:					const aborted = createAbortedMessage(partial);
+packages/ai/src/providers/faux.ts:331:					stream.push({ type: "error", reason: "aborted", error: aborted });
+packages/ai/src/providers/faux.ts:332:					stream.end(aborted);
+packages/ai/src/providers/faux.ts:352:				if (signal?.aborted) {
+packages/ai/src/providers/faux.ts:353:					const aborted = createAbortedMessage(partial);
+packages/ai/src/providers/faux.ts:354:					stream.push({ type: "error", reason: "aborted", error: aborted });
+packages/ai/src/providers/faux.ts:355:					stream.end(aborted);
+packages/ai/src/providers/faux.ts:369:			if (signal?.aborted) {
+packages/ai/src/providers/faux.ts:370:				const aborted = createAbortedMessage(partial);
+packages/ai/src/providers/faux.ts:371:				stream.push({ type: "error", reason: "aborted", error: aborted });
+packages/ai/src/providers/faux.ts:372:				stream.end(aborted);
+packages/ai/src/providers/faux.ts:381:	if (message.stopReason === "error" || message.stopReason === "aborted") {
+packages/coding-agent/src/core/exec.ts:67:			if (options.signal.aborted) {
+packages/coding-agent/src/core/messages.ts:186:				case "toolResult":
+packages/ai/src/providers/openai-responses.ts:133:			if (options?.signal?.aborted) {
+packages/ai/src/providers/openai-responses.ts:134:				throw new Error("Request was aborted");
+packages/ai/src/providers/openai-responses.ts:137:			if (output.stopReason === "aborted" || output.stopReason === "error") {
+packages/ai/src/providers/openai-responses.ts:149:			output.stopReason = options?.signal?.aborted ? "aborted" : "error";
+packages/coding-agent/src/core/compaction/branch-summarization.ts:37:	aborted?: boolean;
+packages/coding-agent/src/core/compaction/branch-summarization.ts:150:			if (entry.message.role === "toolResult") return undefined;
+packages/coding-agent/src/core/compaction/branch-summarization.ts:330:	// Check if aborted or errored
+packages/coding-agent/src/core/compaction/branch-summarization.ts:331:	if (response.stopReason === "aborted") {
+packages/coding-agent/src/core/compaction/branch-summarization.ts:332:		return { aborted: true };
+packages/coding-agent/src/core/compaction/utils.ts:150:		} else if (msg.role === "toolResult") {
+packages/coding-agent/src/core/bash-executor.ts:121:		const cancelled = options?.signal?.aborted ?? false;
+packages/coding-agent/src/core/bash-executor.ts:132:		if (options?.signal?.aborted) {
+packages/coding-agent/src/core/compaction/compaction.ts:141: * Skips aborted and error messages as they don't have valid usage data.
+packages/coding-agent/src/core/compaction/compaction.ts:146:		if (assistantMsg.stopReason !== "aborted" && assistantMsg.stopReason !== "error" && assistantMsg.usage) {
+packages/coding-agent/src/core/compaction/compaction.ts:154: * Find the last non-aborted assistant message usage from session entries.
+packages/coding-agent/src/core/compaction/compaction.ts:263:		case "toolResult": {
+packages/coding-agent/src/core/compaction/compaction.ts:315:					case "toolResult":
+packages/coding-agent/src/core/extensions/types.ts:659:	toolResults: ToolResultMessage[];
+packages/coding-agent/src/core/extensions/types.ts:662:/** Fired when a message starts (user, assistant, or toolResult) */
+packages/coding-agent/src/core/export-html/index.ts:206:		if (msg.role === "toolResult" && msg.toolCallId) {
+packages/coding-agent/src/core/tools/grep.ts:157:				if (signal?.aborted) {
+packages/coding-agent/src/core/tools/grep.ts:158:					reject(new Error("Operation aborted"));
+packages/coding-agent/src/core/tools/grep.ts:226:						let aborted = false;
+packages/coding-agent/src/core/tools/grep.ts:241:							aborted = true;
+packages/coding-agent/src/core/tools/grep.ts:299:							if (aborted) {
+packages/coding-agent/src/core/tools/grep.ts:300:								settle(() => reject(new Error("Operation aborted")));
+packages/coding-agent/src/core/tools/write.ts:206:				// Checking signal.aborted after each await observes the same aborts while
+packages/coding-agent/src/core/tools/write.ts:209:					if (signal?.aborted) throw new Error("Operation aborted");
+packages/coding-agent/src/core/tools/ls.ts:118:				if (signal?.aborted) {
+packages/coding-agent/src/core/tools/ls.ts:119:					reject(new Error("Operation aborted"));
+packages/coding-agent/src/core/tools/ls.ts:123:				const onAbort = () => reject(new Error("Operation aborted"));
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:124:		// Check if aborted - show after partial content
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:129:			if (message.stopReason === "aborted") {
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:131:					message.errorMessage && message.errorMessage !== "Request was aborted"
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:133:						: "Operation aborted";
+packages/coding-agent/src/core/export-html/template.js:379:          // Hide assistant messages with only tool calls (no text) unless error/aborted
+packages/coding-agent/src/core/export-html/template.js:383:            const isErrorOrAborted = msg.stopReason && msg.stopReason !== 'stop' && msg.stopReason !== 'toolUse';
+packages/coding-agent/src/core/export-html/template.js:396:              passesFilter = !isSettingsEntry && !(entry.type === 'message' && entry.message.role === 'toolResult');
+packages/coding-agent/src/core/export-html/template.js:652:              if (msg.stopReason === 'aborted') {
+packages/coding-agent/src/core/export-html/template.js:653:                return labelHtml + `<span class="tree-role-assistant">assistant:</span> <span class="tree-muted">(aborted)</span>`;
+packages/coding-agent/src/core/export-html/template.js:660:            if (msg.role === 'toolResult') {
+packages/coding-agent/src/core/export-html/template.js:827:          if (entry.type === 'message' && entry.message.role === 'toolResult') {
+packages/coding-agent/src/core/export-html/template.js:1251:            if (msg.stopReason === 'aborted') {
+packages/coding-agent/src/core/export-html/template.js:1275:          if (msg.role === 'toolResult') return '';
+packages/coding-agent/src/core/export-html/template.js:1312:        let userMessages = 0, assistantMessages = 0, toolResults = 0;
+packages/coding-agent/src/core/export-html/template.js:1339:            if (msg.role === 'toolResult') toolResults++;
+packages/coding-agent/src/core/export-html/template.js:1349:        return { userMessages, assistantMessages, toolResults, customMessages, compactions, branchSummaries, toolCalls, tokens, cost, models: Array.from(models) };
+packages/coding-agent/src/core/export-html/template.js:1366:        if (globalStats.toolResults) msgParts.push(`${globalStats.toolResults} tool results`);
+packages/coding-agent/src/core/export-html/template.js:1454:        if (entry?.type === 'message' && entry.message.role === 'toolResult' && entry.message.toolCallId) {
+packages/coding-agent/src/core/tools/bash.ts:75:			if (signal?.aborted) {
+packages/coding-agent/src/core/tools/bash.ts:76:				throw new Error("aborted");
+packages/coding-agent/src/core/tools/bash.ts:106:					if (signal.aborted) onAbort();
+packages/coding-agent/src/core/tools/bash.ts:112:				if (signal?.aborted) {
+packages/coding-agent/src/core/tools/bash.ts:113:					throw new Error("aborted");
+packages/coding-agent/src/core/tools/bash.ts:385:					if (err instanceof Error && err.message === "aborted") {
+packages/coding-agent/src/core/tools/bash.ts:386:						throw new Error(appendStatus(text, "Command aborted"));
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:286:			// Skip assistant messages with only tool calls (no text) unless error/aborted
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:291:				const isErrorOrAborted = msg.stopReason && msg.stopReason !== "stop" && msg.stopReason !== "toolUse";
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:292:				// Only hide if no text AND not an error/aborted message
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:315:					passesFilter = !isSettingsEntry && !(entry.type === "message" && entry.message.role === "toolResult");
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:720:					} else if (msgWithContent.stopReason === "aborted") {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:721:						result = theme.fg("success", "assistant: ") + theme.fg("muted", "(aborted)");
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:728:				} else if (role === "toolResult") {
+packages/coding-agent/src/core/tools/edit.ts:319:				// Checking signal.aborted after each await observes the same aborts while
+packages/coding-agent/src/core/tools/edit.ts:322:					if (signal?.aborted) throw new Error("Operation aborted");
+packages/coding-agent/src/core/tools/find.ts:130:				if (signal?.aborted) {
+packages/coding-agent/src/core/tools/find.ts:131:					reject(new Error("Operation aborted"));
+packages/coding-agent/src/core/tools/find.ts:146:					settle(() => reject(new Error("Operation aborted")));
+packages/coding-agent/src/core/tools/find.ts:162:							if (signal?.aborted) {
+packages/coding-agent/src/core/tools/find.ts:163:								settle(() => reject(new Error("Operation aborted")));
+packages/coding-agent/src/core/tools/find.ts:170:							if (signal?.aborted) {
+packages/coding-agent/src/core/tools/find.ts:171:								settle(() => reject(new Error("Operation aborted")));
+packages/coding-agent/src/core/tools/find.ts:217:						if (signal?.aborted) {
+packages/coding-agent/src/core/tools/find.ts:218:							settle(() => reject(new Error("Operation aborted")));
+packages/coding-agent/src/core/tools/find.ts:280:							if (signal?.aborted) {
+packages/coding-agent/src/core/tools/find.ts:281:								settle(() => reject(new Error("Operation aborted")));
+packages/coding-agent/src/core/tools/find.ts:344:						if (signal?.aborted) {
+packages/coding-agent/src/core/tools/find.ts:345:							settle(() => reject(new Error("Operation aborted")));
+packages/coding-agent/src/core/tools/read.ts:228:					if (signal?.aborted) {
+packages/coding-agent/src/core/tools/read.ts:229:						reject(new Error("Operation aborted"));
+packages/coding-agent/src/core/tools/read.ts:232:					let aborted = false;
+packages/coding-agent/src/core/tools/read.ts:234:						aborted = true;
+packages/coding-agent/src/core/tools/read.ts:235:						reject(new Error("Operation aborted"));
+packages/coding-agent/src/core/tools/read.ts:242:							if (aborted) return;
+packages/coding-agent/src/core/tools/read.ts:245:							if (aborted) return;
+packages/coding-agent/src/core/tools/read.ts:332:							if (aborted) return;
+packages/coding-agent/src/core/tools/read.ts:337:							if (!aborted) reject(error);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2030:			if (opts?.signal?.aborted) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2105:			if (opts?.signal?.aborted) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2764:					if (this.streamingMessage.stopReason === "aborted") {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2769:								: "Operation aborted";
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2774:					if (this.streamingMessage.stopReason === "aborted" || this.streamingMessage.stopReason === "error") {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2901:				if (event.aborted) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3107:			case "toolResult": {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3157:						if (message.stopReason === "aborted" || message.stopReason === "error") {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3159:							if (message.stopReason === "aborted") {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3164:										: "Operation aborted";
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3174:			} else if (message.role === "toolResult") {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4337:						if (result.aborted) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4338:							// Summarization aborted - re-show tree selector with same selection
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5106:			if (loader.signal.aborted) return;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5129:			if (!loader.signal.aborted) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5185:		info += `${theme.fg("dim", "Tool Results:")} ${stats.toolResults}\n`;

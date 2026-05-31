@@ -1,0 +1,531 @@
+internal/agent/usage_test.go:43:// TestUsageLineDerivesMissFromHit covers the OpenAI/MiMo shape where only the
+internal/agent/usage_test.go:44:// cached count is reported; the displayed "new" value comes from
+internal/agent/usage_test.go:45:// PromptTokens - CacheHitTokens. Verifies the absolute split doesn't show 0.
+internal/agent/usage_test.go:46:func TestUsageLineDerivesMissFromHit(t *testing.T) {
+internal/agent/usage_test.go:47:	u := &provider.Usage{
+internal/agent/usage_test.go:51:		CacheHitTokens:   1133,
+internal/agent/usage_test.go:54:	if out := renderUsage(u, nil); !strings.Contains(out, "1133 cached / 2407 new") {
+internal/agent/usage_test.go:55:		t.Errorf("usage line = %q (want 1133 cached / 2407 new)", out)
+internal/inspect/inspect.go:42:		Tools:     Tools(reg),
+internal/inspect/inspect.go:71:	CacheHit float64 `json:"cache_hit"`
+internal/inspect/inspect.go:98:				CacheHit: p.CacheHit,
+internal/inspect/inspect.go:112:// UI knows it can show a diff before approval. Schema is the raw JSON Schema
+internal/inspect/inspect.go:120:	Schema      json.RawMessage `json:"schema,omitempty"`
+internal/inspect/inspect.go:143:			Schema:      t.Schema(),
+internal/inspect/inspect.go:183:			Tools:     s.Tools,
+internal/codegraph/e2e_test.go:95:			t.Fatalf("codegraph_search Execute: %v\nschema: %s", err, search.Schema())
+internal/acp/server_test.go:17:// fakeRunner stands in for an agent.Runner; it emits to the session's sink and
+internal/acp/server_test.go:151:// drainPrompt collects session/update notifications until the prompt's response
+internal/acp/server_test.go:171:			t.Fatal("session/prompt: timed out")
+internal/acp/server_test.go:180:			SessionUpdate string `json:"sessionUpdate"`
+internal/acp/server_test.go:216:	newResp := client.call(t, "session/new", SessionNewParams{Cwd: "/tmp"})
+internal/acp/server_test.go:219:		t.Fatalf("session/new result: %v (%q)", err, nr.SessionID)
+internal/acp/server_test.go:222:	promptCh := client.callAsync("session/prompt", SessionPromptParams{
+internal/acp/server_test.go:257:	newResp := client.call(t, "session/new", SessionNewParams{})
+internal/acp/server_test.go:261:	promptCh := client.callAsync("session/prompt", SessionPromptParams{
+internal/acp/server_test.go:271:	client.notify("session/cancel", SessionCancelParams{SessionID: nr.SessionID})
+internal/codegraph/install.go:28:// <user cache>/reasonix/codegraph/<Version>. Versioned so a bump installs cleanly
+internal/codegraph/install.go:29:// beside the old one. REASONIX_CACHE_DIR overrides the base (relocate the cache,
+internal/codegraph/install.go:30:// or isolate it in tests). Empty when no cache/config dir resolves.
+internal/codegraph/install.go:45:// cached returns the launcher path inside CacheDir when the bundle is present.
+internal/codegraph/install.go:46:func cached() (string, bool) {
+internal/codegraph/install.go:79:// It is idempotent: a present cache is returned untouched. log, if non-nil,
+internal/codegraph/install.go:84:	if p, ok := cached(); ok {
+internal/codegraph/install.go:89:		return "", fmt.Errorf("codegraph: no cache directory available")
+internal/codegraph/install.go:130:	// to the versioned cache dir so the launcher lands at <dir>/bin/codegraph.
+internal/codegraph/install.go:136:		// A concurrent session may have won the race; accept its install.
+internal/codegraph/install.go:137:		if p, ok := cached(); ok {
+internal/codegraph/install.go:142:	p, ok := cached()
+internal/memory/writedoc_test.go:10:// TestWriteDocAllowsRecognizedFiles verifies WriteDoc overwrites a canonical
+internal/memory/writedoc_test.go:15:	set := Load(Options{CWD: proj})
+internal/memory/writedoc_test.go:35:	set := Load(Options{CWD: proj})
+internal/memory/writedoc_test.go:47:// AGENTS.md the user is editing) stays writable even though it isn't a canonical
+internal/memory/writedoc_test.go:54:	set := Load(Options{CWD: proj})
+internal/inspect/inspect_test.go:23:func (f fakeTool) Schema() json.RawMessage                                  { return json.RawMessage(`{"type":"object"}`) }
+internal/inspect/inspect_test.go:99:	if len(by["read_file"].Schema) == 0 {
+internal/agent/textsink_test.go:22:	s.Emit(event.Event{Kind: event.Usage, Usage: &provider.Usage{
+internal/agent/textsink_test.go:24:		CacheHitTokens: 900, CacheMissTokens: 100,
+internal/agent/textsink_test.go:37:		"  · 1200 tok · in 1000 (900 cached / 100 new) · out 200\n" + // usage
+internal/acp/live_test.go:56:	resp := client.call(t, "session/new", SessionNewParams{})
+internal/acp/live_test.go:59:		t.Fatalf("session/new: %v", err)
+internal/acp/live_test.go:62:	promptCh := client.callAsync("session/prompt", SessionPromptParams{
+internal/acp/service.go:18:// SessionParams is everything a Factory needs to assemble one ACP session's
+internal/acp/service.go:19:// controller. Sink is owned by this package (an updateSink bound to the session
+internal/acp/service.go:23:// the sink forwards to the client over session/request_permission.
+internal/acp/service.go:25:// The Factory picks the model (ACP's session/new carries no model selection).
+internal/acp/service.go:26:// Cwd roots the session's file tools and bash (built via builtin.Workspace).
+internal/acp/service.go:28:// this session.
+internal/acp/service.go:35:// Factory builds the per-session controller. The composition root (the cli's
+internal/acp/service.go:38:// per-session MCP host from MCPServers, the event Sink, all wired into a
+internal/acp/service.go:52:// ends or ctx is cancelled. It owns the JSON-RPC connection and the session
+internal/acp/service.go:64:		sessions: make(map[string]*acpSession),
+internal/acp/service.go:67:	conn.Handle("session/new", svc.sessionNew)
+internal/acp/service.go:68:	conn.Handle("session/load", svc.sessionLoad)
+internal/acp/service.go:69:	conn.Handle("session/prompt", svc.sessionPrompt)
+internal/acp/service.go:70:	conn.HandleNotify("session/cancel", svc.sessionCancel)
+internal/acp/service.go:76:// the live session registry.
+internal/acp/service.go:83:	sessions map[string]*acpSession
+internal/acp/service.go:86:// acpSession is one open session: its controller, the on-disk transcript path
+internal/acp/service.go:88:// (nil when idle) so session/cancel can abort it.
+internal/acp/service.go:113:// initialize advertises the agent's capability set: sessions can be resumed via
+internal/acp/service.go:114:// session/load (transcripts are keyed by session id under the session dir),
+internal/acp/service.go:121:			LoadSession: true,
+internal/acp/service.go:134:// sessionNew opens a session: it mints an id, builds the session's sink bound to
+internal/acp/service.go:138:func (s *service) sessionNew(ctx context.Context, raw json.RawMessage) (any, error) {
+internal/acp/service.go:142:			return nil, &RPCError{Code: ErrInvalidParams, Message: "session/new: " + err.Error()}
+internal/acp/service.go:148:		return nil, &RPCError{Code: ErrInternal, Message: "session/new: " + err.Error()}
+internal/acp/service.go:158:		return nil, &RPCError{Code: ErrInternal, Message: "session/new: " + err.Error()}
+internal/acp/service.go:164:	// Pin a transcript file keyed by session id when the controller has a session
+internal/acp/service.go:165:	// dir, so every turn auto-saves there, session/prompt can hand the path back,
+internal/acp/service.go:166:	// and session/load can find it again by id across process restarts.
+internal/acp/service.go:173:	s.sessions[id] = sess
+internal/acp/service.go:179:// sessionLoad resumes a previously-saved session by id: it builds a controller
+internal/acp/service.go:181:// the conversation to the client as session/update notifications, and registers
+internal/acp/service.go:182:// it for subsequent prompts. A session already live in this process is replayed
+internal/acp/service.go:184:func (s *service) sessionLoad(ctx context.Context, raw json.RawMessage) (any, error) {
+internal/acp/service.go:185:	var p SessionLoadParams
+internal/acp/service.go:187:		return nil, &RPCError{Code: ErrInvalidParams, Message: "session/load: " + err.Error()}
+internal/acp/service.go:190:		return nil, &RPCError{Code: ErrInvalidParams, Message: "session/load: missing sessionId"}
+internal/acp/service.go:193:	if sess := s.session(p.SessionID); sess != nil {
+internal/acp/service.go:195:		return SessionLoadResult{}, nil
+internal/acp/service.go:205:		return nil, &RPCError{Code: ErrInternal, Message: "session/load: " + err.Error()}
+internal/acp/service.go:213:		return nil, &RPCError{Code: ErrInternal, Message: "session/load: persistence is disabled"}
+internal/acp/service.go:216:	loaded, err := agent.LoadSession(path)
+internal/acp/service.go:219:		return nil, &RPCError{Code: ErrInvalidParams, Message: "session/load: unknown session " + p.SessionID}
+internal/acp/service.go:225:	s.sessions[p.SessionID] = sess
+internal/acp/service.go:229:	return SessionLoadResult{}, nil
+internal/acp/service.go:232:// transcriptPath is where a session's transcript lives — keyed by id so
+internal/acp/service.go:233:// session/load can recover it. Distinct from the cli's timestamp-labelled
+internal/acp/service.go:234:// chat/run session files (those are addressed by a picker, not by id).
+internal/acp/service.go:239:// sessionPrompt runs one turn. It flattens the prompt blocks to text and runs the
+internal/acp/service.go:240:// session's controller synchronously under a per-turn cancelable context (so
+internal/acp/service.go:241:// session/cancel can stop it), then reports why the turn ended. The controller
+internal/acp/service.go:242:// streams the turn's events to the session's sink as it runs.
+internal/acp/service.go:243:func (s *service) sessionPrompt(ctx context.Context, raw json.RawMessage) (any, error) {
+internal/acp/service.go:246:		return nil, &RPCError{Code: ErrInvalidParams, Message: "session/prompt: " + err.Error()}
+internal/acp/service.go:248:	sess := s.session(p.SessionID)
+internal/acp/service.go:250:		return nil, &RPCError{Code: ErrInvalidParams, Message: "session/prompt: unknown session " + p.SessionID}
+internal/acp/service.go:254:		return nil, &RPCError{Code: ErrInvalidParams, Message: "session/prompt: empty prompt"}
+internal/acp/service.go:282:// sessionCancel aborts a session's in-flight turn, if any. It is a notification:
+internal/acp/service.go:283:// no reply, and an unknown session is silently ignored.
+internal/acp/service.go:284:func (s *service) sessionCancel(_ context.Context, raw json.RawMessage) {
+internal/acp/service.go:289:	if sess := s.session(p.SessionID); sess != nil {
+internal/acp/service.go:294:func (s *service) session(id string) *acpSession {
+internal/acp/service.go:297:	return s.sessions[id]
+internal/acp/service.go:300:// closeAll tears down every open session (aborting any in-flight turn and
+internal/acp/service.go:304:	sessions := s.sessions
+internal/acp/service.go:305:	s.sessions = make(map[string]*acpSession)
+internal/acp/service.go:307:	for _, sess := range sessions {
+internal/acp/service.go:314:// session/new only carries stdio servers (the agent advertises http/sse off).
+internal/acp/service.go:332:// newSessionID returns a random RFC 4122 v4 UUID string used to address a session.
+internal/codegraph/codegraph.go:8:// CodeGraph is fetched on first use into a per-version cache (see Install) rather
+internal/codegraph/codegraph.go:10:// the cached launcher; an explicit config path, a system-installed `codegraph` on
+internal/codegraph/codegraph.go:34://  2. the per-version cache populated by Install (the normal case);
+internal/codegraph/codegraph.go:39:// feature), so the codegraph_* tools come online once the cache is populated.
+internal/codegraph/codegraph.go:46:	if p, ok := cached(); ok {
+internal/plugin/transport_http.go:28:// it also keeps nextID and the session id race-free.
+internal/plugin/transport_http.go:37:	session string // Mcp-Session-Id, captured from responses
+internal/plugin/transport_http.go:107:// static headers, and the session id (once known). Caller holds t.mu.
+internal/plugin/transport_http.go:118:	if t.session != "" {
+internal/plugin/transport_http.go:119:		req.Header.Set("Mcp-Session-Id", t.session)
+internal/plugin/transport_http.go:126:		t.session = sid
+internal/agent/save_test.go:14:// doesn't have to sleep between Saves.
+internal/agent/save_test.go:19:// TestSaveLoadRoundTrip is the contract `reasonix chat --resume` depends on: a
+internal/agent/save_test.go:20:// session written to disk reloads byte-for-byte, including tool calls and
+internal/agent/save_test.go:21:// reasoning content (which the model wants to keep across resumes for cache
+internal/agent/save_test.go:23:func TestSaveLoadRoundTrip(t *testing.T) {
+internal/agent/save_test.go:41:	if err := s.Save(path); err != nil {
+internal/agent/save_test.go:42:		t.Fatalf("Save: %v", err)
+internal/agent/save_test.go:44:	loaded, err := LoadSession(path)
+internal/agent/save_test.go:46:		t.Fatalf("LoadSession: %v", err)
+internal/agent/save_test.go:72:	// Write two sessions with explicit mtimes so the order is deterministic.
+internal/agent/save_test.go:76:		if err := s.Save(filepath.Join(dir, name)); err != nil {
+internal/agent/save_test.go:105:// through to a fresh session without special-casing.
+internal/checkpoint/checkpoint_test.go:131:	// Boundaries must survive the round-trip so a resumed session can rewind/fork.
+internal/acp/dispatch_test.go:55:	if n.method != "session/update" {
+internal/acp/dispatch_test.go:56:		t.Fatalf("notif %d method = %q, want session/update", i, n.method)
+internal/acp/dispatch_test.go:63:		SessionID string         `json:"sessionId"`
+internal/acp/dispatch_test.go:70:		t.Errorf("notif %d sessionId = %q, want sess-1", i, decoded.SessionID)
+internal/acp/dispatch_test.go:97:	if u["sessionUpdate"] != "agent_thought_chunk" {
+internal/acp/dispatch_test.go:98:		t.Errorf("update 0 = %v, want agent_thought_chunk", u["sessionUpdate"])
+internal/acp/dispatch_test.go:106:	if u["sessionUpdate"] != "agent_message_chunk" {
+internal/acp/dispatch_test.go:107:		t.Errorf("update 1 = %v, want agent_message_chunk", u["sessionUpdate"])
+internal/acp/dispatch_test.go:112:	if u["sessionUpdate"] != "tool_call" || u["status"] != "pending" {
+internal/acp/dispatch_test.go:127:	if u["sessionUpdate"] != "tool_call_update" || u["status"] != "completed" {
+internal/acp/dispatch_test.go:151:	// Dropped kinds: TurnStarted, Message, Usage, Phase, and empty deltas.
+internal/acp/dispatch_test.go:154:	sink.Emit(event.Event{Kind: event.Usage})
+internal/acp/dispatch_test.go:171:	if u["sessionUpdate"] != "agent_message_chunk" {
+internal/acp/dispatch_test.go:172:		t.Errorf("warn update = %v", u["sessionUpdate"])
+internal/acp/dispatch_test.go:179:// approveCall records one approve(id, allow, session) callback.
+internal/acp/dispatch_test.go:183:	session bool
+internal/acp/dispatch_test.go:188:		if method != "session/request_permission" {
+internal/acp/dispatch_test.go:189:			t.Errorf("request method = %q, want session/request_permission", method)
+internal/acp/dispatch_test.go:197:			t.Errorf("sessionId = %q", p.SessionID)
+internal/acp/dispatch_test.go:212:	sink.bindApprove(func(id string, allow, session bool) { got <- approveCall{id, allow, session} })
+internal/acp/dispatch_test.go:218:		if c != (approveCall{id: "9", allow: true, session: true}) {
+internal/acp/dispatch_test.go:244:			sink.bindApprove(func(id string, allow, session bool) { got <- approveCall{id, allow, session} })
+internal/acp/dispatch_test.go:250:				if c.allow || c.session {
+internal/plugin/transport_http_test.go:19:// It assigns a session id on initialize and fails any later request that
+internal/plugin/transport_http_test.go:21:// session + header plumbing, not just the happy path.
+internal/plugin/transport_http_test.go:24:	const sessionID = "sess-xyz"
+internal/plugin/transport_http_test.go:41:			w.Header().Set("Mcp-Session-Id", sessionID)
+internal/plugin/transport_http_test.go:42:		} else if got := r.Header.Get("Mcp-Session-Id"); got != sessionID {
+internal/plugin/transport_http_test.go:43:			http.Error(w, "missing session id", http.StatusBadRequest)
+internal/plugin/transport_http_test.go:60:				"inputSchema": map[string]any{"type": "object"},
+internal/codegraph/install_test.go:117:	// Seed a fake cached launcher so Install short-circuits before any download.
+internal/codegraph/install_test.go:127:		t.Fatalf("Install with a populated cache = %q, %v; want %q", got, err, launcher)
+internal/codegraph/install_test.go:129:	// Resolve should also find it (no override, cache wins).
+internal/acp/server.go:38:// registered handlers, and can itself send outbound notifications (session/update)
+internal/acp/server.go:39:// and requests (session/request_permission), correlating replies by id.
+internal/acp/server.go:42:// (a long session/prompt alongside a session/cancel) never interleave a line.
+internal/acp/dispatch.go:14:// session/update notifications and, when a tool needs approval, makes a
+internal/acp/dispatch.go:15:// session/request_permission request. Narrowing to this interface keeps the sink
+internal/acp/dispatch.go:26:// updateSink is an event.Sink bound to one session that maps the agent's typed
+internal/acp/dispatch.go:27:// event stream onto ACP session/update notifications. It is the v2 counterpart of
+internal/acp/dispatch.go:34:// tool_call_update on result. Message/Usage/Phase/TurnStarted/TurnDone have no
+internal/acp/dispatch.go:36:// session/prompt stopReason instead).
+internal/acp/dispatch.go:39:// call; the sink forwards it as a session/request_permission round-trip and feeds
+internal/acp/dispatch.go:44:	sessionID string
+internal/acp/dispatch.go:45:	approve   func(id string, allow, session bool)
+internal/acp/dispatch.go:48:func newUpdateSink(conn notifier, sessionID string) *updateSink {
+internal/acp/dispatch.go:49:	return &updateSink{conn: conn, sessionID: sessionID}
+internal/acp/dispatch.go:54:func (s *updateSink) bindApprove(fn func(id string, allow, session bool)) {
+internal/acp/dispatch.go:117:	_ = s.conn.Notify("session/update", SessionUpdateParams{SessionID: s.sessionID, Update: update})
+internal/acp/dispatch.go:120:// replay streams a loaded conversation back to the client as session/update
+internal/acp/dispatch.go:121:// notifications so a resumed session reconstructs its transcript view. The
+internal/acp/dispatch.go:160:// session/request_permission round-trip and feeds the outcome back through
+internal/acp/dispatch.go:172:		SessionID: s.sessionID,
+internal/acp/dispatch.go:181:			{OptionID: string(OptAllowAlways), Name: "Allow for this session", Kind: OptAllowAlways},
+internal/acp/dispatch.go:186:	allow, session := false, false
+internal/acp/dispatch.go:189:	if raw, err := s.conn.Request(context.Background(), "session/request_permission", params); err == nil {
+internal/acp/dispatch.go:196:				allow, session = true, true
+internal/acp/dispatch.go:200:	s.approve(a.ID, allow, session)
+internal/config/mcpjson_test.go:9:func TestLoadMCPJSON(t *testing.T) {
+internal/config/mcpjson_test.go:49:func TestLoadMCPJSONAbsentAndMalformed(t *testing.T) {
+internal/config/mcpjson_test.go:68:func TestLoadMergesMCPJSON(t *testing.T) {
+internal/config/mcpjson_test.go:69:	// Point the user-config and home dirs at an empty temp dir so Load picks up
+internal/config/mcpjson_test.go:91:	cfg, err := Load()
+internal/agent/task_test.go:32:	// the configured system prompt at the top — proving the session was
+internal/checkpoint/checkpoint.go:7:// the session, never touch the user's git, and work in a non-git directory. Only
+internal/checkpoint/checkpoint.go:35:// conversation-rewind boundary — persisted so a resumed session can rewind the
+internal/checkpoint/checkpoint.go:53:// Store holds a session's checkpoints in memory and, when dir is set, persists one
+internal/checkpoint/checkpoint.go:57:	dir  string // <session>.ckpt/, or "" for in-memory only
+internal/checkpoint/checkpoint.go:68:// store still works in memory for the session).
+internal/checkpoint/checkpoint.go:114:// resumed session's checkpoints from disk.
+internal/checkpoint/checkpoint.go:159:// highest existing turn (0 when empty), so a resumed session keeps numbering
+internal/acp/e2e_test.go:22:// live network run: they exercise session/update streaming, the gate→approval
+internal/acp/e2e_test.go:68:func (t fakeTool) Schema() json.RawMessage { return json.RawMessage(`{"type":"object"}`) }
+internal/acp/e2e_test.go:80:	sessionDir string
+internal/acp/e2e_test.go:94:		SessionDir: f.sessionDir,
+internal/acp/e2e_test.go:102:// openSession runs initialize + session/new and returns the session id.
+internal/acp/e2e_test.go:106:	resp := c.call(t, "session/new", SessionNewParams{Cwd: t.TempDir()})
+internal/acp/e2e_test.go:109:		t.Fatalf("session/new: %v (%q)", err, nr.SessionID)
+internal/acp/e2e_test.go:116:// checks the session/update stream, the stopReason, and that the turn was
+internal/acp/e2e_test.go:135:		sessionDir: dir,
+internal/acp/e2e_test.go:141:	promptCh := client.callAsync("session/prompt", SessionPromptParams{
+internal/acp/e2e_test.go:196:		t.Errorf("transcriptPath %q not under session dir %q", *pr.TranscriptPath, dir)
+internal/acp/e2e_test.go:210:// TestE2ESessionLoad runs a turn in one server (saving a transcript keyed by
+internal/acp/e2e_test.go:211:// session id), then resumes it in a fresh server pointed at the same session dir
+internal/acp/e2e_test.go:213:// as session/update notifications.
+internal/acp/e2e_test.go:214:func TestE2ESessionLoad(t *testing.T) {
+internal/acp/e2e_test.go:228:			sessionDir: dir,
+internal/acp/e2e_test.go:232:	// Run 1: create a session and run a turn, persisting the transcript.
+internal/acp/e2e_test.go:235:	promptCh := client1.callAsync("session/prompt", SessionPromptParams{
+internal/acp/e2e_test.go:242:	// Run 2: a brand-new server (same session dir) resumes by id.
+internal/acp/e2e_test.go:245:	loadCh := client2.callAsync("session/load", SessionLoadParams{SessionID: sid})
+internal/acp/e2e_test.go:249:		t.Fatalf("session/load errored: %+v", resp.Error)
+internal/acp/e2e_test.go:284:// session/request_permission, the client allows it, and the tool then runs.
+internal/acp/e2e_test.go:301:		sessionDir: t.TempDir(),
+internal/acp/e2e_test.go:307:	promptCh := client.callAsync("session/prompt", SessionPromptParams{
+internal/acp/e2e_test.go:329:			t.Errorf("permission sessionId = %q, want %q", pr.SessionID, sid)
+internal/acp/e2e_test.go:391:		sessionDir: t.TempDir(),
+internal/acp/e2e_test.go:397:	promptCh := client.callAsync("session/prompt", SessionPromptParams{
+internal/acp/e2e_test.go:407:	client.notify("session/cancel", SessionCancelParams{SessionID: sid})
+internal/acp/e2e_test.go:431:func (t blockingTool) Schema() json.RawMessage { return json.RawMessage(`{"type":"object"}`) }
+internal/config/edit.go:14:// add/remove an MCP server — each validated, then persisted with SaveTo. It is
+internal/config/edit.go:17:// in-memory *Config; nothing writes to disk until SaveTo/Save is called, so a UI
+internal/config/edit.go:19:// RenderTOML → Load (the wizard relies on the same guarantee).
+internal/config/edit.go:39:// SetPlannerModel sets (or, with "", clears) agent.planner_model for two-model
+internal/config/edit.go:73:// model); if the removed provider was the planner, planner_model is cleared as
+internal/config/edit.go:225:// SaveTo writes the configuration to path as annotated TOML, atomically: it
+internal/config/edit.go:229:func (c *Config) SaveTo(path string) error {
+internal/config/edit.go:254:// Save writes the configuration back to the file it was loaded from
+internal/config/edit.go:256:// project-local target a fresh GUI session would create.
+internal/config/edit.go:257:func (c *Config) Save() error {
+internal/config/edit.go:262:	return c.SaveTo(path)
+internal/acp/protocol.go:8:// contracts: it maps the agent's typed event.Event stream onto session/update
+internal/acp/protocol.go:10:// session/request_permission round-trips (see permission.go), and exposes the
+internal/acp/protocol.go:11:// whole thing over NDJSON JSON-RPC (see server.go). How a per-session agent is
+internal/acp/protocol.go:12:// actually assembled — provider, tools rooted at the session cwd, per-session MCP
+internal/acp/protocol.go:51:// match main exactly: sessions are created via session/new (no loadSession),
+internal/acp/protocol.go:63:	LoadSession        bool               `json:"loadSession"`
+internal/acp/protocol.go:75:// MCPCapabilities reports which MCP transports session/new accepts.
+internal/acp/protocol.go:81:// --- session/new ---
+internal/acp/protocol.go:83:// SessionNewParams opens a session rooted at cwd, optionally with stdio MCP
+internal/acp/protocol.go:84:// servers the agent should connect for the session's lifetime.
+internal/acp/protocol.go:98:// SessionNewResult returns the opaque id used to address the session thereafter.
+internal/acp/protocol.go:100:	SessionID string `json:"sessionId"`
+internal/acp/protocol.go:103:// --- session/load ---
+internal/acp/protocol.go:105:// SessionLoadParams resumes a session saved under sessionId (the id a prior
+internal/acp/protocol.go:106:// session/new returned), optionally re-rooting it at cwd with fresh MCP servers.
+internal/acp/protocol.go:107:// The agent replays the stored conversation as session/update notifications
+internal/acp/protocol.go:109:type SessionLoadParams struct {
+internal/acp/protocol.go:110:	SessionID  string          `json:"sessionId"`
+internal/acp/protocol.go:115:// SessionLoadResult is the empty ack; the conversation has already arrived as a
+internal/acp/protocol.go:116:// burst of session/update notifications by the time it is sent.
+internal/acp/protocol.go:117:type SessionLoadResult struct{}
+internal/acp/protocol.go:160:// --- session/prompt ---
+internal/acp/protocol.go:162:// SessionPromptParams sends a turn's prompt to a session.
+internal/acp/protocol.go:164:	SessionID string         `json:"sessionId"`
+internal/acp/protocol.go:177:// SessionPromptResult ends a session/prompt. TranscriptPath is reserved for a
+internal/acp/protocol.go:184:// --- session/update (agent → client notifications) ---
+internal/acp/protocol.go:186:// SessionUpdate is a tagged union discriminated by sessionUpdate. The variants
+internal/acp/protocol.go:192:// SessionUpdateParams wraps one update for a session.
+internal/acp/protocol.go:194:	SessionID string `json:"sessionId"`
+internal/acp/protocol.go:200:	SessionUpdate string       `json:"sessionUpdate"`
+internal/acp/protocol.go:217:	SessionUpdate string          `json:"sessionUpdate"`
+internal/acp/protocol.go:227:	SessionUpdate string        `json:"sessionUpdate"`
+internal/acp/protocol.go:239:// --- session/cancel (client → agent notification) ---
+internal/acp/protocol.go:243:	SessionID string `json:"sessionId"`
+internal/acp/protocol.go:246:// --- session/request_permission (agent → client request) ---
+internal/acp/protocol.go:267:	SessionID string             `json:"sessionId"`
+internal/config/render.go:12:// output round-trips back through Load (see render_test.go).
+internal/config/render.go:40:		fmt.Fprintf(&b, "planner_model = %q   # low-frequency planner (two-model collaboration)\n", c.Agent.PlannerModel)
+internal/config/render.go:42:		b.WriteString("# planner_model = \"mimo\"   # optional: enable two-model collaboration\n")
+internal/config/render.go:60:			fmt.Fprintf(&b, "price       = { cache_hit = %v, input = %v, output = %v, currency = %q }   # per 1M tokens\n",
+internal/config/render.go:61:				p.Price.CacheHit, p.Price.Input, p.Price.Output, p.Price.Symbol())
+internal/config/edit_test.go:84:	// Removing the planner provider clears planner_model.
+internal/config/edit_test.go:177:// TestSaveToRoundTrips stages several mutations, persists atomically, and
+internal/config/edit_test.go:179:func TestSaveToRoundTrips(t *testing.T) {
+internal/config/edit_test.go:201:	if err := c.SaveTo(path); err != nil {
+internal/config/edit_test.go:202:		t.Fatalf("SaveTo: %v", err)
+internal/config/edit_test.go:213:		t.Errorf("planner_model = %q", got.Agent.PlannerModel)
+internal/config/dotenv_test.go:9:// TestLoadDotEnvFallsBackToHome proves the unified-key behaviour: the working
+internal/config/dotenv_test.go:13:func TestLoadDotEnvFallsBackToHome(t *testing.T) {
+internal/config/dotenv_test.go:48:// TestLoadDotEnvDoesNotOverrideEnv confirms an already-set environment variable
+internal/config/dotenv_test.go:50:func TestLoadDotEnvDoesNotOverrideEnv(t *testing.T) {
+internal/agent/compact.go:16:// Compaction defaults. Compaction is a low-frequency cache-reset point: prompts
+internal/agent/compact.go:17:// grow prepend-only (high cache hits) until a turn's prompt nears the model's
+internal/agent/compact.go:21:	defaultCompactRatio = 0.8 // compact when prompt_tokens reach this fraction of the window
+internal/agent/compact.go:23:	minCompactMessages  = 2   // skip compaction below this many compactable messages
+internal/agent/compact.go:29:Summarize the messages below into a compact briefing the agent can rely on to continue the task. Preserve:
+internal/agent/compact.go:37:// maybeCompact compacts the session when the last turn's prompt has grown to the
+internal/agent/compact.go:40:func (a *Agent) maybeCompact(ctx context.Context, u *provider.Usage) {
+internal/agent/compact.go:52:// compact summarizes the older middle of the session and replaces it in place:
+internal/agent/compact.go:53:// the session becomes system + summary + recent tail. The dropped originals are
+internal/agent/compact.go:56:	msgs := a.session.Messages
+internal/agent/compact.go:57:	head, start, ok := compactBounds(msgs, a.recentKeep, minCompactMessages)
+internal/agent/compact.go:84:	a.session.Messages = compacted
+internal/agent/compact.go:94:// SummarizeFrom replaces the messages from fromIdx onward with a single summary,
+internal/agent/compact.go:98:func (a *Agent) SummarizeFrom(ctx context.Context, fromIdx int) error {
+internal/agent/compact.go:99:	msgs := a.session.Messages
+internal/agent/compact.go:117:	a.session.Messages = next
+internal/agent/compact.go:123:// SummarizeUpTo replaces the messages before toIdx (after the system prompt) with
+internal/agent/compact.go:126:func (a *Agent) SummarizeUpTo(ctx context.Context, toIdx int) error {
+internal/agent/compact.go:127:	msgs := a.session.Messages
+internal/agent/compact.go:150:	a.session.Messages = next
+internal/agent/compact.go:162:func compactBounds(msgs []provider.Message, recentKeep, minCompact int) (head, start int, ok bool) {
+internal/agent/compact.go:173:	if start-head < minCompact {
+internal/config/config.go:36:// (default true) lets reasonix fetch the CodeGraph runtime into its cache on first
+internal/config/config.go:39:// the cache, then a `codegraph` on PATH, then a bundle beside the executable.
+internal/config/config.go:121:// planner handles low-frequency planning in its own session (kept separate so
+internal/config/config.go:122:// each model's prompt prefix stays cache-stable).
+internal/config/config.go:128:	PlannerModel     string  `toml:"planner_model"`
+internal/config/config.go:234:// It is static English text, so it stays part of the cache-stable prefix and
+internal/config/config.go:263:		// as a built-in MCP server, and AutoInstall fetches it into the cache on
+internal/config/config.go:268:			{Name: "deepseek-flash", Kind: "openai", BaseURL: "https://api.deepseek.com", Model: "deepseek-v4-flash", APIKeyEnv: "DEEPSEEK_API_KEY", BalanceURL: "https://api.deepseek.com/user/balance", ContextWindow: 1_000_000, Price: &provider.Pricing{CacheHit: 0.02, Input: 1, Output: 2, Currency: "¥"}},
+internal/config/config.go:269:			{Name: "deepseek-pro", Kind: "openai", BaseURL: "https://api.deepseek.com", Model: "deepseek-v4-pro", APIKeyEnv: "DEEPSEEK_API_KEY", BalanceURL: "https://api.deepseek.com/user/balance", ContextWindow: 1_000_000, Price: &provider.Pricing{CacheHit: 0.025, Input: 3, Output: 6, Currency: "¥"}},
+internal/config/config.go:276:// Load builds the configuration: defaults, then user config, then project
+internal/config/config.go:279:func Load() (*Config, error) {
+internal/config/config.go:302:// LoadForEdit returns a config to seed the `reasonix setup` wizard when reconfiguring:
+internal/config/config.go:307:func LoadForEdit(path string) *Config {
+internal/config/config.go:344:// SessionDir is where chat sessions are persisted (one .jsonl per session).
+internal/config/config.go:345:// Used by `reasonix chat --continue` / `--resume` to find the recent ones. Empty
+internal/config/config.go:346:// if the user config dir can't be resolved — sessions then aren't saved.
+internal/config/config.go:352:	return filepath.Join(dir, "reasonix", "sessions")
+internal/config/config.go:367:// commands), in canonical-first order. .reasonix is ours; .agents / .agent /
+internal/config/config.go:376:// priority (reverse of ConventionDirs) so the canonical .reasonix ends up the
+internal/config/config.go:377:// highest-priority entry — command.Load lets a later directory win on a clash.
+internal/config/commanddirs_test.go:11:// canonical .reasonix project dir is highest priority (last, since command.Load
+internal/agent/agent.go:98:	session     *Session
+internal/agent/agent.go:109:	// lastUsage caches the most recent per-turn telemetry the provider
+internal/agent/agent.go:112:	lastUsage *provider.Usage
+internal/agent/agent.go:114:	// sessCacheHit/sessCacheMiss accumulate cache tokens across every API call
+internal/agent/agent.go:115:	// this session, so frontends can show the aggregate hit-rate (Σhit/Σ(hit+miss))
+internal/agent/agent.go:117:	// reset on compaction (compaction only rewrites session.Messages), so the
+internal/agent/agent.go:119:	sessCacheHit  int
+internal/agent/agent.go:124:	// prompt-cache prefix stays valid; the gating happens at execute time
+internal/agent/agent.go:148:	// jobs, when non-nil, is the session's background-job manager. executeOne
+internal/agent/agent.go:155:	// middle of the session is summarized away, keeping recentKeep messages
+internal/agent/agent.go:165:// running it. The cache-friendly bits — system prompt, tools schema, message
+internal/agent/agent.go:166:// history — are left untouched, so the toggle costs nothing in cache hits.
+internal/agent/agent.go:179:// controller wires it to its per-session checkpoint store; nil disables capture.
+internal/agent/agent.go:184:func (a *Agent) Session() *Session { return a.session }
+internal/agent/agent.go:187:// `reasonix chat --resume` to load a saved JSONL transcript before the first turn,
+internal/agent/agent.go:189:func (a *Agent) SetSession(s *Session) { a.session = s }
+internal/agent/agent.go:191:// LastUsage returns the most recent per-turn token telemetry the provider
+internal/agent/agent.go:193:// gauge alongside the prompt; the actual cache decisions still live inside
+internal/agent/agent.go:194:// maybeCompact.
+internal/agent/agent.go:195:func (a *Agent) LastUsage() *provider.Usage { return a.lastUsage }
+internal/agent/agent.go:197:// SessionCache returns the cumulative cache hit/miss prompt tokens across every
+internal/agent/agent.go:198:// API call this session — the basis for the status line's aggregate hit-rate.
+internal/agent/agent.go:199:func (a *Agent) SessionCache() (hit, miss int) { return a.sessCacheHit, a.sessCacheMiss }
+internal/agent/agent.go:205:// CompactNow runs one compaction pass immediately, regardless of the
+internal/agent/agent.go:206:// usage-ratio threshold maybeCompact normally honours. Used by the chat
+internal/agent/agent.go:209:func (a *Agent) CompactNow(ctx context.Context) error { return a.compact(ctx) }
+internal/agent/agent.go:224:	// Jobs is the session's background-job manager (nil disables background tools).
+internal/agent/agent.go:227:	// Context management. ContextWindow <= 0 disables compaction. CompactRatio
+internal/agent/agent.go:230:	CompactRatio  float64
+internal/agent/agent.go:239:func New(prov provider.Provider, tools *tool.Registry, session *Session, opts Options, sink event.Sink) *Agent {
+internal/agent/agent.go:240:	if opts.CompactRatio <= 0 {
+internal/agent/agent.go:241:		opts.CompactRatio = defaultCompactRatio
+internal/agent/agent.go:252:		session:       session,
+internal/agent/agent.go:261:		compactRatio:  opts.CompactRatio,
+internal/agent/agent.go:275:	a.session.Add(provider.Message{Role: provider.RoleUser, Content: input})
+internal/agent/agent.go:283:			a.sink.Emit(event.Event{Kind: event.Usage, Usage: usage, Pricing: a.pricing,
+internal/agent/agent.go:284:				SessionHit: a.sessCacheHit, SessionMiss: a.sessCacheMiss})
+internal/agent/agent.go:290:		// Keep reasoning_content on the assistant turn for display and session
+internal/agent/agent.go:293:		// ordinary prompt input (~500 tok/turn) for no cache or coherence gain.
+internal/agent/agent.go:294:		a.session.Add(provider.Message{
+internal/agent/agent.go:307:			a.session.Add(provider.Message{
+internal/agent/agent.go:317:		a.maybeCompact(ctx, usage)
+internal/agent/agent.go:320:	// is already in the session, so the user can just send another message to pick
+internal/agent/agent.go:330:func (a *Agent) stream(ctx context.Context) (string, string, []provider.ToolCall, *provider.Usage, error) {
+internal/agent/agent.go:332:		Messages:    a.session.Messages,
+internal/agent/agent.go:333:		Tools:       a.tools.Schemas(),
+internal/agent/agent.go:342:	var usage *provider.Usage
+internal/agent/agent.go:363:		case provider.ChunkUsage:
+internal/agent/agent.go:364:			usage = chunk.Usage
+internal/agent/agent.go:365:			a.lastUsage = chunk.Usage
+internal/agent/agent.go:366:			a.sessCacheHit += chunk.Usage.CacheHitTokens
+internal/agent/agent.go:367:			a.sessCacheMiss += chunk.Usage.CacheMissTokens
+internal/agent/agent.go:599:func finishReasonMessage(u *provider.Usage) (string, bool) {
+internal/agent/compact_test.go:33:func TestCompactBounds(t *testing.T) {
+internal/agent/compact_test.go:58:			head, start, ok := compactBounds(tc.msgs, tc.keep, minCompactMessages)
+internal/agent/compact_test.go:76:func TestCompactReplacesHistory(t *testing.T) {
+internal/agent/compact_test.go:126:func TestMaybeCompactThreshold(t *testing.T) {
+internal/agent/compact_test.go:142:	a.maybeCompact(context.Background(), &provider.Usage{PromptTokens: 50})
+internal/agent/compact_test.go:150:	a.maybeCompact(context.Background(), &provider.Usage{PromptTokens: 90})
+internal/agent/compact_test.go:158:	a.maybeCompact(context.Background(), &provider.Usage{PromptTokens: 1 << 30})
+internal/agent/task.go:23:// TaskTool spawns a sub-agent in its own session for a focused sub-task. The
+internal/agent/task.go:70:	return "Spawn a sub-agent for a focused sub-task. The sub-agent runs in its own session with the same provider and a filtered tool list (defaults to every parent tool except 'task' — no recursive nesting). Only its final answer is returned. Use this to (a) keep long exploration sequences out of the parent's context budget, or (b) delegate self-contained work like 'find every place that calls X and summarise the patterns'."
+internal/agent/task.go:73:func (t *TaskTool) Schema() json.RawMessage {
+internal/agent/task.go:125:	// session context (so it survives this turn) and return immediately. The
+internal/agent/task.go:194:// RunSubAgent runs prompt to completion in a fresh sub-agent session over reg,
+internal/agent/task.go:205:	// Walk the session backwards for the last assistant message with content —
+internal/agent/coordinator.go:24:// Coordinator runs two models in separate sessions to keep each one's prompt
+internal/agent/coordinator.go:25:// prefix cache-stable: a low-frequency planner proposes an approach, then the
+internal/agent/coordinator.go:26:// executor (a full tool-using Agent) carries it out. The sessions never mix, so
+internal/agent/coordinator.go:37:// NewCoordinator wires a planner provider (with its own session) to an executor.
+internal/agent/coordinator.go:68:// session, so that session grows prepend-only and stays cache-friendly.
+internal/agent/coordinator.go:81:	var usage *provider.Usage
+internal/agent/coordinator.go:87:		case provider.ChunkUsage:
+internal/agent/coordinator.go:88:			usage = chunk.Usage
+internal/agent/coordinator.go:94:	// usage line, mirroring the old Fprintln + printUsage tail.
+internal/agent/coordinator.go:95:	c.sink.Emit(event.Event{Kind: event.Usage, Usage: usage, Pricing: c.plannerPricing})
+internal/agent/save.go:16:// Save writes the session's messages to path in JSONL — one provider.Message
+internal/agent/save.go:17:// per line — so a user can resume the conversation later. The file is
+internal/agent/save.go:18:// rewritten in full on every save: chat sessions are small (kilobytes), and
+internal/agent/save.go:20:// mutates the middle of session.Messages.
+internal/agent/save.go:21:func (s *Session) Save(path string) error {
+internal/agent/save.go:23:		return fmt.Errorf("empty session path")
+internal/agent/save.go:26:		return fmt.Errorf("create session dir: %w", err)
+internal/agent/save.go:30:	tmp, err := os.CreateTemp(filepath.Dir(path), ".session.*.tmp")
+internal/agent/save.go:32:		return fmt.Errorf("create session tmp: %w", err)
+internal/agent/save.go:50:// LoadSession reads a JSONL file written by Save into a fresh Session value.
+internal/agent/save.go:52:// new session.
+internal/agent/save.go:53:func LoadSession(path string) (*Session, error) {
+internal/agent/save.go:78:// SessionInfo summarises a saved session for the --resume picker: where it
+internal/agent/save.go:88:// ListSessions returns every *.jsonl session under dir, newest first, each
+internal/agent/save.go:91:// resume yet.
+internal/agent/save.go:112:			// Skip sessions that have never had user interaction — they are
+internal/agent/save.go:114:			// or the resume picker.
+internal/agent/save.go:162:// NewSessionPath returns the path to use for a fresh session, namespaced by
+internal/agent/save.go:168:		safe = "session"
+internal/agent/planmode_test.go:35:// TestPlanModeDoesNotMutateSystemOrTools is the cache-stability test. Toggling
+internal/agent/planmode_test.go:37:// tool list seen by the provider — those are the cache-key prefix, and any
+internal/agent/planmode_test.go:38:// change there forces an expensive cache miss.
+internal/agent/planmode_test.go:78:func serializeToolNames(ts []provider.ToolSchema) string {
+internal/agent/session.go:12:// NewSession initializes a session with an optional system prompt.
+internal/agent/session.go:26:// HasContent returns true when the session carries at least one user,
+internal/config/loadedit_test.go:9:func TestLoadForEdit(t *testing.T) {
+internal/config/loadedit_test.go:26:	cfg := LoadForEdit(path)
+internal/config/loadedit_test.go:35:	if cfg := LoadForEdit(filepath.Join(dir, "absent.toml")); cfg.DefaultModel != Default().DefaultModel {
+internal/agent/guards_test.go:66:		if msg, ok := finishReasonMessage(&provider.Usage{FinishReason: r}); ok {
+internal/agent/guards_test.go:76:		msg, ok := finishReasonMessage(&provider.Usage{FinishReason: reason})
+internal/agent/guards_test.go:97:func (f fakeTool) Schema() json.RawMessage { return json.RawMessage(`{"type":"object"}`) }
+internal/agent/coordinator_test.go:41:// TestCoordinatorHandsPlanToExecutor checks the two-session handoff: the planner
+internal/agent/coordinator_test.go:42:// sees the raw task in its own session, and the executor receives the plan.
+internal/agent/coordinator_test.go:67:	// planner session must accumulate (system, user, assistant-plan) so its
+internal/agent/coordinator_test.go:68:	// prefix grows prepend-only and stays cache-stable.
+internal/agent/coordinator_test.go:70:		t.Errorf("planner session has %d messages, want 3", n)
+internal/skill/builtins.go:37:- Combine code reading (read_file, grep, glob) with web_fetch as appropriate. (There is no dedicated web-search tool — fetch the canonical doc/spec URL directly when you know it.)
+internal/skill/builtins.go:38:- For "how does X work" / "is Y supported" questions: fetch the canonical reference, then verify against the local code.
+internal/skill/builtins.go:128:const builtinInitBody = `This skill is INLINED — you run in the parent loop. The user invoked /init: bootstrap (or refresh) this project's AGENTS.md — the durable memory file folded into every future session. Analyze the codebase, then write a concise, high-signal AGENTS.md.
+internal/skill/builtins.go:144:4. Keep it tight — it loads into every session's prompt, so every line costs context. Prefer specifics (file paths, command names) over prose. Never include secrets.
+internal/skill/builtins.go:157:			Description: "Bootstrap or refresh this project's AGENTS.md — analyze the codebase (structure, build/test commands, architecture, conventions) and write a concise memory file loaded into every future session. Inlined — runs in the main loop so you see and approve the write.",
+internal/skill/builtins.go:173:			Description: "Research a question by combining web_fetch + code reading in an isolated subagent. Best for: 'is X supported by lib Y', 'what's the canonical way to do Z', 'compare our impl against the spec'.",
+internal/skill/index.go:9:// cache-stable system-prompt prefix; bodies never enter the prefix.
+internal/agent/cachehit_e2e_test.go:22:// growing the request prefix the way a real multi-turn session does.
+internal/agent/cachehit_e2e_test.go:27:func (echoTool) Schema() json.RawMessage {
+internal/agent/cachehit_e2e_test.go:39:// collectSink captures the per-turn Usage events plus any compaction notices the
+internal/agent/cachehit_e2e_test.go:42:	usages  []*provider.Usage
+internal/agent/cachehit_e2e_test.go:48:	case event.Usage:
+internal/agent/cachehit_e2e_test.go:49:		if e.Usage != nil {
+internal/agent/cachehit_e2e_test.go:50:			s.usages = append(s.usages, e.Usage)
+internal/agent/cachehit_e2e_test.go:57:// --- a mock DeepSeek endpoint that derives cache-hit tokens from the byte-
+internal/agent/cachehit_e2e_test.go:66:	hitChars     []int             // cached prefix chars per conversation request
+internal/agent/cachehit_e2e_test.go:75:	// Compaction issues a tool-less summarize request whose system prompt is the
+internal/agent/cachehit_e2e_test.go:78:	if isSummarizeRequest(body) {
+internal/agent/cachehit_e2e_test.go:128:func hitRate(u *provider.Usage) int {
+internal/agent/cachehit_e2e_test.go:129:	denom := u.CacheHitTokens + u.CacheMissTokens
+internal/agent/cachehit_e2e_test.go:136:	return u.CacheHitTokens * 100 / denom
+internal/agent/cachehit_e2e_test.go:140:	"This system prompt is the cacheable head of every request and must never change between turns."
+internal/agent/cachehit_e2e_test.go:148:// TestCacheHitPrefixStable proves the standard path keeps a byte-stable prefix:
+internal/agent/cachehit_e2e_test.go:150:// hit% equals hit/prompt%. This rules out "something is breaking the cache" and
+internal/agent/cachehit_e2e_test.go:152:func TestCacheHitPrefixStable(t *testing.T) {
+internal/agent/cachehit_e2e_test.go:153:	mock := &mockDeepSeek{t: t, withTools: true, reasoning: longReasoning, toolRounds: 2}
+internal/agent/cachehit_e2e_test.go:165:		// On request i the cached prefix should be the ENTIRE request i-1.
+internal/agent/cachehit_e2e_test.go:167:			t.Errorf("PREFIX BROKEN at req %d: cached %d chars but the full prior request was %d chars",
+internal/agent/cachehit_e2e_test.go:171:	t.Logf("prefix STABLE across %d requests — nothing in the client breaks the cache", len(mock.reqChars))
+internal/agent/cachehit_e2e_test.go:177:			want = 100 * u.CacheHitTokens / u.PromptTokens
+internal/agent/cachehit_e2e_test.go:179:		t.Logf("turn %d: prompt=%d hit=%d miss=%d → 'cache %d%%' (hit/prompt=%d%%) | %s",
+internal/agent/cachehit_e2e_test.go:180:			i, u.PromptTokens, u.CacheHitTokens, u.CacheMissTokens, hitRate(u), want,
+internal/agent/cachehit_e2e_test.go:181:			strings.TrimSpace(FormatUsageLine(u, nil)))
+internal/agent/cachehit_e2e_test.go:182:		if u.CacheHitTokens+u.CacheMissTokens != u.PromptTokens {
+internal/agent/cachehit_e2e_test.go:184:				u.CacheHitTokens+u.CacheMissTokens, u.PromptTokens)
+internal/agent/cachehit_e2e_test.go:189:// TestCacheHitClimbsWithoutCompaction runs a long multi-turn conversation with
+internal/agent/cachehit_e2e_test.go:192:func TestCacheHitClimbsWithoutCompaction(t *testing.T) {
+internal/agent/cachehit_e2e_test.go:214:		t.Logf("turn %2d: prompt=%5d hit=%5d miss=%4d → cache %d%%", i, u.PromptTokens, u.CacheHitTokens, u.CacheMissTokens, r)
+internal/agent/cachehit_e2e_test.go:223:// TestCacheHitCollapsesOnCompaction is the smoking gun: a long tool-loop with
+internal/agent/cachehit_e2e_test.go:224:// compaction enabled. maybeCompact only runs after a tool-call step (agent.go
+internal/agent/cachehit_e2e_test.go:228:func TestCacheHitCollapsesOnCompaction(t *testing.T) {
+internal/agent/cachehit_e2e_test.go:229:	mock := &mockDeepSeek{t: t, withTools: true, reasoning: longReasoning, toolRounds: 30}
+internal/agent/cachehit_e2e_test.go:235:	// session in.
+internal/agent/cachehit_e2e_test.go:252:		t.Logf("step %2d: prompt=%5d hit=%5d miss=%4d → cache %3d%%%s", i, u.PromptTokens, u.CacheHitTokens, u.CacheMissTokens, r, marker)
+internal/agent/cachehit_e2e_test.go:266:// counts it as uncached prompt — drags the hit rate down at each turn.
+internal/agent/cachehit_e2e_test.go:306:// TestSessionAggregateCacheRate verifies the session-aggregate hit-rate the
+internal/agent/cachehit_e2e_test.go:326:		sumHit += u.CacheHitTokens
+internal/agent/cachehit_e2e_test.go:336:	single := 100 * last.CacheHitTokens / last.PromptTokens
+internal/agent/cachehit_e2e_test.go:337:	t.Logf("after %d turns: aggregate(session) = %d%%  vs  single(last turn) = %d%%", turns, agg, single)
+internal/agent/cachehit_e2e_test.go:375:func isSummarizeRequest(body []byte) bool {
+internal/agent/cachehit_e2e_test.go:429:	Usage   *sseUsage   `json:"usage,omitempty"`
+internal/agent/cachehit_e2e_test.go:432:type sseUsage struct {
+internal/agent/cachehit_e2e_test.go:436:	PromptCacheHitTokens  int `json:"prompt_cache_hit_tokens"`
+internal/agent/cachehit_e2e_test.go:437:	PromptCacheMissTokens int `json:"prompt_cache_miss_tokens"`
+internal/agent/cachehit_e2e_test.go:454:	return sseResp{Usage: &sseUsage{
+internal/agent/cachehit_e2e_test.go:458:		PromptCacheHitTokens:  hit,
+internal/skill/skill.go:6:// enter the cache-stable system-prompt index (see index.go) — bodies load on
+internal/skill/skill.go:48:	// SkillFile is the canonical filename inside a directory-layout skill.
+internal/skill/skill.go:54:	Name        string // canonical identifier; matches the directory / filename stem
+internal/skill/skill.go:195:// stays stable and cacheable.
+internal/skill/skill.go:321:		AllowedTools: parseAllowedTools(fm["allowed-tools"]),
+internal/agent/ask.go:30:func (*AskTool) Schema() json.RawMessage {
+internal/skill/tools.go:17:// means subagent skills are unavailable in this session (they error rather than
+internal/skill/tools.go:49:func (*runSkillTool) Schema() json.RawMessage {
+internal/skill/tools.go:80:			return "", fmt.Errorf("run_skill: skill %q is runAs=subagent but no subagent runner is configured in this session", name)
+internal/skill/tools.go:105:func (t *subagentSkillTool) Schema() json.RawMessage {
+internal/skill/tools.go:131:		return "", fmt.Errorf("%s: no subagent runner is configured in this session", t.toolName)
+internal/skill/tools.go:197:func (*installSkillTool) Schema() json.RawMessage {
+
+[Showing lines 701-1229 of 1229 (50.0KB limit). Full output: /var/folders/7m/csfvhz791k527kby7nxl7cbc0000h_/T/pi-bash-066df4410d8761ec.log]

@@ -1,0 +1,200 @@
+.pi/agents/trellis-implement.md:43:- Only the main session may dispatch Trellis implement/check agents. If more parallel work is needed, report that recommendation instead of spawning.
+.pi/agents/trellis-check.md:43:- Only the main session may dispatch Trellis implement/check agents. If more implementation work is needed, report that recommendation instead of spawning.
+.pi/extensions/trellis/index.ts:52:  // Parsed for pi-subagents-compatible agent files; Pi CLI has no documented fallback-model flag to pass through here.
+.pi/extensions/trellis/index.ts:276:// Nested agents can emit unbounded output; keep the tail so diagnostics survive without growing memory indefinitely.
+.pi/extensions/trellis/index.ts:784:// Sub-agent dispatch protocol snippet (registered with the `subagent` tool).
+.pi/extensions/trellis/index.ts:804:  const raw = readText(join(projectRoot, ".pi", "agents", `${normalized}.md`));
+.pi/extensions/trellis/index.ts:854:      reject(new Error("pi subagent cancelled"));
+.pi/extensions/trellis/index.ts:920:        fail(new Error("pi subagent cancelled"));
+.pi/extensions/trellis/index.ts:1039:  registerTool?: (tool: JsonObject) => void;
+.pi/extensions/trellis/index.ts:1072:  pi.registerTool?.({
+.pi/extensions/trellis/index.ts:1073:    name: "subagent",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-control.ts:171:			"Next: read the output artifact or session from the subagent result, then retry with a more explicit implementation prompt or handle the fix directly.",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-control.ts:190:			`Status: subagent({ action: "status", id: "${runTarget}" })`,
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-control.ts:191:			`Interrupt: subagent({ action: "interrupt", id: "${runTarget}" })`,
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-control.ts:204:		`Status: subagent({ action: "status", id: "${runTarget}" })`,
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-control.ts:205:		`Interrupt: subagent({ action: "interrupt", id: "${runTarget}" })`,
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-control.ts:211:		? "subagent failed"
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-control.ts:213:			? "subagent active but long-running"
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-control.ts:214:			: "subagent needs attention";
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/acceptance-finalization.ts:32:		"You are continuing the same subagent session. Before this run can be accepted, compare the current work to the acceptance contract and the evidence below.",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/pi-args.ts:12:const PROMPT_RUNTIME_EXTENSION_PATH = path.join(path.dirname(fileURLToPath(import.meta.url)), "subagent-prompt-runtime.ts");
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/pi-args.ts:101:	const fanoutAuthorized = declaredBuiltinTools.includes("subagent");
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/pi-args.ts:138:		tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "pi-subagent-"));
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/pi-args.ts:147:			tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "pi-subagent-"));
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-events.ts:30:export const NESTED_EVENTS_DIR = path.join(TEMP_ROOT_DIR, "nested-subagent-events");
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-events.ts:38:type NestedStatusEventType = "subagent.nested.started" | "subagent.nested.updated" | "subagent.nested.completed";
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-events.ts:39:type NestedControlResultEventType = "subagent.nested.control-result";
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-events.ts:65:	type: "subagent.nested.control-request";
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-events.ts:107:	if (!containedPath(NESTED_EVENTS_DIR, route.eventSink)) throw new Error("Nested event sink is outside the subagent nested event root.");
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-events.ts:108:	if (!containedPath(NESTED_EVENTS_DIR, route.controlInbox)) throw new Error("Nested control inbox is outside the subagent nested event root.");
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-events.ts:144:		console.error("Ignoring invalid nested subagent event route:", error);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-events.ts:163:	const nestedRoot = path.resolve(TEMP_ROOT_DIR, "nested-subagent-runs", rootRunId, run.id);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-events.ts:248:		...(Array.isArray(raw.agents) ? { agents: raw.agents.map((agent) => stringValue(agent, 128)).filter((agent): agent is string => Boolean(agent)).slice(0, MAX_STEPS) } : {}),
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-events.ts:278:	if (raw.type !== "subagent.nested.started" && raw.type !== "subagent.nested.updated" && raw.type !== "subagent.nested.completed") return undefined;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-events.ts:318:	const incomingState = event.type === "subagent.nested.completed" && event.child.state === "running" ? "complete" : event.child.state;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-events.ts:585:	if (raw.type !== "subagent.nested.control-request") return undefined;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-events.ts:592:		type: "subagent.nested.control-request",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-events.ts:613:	if (raw.type !== "subagent.nested.control-result") return undefined;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-events.ts:619:		type: "subagent.nested.control-result",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-events.ts:635:		type: "subagent.nested.control-request",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-events.ts:674:		type: "subagent.nested.control-result",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-events.ts:812:	return containedPath(ASYNC_DIR, resolved) && !containedPath(path.join(TEMP_ROOT_DIR, "nested-subagent-runs"), resolved);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/structured-output.ts:31:	const dir = fs.mkdtempSync(path.join(rootDir, "pi-subagent-structured-"));
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:2: * Rendering functions for subagent results
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:124:	state: { subagentResultAnimationTimer?: ReturnType<typeof setInterval> };
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:128:	const timer = context.state.subagentResultAnimationTimer;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:131:	context.state.subagentResultAnimationTimer = undefined;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:270:		agents: job.agents,
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:286:function formatWidgetAgents(agents: string[]): string {
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:287:	const distinct = [...new Set(agents)];
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:288:	if (distinct.length === 1 && agents.length > 1) return `${distinct[0]} ×${agents.length}`;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:289:	if (agents.length > 3) return `${agents.slice(0, 2).join(", ")} +${agents.length - 2} more`;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:290:	return agents.join(", ");
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:296:	if (job.mode === "single" && job.agents?.length === 1) return job.agents[0]!;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:297:	if (job.agents?.length) return formatWidgetAgents(job.agents);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:298:	return job.mode ?? "subagent";
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:682:	const stepsTotal = job.stepsTotal ?? (job.agents?.length ?? 1);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:745:	if (run.agents?.length) return formatWidgetAgents(run.agents);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:882:	const count = job.mode === "chain" ? job.chainStepCount : job.stepsTotal ?? job.agents?.length ?? job.steps?.length;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:884:	const title = `async subagent ${mode}${count && count > 1 ? ` (${count})` : ""}`;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:950:	lines.push(truncLine(`${theme.fg(hasActive ? "accent" : "dim", headerGlyph)} ${theme.fg(hasActive ? "accent" : "dim", "Async agents")} ${theme.fg("dim", "· background")}`, width));
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:1151: * Render a subagent result
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:2: * Async execution logic for subagent tool
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:12:import type { AgentConfig } from "../../agents/agents.ts";
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:18:import { buildSkillInjection, normalizeSkillInput, resolveSkillsWithFallback } from "../../agents/skills.ts";
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:104:	agents: AgentConfig[];
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:165:		"Use subagent({ action: \"status\", id: \"...\" }) when you need the current status/result, or to inspect a blocked/stale run. Do not poll just to wait.",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:196:	const runner = path.join(path.dirname(fileURLToPath(import.meta.url)), "subagent-runner.ts");
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:205:		console.error(`[pi-subagents] async spawn failed: ${error.message}`);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:222:const UNAVAILABLE_SUBAGENT_SKILL_ERROR = "Skills not found: pi-subagents";
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:236:		agents,
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:280:			if (!agents.find((x) => x.name === agentName)) {
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:293:		? path.join(TEMP_ROOT_DIR, "nested-subagent-runs", inheritedNestedRoute.rootRunId, id)
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:319:		const a = agents.find((x) => x.name === s.agent)!;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:325:		if (missingSkills.includes("pi-subagents")) throw new UnavailableSubagentSkillError(UNAVAILABLE_SUBAGENT_SKILL_ERROR);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:398:					const agent = agents.find((candidate) => candidate.name === task.agent)!;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:424:				const agent = agents.find((candidate) => candidate.name === s.parallel.agent)!;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:534:					type: "subagent.nested.started",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:553:						agents: flatAgents,
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:570:			agents: flatAgents,
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:631:	if (missingSkills.includes("pi-subagents")) return formatAsyncStartError("single", UNAVAILABLE_SUBAGENT_SKILL_ERROR);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:641:		? path.join(TEMP_ROOT_DIR, "nested-subagent-runs", inheritedNestedRoute.rootRunId, id)
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:744:					type: "subagent.nested.started",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/async-execution.ts:763:						agents: [agent],
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-prompt-runtime.ts:13:	"This subagent step has a strict structured output contract.",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-prompt-runtime.ts:19:	"You are a child subagent, not the parent orchestrator.",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-prompt-runtime.ts:22:	"Do not propose or run subagents. Complete only your assigned role-specific task with the tools available to you.",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-prompt-runtime.ts:27:	"You are a child subagent with explicit fanout responsibility for this assigned task.",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-prompt-runtime.ts:29:	"You may use the `subagent` tool only for the fanout work explicitly requested in this task.",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-prompt-runtime.ts:36:	"subagent-orchestration-instructions",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-prompt-runtime.ts:37:	"subagent-slash-result",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-prompt-runtime.ts:38:	"subagent-notify",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-prompt-runtime.ts:39:	"subagent_control_notice",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-prompt-runtime.ts:40:	"subagent-control",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-prompt-runtime.ts:41:	"subagent-control-notice",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-prompt-runtime.ts:43:const SUBAGENT_ORCHESTRATION_SKILL_NAME_PATTERN = /<name>\s*pi-subagents\s*<\/name>/;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-prompt-runtime.ts:81:		.replace(/\n{0,2}<skill\s+name=["']pi-subagents["'][^>]*>[\s\S]*?<\/skill>\n{0,2}/g, "\n\n")
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-prompt-runtime.ts:120:	return m?.role === "toolResult" && m.toolName === "subagent";
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-prompt-runtime.ts:125:	return b?.type === "toolCall" && b.name === "subagent";
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-prompt-runtime.ts:167:		const registerTool = pi.registerTool as unknown as (tool: {
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-prompt-runtime.ts:174:		registerTool({
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/subagent-prompt-runtime.ts:177:			description: "Submit the required final structured output for this subagent step. This terminates the step.",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/worktree.ts:44:	agents?: string[];
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/worktree.ts:506:				options?.agents?.[index],
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/worktree.ts:525:export function diffWorktrees(setup: WorktreeSetup, agents: string[], diffsDir: string): WorktreeDiff[] {
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/worktree.ts:536:		const agent = agents[index] ?? `task-${index + 1}`;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-render.ts:45:	if (run.agents?.length) return run.agents.length === 1 ? run.agents[0]! : `${run.agents.slice(0, 2).join(", ")}${run.agents.length > 2 ? ` +${run.agents.length - 2}` : ""}`;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/shared/nested-render.ts:89:			if (options.commandHints && lines.length < options.maxLines) lines.push(`${indent}  Status: subagent({ action: "status", id: "${child.id}" })`);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:2: * Chain execution logic for subagent tool
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:9:import type { AgentConfig } from "../../agents/agents.ts";
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:33:import { discoverAvailableSkills, normalizeSkillInput } from "../../agents/skills.ts";
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:91:	agents: AgentConfig[];
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:187:	agents: string[],
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:190:	const diffs = diffWorktrees(worktreeSetup, agents, diffsDir);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:233:			const taskAgentConfig = input.agents.find((agent) => agent.name === task.agent);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:264:			const result = await runSync(input.ctx.cwd, input.agents, task.agent, taskStr, {
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:355:	agents: AgentConfig[];
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:408: * Execute a chain of subagent steps
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:413:		agents,
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:501:			const config = agents.find((a) => a.name === step.agent);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:605:						agents: step.parallel.map((task) => task.agent),
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:618:				const parallelBehaviors = resolveParallelBehaviors(step.parallel, agents, stepIndex, chainSkills)
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:635:					agents,
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:801:			const parallelBehaviors = resolveParallelBehaviors(dynamicParallelStep.parallel, agents, stepIndex, chainSkills)
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:822:				agents,
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:934:			const agentConfig = agents.find((a) => a.name === seqStep.agent);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/foreground/chain-execution.ts:1008:			const r = await runSync(ctx.cwd, agents, seqStep.agent, stepTask, {
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/extension/config.ts:7:	const configPath = path.join(getAgentDir(), "extensions", "subagent", "config.json");
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/extension/config.ts:13:		console.error(`Failed to load subagent config from '${configPath}':`, error);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/package.json:2:  "name": "pi-subagents",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/package.json:4:  "description": "Pi extension for delegating tasks to subagents with chains, parallel execution, and TUI clarification",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/package.json:10:    "url": "git+https://github.com/nicobailon/pi-subagents.git"
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/package.json:12:  "homepage": "https://github.com/nicobailon/pi-subagents#readme",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/package.json:14:    "url": "https://github.com/nicobailon/pi-subagents/issues"
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/package.json:20:    "subagents",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/package.json:22:    "agents",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/package.json:26:    "pi-subagents": "install.mjs"
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/package.json:31:    "agents/",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/run-status.ts:43:		return `Revive: subagent({ action: "resume", id: "${runId}", message: "..." })`;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/run-status.ts:47:		return `Revive child: subagent({ action: "resume", id: "${runId}", index: ${childWithSession.index}, message: "..." })`;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/run-status.ts:72:	if (run.agents?.length) return run.agents.join(", ");
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/run-status.ts:102:	lines.push("Commands:", `  Status: subagent({ action: "status", id: "${run.id}" })`, `  Interrupt: subagent({ action: "interrupt", id: "${run.id}" })`, `  Resume: subagent({ action: "resume", id: "${run.id}", message: "..." })`, `  Root status: subagent({ action: "status", id: "${rootRunId}" })`);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/run-status.ts:112:				content: [{ type: "text", text: "Child-safe subagent status requires an id when no foreground run is active." }],
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/runs/background/run-status.ts:181:		const logPath = path.join(asyncDir, `subagent-log-${effectiveRunId}.md`);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/agents/context-builder.md:12:You are a requirements-to-context subagent.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/agents/context-builder.md:14:Analyze the user request against the codebase, gather the relevant high-value context, and produce structured handoff material for planning and subagent prompts. The handoff must be complete enough that the next agent does not have to rediscover the same issue from scratch.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/agents/context-builder.md:43:The goal is to hand the planner or another role subagent exactly enough code and requirement context to act without rediscovering the same ground. Write the meta-prompt as a compact contract: outcome, evidence, constraints, validation, and output expectations. Avoid long procedural scripts unless each step is a real requirement.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/extension/doctor.ts:3:import { discoverAgentsAll, type AgentSource } from "../agents/agents.ts";
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/extension/doctor.ts:6:import { discoverAvailableSkills, type SkillSource } from "../agents/skills.ts";
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/extension/doctor.ts:131:		lineFromCheck("agents/chains", () => {
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/extension/doctor.ts:143:				`- agents: total ${agentCounts.builtin + agentCounts.user + agentCounts.project} (${formatSourceCounts(agentCounts)})`,
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/extension/doctor.ts:174:		"Subagents doctor report",
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:2:  <img src="https://raw.githubusercontent.com/nicobailon/pi-subagents/main/banner.png" alt="pi-subagents" width="1100">
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:5:# pi-subagents
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:7:`pi-subagents` lets Pi delegate work to focused child agents. Use it for code review, scouting, implementation, parallel audits, saved workflows, background jobs, and anything else that benefits from a second or third set of model eyes.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:14:pi install npm:pi-subagents
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:21:You do not need to create agents, write config, or learn slash commands. After installing, ask Pi for delegation in plain language:
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:43:Pi is the parent session. A subagent is a focused child Pi session with its own job.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:45:When you ask for a subagent, Pi starts the child, gives it the task, and brings the result back. Foreground runs stream in the conversation. Background runs keep working and can be checked later.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:50:When you finish implementing, run a reviewer subagent before summarizing.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:81:Those are ordinary Pi requests. Pi decides whether to call `subagent`, which agent to use, and whether a chain or parallel run makes sense.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:96:| Browse agents | “Show me the available subagents.” |
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:99:| Check setup | “Check whether subagents are configured correctly.” |
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:101:The extension ships with builtin agents you can use immediately.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:103:## Builtin agents in plain English
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:120:Builtin agents inherit your current Pi default model by default. This keeps new installs from depending on a provider you may not have configured. If you want a role to use a specific model, set an override instead of copying the bundled agent file.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:132:  "subagents": {
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:146:## Where running subagents show up
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:150:Background runs keep working after control returns to you. Inspect active runs with `subagent({ action: "status" })`, or a specific run with `subagent({ action: "status", id: "..." })`.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:152:They also show a compact async widget and send completion notifications. Parallel background runs show per-agent progress instead of fake chain steps. Chains with parallel groups keep their grouped shape in progress and results, so failed or paused agents stay visible next to completed ones. When a child is explicitly allowed to fan out with `tools: subagent`, its nested runs appear under that parent child in the main status tree instead of being hidden inside the child process.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:163:/subagents-doctor
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:169:Check whether subagents and intercom are set up correctly.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:184:Child-safety boundaries are enforced at runtime. Spawned child sessions do not receive the bundled `pi-subagents` skill, and forked child context filtering removes parent-only subagent artifacts (including old hidden orchestration-instruction messages, slash/status/control messages, and prior parent `subagent` tool-call/tool-result history) while preserving ordinary prose and unrelated tool calls/results. By default, children do not register the `subagent` tool and receive boundary instructions that they are not the parent orchestrator and must not propose or run subagents. The explicit exception is an agent whose resolved builtin `tools` includes `subagent`; that child gets a child-safe `subagent` tool for the fanout work the parent assigned, still bounded by `maxSubagentDepth`.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:195:| `/parallel-context-build` | Run `context-builder` agents in parallel to produce planning handoff context and meta-prompts. |
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:204:`pi-subagents` works without `pi-intercom`. Install `pi-intercom` only if you want child agents to talk back to the parent Pi session while they are running.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:210:Most users do not call `intercom` directly. After `pi-intercom` is installed, `pi-subagents` can automatically give child agents a private coordination channel back to the parent session. The bridge recognizes the normal `pi install npm:pi-intercom` package install as well as legacy local extension checkouts.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:226:Child-side routine completion handoffs are still not expected. With the intercom bridge active, parent-side `pi-subagents` sends grouped completion results through `pi-intercom`: one grouped message per foreground parent `subagent` run and one per completed async result file. Acknowledged foreground delivery returns a compact receipt with artifact/session paths; if unacknowledged, the normal full output is preserved. Grouped messages include child intercom targets, full child summaries, and compact nested child summaries under the parent child that launched them.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:228:If a child appears stalled, needs-attention notices can show up in the parent session with useful next actions, such as checking `subagent({ action: "status" })`, interrupting the run, or nudging the child.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:233:/subagents-doctor
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:238:At this point, you know enough to use the plugin. The rest of this README is reference material for exact command syntax, custom agents, saved chains, worktrees, and configuration.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:246:| `/run <agent> [task]` | Run one agent; omit the task for self-contained agents |
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:247:| `/chain agent1 "task1" -> agent2 "task2"` | Run agents in sequence |
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:248:| `/parallel agent1 "task1" -> agent2 "task2"` | Run agents in parallel |
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:250:| `/subagents-doctor` | Show read-only setup diagnostics |
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:276:For a shared task, list agents and place one `--` before the task:
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:360:| Builtin | `~/.pi/agent/extensions/subagent/agents/` |
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:361:| User | `~/.pi/agent/agents/**/*.md` |
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:362:| Project | `.pi/agents/**/*.md` |
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:364:Project discovery also reads legacy `.agents/**/*.md` files. Nested subdirectories are discovered recursively. `.chain.md` files do not define agents. If both `.agents/` and `.pi/agents/` define the same parsed runtime agent name, `.pi/agents/` wins. Use `agentScope: "user" | "project" | "both"` to control discovery; `both` is the default and project definitions win runtime-name collisions.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:366:Builtin agents load at the lowest priority, so a user or project agent with the same name overrides them. They do not pin a provider model; they inherit your current Pi default model unless you set `subagents.agentOverrides.<name>.model`. `oracle` is an advisory reviewer that critiques direction and proposes an execution prompt without editing files. `worker` is the implementation agent for normal tasks and approved oracle handoffs.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:385:  "subagents": {
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:397:Set `disabled: true` to hide a builtin from runtime discovery and agent-facing `subagent({ action: "list" })` output. For bulk control, set `subagents.disableBuiltins: true` in settings.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:401:Subagents are designed to be narrow by default. Custom agents start with a clean system prompt and only the context you intentionally give them. They do not automatically inherit Pi’s whole base prompt, project instruction files, or discovered skills catalog.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:412:Builtin agents opt into project instruction inheritance by default so they follow repo-specific rules out of the box. `delegate` also uses append mode because its job is orchestration inside the parent workflow.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:462:| `completionGuard` | Set `false` only for non-implementation agents that may mention implementation words while using mutation-capable tools such as `bash`. |
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:468:If `tools` is omitted, `pi-subagents` does not pass `--tools`, so the child gets Pi’s normal builtin tools. If `tools` is present, regular tool names become an explicit allowlist. `mcp:` entries are split out and forwarded as direct MCP selections. Path-like `tools` entries, such as extension paths or `.ts`/`.js` files, are treated as tool-extension paths rather than builtin tool names. Agents that declare only known read-only builtin tools skip the implementation completion guard, but `bash`, unknown tools, and MCP tools stay mutation-capable. Use `completionGuard: false` for bash-enabled validators or advisors that should never be judged as implementation agents.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:475:- `tools: subagent, read`: a child-safe `subagent` tool is available inside that child so it can run explicitly assigned nested fanout.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:477:Direct MCP tools require [pi-mcp-adapter](https://github.com/nicobailon/pi-mcp-adapter). Subagents only receive direct MCP tools when `mcp:` entries are listed in their frontmatter; global `directTools: true` in `mcp.json` is not enough by itself. The generic `mcp` proxy tool can still be used for discovery when available. The adapter caches tool metadata at startup, so after connecting a new MCP server for the first time, restart Pi before relying on direct tools. An `mcp:` entry named `subagent` does not authorize nested fanout; only the builtin `subagent` tool name does.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:502:Nested subdirectories are discovered recursively. If both `.chain.md` and `.chain.json` define the same parsed runtime chain name in the same scope, `.chain.json` wins. If user and project scopes define the same parsed runtime chain name, the project chain wins. Chains support the same optional `package` frontmatter as agents; `name: review-flow` plus `package: code-analysis` runs as `code-analysis.review-flow`.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/README.md:536:Dynamic fanout is available only through direct `subagent({ chain: [...] })` JSON or saved `.chain.json` files. It expands an array from a prior structured named output, runs one child template per item, and stores the ordered collection under `collect.as`. The source must be structured output; prose is never parsed. `expand.maxItems` is required, over-limit arrays fail, nested fanout and arbitrary expressions are not supported, and `.chain.md` has no dynamic syntax in this release.

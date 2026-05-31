@@ -1,0 +1,107 @@
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/models.md:344:        "supportsLongCacheRetention": true,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/models.md:363:| `supportsLongCacheRetention` | Whether the provider accepts Anthropic long cache retention (`cache_control.ttl: "1h"`) when cache retention is `long`. Default: `true`. |
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/models.md:365:| `supportsCacheControlOnTools` | Whether the provider accepts Anthropic-style `cache_control` markers on tool definitions. Default: `true`. |
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/models.md:406:| `supportsLongCacheRetention` | Whether the provider accepts long cache retention when cache retention is `long`: `prompt_cache_retention: "24h"` for OpenAI prompt caching, or `cache_control.ttl: "1h"` when `cacheControlFormat` is `anthropic`. Default: `true`. |
+packages/coding-agent/src/core/model-registry.ts:120:	supportsLongCacheRetention: Type.Optional(Type.Boolean()),
+packages/coding-agent/src/core/model-registry.ts:125:	supportsLongCacheRetention: Type.Optional(Type.Boolean()),
+packages/coding-agent/src/core/model-registry.ts:130:	supportsLongCacheRetention: Type.Optional(Type.Boolean()),
+packages/coding-agent/src/core/model-registry.ts:132:	supportsCacheControlOnTools: Type.Optional(Type.Boolean()),
+packages/ai/src/providers/amazon-bedrock.ts:185:			const cacheRetention = resolveCacheRetention(options.cacheRetention);
+packages/ai/src/providers/amazon-bedrock.ts:189:				messages: convertMessages(context, model, cacheRetention),
+packages/ai/src/providers/amazon-bedrock.ts:190:				system: buildSystemPrompt(context.systemPrompt, model, cacheRetention),
+packages/ai/src/providers/amazon-bedrock.ts:518: * Defaults to "short" and uses PI_CACHE_RETENTION for backward compatibility.
+packages/ai/src/providers/amazon-bedrock.ts:520:function resolveCacheRetention(cacheRetention?: CacheRetention): CacheRetention {
+packages/ai/src/providers/amazon-bedrock.ts:521:	if (cacheRetention) {
+packages/ai/src/providers/amazon-bedrock.ts:522:		return cacheRetention;
+packages/ai/src/providers/amazon-bedrock.ts:524:	if (typeof process !== "undefined" && process.env.PI_CACHE_RETENTION === "long") {
+packages/ai/src/providers/amazon-bedrock.ts:593:	cacheRetention: CacheRetention,
+packages/ai/src/providers/amazon-bedrock.ts:600:	if (cacheRetention !== "none" && supportsPromptCaching(model)) {
+packages/ai/src/providers/amazon-bedrock.ts:602:			cachePoint: { type: CachePointType.DEFAULT, ...(cacheRetention === "long" ? { ttl: CacheTTL.ONE_HOUR } : {}) },
+packages/ai/src/providers/amazon-bedrock.ts:617:	cacheRetention: CacheRetention,
+packages/ai/src/providers/amazon-bedrock.ts:765:	if (cacheRetention !== "none" && supportsPromptCaching(model) && result.length > 0) {
+packages/ai/src/providers/amazon-bedrock.ts:771:					...(cacheRetention === "long" ? { ttl: CacheTTL.ONE_HOUR } : {}),
+packages/ai/src/providers/openai-codex-responses.ts:95:	prompt_cache_key?: string;
+packages/ai/src/providers/openai-codex-responses.ts:382:		prompt_cache_key: clampOpenAIPromptCacheKey(options?.sessionId),
+packages/ai/src/providers/anthropic.ts:42: * Defaults to "short" and uses PI_CACHE_RETENTION for backward compatibility.
+packages/ai/src/providers/anthropic.ts:44:function resolveCacheRetention(cacheRetention?: CacheRetention): CacheRetention {
+packages/ai/src/providers/anthropic.ts:45:	if (cacheRetention) {
+packages/ai/src/providers/anthropic.ts:46:		return cacheRetention;
+packages/ai/src/providers/anthropic.ts:48:	if (typeof process !== "undefined" && process.env.PI_CACHE_RETENTION === "long") {
+packages/ai/src/providers/anthropic.ts:56:	cacheRetention?: CacheRetention,
+packages/ai/src/providers/anthropic.ts:58:	const retention = resolveCacheRetention(cacheRetention);
+packages/ai/src/providers/anthropic.ts:62:	const ttl = retention === "long" && getAnthropicCompat(model).supportsLongCacheRetention ? "1h" : undefined;
+packages/ai/src/providers/anthropic.ts:176:		supportsLongCacheRetention: model.compat?.supportsLongCacheRetention ?? !isFireworks,
+packages/ai/src/providers/anthropic.ts:179:		supportsCacheControlOnTools: model.compat?.supportsCacheControlOnTools ?? !isFireworks,
+packages/ai/src/providers/anthropic.ts:492:				const cacheRetention = options?.cacheRetention ?? resolveCacheRetention();
+packages/ai/src/providers/anthropic.ts:493:				const cacheSessionId = cacheRetention === "none" ? undefined : options?.sessionId;
+packages/ai/src/providers/anthropic.ts:895:	const { cacheControl } = getCacheControl(model, options?.cacheRetention);
+packages/ai/src/providers/anthropic.ts:941:			compat.supportsCacheControlOnTools ? cacheControl : undefined,
+packages/ai/src/providers/azure-openai-responses.ts:265:		prompt_cache_key: clampOpenAIPromptCacheKey(options?.sessionId),
+packages/ai/src/models.generated.ts:3662:			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:3680:			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:3698:			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:3716:			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:3734:			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:3752:			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:3770:			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:3788:			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:3806:			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:3824:			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:3842:			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:3860:			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:12681:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:12700:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:12719:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12738:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:12756:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12775:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12794:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12813:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12832:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12851:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12870:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":true,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12889:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:12907:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12926:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:12944:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12963:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12982:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":true,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"openai"},
+packages/ai/src/models.generated.ts:13001:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/providers/openai-completions.ts:102:function resolveCacheRetention(cacheRetention?: CacheRetention): CacheRetention {
+packages/ai/src/providers/openai-completions.ts:103:	if (cacheRetention) {
+packages/ai/src/providers/openai-completions.ts:104:		return cacheRetention;
+packages/ai/src/providers/openai-completions.ts:106:	if (typeof process !== "undefined" && process.env.PI_CACHE_RETENTION === "long") {
+packages/ai/src/providers/openai-completions.ts:141:			const cacheRetention = resolveCacheRetention(options?.cacheRetention);
+packages/ai/src/providers/openai-completions.ts:142:			const cacheSessionId = cacheRetention === "none" ? undefined : options?.sessionId;
+packages/ai/src/providers/openai-completions.ts:144:			let params = buildParams(model, context, options, compat, cacheRetention);
+packages/ai/src/providers/openai-completions.ts:508:	cacheRetention: CacheRetention = resolveCacheRetention(options?.cacheRetention),
+packages/ai/src/providers/openai-completions.ts:511:	const cacheControl = getCompatCacheControl(compat, cacheRetention);
+packages/ai/src/providers/openai-completions.ts:517:		prompt_cache_key:
+packages/ai/src/providers/openai-completions.ts:518:			(model.baseUrl.includes("api.openai.com") && cacheRetention !== "none") ||
+packages/ai/src/providers/openai-completions.ts:519:			(cacheRetention === "long" && compat.supportsLongCacheRetention)
+packages/ai/src/providers/openai-completions.ts:522:		prompt_cache_retention: cacheRetention === "long" && compat.supportsLongCacheRetention ? "24h" : undefined,
+packages/ai/src/providers/openai-completions.ts:628:	cacheRetention: CacheRetention,
+packages/ai/src/providers/openai-completions.ts:630:	if (compat.cacheControlFormat !== "anthropic" || cacheRetention === "none") {
+packages/ai/src/providers/openai-completions.ts:634:	const ttl = cacheRetention === "long" && compat.supportsLongCacheRetention ? "1h" : undefined;
+packages/ai/src/providers/openai-completions.ts:1127:		supportsLongCacheRetention: !(isTogether || isCloudflareWorkersAI || isCloudflareAiGateway),
+packages/ai/src/providers/openai-completions.ts:1159:		supportsLongCacheRetention: model.compat.supportsLongCacheRetention ?? detected.supportsLongCacheRetention,
+packages/ai/src/types.ts:98:	cacheRetention?: CacheRetention;
+packages/ai/src/types.ts:399:	supportsLongCacheRetention?: boolean;
+packages/ai/src/types.ts:407:	supportsLongCacheRetention?: boolean;
+packages/ai/src/types.ts:421:	supportsLongCacheRetention?: boolean;
+packages/ai/src/types.ts:437:	supportsCacheControlOnTools?: boolean;
+packages/ai/src/providers/faux.ts:215:	if (sessionId && options?.cacheRetention !== "none") {
+packages/ai/src/providers/openai-responses.ts:29: * Defaults to "short" and uses PI_CACHE_RETENTION for backward compatibility.
+packages/ai/src/providers/openai-responses.ts:31:function resolveCacheRetention(cacheRetention?: CacheRetention): CacheRetention {
+packages/ai/src/providers/openai-responses.ts:32:	if (cacheRetention) {
+packages/ai/src/providers/openai-responses.ts:33:		return cacheRetention;
+packages/ai/src/providers/openai-responses.ts:35:	if (typeof process !== "undefined" && process.env.PI_CACHE_RETENTION === "long") {
+packages/ai/src/providers/openai-responses.ts:44:		supportsLongCacheRetention: model.compat?.supportsLongCacheRetention ?? true,
+packages/ai/src/providers/openai-responses.ts:50:	cacheRetention: CacheRetention,
+packages/ai/src/providers/openai-responses.ts:52:	return cacheRetention === "long" && compat.supportsLongCacheRetention ? "24h" : undefined;
+packages/ai/src/providers/openai-responses.ts:111:			const cacheRetention = resolveCacheRetention(options?.cacheRetention);
+packages/ai/src/providers/openai-responses.ts:112:			const cacheSessionId = cacheRetention === "none" ? undefined : options?.sessionId;
+packages/ai/src/providers/openai-responses.ts:238:	const cacheRetention = resolveCacheRetention(options?.cacheRetention);
+packages/ai/src/providers/openai-responses.ts:244:		prompt_cache_key: cacheRetention === "none" ? undefined : clampOpenAIPromptCacheKey(options?.sessionId),
+packages/ai/src/providers/openai-responses.ts:245:		prompt_cache_retention: getPromptCacheRetention(compat, cacheRetention),
+packages/ai/src/providers/simple-options.ts:10:		cacheRetention: options?.cacheRetention,

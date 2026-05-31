@@ -1,0 +1,170 @@
+/Users/mac_522/Desktop/ga/agentmain.py:9:from llmcore import reload_mykeys, LLMSession, ToolClient, ClaudeSession, MixinSession, NativeToolClient, NativeClaudeSession, NativeOAISession, resolve_client
+/Users/mac_522/Desktop/ga/agentmain.py:71:                    if isinstance(mixin._sessions[0], (NativeClaudeSession, NativeOAISession)): llm_sessions[i] = NativeToolClient(mixin)
+/Users/mac_522/Desktop/ga/agentmain.py:72:                    else: llm_sessions[i] = ToolClient(mixin)
+/Users/mac_522/Desktop/ga/agentmain.py:85:        self.llmclient.last_tools = ''
+/Users/mac_522/Desktop/ga/agentmain.py:162:                #if '</summary>' in full_resp: full_resp = full_resp.replace('</summary>', '</summary>\n\n')
+/Users/mac_522/Desktop/ga/agent_loop.py:17:    def turn_end_callback(self, response, tool_calls, tool_results, turn, next_prompt, exit_reason): return next_prompt
+/Users/mac_522/Desktop/ga/agent_loop.py:55:        if turn%10 == 0: client.last_tools = ''  # 每10轮重置一次工具描述
+/Users/mac_522/Desktop/ga/agent_loop.py:69:        tool_results = []; next_prompts = set(); exit_reason = {}
+/Users/mac_522/Desktop/ga/agent_loop.py:90:            if outcome.next_prompt.startswith('未知工具'): client.last_tools = ''
+/Users/mac_522/Desktop/ga/agent_loop.py:93:                tool_results.append({'tool_use_id': tid, 'content': datastr})
+/Users/mac_522/Desktop/ga/agent_loop.py:98:        next_prompt = handler.turn_end_callback(response, tool_calls, tool_results, turn, '\n'.join(next_prompts), exit_reason)
+/Users/mac_522/Desktop/ga/agent_loop.py:99:        messages = [{"role": "user", "content": next_prompt, "tool_results": tool_results}]   # just new message, history is kept in *Session
+/Users/mac_522/Desktop/ga/agent_loop.py:100:    if exit_reason: handler.turn_end_callback(response, tool_calls, tool_results, turn, '', exit_reason)
+/Users/mac_522/Desktop/ga/ga.py:455:        二次确认仅在回复几乎只包含<thinking>/<summary>和一段大代码块时触发。'''
+/Users/mac_522/Desktop/ga/ga.py:457:        thinking = getattr(response, 'thinking', '') or ""
+/Users/mac_522/Desktop/ga/ga.py:458:        if not response or (not content.strip() and not thinking.strip()):
+/Users/mac_522/Desktop/ga/ga.py:480:                residual = re.sub(r"<thinking>[\s\S]*?</thinking>", "", residual, flags=re.IGNORECASE)
+/Users/mac_522/Desktop/ga/ga.py:481:                residual = re.sub(r"<summary>[\s\S]*?</summary>", "", residual, flags=re.IGNORECASE)
+/Users/mac_522/Desktop/ga/ga.py:547:    def turn_end_callback(self, response, tool_calls, tool_results, turn, next_prompt, exit_reason):
+/Users/mac_522/Desktop/ga/ga.py:548:        _c = re.sub(r'```.*?```|<thinking>.*?</thinking>', '', response.content, flags=re.DOTALL)
+/Users/mac_522/Desktop/ga/ga.py:549:        rsumm = re.search(r"<summary>(.*?)</summary>", _c, re.DOTALL)
+/Users/mac_522/Desktop/ga/ga.py:550:        if rsumm: summary = rsumm.group(1).strip()
+/Users/mac_522/Desktop/ga/ga.py:554:            summary = f"调用工具{tool_name}, args: {clean_args}"
+/Users/mac_522/Desktop/ga/ga.py:555:            if tool_name == 'no_tool': summary = "直接回答了用户问题"
+/Users/mac_522/Desktop/ga/ga.py:556:            next_prompt += "\n\n\n[SYSTEM] 必须在回复文本中包含<summary>！\n\n"
+/Users/mac_522/Desktop/ga/ga.py:557:            summary = smart_format(summary.replace('\n', ''), max_str_len=40)
+/Users/mac_522/Desktop/ga/ga.py:558:        summary = smart_format(summary.replace('\n', ''), max_str_len=80)
+/Users/mac_522/Desktop/ga/ga.py:559:        self.history_info.append(f'[Agent] {summary}')
+/Users/mac_522/Desktop/ga/llmcore.py:33:def compress_history_tags(messages, keep_recent=10, max_len=800, force=False, interval=5):
+/Users/mac_522/Desktop/ga/llmcore.py:34:    """Compress <thinking>/<tool_use>/<tool_result> tags in older messages to save tokens."""
+/Users/mac_522/Desktop/ga/llmcore.py:35:    compress_history_tags._cd = getattr(compress_history_tags, '_cd', 0) + 1
+/Users/mac_522/Desktop/ga/llmcore.py:36:    if force: compress_history_tags._cd = 0
+/Users/mac_522/Desktop/ga/llmcore.py:37:    if compress_history_tags._cd % interval != 0: return messages
+/Users/mac_522/Desktop/ga/llmcore.py:39:    _pats = {tag: re.compile(rf'(<{tag}>)([\s\S]*?)(</{tag}>)') for tag in ('thinking', 'think', 'tool_use', 'tool_result')}
+/Users/mac_522/Desktop/ga/llmcore.py:55:                elif t == 'tool_result':
+/Users/mac_522/Desktop/ga/llmcore.py:61:                elif t == 'tool_use' and isinstance(b.get('input'), dict):
+/Users/mac_522/Desktop/ga/llmcore.py:67:    """把 user 消息里的 tool_result 块改写成纯文本，避免孤立引用。
+/Users/mac_522/Desktop/ga/llmcore.py:75:        if block.get('type') == 'tool_result':
+/Users/mac_522/Desktop/ga/llmcore.py:94:    compress_history_tags(history, interval=getattr(sess, 'cut_msg_interval', 5))
+/Users/mac_522/Desktop/ga/llmcore.py:97:    compress_history_tags(history, keep_recent=4, force=True)
+/Users/mac_522/Desktop/ga/llmcore.py:116:        elif b.get("type") == "thinking": yield ""
+/Users/mac_522/Desktop/ga/llmcore.py:140:            elif block.get("type") == "thinking": current_block = {"type": "thinking", "thinking": "", "signature": ""}
+/Users/mac_522/Desktop/ga/llmcore.py:141:            elif block.get("type") == "tool_use":
+/Users/mac_522/Desktop/ga/llmcore.py:142:                current_block = {"type": "tool_use", "id": block.get("id", ""), "name": block.get("name", ""), "input": {}}
+/Users/mac_522/Desktop/ga/llmcore.py:150:            elif delta.get("type") == "thinking_delta":
+/Users/mac_522/Desktop/ga/llmcore.py:151:                if current_block and current_block.get("type") == "thinking": current_block["thinking"] += delta.get("thinking", "")
+/Users/mac_522/Desktop/ga/llmcore.py:153:                if current_block and current_block.get("type") == "thinking":
+/Users/mac_522/Desktop/ga/llmcore.py:158:                if current_block["type"] == "tool_use":
+/Users/mac_522/Desktop/ga/llmcore.py:178:        if current_block["type"] == "tool_use":
+/Users/mac_522/Desktop/ga/llmcore.py:205:    content_block: {type:'text', text:str} | {type:'tool_use', id:str, name:str, input:dict}
+/Users/mac_522/Desktop/ga/llmcore.py:254:                blocks.append({"type": "tool_use", "id": bid, "name": fc["name"], "input": inp})
+/Users/mac_522/Desktop/ga/llmcore.py:285:        if reasoning_text: blocks.append({"type": "thinking", "thinking": reasoning_text})
+/Users/mac_522/Desktop/ga/llmcore.py:293:                blocks.append({"type": "tool_use", "id": bid, "name": tc["name"], "input": inp})
+/Users/mac_522/Desktop/ga/llmcore.py:299:        cached = (usage.get("input_tokens_details") or {}).get("cached_tokens", 0)
+/Users/mac_522/Desktop/ga/llmcore.py:301:        print(f"[Cache] input={inp} cached={cached}")
+/Users/mac_522/Desktop/ga/llmcore.py:304:        cached = (usage.get("prompt_tokens_details") or {}).get("cached_tokens", 0)
+/Users/mac_522/Desktop/ga/llmcore.py:306:        print(f"[Cache] input={inp} cached={cached}")
+/Users/mac_522/Desktop/ga/llmcore.py:309:        ci, cr, inp = usage.get("cache_creation_input_tokens", 0), usage.get("cache_read_input_tokens", 0), usage.get("input_tokens", 0)
+/Users/mac_522/Desktop/ga/llmcore.py:324:                blocks.append({"type": "tool_use", "id": item.get("call_id", item.get("id", "")),
+/Users/mac_522/Desktop/ga/llmcore.py:331:            blocks.append({"type": "thinking", "thinking": reasoning})
+/Users/mac_522/Desktop/ga/llmcore.py:339:            blocks.append({"type": "tool_use", "id": tc.get("id", ""), "name": fn.get("name", ""), "input": args})
+/Users/mac_522/Desktop/ga/llmcore.py:342:def _stamp_oai_cache_markers(messages, model):
+/Users/mac_522/Desktop/ga/llmcore.py:343:    """Add cache_control to last 2 user messages for Anthropic models via OAI-compatible relay."""
+/Users/mac_522/Desktop/ga/llmcore.py:350:            messages[idx] = {**messages[idx], 'content': [{'type': 'text', 'text': c, 'cache_control': {'type': 'ephemeral'}}]}
+/Users/mac_522/Desktop/ga/llmcore.py:352:            c = list(c); c[-1] = dict(c[-1], cache_control={'type': 'ephemeral'})
+/Users/mac_522/Desktop/ga/llmcore.py:402:                   "prompt_cache_key": _RESP_CACHE_KEY, "instructions": sess.system or "You are an Omnipotent Executor."}
+/Users/mac_522/Desktop/ga/llmcore.py:408:        _stamp_oai_cache_markers(messages, model)
+/Users/mac_522/Desktop/ga/llmcore.py:477:                if b.get("type") == "thinking" and b.get("thinking"): reasoning = b["thinking"]
+/Users/mac_522/Desktop/ga/llmcore.py:479:                elif b.get("type") == "tool_use":
+/Users/mac_522/Desktop/ga/llmcore.py:494:                if b.get("type") == "tool_result":
+/Users/mac_522/Desktop/ga/llmcore.py:501:                    result.append({"role": "tool", "tool_call_id": b.get("tool_use_id") or '', "content": tr if isinstance(tr, str) else str(tr)})
+/Users/mac_522/Desktop/ga/llmcore.py:537:        self.thinking_type = _enum('thinking_type', {'adaptive', 'enabled', 'disabled'})
+/Users/mac_522/Desktop/ga/llmcore.py:538:        self.thinking_budget_tokens = cfg.get('thinking_budget_tokens')
+/Users/mac_522/Desktop/ga/llmcore.py:543:    def _apply_claude_thinking(self, payload):
+/Users/mac_522/Desktop/ga/llmcore.py:544:        if self.thinking_type:
+/Users/mac_522/Desktop/ga/llmcore.py:545:            thinking = {"type": self.thinking_type}
+/Users/mac_522/Desktop/ga/llmcore.py:546:            if self.thinking_type == 'enabled':
+/Users/mac_522/Desktop/ga/llmcore.py:547:                if self.thinking_budget_tokens is None: print("[WARN] thinking_type='enabled' requires thinking_budget_tokens, ignored.")
+/Users/mac_522/Desktop/ga/llmcore.py:549:                    thinking["budget_tokens"] = self.thinking_budget_tokens; payload["thinking"] = thinking
+/Users/mac_522/Desktop/ga/llmcore.py:550:            else: payload["thinking"] = thinking
+/Users/mac_522/Desktop/ga/llmcore.py:568:                if block.get('type', '') == 'tool_use':
+/Users/mac_522/Desktop/ga/llmcore.py:570:                    yield f'<tool_use>{json.dumps(tu, ensure_ascii=False)}</tool_use>'
+/Users/mac_522/Desktop/ga/llmcore.py:574:def _keep_claude_block(b): return not isinstance(b, dict) or b.get("type") != "thinking" or b.get("signature")
+/Users/mac_522/Desktop/ga/llmcore.py:575:def _drop_unsigned_thinking(messages):
+/Users/mac_522/Desktop/ga/llmcore.py:581:def _ensure_thinking_blocks(messages, model):
+/Users/mac_522/Desktop/ga/llmcore.py:582:    """deepseek needs thinking in history!"""
+/Users/mac_522/Desktop/ga/llmcore.py:588:        has_thinking = any(isinstance(b, dict) and b.get("type") == "thinking" for b in c)
+/Users/mac_522/Desktop/ga/llmcore.py:589:        if not has_thinking: m["content"] = [{"type": "thinking", "thinking": "...", "signature": "placeholder"}, *c]
+/Users/mac_522/Desktop/ga/llmcore.py:599:        self._apply_claude_thinking(payload)
+/Users/mac_522/Desktop/ga/llmcore.py:600:        if self.system: payload["system"] = [{"type": "text", "text": self.system, "cache_control": {"type": "persistent"}}]
+/Users/mac_522/Desktop/ga/llmcore.py:605:        msgs = _drop_unsigned_thinking([{"role": m['role'], "content": list(m['content'])} for m in raw_list])
+/Users/mac_522/Desktop/ga/llmcore.py:608:            msgs[idx]["content"][-1] = dict(msgs[idx]["content"][-1], cache_control={"type": "ephemeral"})
+/Users/mac_522/Desktop/ga/llmcore.py:616:    """修复 messages 符合 Claude API：交替、tool_use/tool_result 配对"""
+/Users/mac_522/Desktop/ga/llmcore.py:624:            uses = [b.get('id') for b in fixed[-1].get('content', []) if isinstance(b, dict) and b.get('type') == 'tool_use' and b.get('id')]
+/Users/mac_522/Desktop/ga/llmcore.py:625:            has = {b.get('tool_use_id') for b in _wrap(m['content']) if isinstance(b, dict) and b.get('type') == 'tool_result'}
+/Users/mac_522/Desktop/ga/llmcore.py:627:            if miss: m = {**m, 'content': [{"type": "tool_result", "tool_use_id": uid, "content": "(error)"} for uid in miss] + _wrap(m['content'])}
+/Users/mac_522/Desktop/ga/llmcore.py:629:            if orphan: m = {**m, 'content': [{"type":"text","text":str(b.get('content',''))} if isinstance(b,dict) and b.get('type')=='tool_result' and b.get('tool_use_id') in orphan else b for b in _wrap(m['content'])]}
+/Users/mac_522/Desktop/ga/llmcore.py:647:        if 'claude' in model.lower(): messages = _drop_unsigned_thinking(messages)
+/Users/mac_522/Desktop/ga/llmcore.py:648:        messages = _ensure_thinking_blocks(messages, self.model)
+/Users/mac_522/Desktop/ga/llmcore.py:649:        beta_parts = ["claude-code-20250219", "interleaved-thinking-2025-05-14", "redact-thinking-2026-02-12", "prompt-caching-scope-2026-01-05"]
+/Users/mac_522/Desktop/ga/llmcore.py:659:        self._apply_claude_thinking(payload)
+/Users/mac_522/Desktop/ga/llmcore.py:663:            tools = [dict(t) for t in claude_tools]; tools[-1]["cache_control"] = {"type": "ephemeral"}
+/Users/mac_522/Desktop/ga/llmcore.py:666:        payload['system'] = [{"type": "text", "text": "You are Claude Code, Anthropic's official CLI for Claude.", "cache_control": {"type": "ephemeral"}}]
+/Users/mac_522/Desktop/ga/llmcore.py:673:            messages[idx]["content"][-1] = dict(messages[idx]["content"][-1], cache_control={"type": "ephemeral"})
+/Users/mac_522/Desktop/ga/llmcore.py:694:        tool_calls = [MockToolCall(b["name"], b.get("input", {}), id=b.get("id", "")) for b in content_blocks if b.get("type") == "tool_use"]
+/Users/mac_522/Desktop/ga/llmcore.py:696:        thinking_parts = [b["thinking"] for b in content_blocks if b.get("type") == "thinking"]
+/Users/mac_522/Desktop/ga/llmcore.py:697:        thinking = "\n".join(thinking_parts).strip()
+/Users/mac_522/Desktop/ga/llmcore.py:698:        if not thinking:
+/Users/mac_522/Desktop/ga/llmcore.py:702:                thinking = think_match.group(1).strip()
+/Users/mac_522/Desktop/ga/llmcore.py:704:        return MockResponse(thinking, content, tool_calls, str(content_blocks))
+/Users/mac_522/Desktop/ga/llmcore.py:709:        messages = _ensure_thinking_blocks(messages, self.model)
+/Users/mac_522/Desktop/ga/llmcore.py:731:    def __init__(self, thinking, content, tool_calls, raw, stop_reason='end_turn'):
+/Users/mac_522/Desktop/ga/llmcore.py:732:        self.thinking = thinking; self.content = content          
+/Users/mac_522/Desktop/ga/llmcore.py:734:        self.stop_reason = 'tool_use' if tool_calls else stop_reason
+/Users/mac_522/Desktop/ga/llmcore.py:736:        return f"<MockResponse thinking={bool(self.thinking)}, content='{self.content}', tools={bool(self.tool_calls)}>"
+/Users/mac_522/Desktop/ga/llmcore.py:738:class ToolClient:
+/Users/mac_522/Desktop/ga/llmcore.py:739:    def __init__(self, backend, auto_save_tokens=True):
+/Users/mac_522/Desktop/ga/llmcore.py:741:        self.auto_save_tokens = auto_save_tokens
+/Users/mac_522/Desktop/ga/llmcore.py:742:        self.last_tools = ''
+/Users/mac_522/Desktop/ga/llmcore.py:744:        self.total_cd_tokens = 0
+/Users/mac_522/Desktop/ga/llmcore.py:757:        full_prompt = self._build_protocol_prompt(messages, tools)
+/Users/mac_522/Desktop/ga/llmcore.py:767:    def _prepare_tool_instruction(self, tools):
+/Users/mac_522/Desktop/ga/llmcore.py:776:1. **Think**: Analyze the current situation and strategy inside `<thinking>` tags.
+/Users/mac_522/Desktop/ga/llmcore.py:777:2. **Summarize**: Output a minimal one-line (<30 words) physical snapshot in `<summary>`: new info from last tool result + current tool call intent. This goes into long-term working memory. Must contain real information, no filler.
+/Users/mac_522/Desktop/ga/llmcore.py:778:3. **Act**: If you need to call tools, output one or more **<tool_use> blocks** after your reply, then stop.
+/Users/mac_522/Desktop/ga/llmcore.py:784:1. **思考**: 在 `<thinking>` 标签中先进行思考，分析现状和策略。
+/Users/mac_522/Desktop/ga/llmcore.py:785:2. **总结**: 在 `<summary>` 中输出*极为简短*的高度概括的单行（<30字）物理快照，包括上次工具调用结果产生的新信息+本次工具调用意图。此内容将进入长期工作记忆，记录关键信息，严禁输出无实际信息增量的描述。
+/Users/mac_522/Desktop/ga/llmcore.py:786:3. **行动**: 如需调用工具，请在回复正文之后输出一个（或多个）**<tool_use>块**，然后结束。
+/Users/mac_522/Desktop/ga/llmcore.py:788:        tool_instruction += f'\nFormat: ```<tool_use>{{"name": "tool_name", "arguments": {{...}}}}</tool_use>```\n\n### Tools (mounted, always in effect):\n{tools_json}\n'
+/Users/mac_522/Desktop/ga/llmcore.py:789:        if self.auto_save_tokens and self.last_tools == tools_json:
+/Users/mac_522/Desktop/ga/llmcore.py:791:        else: self.total_cd_tokens = 0
+/Users/mac_522/Desktop/ga/llmcore.py:792:        self.last_tools = tools_json
+/Users/mac_522/Desktop/ga/llmcore.py:795:    def _build_protocol_prompt(self, messages, tools):
+/Users/mac_522/Desktop/ga/llmcore.py:798:        tool_instruction = self._prepare_tool_instruction(tools)
+/Users/mac_522/Desktop/ga/llmcore.py:805:            for tr in m.get('tool_results', []): user += f'<tool_result>{tr["content"]}</tool_result>\n'
+/Users/mac_522/Desktop/ga/llmcore.py:807:            self.total_cd_tokens += len(user) // 3
+/Users/mac_522/Desktop/ga/llmcore.py:808:        if self.total_cd_tokens > 9000: self.last_tools = ''
+/Users/mac_522/Desktop/ga/llmcore.py:813:        remaining_text = text; thinking = ''
+/Users/mac_522/Desktop/ga/llmcore.py:816:            thinking = think_match.group(1).strip()
+/Users/mac_522/Desktop/ga/llmcore.py:821:            if '<tool_use>' in remaining_text:
+/Users/mac_522/Desktop/ga/llmcore.py:822:                weaktoolstr = remaining_text.split('<tool_use>')[-1].strip().strip('><')
+/Users/mac_522/Desktop/ga/llmcore.py:827:                remaining_text = remaining_text.replace('<tool_use>'+weaktoolstr, "")
+/Users/mac_522/Desktop/ga/llmcore.py:841:                    errors.append(f'Failed to parse tool_use JSON: {json_str[:200]}')
+/Users/mac_522/Desktop/ga/llmcore.py:842:                    self.last_tools = ''
+/Users/mac_522/Desktop/ga/llmcore.py:847:        return MockResponse(thinking, remaining_text.strip(), tool_calls, text)
+/Users/mac_522/Desktop/ga/llmcore.py:850:    """Fallback: extract tool calls from text when model doesn't use native tool_use blocks."""
+/Users/mac_522/Desktop/ga/llmcore.py:852:    # try JSON array: [{"type":"tool_use", "name":..., "input":...}]
+/Users/mac_522/Desktop/ga/llmcore.py:853:    _jp = next((p for p in ['[{"type":"tool_use"', '[{"type": "tool_use"'] if p in content), None)
+/Users/mac_522/Desktop/ga/llmcore.py:857:            tcs = [MockToolCall(b["name"], b.get("input", {}), id=b.get("id", "")) for b in raw if b.get("type") == "tool_use"]
+/Users/mac_522/Desktop/ga/llmcore.py:861:    _xp = r"<(?:tool_use|tool_call)>((?:(?!<(?:tool_use|tool_call)>).){15,}?)</(?:tool_use|tool_call)>"
+/Users/mac_522/Desktop/ga/llmcore.py:872:    """If response has thinking but no text block, inject a synthetic summary from thinking's first line."""
+/Users/mac_522/Desktop/ga/llmcore.py:874:    th = next((b.get("thinking", "") for b in blocks if b.get("type") == "thinking"), "")
+/Users/mac_522/Desktop/ga/llmcore.py:877:    txt = "<summary>" + (line[:60] + '...' if len(line) > 60 else line) + "</summary>"
+/Users/mac_522/Desktop/ga/llmcore.py:964:每次回复（含工具调用轮）都先在回复文字中包含一个<summary></summary> 中输出极简单行（<30字）物理快照：上次结果新信息+本次意图。此内容进入长期工作记忆。
+/Users/mac_522/Desktop/ga/llmcore.py:969:The reply body should first include a minimal one-line (<30 words) physical snapshot in <summary></summary>: new info from last result + current intent. This goes into long-term working memory.
+/Users/mac_522/Desktop/ga/llmcore.py:973:class NativeToolClient:
+/Users/mac_522/Desktop/ga/llmcore.py:975:    def _thinking_prompt(): return THINKING_PROMPT_EN if os.environ.get('GA_LANG') == 'en' else THINKING_PROMPT_ZH
+/Users/mac_522/Desktop/ga/llmcore.py:978:        self.backend.system = self._thinking_prompt()
+/Users/mac_522/Desktop/ga/llmcore.py:983:        combined = f"{extra_system}\n\n{self._thinking_prompt()}" if extra_system else self._thinking_prompt()
+/Users/mac_522/Desktop/ga/llmcore.py:989:        combined_content = []; resp = None; tool_results = []
+/Users/mac_522/Desktop/ga/llmcore.py:996:            if msg['role'] == 'user' and msg.get('tool_results'): tool_results.extend(msg['tool_results'])
+/Users/mac_522/Desktop/ga/llmcore.py:997:        tr_id_set = set();  tool_result_blocks = []
+/Users/mac_522/Desktop/ga/llmcore.py:998:        for tr in tool_results:
+/Users/mac_522/Desktop/ga/llmcore.py:999:            tool_use_id, content = tr.get("tool_use_id", ""), tr.get("content", "")
+/Users/mac_522/Desktop/ga/llmcore.py:1000:            tr_id_set.add(tool_use_id)
+/Users/mac_522/Desktop/ga/llmcore.py:1001:            if tool_use_id: tool_result_blocks.append({"type": "tool_result", "tool_use_id": tool_use_id, "content": tr.get("content", "")})
+/Users/mac_522/Desktop/ga/llmcore.py:1002:            else: combined_content = [{"type": "text", "text": f'<tool_result>{content}</tool_result>'}] + combined_content
+/Users/mac_522/Desktop/ga/llmcore.py:1004:            if tid not in tr_id_set: tool_result_blocks.append({"type": "tool_result", "tool_use_id": tid, "content": ""})
+/Users/mac_522/Desktop/ga/llmcore.py:1008:        final_content = tool_result_blocks + filtered_content
+/Users/mac_522/Desktop/ga/llmcore.py:1030:    return (NativeToolClient(s) if isinstance(s, (NativeClaudeSession, NativeOAISession)) else ToolClient(s)) if s else None

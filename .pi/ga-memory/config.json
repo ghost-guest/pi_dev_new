@@ -1,0 +1,17 @@
+{
+  "cacheMode": "long",
+  "toolResultExternalizeChars": 16000,
+  "l1MaxEntries": 40,
+  "workingMemoryMaxSummaries": 6,
+  "workingMemoryMaxChars": 1200,
+  "workingMemoryMinScore": 2,
+  "providerCacheMarkers": "anthropic",
+  "promptOptimization": {
+    "enabled": false,
+    "mode": "off",
+    "minChars": 120,
+    "minSavingsChars": 20,
+    "preserveOriginal": true,
+    "inlineOriginalPointerMinBytes": 1500
+  }
+}

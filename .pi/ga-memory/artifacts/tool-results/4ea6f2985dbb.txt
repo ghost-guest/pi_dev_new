@@ -1,0 +1,148 @@
+packages/ai/src/env-api-keys.ts:156: * Will not return API keys for providers that require OAuth tokens.
+packages/ai/src/stream.ts:1:import "./providers/register-builtins.ts";
+packages/ai/src/index.ts:10:export type { BedrockOptions, BedrockThinkingDisplay } from "./providers/amazon-bedrock.ts";
+packages/ai/src/index.ts:11:export type { AnthropicEffort, AnthropicOptions, AnthropicThinkingDisplay } from "./providers/anthropic.ts";
+packages/ai/src/index.ts:12:export type { AzureOpenAIResponsesOptions } from "./providers/azure-openai-responses.ts";
+packages/ai/src/index.ts:13:export * from "./providers/faux.ts";
+packages/ai/src/index.ts:14:export type { GoogleOptions } from "./providers/google.ts";
+packages/ai/src/index.ts:15:export type { GoogleThinkingLevel } from "./providers/google-shared.ts";
+packages/ai/src/index.ts:16:export type { GoogleVertexOptions } from "./providers/google-vertex.ts";
+packages/ai/src/index.ts:17:export * from "./providers/images/register-builtins.ts";
+packages/ai/src/index.ts:18:export type { MistralOptions } from "./providers/mistral.ts";
+packages/ai/src/index.ts:22:} from "./providers/openai-codex-responses.ts";
+packages/ai/src/index.ts:23:export type { OpenAICompletionsOptions } from "./providers/openai-completions.ts";
+packages/ai/src/index.ts:24:export type { OpenAIResponsesOptions } from "./providers/openai-responses.ts";
+packages/ai/src/index.ts:25:export * from "./providers/register-builtins.ts";
+packages/ai/src/images.ts:1:import "./providers/images/register-builtins.ts";
+packages/ai/src/cli.ts:85:  list              List available providers
+packages/ai/src/cli.ts:93:  npx @earendil-works/pi-ai list               # list providers
+packages/ai/src/cli.ts:99:		console.log("Available OAuth providers:\n");
+packages/ai/src/cli.ts:130:			console.error(`Use 'npx @earendil-works/pi-ai list' to see available providers`);
+packages/ai/src/bedrock-provider.ts:1:import { streamBedrock, streamSimpleBedrock } from "./providers/amazon-bedrock.ts";
+packages/ai/src/types.ts:66:/** Token budgets for each thinking level (token-based providers only) */
+packages/ai/src/types.ts:74:// Base options all providers share
+packages/ai/src/types.ts:90:	 * Preferred transport for providers that support multiple transports.
+packages/ai/src/types.ts:100:	 * Optional session identifier for providers that support session-based caching.
+packages/ai/src/types.ts:102:	 * session-aware features. Ignored by providers that don't support it.
+packages/ai/src/types.ts:118:	 * Not supported by all providers (e.g., AWS Bedrock uses SDK auth).
+packages/ai/src/types.ts:122:	 * HTTP request timeout in milliseconds for providers/SDKs that support it.
+packages/ai/src/types.ts:127:	 * Maximum retry attempts for providers/SDKs that support client-side retries.
+packages/ai/src/types.ts:167:	 * HTTP request timeout in milliseconds for providers/SDKs that support it.
+packages/ai/src/types.ts:171:	 * Maximum retry attempts for providers/SDKs that support client-side retries.
+packages/ai/src/types.ts:194:	/** Custom token budgets for thinking levels (token-based providers only) */
+packages/ai/src/types.ts:363: * Use this to override URL-based auto-detection for custom providers.
+packages/ai/src/types.ts:424:	 * when caching is enabled. Required for providers like Fireworks that use
+packages/ai/src/types.ts:433:	 * Some Anthropic-compatible providers (e.g., Fireworks) do not support this
+packages/ai/src/types.ts:442:	 * Anthropic-compatible providers can set this to `true` for any model whose
+packages/ai/src/types.ts:452: * Controls which upstream providers OpenRouter routes requests to.
+packages/ai/src/types.ts:457:	/** Whether to allow backup providers to serve requests. Default: true. */
+packages/ai/src/types.ts:459:	/** Whether to filter providers to only those that support all parameters in the request. Default: false. */
+packages/ai/src/types.ts:461:	/** Data collection setting. "allow" (default): allow providers that may store/train on data. "deny": only use providers that don't collect user data. */
+packages/ai/src/types.ts:473:	/** A list of quantization levels to filter providers by (e.g., ["fp16", "bf16", "fp8", "fp6", "int8", "int4", "fp4", "fp32"]). */
+packages/ai/src/types.ts:527: * Controls which upstream providers the gateway routes requests to.
+packages/ai/src/types.ts:528: * @see https://vercel.com/docs/ai-gateway/models-and-providers/provider-options
+packages/ai/src/providers/google-shared.ts:2: * Shared utilities for Google Generative AI and Google Vertex providers.
+packages/ai/src/utils/typebox-helpers.ts:4: * Creates a string enum schema compatible with Google's API and other providers
+packages/ai/src/providers/amazon-bedrock.ts:555: * also checks model.name which is user-controlled via models.json or registerProvider.
+packages/coding-agent/src/config.ts:485:/** Get path to models.json */
+packages/coding-agent/src/config.ts:487:	return join(getAgentDir(), "models.json");
+packages/ai/src/utils/overflow.ts:4: * Regex patterns to detect context overflow errors from different providers.
+packages/ai/src/utils/overflow.ts:77: * 1. Error-based overflow: Most providers return stopReason "error" with a
+packages/ai/src/utils/overflow.ts:79: * 2. Silent overflow: Some providers accept overflow requests and return
+packages/ai/src/utils/overflow.ts:110: * overflow errors from those providers. To add support:
+packages/ai/src/utils/sanitize-unicode.ts:5: * or vice versa) cause JSON serialization errors in many API providers.
+packages/ai/src/providers/openai-completions.ts:281:				// Fallback: some providers (e.g., Moonshot) return usage
+packages/ai/src/providers/openai-completions.ts:415:			// Some providers via OpenRouter give additional information in this field.
+packages/ai/src/providers/openai-completions.ts:579:		// OpenRouter normalizes reasoning across providers via a nested reasoning object.
+packages/ai/src/providers/openai-completions.ts:751:		// These come from providers like github-copilot, openai-codex, opencode
+packages/ai/src/providers/openai-completions.ts:775:		// Some providers don't allow user messages directly after tool results
+packages/ai/src/providers/openai-completions.ts:813:			// Some providers don't accept null content, use empty string instead
+packages/ai/src/providers/openai-completions.ts:901:			// Some providers require "either content or tool_calls, but not none".
+packages/ai/src/providers/openai-completions.ts:902:			// Other providers also don't accept empty assistant messages.
+packages/ai/src/providers/openai-completions.ts:929:				// Some providers require the 'name' field in tool results
+packages/ai/src/providers/openai-completions.ts:1018:	// OpenRouter-compatible providers can include it as a separate write count.
+packages/ai/src/providers/openai-completions.ts:1022:	// providers are under-reported. DS4 mirrors this contract too:
+packages/ai/src/providers/openai-completions.ts:1066: * Detect compatibility settings from provider and baseUrl for known providers.
+packages/coding-agent/src/migrations.ts:31:	const providers: string[] = [];
+packages/coding-agent/src/migrations.ts:39:				providers.push(provider);
+packages/coding-agent/src/migrations.ts:56:						providers.push(provider);
+packages/coding-agent/src/migrations.ts:72:	return providers;
+packages/ai/src/utils/oauth/index.ts:2: * OAuth credential management for AI providers.
+packages/ai/src/utils/oauth/index.ts:5: * for OAuth-based providers:
+packages/ai/src/utils/oauth/index.ts:53: * Register a custom OAuth provider
+packages/ai/src/utils/oauth/index.ts:63: * Custom providers are removed completely.
+packages/ai/src/utils/oauth/index.ts:75: * Reset OAuth providers to built-ins.
+packages/ai/src/utils/oauth/index.ts:85: * Get all registered OAuth providers
+packages/coding-agent/src/core/auth-guidance.ts:9:		`  ${join(getDocsPath(), "providers.md")}`,
+packages/coding-agent/src/core/model-registry.ts:201:	providers: Type.Record(Type.String(), ProviderConfigSchema),
+packages/coding-agent/src/core/model-registry.ts:251:/** Result of loading custom models from models.json */
+packages/coding-agent/src/core/model-registry.ts:333: * Model registry - loads and manages models, resolves API keys via AuthStorage.
+packages/coding-agent/src/core/model-registry.ts:350:	static create(authStorage: AuthStorage, modelsJsonPath: string = join(getAgentDir(), "models.json")): ModelRegistry {
+packages/coding-agent/src/core/model-registry.ts:359:	 * Reload models from disk (built-in + custom from models.json).
+packages/coding-agent/src/core/model-registry.ts:378:	 * Get any error from loading models.json (undefined if no error).
+packages/coding-agent/src/core/model-registry.ts:385:		// Load custom models and overrides from models.json
+packages/coding-agent/src/core/model-registry.ts:391:		} = this.modelsJsonPath ? this.loadCustomModels(this.modelsJsonPath) : emptyCustomModelsResult();
+packages/coding-agent/src/core/model-registry.ts:401:		// Let OAuth providers modify their models (e.g., update baseUrl)
+packages/coding-agent/src/core/model-registry.ts:445:	/** Merge custom models into built-in list by provider+id (custom wins on conflicts). */
+packages/coding-agent/src/core/model-registry.ts:449:			const existingIndex = merged.findIndex((m) => m.provider === customModel.provider && m.id === customModel.id);
+packages/coding-agent/src/core/model-registry.ts:459:	private loadCustomModels(modelsJsonPath: string): CustomModelsResult {
+packages/coding-agent/src/core/model-registry.ts:474:				return emptyCustomModelsResult(`Invalid models.json schema:\n${errors}\n\nFile: ${modelsJsonPath}`);
+packages/coding-agent/src/core/model-registry.ts:485:			for (const [providerName, providerConfig] of Object.entries(config.providers)) {
+packages/coding-agent/src/core/model-registry.ts:506:				return emptyCustomModelsResult(`Failed to parse models.json: ${error.message}\n\nFile: ${modelsJsonPath}`);
+packages/coding-agent/src/core/model-registry.ts:509:				`Failed to load models.json: ${error instanceof Error ? error.message : error}\n\nFile: ${modelsJsonPath}`,
+packages/coding-agent/src/core/model-registry.ts:517:		for (const [providerName, providerConfig] of Object.entries(config.providers)) {
+packages/coding-agent/src/core/model-registry.ts:532:				// Non-built-in providers with custom models require endpoint + auth.
+packages/coding-agent/src/core/model-registry.ts:540:			// Built-in providers with custom models: baseUrl/apiKey/api are optional,
+packages/coding-agent/src/core/model-registry.ts:551:				// For built-in providers, api is optional — inherited from built-in models.
+packages/coding-agent/src/core/model-registry.ts:579:		for (const [providerName, providerConfig] of Object.entries(config.providers)) {
+packages/coding-agent/src/core/model-registry.ts:619:	 * If models.json had errors, returns only built-in models.
+packages/coding-agent/src/core/model-registry.ts:727:	 * Return auth status for a provider, including request auth configured in models.json.
+packages/coding-agent/src/core/model-registry.ts:742:			return { configured: true, source: "models_json_command" };
+packages/coding-agent/src/core/model-registry.ts:749:		return { configured: true, source: "models_json_key" };
+packages/coding-agent/src/core/model-registry.ts:805:	 * Removes the provider from the registry and reloads models from disk so that
+packages/coding-agent/src/core/model-registry.ts:808:	 * remaining dynamic providers.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:240:				description: "Preferred transport for providers that support multiple transports",
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:395:			description: "Prevent images from being sent to LLM providers",
+packages/coding-agent/src/cli/list-models.ts:32:		console.error(chalk.yellow(`Warning: errors loading models.json:\n${loadError}`));
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:96:			const hintText = "Only showing models from configured providers. Use /login to add providers.";
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:140:		// Refresh to pick up any changes to models.json
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:143:		// Check for models.json errors
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:149:		// Load available models (built-in models still work even if models.json failed)
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:49:		providers: AuthSelectorProvider[],
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:59:		this.allProviders = providers;
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:60:		this.filteredProviders = providers;
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:139:		// Show "no providers" if empty
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:144:						? "No providers available"
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:145:						: "No providers logged in. Use /login first."
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:146:					: "No matching providers";
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:168:			case "models_json_key":
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:169:				return theme.fg("success", " ✓ key in models.json");
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:170:			case "models_json_command":
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:171:				return theme.fg("success", " ✓ command in models.json");
+packages/coding-agent/src/modes/interactive/components/footer.ts:178:		// Prepend the provider in parentheses if there are multiple providers and there's enough room
+packages/coding-agent/src/core/sdk.ts:42:	/** Model registry. Default: ModelRegistry.create(authStorage, agentDir/models.json) */
+packages/coding-agent/src/core/sdk.ts:209:	const modelsPath = options.agentDir ? join(agentDir, "models.json") : undefined;
+packages/coding-agent/src/modes/interactive/components/login-dialog.ts:139:	 * Show input for manual code/URL entry (for callback server providers)
+packages/coding-agent/src/core/footer-data-provider.ts:145:	/** Number of unique providers with available models (for footer display) */
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:749:			this.showError(`models.json error: ${modelsJsonError}`);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1893:			// Create and add custom footer, passing the data provider
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4588:				authType === "oauth" ? "No subscription providers available." : "No API key providers available.",
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4633:				"No stored credentials to remove. /logout only removes credentials saved by /login; environment variables and models.json config are unchanged.",
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4658:								: `Removed stored API key for ${providerOption.name}. Environment variables and models.json config are unchanged.`;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4745:			theme.fg("accent", `  ${path.join(getDocsPath(), "providers.md")}`),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4999:				this.showError(`models.json error: ${modelsJsonError}`);
+packages/coding-agent/src/core/agent-session-services.ts:137:	const modelRegistry = options.modelRegistry ?? ModelRegistry.create(authStorage, join(agentDir, "models.json"));
+packages/coding-agent/src/core/system-prompt.ts:147:- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md)
+packages/coding-agent/src/core/settings-manager.ts:42:	blockImages?: boolean; // default: false - when true, prevents all images from being sent to LLM providers
+packages/coding-agent/src/core/auth-storage.ts:39:	source?: "stored" | "runtime" | "environment" | "fallback" | "models_json_key" | "models_json_command";
+packages/coding-agent/src/core/auth-storage.ts:240:	 * Used for custom provider keys from models.json.
+packages/coding-agent/src/core/auth-storage.ts:321:	 * List all providers with credentials.
+packages/coding-agent/src/core/auth-storage.ts:364:			return { configured: false, source: "fallback", label: "custom provider config" };
+packages/coding-agent/src/core/auth-storage.ts:460:	 * 5. Fallback resolver (models.json custom providers)
+packages/coding-agent/src/core/auth-storage.ts:517:		// Fall back to custom resolver (e.g., models.json custom providers)
+packages/coding-agent/src/core/auth-storage.ts:526:	 * Get all registered OAuth providers
+packages/coding-agent/src/core/model-resolver.ts:71: * When matching by bare id, ambiguous matches across providers are rejected.
+packages/coding-agent/src/core/model-resolver.ts:355:			error: "No models available. Check your installation or add models to models.json.",
+packages/coding-agent/src/core/model-resolver.ts:370:			error: `Unknown provider "${cliProvider}". Use --list-models to see available providers/models.`,
+packages/coding-agent/src/core/model-resolver.ts:548:		// Try to find a default model from known providers
+packages/coding-agent/src/core/model-resolver.ts:609:		// Try to find a default model from known providers

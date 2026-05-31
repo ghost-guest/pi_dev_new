@@ -189,6 +189,7 @@ export interface ExtensionBindings {
 	abortHandler?: () => void;
 	shutdownHandler?: ShutdownHandler;
 	onError?: ExtensionErrorListener;
+	onAppendEntry?: (customType: string) => void;
 }
 
 /** Options for AgentSession.prompt() */
@@ -301,6 +302,7 @@ export class AgentSession {
 	private _extensionAbortHandler?: () => void;
 	private _extensionShutdownHandler?: ShutdownHandler;
 	private _extensionErrorListener?: ExtensionErrorListener;
+	private _extensionAppendEntryListener?: (customType: string) => void;
 	private _extensionErrorUnsubscriber?: () => void;
 
 	// Model registry for API key resolution
@@ -2054,6 +2056,9 @@ export class AgentSession {
 		if (bindings.onError !== undefined) {
 			this._extensionErrorListener = bindings.onError;
 		}
+		if (bindings.onAppendEntry !== undefined) {
+			this._extensionAppendEntryListener = bindings.onAppendEntry;
+		}
 
 		this._applyExtensionBindings(this._extensionRunner);
 		await this._extensionRunner.emit(this._sessionStartEvent);
@@ -2185,6 +2190,7 @@ export class AgentSession {
 				},
 				appendEntry: (customType, data) => {
 					this.sessionManager.appendCustomEntry(customType, data);
+					this._extensionAppendEntryListener?.(customType);
 				},
 				setSessionName: (name) => {
 					this.setSessionName(name);

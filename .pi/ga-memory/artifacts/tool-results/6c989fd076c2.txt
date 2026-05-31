@@ -1,0 +1,306 @@
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/preset.ts:27: *     "instructions": "You are in IMPLEMENTATION MODE. Your job is to make focused, correct changes.\n\nRules:\n- Keep scope tight. Do exactly what was asked, no more.\n- Read files before editing to understand current state.\n- Make surgical edits. Prefer edit over write for existing files.\n- Explain your reasoning briefly before each change.\n- Run tests or type checks after changes if the project has them (npm test, npm run check, etc.).\n- If you encounter unexpected complexity, STOP and explain the issue rather than hacking around it.\n\nIf no plan exists:\n- Ask clarifying questions before starting.\n- Propose what you'll do and get confirmation for non-trivial changes.\n\nAfter completing changes:\n- Summarize what was done.\n- Note any follow-up work or tests that should be added."
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/preset.ts:58:	/** Instructions to append to system prompt */
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/preset.ts:107:export default function presetExtension(pi: ExtensionAPI) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/preset.ts:123:		// Snapshot state before the first preset is applied (i.e. only when transitioning from no-preset)
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/preset.ts:165:		// Store active preset for system prompt injection
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/preset.ts:175:	function buildPresetDescription(preset: Preset): string {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/preset.ts:214:				description: buildPresetDescription(preset),
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/preset.ts:354:	pi.registerCommand("preset", {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/preset.ts:379:	// Inject preset instructions into system prompt
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/preset.ts:380:	pi.on("before_agent_start", async (event) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/preset.ts:383:				systemPrompt: `${event.systemPrompt}\n\n${activePreset.instructions}`,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/preset.ts:389:	pi.on("session_start", async (_event, ctx) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/preset.ts:407:		const entries = ctx.sessionManager.getEntries();
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/preset.ts:425:	pi.on("turn_start", async () => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/preset.ts:427:			pi.appendEntry("preset-state", { name: activePresetName });
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/subagent/agents/scout.md:3:description: Fast codebase recon that returns compressed context for handoff to other agents
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/subagent/agents/scout.md:41:function keyFunction() {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:71:	pi.registerTool({
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:83:		renderCall(args, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:97:		renderResult(result, { expanded }, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:118:	pi.registerTool({
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:130:		renderCall(args, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:138:		renderResult(result, { expanded }, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:167:	pi.registerTool({
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:179:		renderCall(args, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:188:		renderResult(result, { expanded }, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:209:	pi.registerTool({
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:221:		renderCall(args, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:228:		renderResult(result, { expanded }, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:240:			// For errors, show the error message
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:254:	pi.registerTool({
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:266:		renderCall(args, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:280:		renderResult(result, { expanded }, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:312:	pi.registerTool({
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:324:		renderCall(args, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:342:		renderResult(result, { expanded }, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:374:	pi.registerTool({
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:386:		renderCall(args, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/minimal-mode.ts:398:		renderResult(result, { expanded }, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/modal-editor.ts:82:	pi.on("session_start", (_event, ctx) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/question.ts:36:export default function question(pi: ExtensionAPI) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/question.ts:37:	pi.registerTool({
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/question.ts:230:		renderCall(args, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/question.ts:241:		renderResult(result, _options, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/truncated-tool.ts:4: * Custom tools MUST truncate their output to avoid overwhelming the LLM context.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/truncated-tool.ts:49:	pi.registerTool({
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/truncated-tool.ts:80:				throw new Error(`ripgrep failed: ${err.message}`);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/truncated-tool.ts:137:		// Custom rendering of the tool call (shown before/during execution)
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/truncated-tool.ts:138:		renderCall(args, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/truncated-tool.ts:151:		renderResult(result, { expanded, isPartial }, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/mac-system-theme.ts:2: * Syncs pi theme with macOS system appearance (dark/light mode).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/mac-system-theme.ts:5: *   pi -e examples/extensions/mac-system-theme.ts
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/mac-system-theme.ts:28:	pi.on("session_start", async (_event, ctx) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/mac-system-theme.ts:41:	pi.on("session_shutdown", () => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/README.md:33:4. Choose "Execute the plan" when prompted
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/utils.ts:38:	/\bsystemctl\s+(start|stop|restart|enable|disable)/i,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/utils.ts:129:export function extractTodoItems(message: string): TodoItem[] {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/utils.ts:131:	const headerMatch = message.match(/\*{0,2}Plan:\*{0,2}\s*\n/i);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/utils.ts:134:	const planSection = message.slice(message.indexOf(headerMatch[0]) + headerMatch[0].length);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/utils.ts:152:export function extractDoneSteps(message: string): number[] {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/utils.ts:154:	for (const match of message.matchAll(/\[DONE:(\d+)\]/gi)) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:25:// Type guard for assistant messages
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:30:// Extract text content from an assistant message
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:31:function getTextContent(message: AssistantMessage): string {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:32:	return message.content
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:38:export default function planModeExtension(pi: ExtensionAPI): void {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:92:		pi.appendEntry("plan-mode", {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:99:	pi.registerCommand("plan", {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:104:	pi.registerCommand("todos", {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:122:	pi.on("tool_call", async (event) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:123:		if (!planModeEnabled || event.toolName !== "bash") return;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:125:		const command = event.input.command as string;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:134:	// Filter out stale plan mode context when not in plan mode
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:135:	pi.on("context", async (event) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:139:			messages: event.messages.filter((m) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:141:				if (msg.customType === "plan-mode-context") return false;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:158:	// Inject plan/execution context before agent starts
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:159:	pi.on("before_agent_start", async () => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:162:				message: {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:163:					customType: "plan-mode-context",
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:192:				message: {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:193:					customType: "plan-execution-context",
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:208:	pi.on("turn_end", async (event, ctx) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:210:		if (!isAssistantMessage(event.message)) return;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:212:		const text = getTextContent(event.message);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:220:	pi.on("agent_end", async (event, ctx) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:240:		// Extract todos from last assistant message
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:241:		const lastAssistant = [...event.messages].reverse().find(isAssistantMessage);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:249:		// Show plan steps and prompt for next action
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:291:	pi.on("session_start", async (_event, ctx) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:296:		const entries = ctx.sessionManager.getEntries();
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:309:		// On resume: re-scan messages to rebuild completion state
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:310:		// Only scan messages AFTER the last "plan-mode-execute" to avoid picking up [DONE:n] from previous plans
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:323:			// Only scan messages after the execute marker
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:324:			const messages: AssistantMessage[] = [];
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:327:				if (entry.type === "message" && "message" in entry && isAssistantMessage(entry.message as AgentMessage)) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:328:					messages.push(entry.message as AssistantMessage);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/plan-mode/index.ts:331:			const allText = messages.map(getTextContent).join("\n");
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/subagent/agents/planner.md:3:description: Creates implementation plans from context and requirements
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/subagent/agents/planner.md:8:You are a planning specialist. You receive context (from a scout) and requirements, then produce a clear implementation plan.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/interactive-shell.ts:19: * Note: This only intercepts user `!` commands, not agent bash tool calls.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/interactive-shell.ts:132:	pi.on("user_bash", async (event, ctx) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/interactive-shell.ts:133:		let command = event.command;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/interactive-shell.ts:137:		// The prefix parsing happens before this event, so we check if command starts with "i "
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/interactive-shell.ts:181:		// Return result to prevent default bash handling
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/questionnaire.ts:24:	prompt: string;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/questionnaire.ts:54:			description: "Short contextual label for tab bar, e.g. 'Scope', 'Priority' (defaults to Q1, Q2)",
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/questionnaire.ts:57:	prompt: Type.String({ description: "The full question text to display" }),
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/questionnaire.ts:67:	message: string,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/questionnaire.ts:71:		content: [{ type: "text", text: message }],
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/questionnaire.ts:77:	pi.registerTool({
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/questionnaire.ts:134:				function currentQuestion(): Question | undefined {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/questionnaire.ts:139:					const q = currentQuestion();
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/questionnaire.ts:196:					const q = currentQuestion();
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/questionnaire.ts:262:					const q = currentQuestion();
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/questionnaire.ts:316:						add(theme.fg("text", ` ${q.prompt}`));
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/questionnaire.ts:348:						add(theme.fg("text", ` ${q.prompt}`));
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/questionnaire.ts:396:		renderCall(args, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/questionnaire.ts:408:		renderResult(result, _options, theme, _context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:2: * Handoff extension - transfer context to a new focused session
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:4: * Instead of compacting (which is lossy), handoff extracts what matters
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:5: * for your next task and creates a new session with a generated prompt.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:12: * The generated prompt appears as a draft in the editor for review/editing.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:20:const SYSTEM_PROMPT = `You are a context transfer assistant. Given a conversation history and the user's goal for a new thread, generate a focused prompt that:
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:22:1. Summarizes relevant context from the conversation (decisions made, approaches taken, key findings)
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:27:Format your response as a prompt the user can send to start the new thread. Be concise but include all necessary context. Do not include any preamble like "Here's the prompt" - just output the prompt itself.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:43:	if (entry.type === "message") {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:44:		return entry.message;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:46:	if (entry.type === "compaction") {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:48:			role: "compactionSummary",
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:58:	let compactionIndex = -1;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:60:		if (branch[i].type === "compaction") {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:61:			compactionIndex = i;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:65:	if (compactionIndex < 0) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:66:		return branch.map(entryToMessage).filter((message) => message !== undefined);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:69:	const compaction = branch[compactionIndex];
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:71:		compaction.type === "compaction" ? branch.findIndex((entry) => entry.id === compaction.firstKeptEntryId) : -1;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:72:	const compactedBranch = [
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:73:		compaction,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:74:		...(firstKeptIndex >= 0 ? branch.slice(firstKeptIndex, compactionIndex) : []),
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:75:		...branch.slice(compactionIndex + 1),
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:77:	return compactedBranch.map(entryToMessage).filter((message) => message !== undefined);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:81:	pi.registerCommand("handoff", {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:82:		description: "Transfer context to a new focused session",
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:100:			// Gather conversation context from current branch. If the branch was compacted,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:101:			// include the compaction summary plus entries from firstKeptEntryId onward.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:102:			const messages = getHandoffMessages(ctx.sessionManager.getBranch());
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:104:			if (messages.length === 0) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:110:			const llmMessages = convertToLlm(messages);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:111:			const conversationText = serializeConversation(llmMessages);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:112:			const currentSessionFile = ctx.sessionManager.getSessionFile();
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:114:			// Generate the handoff prompt with loader UI
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:116:				const loader = new BorderedLoader(tui, theme, `Generating handoff prompt...`);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:138:						{ systemPrompt: SYSTEM_PROMPT, messages: [userMessage] },
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:167:			// Let user edit the generated prompt
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:168:			const editedPrompt = await ctx.ui.editor("Edit handoff prompt", result);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:176:			// context for post-switch UI work; the original ctx is stale after a
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/handoff.ts:178:			const newSessionResult = await ctx.newSession({
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/widget-placement.ts:3:export default function widgetPlacementExtension(pi: ExtensionAPI) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/widget-placement.ts:4:	pi.on("session_start", (_event, ctx) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/working-indicator.ts:94:	pi.on("session_start", async (_event, ctx) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/working-indicator.ts:98:	pi.registerCommand("working-indicator", {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/rainbow-editor.ts:52:	private startAnimation(): void {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/rainbow-editor.ts:60:	private stopAnimation(): void {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/rainbow-editor.ts:70:			this.startAnimation();
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/rainbow-editor.ts:72:			this.stopAnimation();
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/rainbow-editor.ts:85:	pi.on("session_start", (_event, ctx) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/file-trigger.ts:5: * Useful for external systems to send messages to the agent.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/file-trigger.ts:15:	pi.on("session_start", async (_event, ctx) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/status-line.ts:13:	pi.on("session_start", async (_event, ctx) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/status-line.ts:18:	pi.on("turn_start", async (_event, ctx) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/status-line.ts:26:	pi.on("turn_end", async (_event, ctx) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/message-renderer.ts:2: * Custom message rendering example.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/message-renderer.ts:4: * Shows how to use registerMessageRenderer to control how custom messages
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/message-renderer.ts:7: * Usage: /status [message] - sends a status message with custom rendering
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/message-renderer.ts:14:	// Register custom renderer for "status-update" messages
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/message-renderer.ts:15:	pi.registerMessageRenderer("status-update", (message, { expanded }, theme) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/message-renderer.ts:16:		const details = message.details as { level: string; timestamp: number } | undefined;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/message-renderer.ts:23:		let text = `${prefix} ${message.content}`;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/message-renderer.ts:37:	// Command to send status messages
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/message-renderer.ts:38:	pi.registerCommand("status", {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/message-renderer.ts:39:		description: "Send a status message (usage: /status [warn|error] message)",
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/structured-output.ts:23:	promptSnippet: "Emit a final structured answer as a terminating tool result",
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/structured-output.ts:24:	promptGuidelines: [
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/structured-output.ts:64:	pi.registerTool(structuredOutputTool);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/subagent/agents/worker.md:3:description: General-purpose subagent with full capabilities, isolated context
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/subagent/agents/worker.md:7:You are a worker agent with full capabilities. You operate in an isolated context window to handle delegated tasks without polluting the main conversation.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:11: * default parallel tool-execution mode this races: `play` can resolve before
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:28:	constructor(message: string) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:29:		super(message);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:248:	// results, move messages, and the game-over banner).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:358:/** Static snapshot used inside tool results and custom messages. */
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:509:// Move-message renderer (full width banner)
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:512:// Full-width banner message with an optional board snapshot underneath.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:631:	for (const entry of ctx.sessionManager.getBranch()) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:632:		if (entry.type !== "message") continue;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:633:		const msg = entry.message;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:659:	pi.on("session_start", async (_event, ctx) => reconstructState(ctx));
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:660:	pi.on("session_tree", async (_event, ctx) => reconstructState(ctx));
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:664:	// LLM (in case the message ends up in future context).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:683:	// Custom message renderer for user move messages
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:685:	pi.registerMessageRenderer(MOVE_MESSAGE_TYPE, (message, { expanded }, theme) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:686:		const details = message.details as BoardDetails | undefined;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:696:	// Custom message renderer for game-over messages
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:698:	pi.registerMessageRenderer(GAME_OVER_MESSAGE_TYPE, (message, _options, theme) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:699:		const details = message.details as BoardDetails | undefined;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:705:	// before_agent_start - inject game instructions each turn
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:707:	pi.on("before_agent_start", async (event) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:719:When the human plays, you receive a message that contains the cell X marked,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:720:the full board, and YOUR cursor position (Player O's cursor). The message is
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:747:separate tool_use blocks, before you stop. Do not:
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:749:- wait for a move result before emitting the next move or \`play\`,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:771:			systemPrompt: event.systemPrompt + instructions,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:778:	pi.registerCommand("tic-tac-toe", {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:809:						pi.appendEntry(SAVE_TYPE, getBoardDetails());
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:859:	pi.registerTool({
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:863:			"Execute ONE tic-tac-toe action as Player O. `action` is exactly one of: move_up, move_down, move_left, move_right (move YOUR cursor one cell, clamped at edges), or play (place O under YOUR cursor; errors if the cell is not empty). There is no batched form. To play at (r, c) from your current cursor (r0, c0), emit the required move_down/move_up and move_right/move_left calls, then play, all as separate tool_use blocks in the SAME assistant response. Do not split the sequence across responses and do not wait for a result before emitting the next call. Your cursor position persists between turns and is reset to (0,0) only after a successful play.",
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:864:		promptSnippet: "Play a tic-tac-toe action (move_up/down/left/right or play) as Player O",
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:865:		promptGuidelines: [
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:867:			"Never ask the user for the board. The board and your cursor position are included in the user's move message; use tic_tac_toe_see_board if you need them restated.",
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:913:						pi.appendEntry(SAVE_TYPE, getBoardDetails());
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:942:			pi.appendEntry(SAVE_TYPE, getBoardDetails());
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:955:		renderResult(result, { expanded }, theme, context) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:959:			const prefix = context?.isError ? theme.fg("error", "\u2717 ") : theme.fg("success", "\u2713 ");
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:972:	pi.registerTool({
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/tic-tac-toe.ts:977:		promptSnippet: "Inspect the tic-tac-toe board and your cursor",
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/auto-commit-on-exit.ts:5: * Uses the last assistant message to generate a commit message.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/auto-commit-on-exit.ts:11:	pi.on("session_shutdown", async (_event, ctx) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/auto-commit-on-exit.ts:20:		// Find the last assistant message for commit context
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/auto-commit-on-exit.ts:21:		const entries = ctx.sessionManager.getEntries();
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/auto-commit-on-exit.ts:25:			if (entry.type === "message" && entry.message.role === "assistant") {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/auto-commit-on-exit.ts:26:				const content = entry.message.content;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/auto-commit-on-exit.ts:37:		// Generate a simple commit message
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/git-merge-and-resolve.ts:7: * the agent receives a follow-up message listing each conflict block
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/git-merge-and-resolve.ts:74:	pi.on("agent_end", async (_event, ctx) => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/dynamic-resources/index.ts:8:	pi.on("resources_discover", () => {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/dynamic-resources/index.ts:11:			promptPaths: [join(baseDir, "dynamic.md")],
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:25:import type { ContentBlockParam, MessageCreateParamsStreaming } from "@anthropic-ai/sdk/resources/messages.js";
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:94:	const authCode = await callbacks.onPrompt({ message: "Paste the authorization code:" });
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:114:	const data = (await tokenResponse.json()) as {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:142:	const data = (await response.json()) as {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:217:function convertMessages(messages: Message[], isOAuth: boolean, _tools?: Tool[]): any[] {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:220:	for (let i = 0; i < messages.length; i++) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:221:		const msg = messages[i];
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:278:			while (j < messages.length && messages[j].role === "toolResult") {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:279:				const nextMsg = messages[j] as ToolResultMessage;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:293:	// Add cache control to last user message
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:319:function mapStopReason(reason: string): StopReason {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:336:	context: Context,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:395:				messages: convertMessages(context.messages, isOAuth, context.tools),
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:400:			// System prompt with Claude Code identity for OAuth
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:402:				params.system = [
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:409:				if (context.systemPrompt) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:410:					params.system.push({
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:412:						text: sanitizeSurrogates(context.systemPrompt),
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:416:			} else if (context.systemPrompt) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:417:				params.system = [
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:420:						text: sanitizeSurrogates(context.systemPrompt),
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:426:			if (context.tools) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:427:				params.tools = convertTools(context.tools, isOAuth);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:445:			const anthropicStream = client.messages.stream({ ...params }, { signal: options?.signal });
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:451:			for await (const event of anthropicStream) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:452:				if (event.type === "message_start") {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:453:					output.usage.input = event.message.usage.input_tokens || 0;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:454:					output.usage.output = event.message.usage.output_tokens || 0;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:455:					output.usage.cacheRead = (event.message.usage as any).cache_read_input_tokens || 0;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:456:					output.usage.cacheWrite = (event.message.usage as any).cache_creation_input_tokens || 0;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:460:				} else if (event.type === "content_block_start") {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:461:					if (event.content_block.type === "text") {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:462:						output.content.push({ type: "text", text: "", index: event.index } as any);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:464:					} else if (event.content_block.type === "thinking") {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:469:							index: event.index,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:472:					} else if (event.content_block.type === "tool_use") {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:475:							id: event.content_block.id,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:477:								? fromClaudeCodeName(event.content_block.name, context.tools)
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:478:								: event.content_block.name,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:481:							index: event.index,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:485:				} else if (event.type === "content_block_delta") {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:486:					const index = blocks.findIndex((b) => b.index === event.index);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:490:					if (event.delta.type === "text_delta" && block.type === "text") {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:491:						block.text += event.delta.text;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:492:						stream.push({ type: "text_delta", contentIndex: index, delta: event.delta.text, partial: output });
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:493:					} else if (event.delta.type === "thinking_delta" && block.type === "thinking") {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:494:						block.thinking += event.delta.thinking;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:498:							delta: event.delta.thinking,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:501:					} else if (event.delta.type === "input_json_delta" && block.type === "toolCall") {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:502:						(block as any).partialJson += event.delta.partial_json;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:509:							delta: event.delta.partial_json,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:512:					} else if (event.delta.type === "signature_delta" && block.type === "thinking") {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:513:						block.thinkingSignature = (block.thinkingSignature || "") + (event.delta as any).signature;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:515:				} else if (event.type === "content_block_stop") {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:516:					const index = blocks.findIndex((b) => b.index === event.index);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:532:				} else if (event.type === "message_delta") {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:533:					if ((event.delta as any).stop_reason) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:534:						output.stopReason = mapStopReason((event.delta as any).stop_reason);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:536:					output.usage.input = (event.usage as any).input_tokens || 0;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:537:					output.usage.output = (event.usage as any).output_tokens || 0;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:538:					output.usage.cacheRead = (event.usage as any).cache_read_input_tokens || 0;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:539:					output.usage.cacheWrite = (event.usage as any).cache_creation_input_tokens || 0;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:550:			stream.push({ type: "done", reason: output.stopReason as "stop" | "length" | "toolUse", message: output });
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:555:			output.errorMessage = error instanceof Error ? error.message : JSON.stringify(error);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:581:				contextWindow: 200000,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/custom-provider-anthropic/index.ts:590:				contextWindow: 200000,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples/extensions/dynamic-resources/dynamic.md:2:description: Example prompt template loaded from resources_discover
+
+[Showing lines 983-1286 of 1286 (50.0KB limit). Full output: /var/folders/7m/csfvhz791k527kby7nxl7cbc0000h_/T/pi-bash-0bb51f5d66f4b963.log]

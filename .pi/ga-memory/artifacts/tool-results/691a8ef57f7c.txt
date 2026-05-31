@@ -1,0 +1,452 @@
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:396:  const auth = await ctx.modelRegistry.getApiKeyAndHeaders(model);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:397:  if (!auth.ok || !auth.apiKey) return fallbackSummary(conversationText, instruction);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:400:    const response = await complete(
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:405:            role: "user" as const,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:406:            content: [{ type: "text" as const, text: buildFoldPrompt(conversationText, instruction) }],
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:414:        reasoningEffort: "medium",
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:418:    const text = response.content
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:419:      .filter((c): c is { type: "text"; text: string } => c.type === "text")
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:424:    return text || fallbackSummary(conversationText, instruction);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:427:      fallbackSummary(conversationText, instruction),
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:434:function buildFoldContextMessage(summary: string): string {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:436:    "# Folded previous context",
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:438:    "Earlier conversation is hidden behind this fold, but the underlying session history is unchanged.",
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:439:    "Use `/unfold` to restore the full earlier context.",
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:441:    summary,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:445:function buildFoldPreviewLines(summary: string): string[] {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:446:  const lines = summary
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:449:    .filter(Boolean)
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:452:  const preview = lines.slice(0, 4).map((line) => line.length > 110 ? `${line.slice(0, 109)}…` : line);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:457:function refreshFoldWidget(ctx: ExtensionContext): void {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:460:  const activeFold = getActiveFoldInfo(ctx.sessionManager.getBranch());
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:462:    ctx.ui.setWidget("fold-summary", undefined);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:466:  const header = `Folded context active — ${activeFold.details.trigger === "auto" ? "auto" : "manual"} · ${activeFold.details.entryCount} entries`;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:467:  const footer = "Same session preserved. Continue normally, or use /unfold to restore full context.";
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:468:  ctx.ui.setWidget("fold-summary", [header, ...buildFoldPreviewLines(activeFold.summaryText), footer]);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:471:function createSyntheticFoldContextMessage(activeFold: ActiveFoldInfo): AgentMessage {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:475:    content: buildFoldContextMessage(activeFold.summaryText),
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:478:    timestamp: activeFold.details.foldedAt,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:482:function parseAutoFoldArguments(args: string[]): ParsedAutoFoldArgs | null {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:483:  const first = args[0]?.trim().toLowerCase();
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:490:  if (first === "on") {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:493:    const parsedRounds = Number.parseInt(first, 10);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:501:async function prepareFold(ctx: ExtensionContext, trigger: "manual" | "auto", instruction = ""): Promise<PreparedFold | null> {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:502:  const branch = ctx.sessionManager.getBranch();
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:503:  const globalConfig = await loadGlobalConfig();
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:504:  const state = getFoldStateFromBranch(branch, globalConfig);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:505:  const leaf = ctx.sessionManager.getLeafEntry();
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:506:  const cutoffTimestamp = leaf ? getEntryTimestampMs(leaf) : Date.now();
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:508:  const conversationText = buildConversationText(branch);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:509:  if (!conversationText.trim()) {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:510:    if (ctx.hasUI) ctx.ui.notify("Nothing to fold yet", "warning");
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:514:  const summary = await summarize(ctx, conversationText, instruction);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:515:  const details: FoldSummaryDetails = {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:516:    foldId: `fold-${Date.now().toString(36)}`,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:517:    foldedAt: Date.now(),
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:520:    sourceLeafId: ctx.sessionManager.getLeafId(),
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:521:    userInstruction: instruction || undefined,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:522:    summaryText: summary,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:528:    summary,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:533:async function createFold(pi: ExtensionAPI, ctx: ExtensionContext, trigger: "manual" | "auto", instruction = ""): Promise<boolean> {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:534:  if (foldInProgress) {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:535:    if (ctx.hasUI) ctx.ui.notify("A fold is already in progress", "warning");
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:539:  foldInProgress = true;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:542:    const prepared = await prepareFold(ctx, trigger, instruction);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:547:      content: prepared.summary,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:555:      const suffix = prepared.state.activeFold ? " (updated existing folded context)" : "";
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:556:      const mode = trigger === "auto"
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:557:        ? `Auto folded after ${prepared.state.effectiveRounds ?? DEFAULT_AUTO_FOLD_THRESHOLD} rounds`
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:558:        : "Session folded";
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:565:      const message = error instanceof Error ? error.message : String(error);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:570:    foldInProgress = false;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:574:export default function (pi: ExtensionAPI) {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:576:    const details = message.details;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:577:    const foldedAt = details?.foldedAt ? new Date(details.foldedAt).toLocaleString() : "unknown time";
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:578:    const trigger = details?.trigger === "auto" ? "auto" : "manual";
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:579:    const header = `${theme.fg("accent", "▸ Folded previous context")} ${theme.fg("dim", `(${details?.entryCount ?? 0} entries, ${trigger}, ${foldedAt})`)}`;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:580:    const body = expanded
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:581:      ? `\n${typeof message.content === "string" ? message.content : extractTextParts(message.content).join("\n")}`
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:582:      : theme.fg("dim", "\n  Press Enter to expand this folded summary.");
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:584:    const box = new Box(1, 1, (s) => theme.bg("customMessageBg", s));
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:589:  pi.on("session_start", async (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:593:  pi.on("session_tree", async (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:597:  pi.on("session_compact", async (_event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:601:  pi.on("context", async (event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:602:    const activeFold = getActiveFoldInfo(ctx.sessionManager.getBranch());
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:603:    const messages: AgentMessage[] = [];
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:604:    let injectedFoldContext = false;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:606:    for (const message of event.messages) {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:607:      const custom = message as CustomLikeMessage;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:610:        if (custom.customType === FOLD_CONTROL_TYPE) continue;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:611:        if (custom.customType === FOLD_AUTO_CONFIG_TYPE) continue;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:613:          if (!activeFold) continue;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:614:          if (isFoldSummaryDetails(custom.details) && custom.details.foldId !== activeFold.details.foldId) continue;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:615:          if (!injectedFoldContext) {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:616:            messages.push(createSyntheticFoldContextMessage(activeFold));
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:617:            injectedFoldContext = true;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:619:          continue;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:623:      if (activeFold && message.role === "compactionSummary") {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:624:        if (!injectedFoldContext) {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:625:          messages.push(createSyntheticFoldContextMessage(activeFold));
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:626:          injectedFoldContext = true;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:628:        continue;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:632:        const timestamp = getMessageTimestampMs(message);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:634:          if (!injectedFoldContext) {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:635:            messages.push(createSyntheticFoldContextMessage(activeFold));
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:636:            injectedFoldContext = true;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:638:          continue;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:645:    if (activeFold && !injectedFoldContext) {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:646:      messages.unshift(createSyntheticFoldContextMessage(activeFold));
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:652:  pi.on("turn_end", async (event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:655:    const globalConfig = await loadGlobalConfig();
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:656:    const state = getFoldStateFromBranch(ctx.sessionManager.getBranch(), globalConfig);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:657:    const roundsThreshold = state.effectiveRounds;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:666:  pi.registerCommand("fold", {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:667:    description: "Fold earlier conversation into a summary inside the current session (usage: /fold [instruction])",
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:668:    handler: async (args, ctx: ExtensionCommandContext) => {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:674:  pi.registerCommand("unfold", {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:675:    description: "Restore the full earlier context after a /fold",
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:676:    handler: async (_args, ctx: ExtensionCommandContext) => {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:678:      const globalConfig = await loadGlobalConfig();
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:679:      const state = getFoldStateFromBranch(ctx.sessionManager.getBranch(), globalConfig);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:681:        ctx.ui.notify("No active folded context", "warning");
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:687:        content: "unfold-all",
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:690:          action: "unfold-all",
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:691:          unfoldedAt: Date.now(),
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:692:        } satisfies FoldControlDetails,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:697:      ctx.ui.notify("Full earlier context restored", "info");
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:701:  pi.registerCommand("fold-auto", {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:702:    description: "Configure auto fold for this session or globally (usage: /fold-auto [10|off|inherit|status] or /fold-auto global [10|off|on|status])",
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:703:    handler: async (args, ctx: ExtensionCommandContext) => {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:704:      const tokens = args.trim().split(/\s+/).filter(Boolean);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:705:      const globalConfig = await loadGlobalConfig();
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:706:      const state = getFoldStateFromBranch(ctx.sessionManager.getBranch(), globalConfig);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:709:        const roundsProgress = state.effectiveRounds === null ? "off" : `${state.roundsSinceReset}/${state.effectiveRounds}`;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:711:          `fold-auto session=${formatThreshold(state.sessionRounds)} global=${formatThreshold(globalConfig.defaultRounds)} effective=${formatThreshold(state.effectiveRounds)} rounds=${roundsProgress}`,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:718:        const subcommand = tokens[1]?.toLowerCase();
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:720:          ctx.ui.notify(`fold-auto global=${formatThreshold(globalConfig.defaultRounds)}`, "info");
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:725:          const builtIn = getBuiltInGlobalConfig();
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:726:          await saveGlobalConfig(builtIn);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:727:          ctx.ui.notify(`Global auto fold reset to built-in default: ${describeAutoFoldSetting(builtIn.defaultRounds)}`, "info");
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:731:        const parsedGlobal = parseAutoFoldArguments(tokens.slice(1));
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:733:          ctx.ui.notify("Usage: /fold-auto global [10|off|on|status]", "warning");
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:737:        const nextConfig: GlobalFoldConfig = {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:740:        await saveGlobalConfig(nextConfig);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:743:            ? "Global auto fold disabled"
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:744:            : `Global auto fold enabled: ${describeAutoFoldSetting(parsedGlobal.rounds)}`,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:750:      const parsed = parseAutoFoldArguments(tokens);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:752:        ctx.ui.notify("Usage: /fold-auto [10|off|inherit|status] or /fold-auto global [10|off|on|status]", "warning");
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:759:          content: "auto-fold config inherited from global default",
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:763:          } satisfies FoldAutoConfigDetails,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:769:          `Session auto fold now inherits global default: ${describeAutoFoldSetting(globalConfig.defaultRounds)}`,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:777:        content: parsed.rounds === null
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:778:          ? "auto-fold disabled for this session"
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:779:          : `auto-fold rounds=${parsed.rounds} for this session`,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:783:        } satisfies FoldAutoConfigDetails,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:790:          ? "Auto fold disabled for this session"
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:791:          : `Auto fold enabled for this session: ${describeAutoFoldSetting(parsed.rounds)}`,
+/Users/mac_522/.pi/agent/extensions/fold.ts:6:import { complete } from "@earendil-works/pi-ai";
+/Users/mac_522/.pi/agent/extensions/fold.ts:7:import type { ExtensionAPI, ExtensionCommandContext, ExtensionContext, SessionEntry } from "@earendil-works/pi-coding-agent";
+/Users/mac_522/.pi/agent/extensions/fold.ts:10:type ContentBlock = {
+/Users/mac_522/.pi/agent/extensions/fold.ts:18:  foldId: string;
+/Users/mac_522/.pi/agent/extensions/fold.ts:19:  foldedAt: number;
+/Users/mac_522/.pi/agent/extensions/fold.ts:23:  userInstruction?: string;
+/Users/mac_522/.pi/agent/extensions/fold.ts:24:  summaryText?: string;
+/Users/mac_522/.pi/agent/extensions/fold.ts:28:type FoldControlDetails = {
+/Users/mac_522/.pi/agent/extensions/fold.ts:29:  action: "unfold-all";
+/Users/mac_522/.pi/agent/extensions/fold.ts:30:  unfoldedAt: number;
+/Users/mac_522/.pi/agent/extensions/fold.ts:33:type FoldAutoConfigDetails = {
+/Users/mac_522/.pi/agent/extensions/fold.ts:39:type GlobalFoldConfig = {
+/Users/mac_522/.pi/agent/extensions/fold.ts:45:  sessionRounds: number | null | undefined;
+/Users/mac_522/.pi/agent/extensions/fold.ts:52:  summary: string;
+/Users/mac_522/.pi/agent/extensions/fold.ts:58:  summaryText: string;
+/Users/mac_522/.pi/agent/extensions/fold.ts:59:  source: "compaction" | "custom";
+/Users/mac_522/.pi/agent/extensions/fold.ts:64:  content?: string | Array<{ type?: string; text?: string }>;
+/Users/mac_522/.pi/agent/extensions/fold.ts:73:const MAX_CONVERSATION_CHARS = 80_000;
+/Users/mac_522/.pi/agent/extensions/fold.ts:74:const MAX_LOCAL_SUMMARY_CHARS = 12_000;
+/Users/mac_522/.pi/agent/extensions/fold.ts:75:const DEFAULT_AUTO_FOLD_THRESHOLD = 10;
+/Users/mac_522/.pi/agent/extensions/fold.ts:76:const FOLD_SUMMARY_TYPE = "fold-summary";
+/Users/mac_522/.pi/agent/extensions/fold.ts:77:const FOLD_CONTROL_TYPE = "fold-control";
+/Users/mac_522/.pi/agent/extensions/fold.ts:78:const FOLD_AUTO_CONFIG_TYPE = "fold-auto-config";
+/Users/mac_522/.pi/agent/extensions/fold.ts:79:const GLOBAL_CONFIG_PATH = fileURLToPath(new URL("./fold-auto.json", import.meta.url));
+/Users/mac_522/.pi/agent/extensions/fold.ts:81:let globalConfigCache: GlobalFoldConfig | null = null;
+/Users/mac_522/.pi/agent/extensions/fold.ts:82:let globalConfigPromise: Promise<GlobalFoldConfig> | null = null;
+/Users/mac_522/.pi/agent/extensions/fold.ts:83:let foldInProgress = false;
+/Users/mac_522/.pi/agent/extensions/fold.ts:85:function extractTextParts(content: unknown): string[] {
+/Users/mac_522/.pi/agent/extensions/fold.ts:86:  if (typeof content === "string") return [content];
+/Users/mac_522/.pi/agent/extensions/fold.ts:87:  if (!Array.isArray(content)) return [];
+/Users/mac_522/.pi/agent/extensions/fold.ts:89:  const textParts: string[] = [];
+/Users/mac_522/.pi/agent/extensions/fold.ts:90:  for (const part of content) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:91:    if (!part || typeof part !== "object") continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:92:    const block = part as ContentBlock;
+/Users/mac_522/.pi/agent/extensions/fold.ts:98:function extractToolCallLines(content: unknown): string[] {
+/Users/mac_522/.pi/agent/extensions/fold.ts:99:  if (!Array.isArray(content)) return [];
+/Users/mac_522/.pi/agent/extensions/fold.ts:100:  const lines: string[] = [];
+/Users/mac_522/.pi/agent/extensions/fold.ts:101:  for (const part of content) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:102:    if (!part || typeof part !== "object") continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:103:    const block = part as ContentBlock;
+/Users/mac_522/.pi/agent/extensions/fold.ts:104:    if (block.type !== "toolCall" || typeof block.name !== "string") continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:110:function normalizePositiveThreshold(value: unknown): number | undefined {
+/Users/mac_522/.pi/agent/extensions/fold.ts:115:function getConfiguredRounds(details: FoldAutoConfigDetails): number | null | undefined {
+/Users/mac_522/.pi/agent/extensions/fold.ts:116:  const raw = details.rounds !== undefined ? details.rounds : details.threshold;
+/Users/mac_522/.pi/agent/extensions/fold.ts:122:function getEntryTimestampMs(entry: SessionEntry): number {
+/Users/mac_522/.pi/agent/extensions/fold.ts:123:  const value = new Date(entry.timestamp).getTime();
+/Users/mac_522/.pi/agent/extensions/fold.ts:127:function getMessageTimestampMs(message: AgentMessage): number {
+/Users/mac_522/.pi/agent/extensions/fold.ts:128:  const value = (message as { timestamp?: number }).timestamp;
+/Users/mac_522/.pi/agent/extensions/fold.ts:132:function isCustomMessageEntry(entry: SessionEntry): entry is SessionEntry & {
+/Users/mac_522/.pi/agent/extensions/fold.ts:135:  content: unknown;
+/Users/mac_522/.pi/agent/extensions/fold.ts:142:function isFoldSummaryDetails(value: unknown): value is FoldSummaryDetails {
+/Users/mac_522/.pi/agent/extensions/fold.ts:144:  const v = value as Partial<FoldSummaryDetails>;
+/Users/mac_522/.pi/agent/extensions/fold.ts:145:  return typeof v.foldId === "string"
+/Users/mac_522/.pi/agent/extensions/fold.ts:146:    && typeof v.foldedAt === "number"
+/Users/mac_522/.pi/agent/extensions/fold.ts:149:    && (v.summaryText === undefined || typeof v.summaryText === "string")
+/Users/mac_522/.pi/agent/extensions/fold.ts:153:function isFoldControlDetails(value: unknown): value is FoldControlDetails {
+/Users/mac_522/.pi/agent/extensions/fold.ts:155:  const v = value as Partial<FoldControlDetails>;
+/Users/mac_522/.pi/agent/extensions/fold.ts:156:  return v.action === "unfold-all" && typeof v.unfoldedAt === "number";
+/Users/mac_522/.pi/agent/extensions/fold.ts:159:function isFoldAutoConfigDetails(value: unknown): value is FoldAutoConfigDetails {
+/Users/mac_522/.pi/agent/extensions/fold.ts:161:  const v = value as Partial<FoldAutoConfigDetails>;
+/Users/mac_522/.pi/agent/extensions/fold.ts:162:  const roundsOk = v.rounds === undefined || v.rounds === null || typeof v.rounds === "number";
+/Users/mac_522/.pi/agent/extensions/fold.ts:163:  const legacyOk = v.threshold === undefined || v.threshold === null || typeof v.threshold === "number";
+/Users/mac_522/.pi/agent/extensions/fold.ts:164:  const inheritOk = v.inheritGlobal === undefined || typeof v.inheritGlobal === "boolean";
+/Users/mac_522/.pi/agent/extensions/fold.ts:168:function formatThreshold(value: number | null | undefined): string {
+/Users/mac_522/.pi/agent/extensions/fold.ts:174:function describeAutoFoldSetting(rounds: number | null): string {
+/Users/mac_522/.pi/agent/extensions/fold.ts:179:function getBuiltInGlobalConfig(): GlobalFoldConfig {
+/Users/mac_522/.pi/agent/extensions/fold.ts:185:async function loadGlobalConfig(): Promise<GlobalFoldConfig> {
+/Users/mac_522/.pi/agent/extensions/fold.ts:186:  if (globalConfigCache) return globalConfigCache;
+/Users/mac_522/.pi/agent/extensions/fold.ts:187:  if (globalConfigPromise) return globalConfigPromise;
+/Users/mac_522/.pi/agent/extensions/fold.ts:189:  globalConfigPromise = (async () => {
+/Users/mac_522/.pi/agent/extensions/fold.ts:191:      const raw = await readFile(GLOBAL_CONFIG_PATH, "utf8");
+/Users/mac_522/.pi/agent/extensions/fold.ts:192:      const parsed = JSON.parse(raw) as {
+/Users/mac_522/.pi/agent/extensions/fold.ts:197:      const roundsSource = parsed.defaultRounds ?? parsed.defaultThreshold;
+/Users/mac_522/.pi/agent/extensions/fold.ts:198:      const normalizedRounds = roundsSource === null ? null : normalizePositiveThreshold(roundsSource);
+/Users/mac_522/.pi/agent/extensions/fold.ts:200:      globalConfigCache = {
+/Users/mac_522/.pi/agent/extensions/fold.ts:204:      globalConfigCache = getBuiltInGlobalConfig();
+/Users/mac_522/.pi/agent/extensions/fold.ts:207:    return globalConfigCache;
+/Users/mac_522/.pi/agent/extensions/fold.ts:211:    return await globalConfigPromise;
+/Users/mac_522/.pi/agent/extensions/fold.ts:213:    globalConfigPromise = null;
+/Users/mac_522/.pi/agent/extensions/fold.ts:217:async function saveGlobalConfig(config: GlobalFoldConfig): Promise<GlobalFoldConfig> {
+/Users/mac_522/.pi/agent/extensions/fold.ts:219:  await writeFile(GLOBAL_CONFIG_PATH, `${JSON.stringify(config, null, 2)}\n`, "utf8");
+/Users/mac_522/.pi/agent/extensions/fold.ts:220:  globalConfigCache = config;
+/Users/mac_522/.pi/agent/extensions/fold.ts:221:  globalConfigPromise = null;
+/Users/mac_522/.pi/agent/extensions/fold.ts:222:  return config;
+/Users/mac_522/.pi/agent/extensions/fold.ts:225:function getFoldStateFromBranch(entries: SessionEntry[], globalConfig: GlobalFoldConfig): FoldState {
+/Users/mac_522/.pi/agent/extensions/fold.ts:227:  let sessionRounds: number | null | undefined;
+/Users/mac_522/.pi/agent/extensions/fold.ts:228:  let effectiveRounds = globalConfig.defaultRounds;
+/Users/mac_522/.pi/agent/extensions/fold.ts:231:  for (const entry of entries) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:232:    if (entry.type === "compaction" && isFoldSummaryDetails(entry.details)) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:234:      resetTimestamp = Math.max(resetTimestamp, getEntryTimestampMs(entry), entry.details.foldedAt);
+/Users/mac_522/.pi/agent/extensions/fold.ts:235:      continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:238:    if (!isCustomMessageEntry(entry)) continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:242:      resetTimestamp = Math.max(resetTimestamp, entry.details.foldedAt);
+/Users/mac_522/.pi/agent/extensions/fold.ts:243:      continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:246:    if (entry.customType === FOLD_CONTROL_TYPE && isFoldControlDetails(entry.details)) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:248:      resetTimestamp = Math.max(resetTimestamp, entry.details.unfoldedAt);
+/Users/mac_522/.pi/agent/extensions/fold.ts:249:      continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:252:    if (entry.customType === FOLD_AUTO_CONFIG_TYPE && isFoldAutoConfigDetails(entry.details)) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:254:        sessionRounds = undefined;
+/Users/mac_522/.pi/agent/extensions/fold.ts:255:        effectiveRounds = globalConfig.defaultRounds;
+/Users/mac_522/.pi/agent/extensions/fold.ts:256:        continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:259:      const nextRounds = getConfiguredRounds(entry.details);
+/Users/mac_522/.pi/agent/extensions/fold.ts:261:        sessionRounds = nextRounds;
+/Users/mac_522/.pi/agent/extensions/fold.ts:270:  for (const entry of entries) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:271:    if (entry.type !== "message") continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:272:    if (getEntryTimestampMs(entry) <= resetTimestamp) continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:276:      continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:287:    sessionRounds,
+/Users/mac_522/.pi/agent/extensions/fold.ts:293:function getActiveFoldInfo(entries: SessionEntry[]): ActiveFoldInfo | null {
+/Users/mac_522/.pi/agent/extensions/fold.ts:296:  for (const entry of entries) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:297:    if (entry.type === "compaction" && isFoldSummaryDetails(entry.details)) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:300:        summaryText: entry.details.summaryText || entry.summary,
+/Users/mac_522/.pi/agent/extensions/fold.ts:301:        source: "compaction",
+/Users/mac_522/.pi/agent/extensions/fold.ts:303:      continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:306:    if (!isCustomMessageEntry(entry)) continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:311:        summaryText: entry.details.summaryText || extractTextParts(entry.content).join("\n").trim(),
+/Users/mac_522/.pi/agent/extensions/fold.ts:314:      continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:317:    if (entry.customType === FOLD_CONTROL_TYPE && isFoldControlDetails(entry.details)) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:325:function buildConversationText(entries: SessionEntry[]): string {
+/Users/mac_522/.pi/agent/extensions/fold.ts:326:  const sections: string[] = [];
+/Users/mac_522/.pi/agent/extensions/fold.ts:328:  for (const entry of entries) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:330:      const role = entry.message.role;
+/Users/mac_522/.pi/agent/extensions/fold.ts:331:      if (role !== "user" && role !== "assistant") continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:333:      const lines: string[] = [];
+/Users/mac_522/.pi/agent/extensions/fold.ts:334:      const text = extractTextParts((entry.message as { content?: unknown }).content).join("\n").trim();
+/Users/mac_522/.pi/agent/extensions/fold.ts:336:      if (role === "assistant") lines.push(...extractToolCallLines((entry.message as { content?: unknown }).content));
+/Users/mac_522/.pi/agent/extensions/fold.ts:337:      if (lines.length > 0) sections.push(lines.join("\n"));
+/Users/mac_522/.pi/agent/extensions/fold.ts:338:      continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:341:    if (!isCustomMessageEntry(entry)) continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:342:    if (entry.customType !== FOLD_SUMMARY_TYPE) continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:344:    const text = extractTextParts(entry.content).join("\n").trim();
+/Users/mac_522/.pi/agent/extensions/fold.ts:345:    if (text) sections.push(`Previous folded summary:\n${text}`);
+/Users/mac_522/.pi/agent/extensions/fold.ts:348:  const conversation = sections.join("\n\n");
+/Users/mac_522/.pi/agent/extensions/fold.ts:349:  if (conversation.length <= MAX_CONVERSATION_CHARS) return conversation;
+/Users/mac_522/.pi/agent/extensions/fold.ts:350:  return conversation.slice(-MAX_CONVERSATION_CHARS);
+/Users/mac_522/.pi/agent/extensions/fold.ts:353:function buildFoldPrompt(conversationText: string, instruction: string): string {
+/Users/mac_522/.pi/agent/extensions/fold.ts:355:    "You are preparing a compact handoff summary for a long coding-agent session.",
+/Users/mac_522/.pi/agent/extensions/fold.ts:356:    "Summarize only durable context needed to continue the work.",
+/Users/mac_522/.pi/agent/extensions/fold.ts:360:    "- Important decisions and constraints",
+/Users/mac_522/.pi/agent/extensions/fold.ts:364:    instruction ? `- Extra instruction: ${instruction}` : "",
+/Users/mac_522/.pi/agent/extensions/fold.ts:366:    "Return concise Markdown. Do not invent facts.",
+/Users/mac_522/.pi/agent/extensions/fold.ts:368:    "<conversation>",
+/Users/mac_522/.pi/agent/extensions/fold.ts:369:    conversationText,
+/Users/mac_522/.pi/agent/extensions/fold.ts:370:    "</conversation>",
+/Users/mac_522/.pi/agent/extensions/fold.ts:371:  ].filter(Boolean).join("\n");
+/Users/mac_522/.pi/agent/extensions/fold.ts:374:function fallbackSummary(conversationText: string, instruction: string): string {
+/Users/mac_522/.pi/agent/extensions/fold.ts:375:  const tail = conversationText.length > MAX_LOCAL_SUMMARY_CHARS
+/Users/mac_522/.pi/agent/extensions/fold.ts:376:    ? conversationText.slice(-MAX_LOCAL_SUMMARY_CHARS)
+/Users/mac_522/.pi/agent/extensions/fold.ts:377:    : conversationText;
+/Users/mac_522/.pi/agent/extensions/fold.ts:380:    "## Folded session summary",
+/Users/mac_522/.pi/agent/extensions/fold.ts:382:    instruction ? `**Instruction:** ${instruction}` : undefined,
+/Users/mac_522/.pi/agent/extensions/fold.ts:384:    "AI summarization was unavailable, so this fold preserved the tail of the conversation.",
+/Users/mac_522/.pi/agent/extensions/fold.ts:389:  ].filter((x): x is string => typeof x === "string").join("\n");
+/Users/mac_522/.pi/agent/extensions/fold.ts:392:async function summarize(ctx: ExtensionContext, conversationText: string, instruction: string): Promise<string> {
+/Users/mac_522/.pi/agent/extensions/fold.ts:393:  const model = ctx.model;
+/Users/mac_522/.pi/agent/extensions/fold.ts:394:  if (!model) return fallbackSummary(conversationText, instruction);
+/Users/mac_522/.pi/agent/extensions/fold.ts:396:  const auth = await ctx.modelRegistry.getApiKeyAndHeaders(model);
+/Users/mac_522/.pi/agent/extensions/fold.ts:397:  if (!auth.ok || !auth.apiKey) return fallbackSummary(conversationText, instruction);
+/Users/mac_522/.pi/agent/extensions/fold.ts:400:    const response = await complete(
+/Users/mac_522/.pi/agent/extensions/fold.ts:405:            role: "user" as const,
+/Users/mac_522/.pi/agent/extensions/fold.ts:406:            content: [{ type: "text" as const, text: buildFoldPrompt(conversationText, instruction) }],
+/Users/mac_522/.pi/agent/extensions/fold.ts:414:        reasoningEffort: "medium",
+/Users/mac_522/.pi/agent/extensions/fold.ts:418:    const text = response.content
+/Users/mac_522/.pi/agent/extensions/fold.ts:419:      .filter((c): c is { type: "text"; text: string } => c.type === "text")
+/Users/mac_522/.pi/agent/extensions/fold.ts:424:    return text || fallbackSummary(conversationText, instruction);
+/Users/mac_522/.pi/agent/extensions/fold.ts:427:      fallbackSummary(conversationText, instruction),
+/Users/mac_522/.pi/agent/extensions/fold.ts:434:function buildFoldContextMessage(summary: string): string {
+/Users/mac_522/.pi/agent/extensions/fold.ts:436:    "# Folded previous context",
+/Users/mac_522/.pi/agent/extensions/fold.ts:438:    "Earlier conversation is hidden behind this fold, but the underlying session history is unchanged.",
+/Users/mac_522/.pi/agent/extensions/fold.ts:439:    "Use `/unfold` to restore the full earlier context.",
+/Users/mac_522/.pi/agent/extensions/fold.ts:441:    summary,
+/Users/mac_522/.pi/agent/extensions/fold.ts:445:function buildFoldPreviewLines(summary: string): string[] {
+/Users/mac_522/.pi/agent/extensions/fold.ts:446:  const lines = summary
+/Users/mac_522/.pi/agent/extensions/fold.ts:449:    .filter(Boolean)
+/Users/mac_522/.pi/agent/extensions/fold.ts:452:  const preview = lines.slice(0, 4).map((line) => line.length > 110 ? `${line.slice(0, 109)}…` : line);
+/Users/mac_522/.pi/agent/extensions/fold.ts:457:function refreshFoldWidget(ctx: ExtensionContext): void {
+/Users/mac_522/.pi/agent/extensions/fold.ts:460:  const activeFold = getActiveFoldInfo(ctx.sessionManager.getBranch());
+/Users/mac_522/.pi/agent/extensions/fold.ts:462:    ctx.ui.setWidget("fold-summary", undefined);
+/Users/mac_522/.pi/agent/extensions/fold.ts:466:  const header = `Folded context active — ${activeFold.details.trigger === "auto" ? "auto" : "manual"} · ${activeFold.details.entryCount} entries`;
+/Users/mac_522/.pi/agent/extensions/fold.ts:467:  const footer = "Same session preserved. Continue normally, or use /unfold to restore full context.";
+/Users/mac_522/.pi/agent/extensions/fold.ts:468:  ctx.ui.setWidget("fold-summary", [header, ...buildFoldPreviewLines(activeFold.summaryText), footer]);
+/Users/mac_522/.pi/agent/extensions/fold.ts:471:function createSyntheticFoldContextMessage(activeFold: ActiveFoldInfo): AgentMessage {
+/Users/mac_522/.pi/agent/extensions/fold.ts:475:    content: buildFoldContextMessage(activeFold.summaryText),
+/Users/mac_522/.pi/agent/extensions/fold.ts:478:    timestamp: activeFold.details.foldedAt,
+/Users/mac_522/.pi/agent/extensions/fold.ts:482:function parseAutoFoldArguments(args: string[]): ParsedAutoFoldArgs | null {
+/Users/mac_522/.pi/agent/extensions/fold.ts:483:  const first = args[0]?.trim().toLowerCase();
+/Users/mac_522/.pi/agent/extensions/fold.ts:490:  if (first === "on") {
+/Users/mac_522/.pi/agent/extensions/fold.ts:493:    const parsedRounds = Number.parseInt(first, 10);
+/Users/mac_522/.pi/agent/extensions/fold.ts:501:async function prepareFold(ctx: ExtensionContext, trigger: "manual" | "auto", instruction = ""): Promise<PreparedFold | null> {
+/Users/mac_522/.pi/agent/extensions/fold.ts:502:  const branch = ctx.sessionManager.getBranch();
+/Users/mac_522/.pi/agent/extensions/fold.ts:503:  const globalConfig = await loadGlobalConfig();
+/Users/mac_522/.pi/agent/extensions/fold.ts:504:  const state = getFoldStateFromBranch(branch, globalConfig);
+/Users/mac_522/.pi/agent/extensions/fold.ts:505:  const leaf = ctx.sessionManager.getLeafEntry();
+/Users/mac_522/.pi/agent/extensions/fold.ts:506:  const cutoffTimestamp = leaf ? getEntryTimestampMs(leaf) : Date.now();
+/Users/mac_522/.pi/agent/extensions/fold.ts:508:  const conversationText = buildConversationText(branch);
+/Users/mac_522/.pi/agent/extensions/fold.ts:509:  if (!conversationText.trim()) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:510:    if (ctx.hasUI) ctx.ui.notify("Nothing to fold yet", "warning");
+/Users/mac_522/.pi/agent/extensions/fold.ts:514:  const summary = await summarize(ctx, conversationText, instruction);
+/Users/mac_522/.pi/agent/extensions/fold.ts:515:  const details: FoldSummaryDetails = {
+/Users/mac_522/.pi/agent/extensions/fold.ts:516:    foldId: `fold-${Date.now().toString(36)}`,
+/Users/mac_522/.pi/agent/extensions/fold.ts:517:    foldedAt: Date.now(),
+/Users/mac_522/.pi/agent/extensions/fold.ts:520:    sourceLeafId: ctx.sessionManager.getLeafId(),
+/Users/mac_522/.pi/agent/extensions/fold.ts:521:    userInstruction: instruction || undefined,
+/Users/mac_522/.pi/agent/extensions/fold.ts:522:    summaryText: summary,
+/Users/mac_522/.pi/agent/extensions/fold.ts:528:    summary,
+/Users/mac_522/.pi/agent/extensions/fold.ts:533:async function createFold(pi: ExtensionAPI, ctx: ExtensionContext, trigger: "manual" | "auto", instruction = ""): Promise<boolean> {
+/Users/mac_522/.pi/agent/extensions/fold.ts:534:  if (foldInProgress) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:535:    if (ctx.hasUI) ctx.ui.notify("A fold is already in progress", "warning");
+/Users/mac_522/.pi/agent/extensions/fold.ts:539:  foldInProgress = true;
+/Users/mac_522/.pi/agent/extensions/fold.ts:542:    const prepared = await prepareFold(ctx, trigger, instruction);
+/Users/mac_522/.pi/agent/extensions/fold.ts:547:      content: prepared.summary,
+/Users/mac_522/.pi/agent/extensions/fold.ts:555:      const suffix = prepared.state.activeFold ? " (updated existing folded context)" : "";
+/Users/mac_522/.pi/agent/extensions/fold.ts:556:      const mode = trigger === "auto"
+/Users/mac_522/.pi/agent/extensions/fold.ts:557:        ? `Auto folded after ${prepared.state.effectiveRounds ?? DEFAULT_AUTO_FOLD_THRESHOLD} rounds`
+/Users/mac_522/.pi/agent/extensions/fold.ts:558:        : "Session folded";
+/Users/mac_522/.pi/agent/extensions/fold.ts:565:      const message = error instanceof Error ? error.message : String(error);
+/Users/mac_522/.pi/agent/extensions/fold.ts:570:    foldInProgress = false;
+/Users/mac_522/.pi/agent/extensions/fold.ts:574:export default function (pi: ExtensionAPI) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:576:    const details = message.details;
+/Users/mac_522/.pi/agent/extensions/fold.ts:577:    const foldedAt = details?.foldedAt ? new Date(details.foldedAt).toLocaleString() : "unknown time";
+/Users/mac_522/.pi/agent/extensions/fold.ts:578:    const trigger = details?.trigger === "auto" ? "auto" : "manual";
+/Users/mac_522/.pi/agent/extensions/fold.ts:579:    const header = `${theme.fg("accent", "▸ Folded previous context")} ${theme.fg("dim", `(${details?.entryCount ?? 0} entries, ${trigger}, ${foldedAt})`)}`;
+/Users/mac_522/.pi/agent/extensions/fold.ts:580:    const body = expanded
+/Users/mac_522/.pi/agent/extensions/fold.ts:581:      ? `\n${typeof message.content === "string" ? message.content : extractTextParts(message.content).join("\n")}`
+/Users/mac_522/.pi/agent/extensions/fold.ts:582:      : theme.fg("dim", "\n  Press Enter to expand this folded summary.");
+/Users/mac_522/.pi/agent/extensions/fold.ts:584:    const box = new Box(1, 1, (s) => theme.bg("customMessageBg", s));
+/Users/mac_522/.pi/agent/extensions/fold.ts:589:  pi.on("session_start", async (_event, ctx) => {
+/Users/mac_522/.pi/agent/extensions/fold.ts:593:  pi.on("session_tree", async (_event, ctx) => {
+/Users/mac_522/.pi/agent/extensions/fold.ts:597:  pi.on("session_compact", async (_event, ctx) => {
+/Users/mac_522/.pi/agent/extensions/fold.ts:601:  pi.on("context", async (event, ctx) => {
+/Users/mac_522/.pi/agent/extensions/fold.ts:602:    const activeFold = getActiveFoldInfo(ctx.sessionManager.getBranch());
+/Users/mac_522/.pi/agent/extensions/fold.ts:603:    const messages: AgentMessage[] = [];
+/Users/mac_522/.pi/agent/extensions/fold.ts:604:    let injectedFoldContext = false;
+/Users/mac_522/.pi/agent/extensions/fold.ts:606:    for (const message of event.messages) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:607:      const custom = message as CustomLikeMessage;
+/Users/mac_522/.pi/agent/extensions/fold.ts:610:        if (custom.customType === FOLD_CONTROL_TYPE) continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:611:        if (custom.customType === FOLD_AUTO_CONFIG_TYPE) continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:613:          if (!activeFold) continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:614:          if (isFoldSummaryDetails(custom.details) && custom.details.foldId !== activeFold.details.foldId) continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:615:          if (!injectedFoldContext) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:616:            messages.push(createSyntheticFoldContextMessage(activeFold));
+/Users/mac_522/.pi/agent/extensions/fold.ts:617:            injectedFoldContext = true;
+/Users/mac_522/.pi/agent/extensions/fold.ts:619:          continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:623:      if (activeFold && message.role === "compactionSummary") {
+/Users/mac_522/.pi/agent/extensions/fold.ts:624:        if (!injectedFoldContext) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:625:          messages.push(createSyntheticFoldContextMessage(activeFold));
+/Users/mac_522/.pi/agent/extensions/fold.ts:626:          injectedFoldContext = true;
+/Users/mac_522/.pi/agent/extensions/fold.ts:628:        continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:632:        const timestamp = getMessageTimestampMs(message);
+/Users/mac_522/.pi/agent/extensions/fold.ts:634:          if (!injectedFoldContext) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:635:            messages.push(createSyntheticFoldContextMessage(activeFold));
+/Users/mac_522/.pi/agent/extensions/fold.ts:636:            injectedFoldContext = true;
+/Users/mac_522/.pi/agent/extensions/fold.ts:638:          continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:645:    if (activeFold && !injectedFoldContext) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:646:      messages.unshift(createSyntheticFoldContextMessage(activeFold));
+/Users/mac_522/.pi/agent/extensions/fold.ts:652:  pi.on("turn_end", async (event, ctx) => {
+/Users/mac_522/.pi/agent/extensions/fold.ts:655:    const globalConfig = await loadGlobalConfig();
+/Users/mac_522/.pi/agent/extensions/fold.ts:656:    const state = getFoldStateFromBranch(ctx.sessionManager.getBranch(), globalConfig);
+/Users/mac_522/.pi/agent/extensions/fold.ts:657:    const roundsThreshold = state.effectiveRounds;
+/Users/mac_522/.pi/agent/extensions/fold.ts:666:  pi.registerCommand("fold", {
+/Users/mac_522/.pi/agent/extensions/fold.ts:667:    description: "Fold earlier conversation into a summary inside the current session (usage: /fold [instruction])",
+/Users/mac_522/.pi/agent/extensions/fold.ts:668:    handler: async (args, ctx: ExtensionCommandContext) => {
+/Users/mac_522/.pi/agent/extensions/fold.ts:674:  pi.registerCommand("unfold", {
+/Users/mac_522/.pi/agent/extensions/fold.ts:675:    description: "Restore the full earlier context after a /fold",
+/Users/mac_522/.pi/agent/extensions/fold.ts:676:    handler: async (_args, ctx: ExtensionCommandContext) => {
+/Users/mac_522/.pi/agent/extensions/fold.ts:678:      const globalConfig = await loadGlobalConfig();
+/Users/mac_522/.pi/agent/extensions/fold.ts:679:      const state = getFoldStateFromBranch(ctx.sessionManager.getBranch(), globalConfig);
+/Users/mac_522/.pi/agent/extensions/fold.ts:681:        ctx.ui.notify("No active folded context", "warning");
+/Users/mac_522/.pi/agent/extensions/fold.ts:687:        content: "unfold-all",
+/Users/mac_522/.pi/agent/extensions/fold.ts:690:          action: "unfold-all",
+/Users/mac_522/.pi/agent/extensions/fold.ts:691:          unfoldedAt: Date.now(),
+/Users/mac_522/.pi/agent/extensions/fold.ts:692:        } satisfies FoldControlDetails,
+/Users/mac_522/.pi/agent/extensions/fold.ts:697:      ctx.ui.notify("Full earlier context restored", "info");
+/Users/mac_522/.pi/agent/extensions/fold.ts:701:  pi.registerCommand("fold-auto", {
+/Users/mac_522/.pi/agent/extensions/fold.ts:702:    description: "Configure auto fold for this session or globally (usage: /fold-auto [10|off|inherit|status] or /fold-auto global [10|off|on|status])",
+/Users/mac_522/.pi/agent/extensions/fold.ts:703:    handler: async (args, ctx: ExtensionCommandContext) => {
+/Users/mac_522/.pi/agent/extensions/fold.ts:704:      const tokens = args.trim().split(/\s+/).filter(Boolean);
+/Users/mac_522/.pi/agent/extensions/fold.ts:705:      const globalConfig = await loadGlobalConfig();
+/Users/mac_522/.pi/agent/extensions/fold.ts:706:      const state = getFoldStateFromBranch(ctx.sessionManager.getBranch(), globalConfig);
+/Users/mac_522/.pi/agent/extensions/fold.ts:709:        const roundsProgress = state.effectiveRounds === null ? "off" : `${state.roundsSinceReset}/${state.effectiveRounds}`;
+/Users/mac_522/.pi/agent/extensions/fold.ts:711:          `fold-auto session=${formatThreshold(state.sessionRounds)} global=${formatThreshold(globalConfig.defaultRounds)} effective=${formatThreshold(state.effectiveRounds)} rounds=${roundsProgress}`,
+/Users/mac_522/.pi/agent/extensions/fold.ts:718:        const subcommand = tokens[1]?.toLowerCase();
+/Users/mac_522/.pi/agent/extensions/fold.ts:720:          ctx.ui.notify(`fold-auto global=${formatThreshold(globalConfig.defaultRounds)}`, "info");
+/Users/mac_522/.pi/agent/extensions/fold.ts:725:          const builtIn = getBuiltInGlobalConfig();
+/Users/mac_522/.pi/agent/extensions/fold.ts:726:          await saveGlobalConfig(builtIn);
+/Users/mac_522/.pi/agent/extensions/fold.ts:727:          ctx.ui.notify(`Global auto fold reset to built-in default: ${describeAutoFoldSetting(builtIn.defaultRounds)}`, "info");
+/Users/mac_522/.pi/agent/extensions/fold.ts:731:        const parsedGlobal = parseAutoFoldArguments(tokens.slice(1));
+/Users/mac_522/.pi/agent/extensions/fold.ts:733:          ctx.ui.notify("Usage: /fold-auto global [10|off|on|status]", "warning");
+/Users/mac_522/.pi/agent/extensions/fold.ts:737:        const nextConfig: GlobalFoldConfig = {
+/Users/mac_522/.pi/agent/extensions/fold.ts:740:        await saveGlobalConfig(nextConfig);
+/Users/mac_522/.pi/agent/extensions/fold.ts:743:            ? "Global auto fold disabled"
+/Users/mac_522/.pi/agent/extensions/fold.ts:744:            : `Global auto fold enabled: ${describeAutoFoldSetting(parsedGlobal.rounds)}`,
+/Users/mac_522/.pi/agent/extensions/fold.ts:750:      const parsed = parseAutoFoldArguments(tokens);
+/Users/mac_522/.pi/agent/extensions/fold.ts:752:        ctx.ui.notify("Usage: /fold-auto [10|off|inherit|status] or /fold-auto global [10|off|on|status]", "warning");
+/Users/mac_522/.pi/agent/extensions/fold.ts:759:          content: "auto-fold config inherited from global default",
+/Users/mac_522/.pi/agent/extensions/fold.ts:763:          } satisfies FoldAutoConfigDetails,
+/Users/mac_522/.pi/agent/extensions/fold.ts:769:          `Session auto fold now inherits global default: ${describeAutoFoldSetting(globalConfig.defaultRounds)}`,
+/Users/mac_522/.pi/agent/extensions/fold.ts:777:        content: parsed.rounds === null
+/Users/mac_522/.pi/agent/extensions/fold.ts:778:          ? "auto-fold disabled for this session"
+/Users/mac_522/.pi/agent/extensions/fold.ts:779:          : `auto-fold rounds=${parsed.rounds} for this session`,
+/Users/mac_522/.pi/agent/extensions/fold.ts:783:        } satisfies FoldAutoConfigDetails,
+/Users/mac_522/.pi/agent/extensions/fold.ts:790:          ? "Auto fold disabled for this session"
+/Users/mac_522/.pi/agent/extensions/fold.ts:791:          : `Auto fold enabled for this session: ${describeAutoFoldSetting(parsed.rounds)}`,
+
+[Showing lines 157-606 of 606 (50.0KB limit). Full output: /var/folders/7m/csfvhz791k527kby7nxl7cbc0000h_/T/pi-bash-2caf7bbff1787dc2.log]

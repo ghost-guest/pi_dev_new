@@ -1,0 +1,136 @@
+rg: -g: No such file or directory (os error 2)
+rg: *.*: No such file or directory (os error 2)
+packages/coding-agent/README.md:242:pi --session <path|id> # Use specific session file or ID
+packages/coding-agent/README.md:243:pi --fork <path|id>    # Fork specific session file or ID into a new session
+packages/coding-agent/README.md:246:Use `/session` in interactive mode to see the current session ID before reusing it with `--session <id>` or `--fork <id>`.
+packages/coding-agent/README.md:258:**`/fork`** - Create a new session file from a previous user message on the active branch. Opens a selector, copies the active path up to that point, and places the selected prompt in the editor for modification.
+packages/coding-agent/README.md:260:**`/clone`** - Duplicate the current active branch into a new session file at the current position. The new session keeps the full active-path history and opens with an empty editor.
+packages/coding-agent/README.md:262:**`--fork <path|id>`** - Fork an existing session file or partial session UUID directly from the CLI. This copies the full source session into a new session file in the current project.
+packages/coding-agent/README.md:544:| `--session <path\|id>` | Use specific session file or partial UUID |
+packages/coding-agent/README.md:545:| `--fork <path\|id>` | Fork specific session file or partial UUID into a new session |
+packages/coding-agent/README.md:546:| `--session-dir <dir>` | Custom session storage directory |
+packages/coding-agent/README.md:631:| `PI_CODING_AGENT_SESSION_DIR` | Override session storage directory (overridden by `--session-dir`) |
+packages/coding-agent/docs/quickstart.md:139:pi --session <path|id> # Open a specific session
+packages/coding-agent/docs/session-format.md:367:- `SessionManager.open(path, sessionDir?)` - Open existing session file
+packages/coding-agent/docs/session-format.md:378:- `setSessionFile(path)` - Switch to a different session file
+packages/coding-agent/docs/session-format.md:379:- `createBranchedSession(leafId)` - Extract branch to new session file
+packages/coding-agent/docs/settings.md:162:| `sessionDir` | string | - | Directory where session files are stored. Accepts absolute or relative paths, plus `~`. |
+packages/coding-agent/docs/settings.md:168:When multiple sources specify a session directory, precedence is `--session-dir`, `PI_CODING_AGENT_SESSION_DIR`, then `sessionDir` in settings.json.
+packages/coding-agent/docs/extensions.md:1020:- `parentSession`: parent session file to record in the new session header
+packages/coding-agent/docs/extensions.md:1026:Fork from a specific entry, creating a new session file:
+packages/coding-agent/docs/extensions.md:1069:### ctx.switchSession(sessionPath, options?)
+packages/coding-agent/docs/extensions.md:1071:Switch to a different session file:
+packages/coding-agent/docs/extensions.md:1074:const result = await ctx.switchSession("/path/to/session.jsonl", {
+packages/coding-agent/docs/extensions.md:1102:      await ctx.switchSession(choice, {
+packages/coding-agent/docs/usage.md:45:| `/session` | Show session file, ID, messages, tokens, and cost |
+packages/coding-agent/docs/usage.md:79:pi --session <path|id> # Use a specific session file or session ID
+packages/coding-agent/docs/usage.md:80:pi --fork <path|id>    # Fork a session into a new session file
+packages/coding-agent/docs/usage.md:85:- `/session` shows the current session file and ID.
+packages/coding-agent/docs/usage.md:88:- `/clone` duplicates the current active branch into a new session file.
+packages/coding-agent/docs/usage.md:177:| `--session <path\|id>` | Use a specific session file or partial UUID |
+packages/coding-agent/docs/usage.md:178:| `--fork <path\|id>` | Fork a session file or partial UUID into a new session |
+packages/coding-agent/docs/usage.md:179:| `--session-dir <dir>` | Custom session storage directory |
+packages/coding-agent/docs/usage.md:265:| `PI_CODING_AGENT_SESSION_DIR` | Override session storage directory; overridden by `--session-dir` |
+packages/coding-agent/docs/sessions.md:13:pi --session <path|id> # Use a specific session file or partial session ID
+packages/coding-agent/docs/sessions.md:14:pi --fork <path|id>    # Fork a session file or partial session ID into a new session
+packages/coding-agent/docs/sessions.md:17:Use `/session` in interactive mode to see the current session file, session ID, message count, tokens, and cost.
+packages/coding-agent/docs/sessions.md:114:| Output | Same session file | New session file | New session file |
+packages/coding-agent/docs/sessions.md:119:Use `/tree` when you want to keep alternatives together. Use `/fork` or `/clone` when you want a separate session file.
+packages/coding-agent/docs/index.md:68:- [Session format](session-format.md) - JSONL session file format, entry types, and SessionManager API.
+packages/coding-agent/docs/rpc.md:17:- `--session-dir <path>`: Custom session storage directory
+packages/coding-agent/docs/rpc.md:565:Load a different session file. Can be cancelled by a `session_before_switch` extension event handler.
+packages/coding-agent/docs/rpc.md:568:{"type": "switch_session", "sessionPath": "/path/to/session.jsonl"}
+packages/coding-agent/docs/sdk.md:103:  // In-place tree navigation within the current session file
+packages/coding-agent/docs/sdk.md:160:- `switchSession()`
+packages/coding-agent/docs/sdk.md:736:await runtime.switchSession("/path/to/session.jsonl");
+packages/coding-agent/src/modes/print-mode.ts:90:				switchSession: async (sessionPath, switchOptions) => {
+packages/coding-agent/src/modes/print-mode.ts:91:					return runtimeHost.switchSession(sessionPath, switchOptions);
+packages/coding-agent/src/modes/rpc/rpc-mode.ts:334:				switchSession: async (sessionPath, options) => {
+packages/coding-agent/src/modes/rpc/rpc-mode.ts:335:					return runtimeHost.switchSession(sessionPath, options);
+packages/coding-agent/src/modes/rpc/rpc-mode.ts:568:				const result = await runtimeHost.switchSession(command.sessionPath);
+packages/coding-agent/src/modes/rpc/rpc-client.ts:331:	 * Switch to a different session file.
+packages/coding-agent/src/modes/rpc/rpc-client.ts:334:	async switchSession(sessionPath: string): Promise<{ cancelled: boolean }> {
+packages/coding-agent/src/modes/rpc/rpc-client.ts:335:		const response = await this.send({ type: "switch_session", sessionPath });
+packages/coding-agent/src/modes/rpc/rpc-types.ts:58:	| { id?: string; type: "switch_session"; sessionPath: string }
+packages/coding-agent/src/main.ts:193:		parsed.session ? "--session" : undefined,
+packages/coding-agent/src/main.ts:497:	// --session and --resume may select a session from another project, so project-local
+packages/coding-agent/src/cli/args.ts:96:		} else if (arg === "--session" && i + 1 < args.length) {
+packages/coding-agent/src/cli/args.ts:100:		} else if (arg === "--session-dir" && i + 1 < args.length) {
+packages/coding-agent/src/cli/args.ts:226:  --session <path|id>            Use specific session file or partial UUID
+packages/coding-agent/src/cli/args.ts:227:  --fork <path|id>               Fork specific session file or partial UUID into a new session
+packages/coding-agent/src/cli/args.ts:228:  --session-dir <dir>            Directory for session storage and lookup
+packages/coding-agent/src/cli/args.ts:246:  --export <file>                Export session file to HTML and exit
+packages/coding-agent/src/cli/args.ts:298:  # Export a session file to HTML
+packages/coding-agent/src/cli/args.ts:339:  ${ENV_SESSION_DIR.padEnd(32)} - Session storage directory (overridden by --session-dir)
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:212:		const sessionPath = canonicalizePath(session.path) ?? session.path;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:213:		byPath.set(sessionPath, { session, children: [] });
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:219:		const sessionPath = canonicalizePath(session.path) ?? session.path;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:220:		const node = byPath.get(sessionPath)!;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:285:	public onSelect?: (sessionPath: string) => void;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:293:	public onDeleteSession?: (sessionPath: string) => Promise<void>;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:294:	public onRenameSession?: (sessionPath: string) => void;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:629: * Delete a session file, trying the `trash` CLI first, then falling back to unlink
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:632:	sessionPath: string,
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:635:	const trashArgs = sessionPath.startsWith("-") ? ["--", sessionPath] : [sessionPath];
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:652:	if (trashResult.status === 0 || !existsSync(sessionPath)) {
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:658:		await unlink(sessionPath);
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:699:	private renameSession?: (sessionPath: string, currentName: string | undefined) => Promise<void>;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:739:		onSelect: (sessionPath: string) => void,
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:744:			renameSession?: (sessionPath: string, currentName: string | undefined) => Promise<void>;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:780:		this.sessionList.onSelect = (sessionPath) => {
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:782:			onSelect(sessionPath);
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:795:		this.sessionList.onRenameSession = (sessionPath) => {
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:801:			const session = sessions.find((s) => s.path === sessionPath);
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:802:			this.enterRenameMode(sessionPath, session?.name);
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:820:		this.sessionList.onDeleteSession = async (sessionPath: string) => {
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:821:			const result = await deleteSessionFile(sessionPath);
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:825:					this.currentSessions = this.currentSessions.filter((s) => s.path !== sessionPath);
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:828:					this.allSessions = this.allSessions.filter((s) => s.path !== sessionPath);
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:854:	private enterRenameMode(sessionPath: string, currentName: string | undefined): void {
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:856:		this.renameTargetPath = sessionPath;
+packages/coding-agent/src/core/agent-session.ts:714:			"This extension ctx is stale after session replacement or reload. Do not use a captured pi or command ctx after ctx.newSession(), ctx.fork(), ctx.switchSession(), or ctx.reload(). For newSession, fork, and switchSession, move post-replacement work into withSession and use the ctx passed to withSession. For reload, do not use the old ctx after await ctx.reload().",
+packages/coding-agent/src/core/agent-session.ts:826:	/** Current session file path, or undefined if sessions are disabled */
+packages/coding-agent/src/core/agent-session.ts:2654:	 * Unlike fork() which creates a new session file, this stays in the same file.
+packages/coding-agent/src/core/settings-manager.ts:113:	sessionDir?: string; // Custom session storage directory (same format as --session-dir CLI flag)
+packages/coding-agent/src/core/session-manager.ts:739:	/** Switch to a different session file (used for resume and branching) */
+packages/coding-agent/src/core/session-manager.ts:768:			this.sessionFile = explicitPath; // preserve explicit path from --session flag
+packages/coding-agent/src/core/session-manager.ts:1208:	 * Create a new session file containing only the path from root to the specified leaf.
+packages/coding-agent/src/core/session-manager.ts:1210:	 * Returns the new session file path, or undefined if not persisting.
+packages/coding-agent/src/core/session-manager.ts:1317:	 * Open a specific session file.
+packages/coding-agent/src/core/session-manager.ts:1318:	 * @param path Path to session file
+packages/coding-agent/src/core/session-manager.ts:1355:	 * @param sourcePath Path to the source session file
+packages/coding-agent/src/core/session-manager.ts:1364:			throw new Error(`Cannot fork: source session file is empty or invalid: ${resolvedSourcePath}`);
+packages/coding-agent/src/core/session-manager.ts:1377:		// Create new session file with new ID but forked content
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1542:				switchSession: async (sessionPath, options) => {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1543:					return this.handleResumeSession(sessionPath, options);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4448:				async (sessionPath) => {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4450:					await this.handleResumeSession(sessionPath);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4478:		sessionPath: string,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4487:			const result = await this.runtimeHost.switchSession(sessionPath, {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4503:				const result = await this.runtimeHost.switchSession(sessionPath, {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4514:			return this.handleFatalRuntimeError("Failed to resume session", error);
+packages/coding-agent/src/core/extensions/runner.ts:168:	sessionPath: string,
+packages/coding-agent/src/core/extensions/runner.ts:468:		message = "This extension ctx is stale after session replacement or reload. Do not use a captured pi or command ctx after ctx.newSession(), ctx.fork(), ctx.switchSession(), or ctx.reload(). For newSession, fork, and switchSession, move post-replacement work into withSession and use the ctx passed to withSession. For reload, do not use the old ctx after await ctx.reload().",
+packages/coding-agent/src/core/extensions/runner.ts:661:		context.switchSession = (sessionPath, options) => {
+packages/coding-agent/src/core/extensions/runner.ts:663:			return this.switchSessionHandler(sessionPath, options);
+packages/coding-agent/src/core/export-html/index.ts:285: * Export session file to HTML (standalone, without AgentState).
+packages/coding-agent/src/core/export-html/index.ts:286: * Used by CLI for exporting arbitrary session files.
+packages/coding-agent/src/core/extensions/loader.ts:157:				"This extension ctx is stale after session replacement or reload. Do not use a captured pi or command ctx after ctx.newSession(), ctx.fork(), ctx.switchSession(), or ctx.reload(). For newSession, fork, and switchSession, move post-replacement work into withSession and use the ctx passed to withSession. For reload, do not use the old ctx after await ctx.reload().";
+packages/coding-agent/src/core/session-cwd.ts:41:	return `cwd from session file does not exist\n${issue.sessionCwd}\n\ncontinue in current cwd\n${issue.fallbackCwd}`;
+packages/coding-agent/src/core/compaction/compaction.ts:52:			// fromHook field kept for session file compatibility
+packages/coding-agent/src/core/agent-session-runtime.ts:187:	async switchSession(
+packages/coding-agent/src/core/agent-session-runtime.ts:188:		sessionPath: string,
+packages/coding-agent/src/core/agent-session-runtime.ts:191:		const beforeResult = await this.emitBeforeSwitch("resume", sessionPath);
+packages/coding-agent/src/core/agent-session-runtime.ts:197:		const sessionManager = SessionManager.open(sessionPath, undefined, options?.cwdOverride);
+packages/coding-agent/src/core/agent-session-runtime.ts:277:				throw new Error("Persisted session is missing a session file");
+packages/coding-agent/src/core/extensions/types.ts:347:	/** Fork from a specific entry, creating a new session file. */
+packages/coding-agent/src/core/extensions/types.ts:359:	/** Switch to a different session file. */
+packages/coding-agent/src/core/extensions/types.ts:360:	switchSession(
+packages/coding-agent/src/core/extensions/types.ts:361:		sessionPath: string,
+packages/coding-agent/src/core/extensions/types.ts:372: * This is passed to `withSession()` callbacks on `newSession()`, `fork()`, and `switchSession()`.
+packages/coding-agent/src/core/extensions/types.ts:520:	/** Previously active session file. Present for "new", "resume", and "fork". */
+packages/coding-agent/src/core/extensions/types.ts:558:	/** Destination session file when shutting down due to session replacement. */
+packages/coding-agent/src/core/extensions/types.ts:1528:		sessionPath: string,
+
+
+Command exited with code 2

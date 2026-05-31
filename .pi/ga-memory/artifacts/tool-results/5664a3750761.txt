@@ -1,0 +1,202 @@
+packages/coding-agent/src/main.ts:305:	// - supports --model <provider>/<pattern>
+packages/coding-agent/src/main.ts:583:					message: "--api-key requires a model to be specified via --model, --provider/--model, or --models",
+packages/coding-agent/src/main.ts:586:				authStorage.setRuntimeApiKey(sessionOptions.model.provider, parsed.apiKey);
+packages/coding-agent/src/modes/rpc/rpc-mode.ts:440:					sessionId: session.sessionId,
+packages/coding-agent/src/modes/rpc/rpc-mode.ts:455:				const model = models.find((m) => m.provider === command.provider && m.id === command.modelId);
+packages/coding-agent/src/modes/rpc/rpc-mode.ts:457:					return error(id, "set_model", `Model not found: ${command.provider}/${command.modelId}`);
+packages/coding-agent/src/core/auth-guidance.ts:23:	const providerDisplay = provider === UNKNOWN_PROVIDER ? "the selected model" : provider;
+packages/coding-agent/src/modes/rpc/rpc-types.ts:31:	| { id?: string; type: "set_model"; provider: string; modelId: string }
+packages/coding-agent/src/modes/rpc/rpc-types.ts:99:	sessionId: string;
+packages/coding-agent/src/modes/rpc/rpc-client.ts:214:	 * Set model by provider and ID.
+packages/coding-agent/src/modes/rpc/rpc-client.ts:216:	async setModel(provider: string, modelId: string): Promise<{ provider: string; id: string }> {
+packages/coding-agent/src/modes/rpc/rpc-client.ts:217:		const response = await this.send({ type: "set_model", provider, modelId });
+packages/coding-agent/src/modes/rpc/rpc-client.ts:225:		model: { provider: string; id: string };
+packages/coding-agent/src/cli/list-models.ts:45:		filteredModels = fuzzyFilter(models, searchPattern, (m) => `${m.provider} ${m.id}`);
+packages/coding-agent/src/core/model-registry.ts:256:	/** Per-model overrides: provider -> modelId -> override */
+packages/coding-agent/src/core/model-registry.ts:412:	/** Load built-in models and apply provider/model overrides */
+packages/coding-agent/src/core/model-registry.ts:418:			const models = getModels(provider as KnownProvider) as Model<Api>[];
+packages/coding-agent/src/core/model-registry.ts:420:			const perModelOverrides = modelOverrides.get(provider);
+packages/coding-agent/src/core/model-registry.ts:430:						compat: mergeCompat(model.compat, providerOverride.compat),
+packages/coding-agent/src/core/model-registry.ts:445:	/** Merge custom models into built-in list by provider+id (custom wins on conflicts). */
+packages/coding-agent/src/core/model-registry.ts:496:					modelOverrides.set(providerName, new Map(Object.entries(providerConfig.modelOverrides)));
+packages/coding-agent/src/core/model-registry.ts:497:					for (const [modelId, modelOverride] of Object.entries(providerConfig.modelOverrides)) {
+packages/coding-agent/src/core/model-registry.ts:520:			const models = providerConfig.models ?? [];
+packages/coding-agent/src/core/model-registry.ts:522:				providerConfig.modelOverrides && Object.keys(providerConfig.modelOverrides).length > 0;
+packages/coding-agent/src/core/model-registry.ts:548:						`Provider ${providerName}, model ${modelDef.id}: no "api" specified. Set at provider or model level.`,
+packages/coding-agent/src/core/model-registry.ts:553:				if (!modelDef.id) throw new Error(`Provider ${providerName}: model missing "id"`);
+packages/coding-agent/src/core/model-registry.ts:580:			const modelDefs = providerConfig.models ?? [];
+packages/coding-agent/src/core/model-registry.ts:586:				const api = modelDef.api ?? providerConfig.api ?? builtInDefaults?.api;
+packages/coding-agent/src/core/model-registry.ts:589:				const baseUrl = modelDef.baseUrl ?? providerConfig.baseUrl ?? builtInDefaults?.baseUrl;
+packages/coding-agent/src/core/model-registry.ts:634:	 * Find a model by provider and ID.
+packages/coding-agent/src/core/model-registry.ts:637:		return this.models.find((m) => m.provider === provider && m.id === modelId);
+packages/coding-agent/src/core/model-registry.ts:645:			this.authStorage.hasAuth(model.provider) ||
+packages/coding-agent/src/core/model-registry.ts:646:			this.providerRequestConfigs.get(model.provider)?.apiKey !== undefined
+packages/coding-agent/src/core/model-registry.ts:687:			const providerConfig = this.providerRequestConfigs.get(model.provider);
+packages/coding-agent/src/core/model-registry.ts:688:			const apiKeyFromAuthStorage = await this.authStorage.getApiKey(model.provider, { includeFallback: false });
+packages/coding-agent/src/core/model-registry.ts:692:					? resolveConfigValueOrThrow(providerConfig.apiKey, `API key for provider "${model.provider}"`)
+packages/coding-agent/src/core/model-registry.ts:695:			const providerHeaders = resolveHeadersOrThrow(providerConfig?.headers, `provider "${model.provider}"`);
+packages/coding-agent/src/core/model-registry.ts:697:				this.modelRequestHeaders.get(this.getModelRequestKey(model.provider, model.id)),
+packages/coding-agent/src/core/model-registry.ts:698:				`model "${model.provider}/${model.id}"`,
+packages/coding-agent/src/core/model-registry.ts:702:				model.headers || providerHeaders || modelHeaders
+packages/coding-agent/src/core/model-registry.ts:703:					? { ...model.headers, ...providerHeaders, ...modelHeaders }
+packages/coding-agent/src/core/model-registry.ts:708:					return { ok: false, error: `No API key found for "${model.provider}"` };
+packages/coding-agent/src/core/model-registry.ts:785:		const cred = this.authStorage.get(model.provider);
+packages/coding-agent/src/core/model-registry.ts:792:	 * If provider has models: replaces all existing models for this provider.
+packages/coding-agent/src/core/model-registry.ts:806:	 * built-in models overridden by this provider are restored to their original state.
+packages/coding-agent/src/core/model-registry.ts:837:		if (config.streamSimple && !config.api) {
+packages/coding-agent/src/core/model-registry.ts:838:			throw new Error(`Provider ${providerName}: "api" is required when registering streamSimple.`);
+packages/coding-agent/src/core/model-registry.ts:871:		if (config.streamSimple) {
+packages/coding-agent/src/core/model-registry.ts:872:			const streamSimple = config.streamSimple;
+packages/coding-agent/src/core/model-registry.ts:876:					stream: (model, context, options) => streamSimple(model, context, options as SimpleStreamOptions),
+packages/coding-agent/src/core/model-registry.ts:877:					streamSimple,
+packages/coding-agent/src/core/model-registry.ts:886:			// Full replacement: remove existing models for this provider
+packages/coding-agent/src/core/model-registry.ts:887:			this.models = this.models.filter((m) => m.provider !== providerName);
+packages/coding-agent/src/core/model-registry.ts:939:	streamSimple?: (model: Model<Api>, context: Context, options?: SimpleStreamOptions) => AssistantMessageEventStream;
+packages/coding-agent/src/core/extensions/types.ts:1241:	 * Register or override a model provider.
+packages/coding-agent/src/core/extensions/types.ts:1243:	 * If `models` is provided: replaces all existing models for this provider.
+packages/coding-agent/src/core/extensions/types.ts:1246:	 * If `streamSimple` is provided: registers a custom API stream handler.
+packages/coding-agent/src/core/extensions/types.ts:1297:	 * Removes all models belonging to the named provider and restores any
+packages/coding-agent/src/core/extensions/types.ts:1298:	 * built-in models that were overridden by it. Has no effect if the provider
+packages/coding-agent/src/core/extensions/types.ts:1327:	/** Optional streamSimple handler for custom APIs. */
+packages/coding-agent/src/core/extensions/types.ts:1328:	streamSimple?: (model: Model<Api>, context: Context, options?: SimpleStreamOptions) => AssistantMessageEventStream;
+packages/coding-agent/src/core/extensions/types.ts:1333:	/** Models to register. If provided, replaces all existing models for this provider. */
+packages/coding-agent/src/core/extensions/types.ts:1345:		/** Optional: modify models for this provider (e.g., update baseUrl based on credentials). */
+packages/coding-agent/src/core/extensions/types.ts:1350:/** Configuration for a model within a provider. */
+packages/coding-agent/src/cli/args.ts:218:  --model <pattern>              Model pattern or ID (supports "provider/id" and optional ":<thinking>")
+packages/coding-agent/src/cli/args.ts:277:  # Use model with provider prefix (no --provider needed)
+packages/coding-agent/src/core/auth-storage.ts:460:	 * 5. Fallback resolver (models.json custom providers)
+packages/coding-agent/src/core/auth-storage.ts:503:					// Refresh truly failed - return undefined so model discovery skips this provider
+packages/coding-agent/src/core/auth-storage.ts:517:		// Fall back to custom resolver (e.g., models.json custom providers)
+packages/coding-agent/src/core/agent-session.ts:34:	streamSimple,
+packages/coding-agent/src/core/agent-session.ts:219:	sessionId: string;
+packages/coding-agent/src/core/agent-session.ts:357:				throw new Error(formatNoApiKeyFoundMessage(model.provider));
+packages/coding-agent/src/core/agent-session.ts:368:				`Authentication failed for "${model.provider}". ` +
+packages/coding-agent/src/core/agent-session.ts:370:					`Run '/login ${model.provider}' to re-authenticate.`,
+packages/coding-agent/src/core/agent-session.ts:373:		throw new Error(formatNoApiKeyFoundMessage(model.provider));
+packages/coding-agent/src/core/agent-session.ts:380:		if (this.agent.streamFn === streamSimple) {
+packages/coding-agent/src/core/agent-session.ts:716:		cleanupSessionResources(this.sessionId);
+packages/coding-agent/src/core/agent-session.ts:830:	get sessionId(): string {
+packages/coding-agent/src/core/agent-session.ts:1033:						`Authentication failed for "${this.model.provider}". ` +
+packages/coding-agent/src/core/agent-session.ts:1035:							`Run '/login ${this.model.provider}' to re-authenticate.`,
+packages/coding-agent/src/core/agent-session.ts:1038:				throw new Error(formatNoApiKeyFoundMessage(this.model.provider));
+packages/coding-agent/src/core/agent-session.ts:1419:			throw new Error(`No API key for ${model.provider}/${model.id}`);
+packages/coding-agent/src/core/agent-session.ts:1425:		this.sessionManager.appendModelChange(model.provider, model.id);
+packages/coding-agent/src/core/agent-session.ts:1426:		this.settingsManager.setDefaultModelAndProvider(model.provider, model.id);
+packages/coding-agent/src/core/agent-session.ts:1451:		const currentModel = this.model;
+packages/coding-agent/src/core/agent-session.ts:1452:		let currentIndex = scopedModels.findIndex((sm) => modelsAreEqual(sm.model, currentModel));
+packages/coding-agent/src/core/agent-session.ts:1462:		this.sessionManager.appendModelChange(next.model.provider, next.model.id);
+packages/coding-agent/src/core/agent-session.ts:1463:		this.settingsManager.setDefaultModelAndProvider(next.model.provider, next.model.id);
+packages/coding-agent/src/core/agent-session.ts:1471:		await this._emitModelSelect(next.model, currentModel, "cycle");
+packages/coding-agent/src/core/agent-session.ts:1480:		const currentModel = this.model;
+packages/coding-agent/src/core/agent-session.ts:1481:		let currentIndex = availableModels.findIndex((m) => modelsAreEqual(m, currentModel));
+packages/coding-agent/src/core/agent-session.ts:1496:		await this._emitModelSelect(nextModel, currentModel, "cycle");
+packages/coding-agent/src/core/agent-session.ts:1782:			this.model && assistantMessage.provider === this.model.provider && assistantMessage.model === this.model.id;
+packages/coding-agent/src/core/agent-session.ts:1871:			if (this.agent.streamFn === streamSimple) {
+packages/coding-agent/src/core/agent-session.ts:2127:		const currentModel = this.model;
+packages/coding-agent/src/core/agent-session.ts:2128:		if (!currentModel) {
+packages/coding-agent/src/core/agent-session.ts:2132:		const refreshedModel = this._modelRegistry.find(currentModel.provider, currentModel.id);
+packages/coding-agent/src/core/agent-session.ts:2133:		if (!refreshedModel || refreshedModel === currentModel) {
+packages/coding-agent/src/core/agent-session.ts:2904:			sessionId: this.sessionId,
+packages/coding-agent/src/core/keybindings.ts:164:		description: "Toggle all models for provider",
+packages/coding-agent/src/core/session-manager.ts:165:	model: { provider: string; modelId: string } | null;
+packages/coding-agent/src/core/session-manager.ts:356:	let model: { provider: string; modelId: string } | null = null;
+packages/coding-agent/src/core/session-manager.ts:363:			model = { provider: entry.provider, modelId: entry.modelId };
+packages/coding-agent/src/core/session-manager.ts:365:			model = { provider: entry.message.provider, modelId: entry.message.model };
+packages/coding-agent/src/core/session-manager.ts:712:	private sessionId: string = "";
+packages/coding-agent/src/core/session-manager.ts:757:			this.sessionId = header?.id ?? createSessionId();
+packages/coding-agent/src/core/session-manager.ts:773:		this.sessionId = options?.id ?? createSessionId();
+packages/coding-agent/src/core/session-manager.ts:778:			id: this.sessionId,
+packages/coding-agent/src/core/session-manager.ts:791:			this.sessionFile = join(this.getSessionDir(), `${fileTimestamp}_${this.sessionId}.jsonl`);
+packages/coding-agent/src/core/session-manager.ts:836:		return this.sessionId;
+packages/coding-agent/src/core/session-manager.ts:1265:			this.sessionId = newSessionId;
+packages/coding-agent/src/core/session-manager.ts:1301:		this.sessionId = newSessionId;
+packages/coding-agent/src/core/sdk.ts:3:import { clampThinkingLevel, type Message, type Model, streamSimple } from "@earendil-works/pi-ai";
+packages/coding-agent/src/core/sdk.ts:132:	sessionId?: string,
+packages/coding-agent/src/core/sdk.ts:135:		sessionId &&
+packages/coding-agent/src/core/sdk.ts:136:		(model.provider === "opencode" || model.provider === "opencode-go" || model.baseUrl.includes("opencode.ai"))
+packages/coding-agent/src/core/sdk.ts:138:		return { "x-opencode-session": sessionId, "x-opencode-client": "pi" };
+packages/coding-agent/src/core/sdk.ts:145:	if (model.provider === "openrouter" || model.baseUrl.includes("openrouter.ai")) {
+packages/coding-agent/src/core/sdk.ts:154:		model.provider === "cloudflare-workers-ai" ||
+packages/coding-agent/src/core/sdk.ts:155:		model.provider === "cloudflare-ai-gateway" ||
+packages/coding-agent/src/core/sdk.ts:232:		const restoredModel = modelRegistry.find(existingSession.model.provider, existingSession.model.modelId);
+packages/coding-agent/src/core/sdk.ts:237:			modelFallbackMessage = `Could not restore model ${existingSession.model.provider}/${existingSession.model.modelId}`;
+packages/coding-agent/src/core/sdk.ts:241:	// If still no model, use findInitialModel (checks settings default, then provider defaults)
+packages/coding-agent/src/core/sdk.ts:255:			modelFallbackMessage += `. Using ${model.provider}/${model.id}`;
+packages/coding-agent/src/core/sdk.ts:343:			const attributionHeaders = getAttributionHeaders(model, settingsManager, options?.sessionId);
+packages/coding-agent/src/core/sdk.ts:344:			return streamSimple(model, context, {
+packages/coding-agent/src/core/sdk.ts:356:		onPayload: async (payload, _model) => {
+packages/coding-agent/src/core/sdk.ts:374:		sessionId: sessionManager.getSessionId(),
+packages/coding-agent/src/core/sdk.ts:396:			sessionManager.appendModelChange(model.provider, model.id);
+packages/coding-agent/src/core/model-resolver.ts:13:/** Default model IDs for each known provider */
+packages/coding-agent/src/core/model-resolver.ts:70: * Supports either a bare model id or a canonical provider/modelId reference.
+packages/coding-agent/src/core/model-resolver.ts:85:		(model) => `${model.provider}/${model.id}`.toLowerCase() === normalizedReference,
+packages/coding-agent/src/core/model-resolver.ts:101:					model.provider.toLowerCase() === provider.toLowerCase() &&
+packages/coding-agent/src/core/model-resolver.ts:331: * - --model <provider>/<pattern>
+packages/coding-agent/src/core/model-resolver.ts:370:			error: `Unknown provider "${cliProvider}". Use --list-models to see available providers/models.`,
+packages/coding-agent/src/core/model-resolver.ts:408:		// If both were provided, tolerate --model <provider>/<pattern> by stripping the provider prefix
+packages/coding-agent/src/core/model-resolver.ts:548:		// Try to find a default model from known providers
+packages/coding-agent/src/core/model-resolver.ts:571:	currentModel: Model<Api> | undefined,
+packages/coding-agent/src/core/model-resolver.ts:595:	if (currentModel) {
+packages/coding-agent/src/core/model-resolver.ts:597:			console.log(chalk.dim(`Falling back to: ${currentModel.provider}/${currentModel.id}`));
+packages/coding-agent/src/core/model-resolver.ts:600:			model: currentModel,
+packages/coding-agent/src/core/model-resolver.ts:601:			fallbackMessage: `Could not restore model ${savedProvider}/${savedModelId} (${reason}). Using ${currentModel.provider}/${currentModel.id}.`,
+packages/coding-agent/src/core/model-resolver.ts:609:		// Try to find a default model from known providers
+packages/coding-agent/src/core/model-resolver.ts:631:			fallbackMessage: `Could not restore model ${savedProvider}/${savedModelId} (${reason}). Using ${fallbackModel.provider}/${fallbackModel.id}.`,
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:118:			const fullId = `${model.provider}/${model.id}`;
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:172:			`${keyText("app.models.toggleProvider")} provider`,
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:185:		this.filteredItems = query ? fuzzyFilter(items, query, (i) => `${i.model.id} ${i.model.provider}`) : items;
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:215:			const providerBadge = theme.fg("muted", ` [${item.model.provider}]`);
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:217:			this.listContainer.addChild(new Text(`${prefix}${modelText}${providerBadge}${status}`, 0, 0));
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:309:				const provider = item.model.provider;
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:310:				const providerIds = this.allIds.filter((id) => this.modelsById.get(id)!.provider === provider);
+packages/coding-agent/src/core/export-html/template.js:1279:          return `<div class="model-change" id="${entryDomId}">${tsHtml}Switched to model: <span class="model-name">${escapeHtml(entry.provider)}/${escapeHtml(entry.modelId)}</span></div>`;
+packages/coding-agent/src/core/export-html/template.js:1324:              if (msg.model) models.add(msg.provider ? `${msg.provider}/${msg.model}` : msg.model);
+packages/coding-agent/src/modes/interactive/components/footer.ts:181:			rightSide = `(${state.model!.provider}) ${rightSideWithoutProvider}`;
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:52:	private currentModel?: Model<any>;
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:66:		currentModel: Model<any> | undefined,
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:77:		this.currentModel = currentModel;
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:96:			const hintText = "Only showing models from configured providers. Use /login to add providers.";
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:153:				provider: model.provider,
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:168:			const refreshed = this.modelRegistry.find(scoped.model.provider, scoped.model.id);
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:172:			provider: scoped.model.provider,
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:178:		const currentIndex = this.filteredModels.findIndex((item) => modelsAreEqual(this.currentModel, item.model));
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:185:		// Sort: current model first, then by provider
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:187:			const aIsCurrent = modelsAreEqual(this.currentModel, a.model);
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:188:			const bIsCurrent = modelsAreEqual(this.currentModel, b.model);
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:210:		const currentIndex = this.activeModels.findIndex((item) => modelsAreEqual(this.currentModel, item.model));
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:246:			const isCurrent = modelsAreEqual(this.currentModel, item.model);
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:254:				line = `${prefix + theme.fg("accent", modelText)} ${providerBadge}${checkmark}`;
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:259:				line = `${modelText} ${providerBadge}${checkmark}`;
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:313:			const selectedModel = this.filteredModels[this.selectedIndex];
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:314:			if (selectedModel) {
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:315:				this.handleSelect(selectedModel.model);
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:331:		this.settingsManager.setDefaultModelAndProvider(model.provider, model.id);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:194:	return !!model && model.provider === "unknown" && model.id === "unknown" && model.api === "unknown";
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:473:				// Fuzzy filter by model ID + provider (allows "opus anthropic" to match)
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4044:		const uniqueProviders = new Set(models.map((m) => m.provider));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4057:		if (!model || model.provider !== "anthropic") {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4069:			const apiKey = await this.session.modelRegistry.getApiKeyForProvider(model.provider);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4131:			currentEnabledIds = sessionScopedModels.map((scoped) => `${scoped.model.provider}/${scoped.model.id}`);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4137:				currentEnabledIds = scopedModels.map((scoped) => `${scoped.model.provider}/${scoped.model.id}`);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4467:		const modelProviders = new Set(this.session.modelRegistry.getAll().map((model) => model.provider));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4474:				name: this.session.modelRegistry.getProviderDisplayName(providerId),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4494:				name: this.session.modelRegistry.getProviderDisplayName(providerId),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4557:				(providerId) => this.session.modelRegistry.getProviderAuthStatus(providerId),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4591:						this.session.modelRegistry.authStorage.logout(providerOption.id);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4622:		let selectedModel: Model<any> | undefined;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4626:			const providerModels = availableModels.filter((model) => model.provider === providerId);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4628:				selectionError = `${actionLabel}, but no default model is configured for provider "${providerId}". Use /model to select a model.`;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4630:				selectionError = `${actionLabel}, but no models are available for that provider. Use /model to select a model.`;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4633:				selectedModel = providerModels.find((model) => model.id === defaultModelId);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4634:				if (!selectedModel) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4638:						await this.session.setModel(selectedModel);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4640:						selectedModel = undefined;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4651:		if (selectedModel) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4652:			this.showStatus(`${actionLabel}. Selected ${selectedModel.id}. Credentials saved to ${getAuthPath()}`);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4653:			void this.maybeWarnAboutAnthropicSubscriptionAuth(selectedModel);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4654:			this.checkDaxnutsEasterEgg(selectedModel);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4723:			this.session.modelRegistry.authStorage.set(providerId, { type: "api_key", key: apiKey });
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4806:			await this.session.modelRegistry.authStorage.login(providerId as OAuthProviderId, {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5180:		info += `${theme.fg("dim", "ID:")} ${stats.sessionId}\n\n`;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5429:	private checkDaxnutsEasterEgg(model: { provider: string; id: string }): void {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5430:		if (model.provider === "opencode" && model.id.toLowerCase().includes("kimi-k2.5")) {

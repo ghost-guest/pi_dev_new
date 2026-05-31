@@ -1,0 +1,502 @@
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+import type { AgentMessage } from "@earendil-works/pi-agent-core";
+import { complete } from "@earendil-works/pi-ai";
+import type { ExtensionAPI, ExtensionCommandContext, ExtensionContext, SessionEntry } from "@earendil-works/pi-coding-agent";
+import { Box, Text } from "@earendil-works/pi-tui";
+
+type ContentBlock = {
+  type?: string;
+  text?: string;
+  name?: string;
+  arguments?: Record<string, unknown>;
+};
+
+type FoldSummaryDetails = {
+  foldId: string;
+  foldedAt: number;
+  cutoffTimestamp: number;
+  entryCount: number;
+  sourceLeafId?: string | null;
+  userInstruction?: string;
+  summaryText?: string;
+  trigger: "manual" | "auto";
+};
+
+type FoldControlDetails = {
+  action: "unfold-all";
+  unfoldedAt: number;
+};
+
+type FoldAutoConfigDetails = {
+  threshold?: number | null;
+  rounds?: number | null;
+  inheritGlobal?: boolean;
+};
+
+type GlobalFoldConfig = {
+  defaultRounds: number | null;
+};
+
+type FoldState = {
+  activeFold: FoldSummaryDetails | null;
+  sessionRounds: number | null | undefined;
+  effectiveRounds: number | null;
+  roundsSinceReset: number;
+};
+
+type PreparedFold = {
+  state: FoldState;
+  summary: string;
+  details: FoldSummaryDetails;
+};
+
+type ActiveFoldInfo = {
+  details: FoldSummaryDetails;
+  summaryText: string;
+  source: "compaction" | "custom";
+};
+
+type CustomLikeMessage = AgentMessage & {
+  customType?: string;
+  content?: string | Array<{ type?: string; text?: string }>;
+  details?: unknown;
+  timestamp?: number;
+};
+
+type ParsedAutoFoldArgs =
+  | { mode: "inherit" }
+  | { mode: "set"; rounds: number | null };
+
+const MAX_CONVERSATION_CHARS = 80_000;
+const MAX_LOCAL_SUMMARY_CHARS = 12_000;
+const DEFAULT_AUTO_FOLD_THRESHOLD = 10;
+const FOLD_SUMMARY_TYPE = "fold-summary";
+const FOLD_CONTROL_TYPE = "fold-control";
+const FOLD_AUTO_CONFIG_TYPE = "fold-auto-config";
+const GLOBAL_CONFIG_PATH = fileURLToPath(new URL("./fold-auto.json", import.meta.url));
+
+let globalConfigCache: GlobalFoldConfig | null = null;
+let globalConfigPromise: Promise<GlobalFoldConfig> | null = null;
+let foldInProgress = false;
+
+function extractTextParts(content: unknown): string[] {
+  if (typeof content === "string") return [content];
+  if (!Array.isArray(content)) return [];
+
+  const textParts: string[] = [];
+  for (const part of content) {
+    if (!part || typeof part !== "object") continue;
+    const block = part as ContentBlock;
+    if (block.type === "text" && typeof block.text === "string") textParts.push(block.text);
+  }
+  return textParts;
+}
+
+function extractToolCallLines(content: unknown): string[] {
+  if (!Array.isArray(content)) return [];
+  const lines: string[] = [];
+  for (const part of content) {
+    if (!part || typeof part !== "object") continue;
+    const block = part as ContentBlock;
+    if (block.type !== "toolCall" || typeof block.name !== "string") continue;
+    lines.push(`Tool ${block.name} called with ${JSON.stringify(block.arguments ?? {})}`);
+  }
+  return lines;
+}
+
+function normalizePositiveThreshold(value: unknown): number | undefined {
+  if (typeof value !== "number" || !Number.isFinite(value) || value <= 0) return undefined;
+  return Math.max(1, Math.floor(value));
+}
+
+function getConfiguredRounds(details: FoldAutoConfigDetails): number | null | undefined {
+  const raw = details.rounds !== undefined ? details.rounds : details.threshold;
+  if (raw === undefined) return undefined;
+  if (raw === null) return null;
+  return normalizePositiveThreshold(raw);
+}
+
+function getEntryTimestampMs(entry: SessionEntry): number {
+  const value = new Date(entry.timestamp).getTime();
+  return Number.isFinite(value) ? value : 0;
+}
+
+function getMessageTimestampMs(message: AgentMessage): number {
+  const value = (message as { timestamp?: number }).timestamp;
+  return typeof value === "number" && Number.isFinite(value) ? value : 0;
+}
+
+function isCustomMessageEntry(entry: SessionEntry): entry is SessionEntry & {
+  type: "custom_message";
+  customType: string;
+  content: unknown;
+  details?: unknown;
+  display: boolean;
+} {
+  return entry.type === "custom_message";
+}
+
+function isFoldSummaryDetails(value: unknown): value is FoldSummaryDetails {
+  if (!value || typeof value !== "object") return false;
+  const v = value as Partial<FoldSummaryDetails>;
+  return typeof v.foldId === "string"
+    && typeof v.foldedAt === "number"
+    && typeof v.cutoffTimestamp === "number"
+    && typeof v.entryCount === "number"
+    && (v.summaryText === undefined || typeof v.summaryText === "string")
+    && (v.trigger === "manual" || v.trigger === "auto");
+}
+
+function isFoldControlDetails(value: unknown): value is FoldControlDetails {
+  if (!value || typeof value !== "object") return false;
+  const v = value as Partial<FoldControlDetails>;
+  return v.action === "unfold-all" && typeof v.unfoldedAt === "number";
+}
+
+function isFoldAutoConfigDetails(value: unknown): value is FoldAutoConfigDetails {
+  if (!value || typeof value !== "object") return false;
+  const v = value as Partial<FoldAutoConfigDetails>;
+  const roundsOk = v.rounds === undefined || v.rounds === null || typeof v.rounds === "number";
+  const legacyOk = v.threshold === undefined || v.threshold === null || typeof v.threshold === "number";
+  const inheritOk = v.inheritGlobal === undefined || typeof v.inheritGlobal === "boolean";
+  return roundsOk && legacyOk && inheritOk;
+}
+
+function formatThreshold(value: number | null | undefined): string {
+  if (value === undefined) return "inherit";
+  if (value === null) return "off";
+  return String(value);
+}
+
+function describeAutoFoldSetting(rounds: number | null): string {
+  if (rounds === null) return "off";
+  return `every ${rounds} rounds`;
+}
+
+function getBuiltInGlobalConfig(): GlobalFoldConfig {
+  return {
+    defaultRounds: DEFAULT_AUTO_FOLD_THRESHOLD,
+  };
+}
+
+async function loadGlobalConfig(): Promise<GlobalFoldConfig> {
+  if (globalConfigCache) return globalConfigCache;
+  if (globalConfigPromise) return globalConfigPromise;
+
+  globalConfigPromise = (async () => {
+    try {
+      const raw = await readFile(GLOBAL_CONFIG_PATH, "utf8");
+      const parsed = JSON.parse(raw) as {
+        defaultThreshold?: unknown;
+        defaultRounds?: unknown;
+      };
+
+      const roundsSource = parsed.defaultRounds ?? parsed.defaultThreshold;
+      const normalizedRounds = roundsSource === null ? null : normalizePositiveThreshold(roundsSource);
+
+      globalConfigCache = {
+        defaultRounds: normalizedRounds ?? DEFAULT_AUTO_FOLD_THRESHOLD,
+      };
+    } catch {
+      globalConfigCache = getBuiltInGlobalConfig();
+    }
+
+    return globalConfigCache;
+  })();
+
+  try {
+    return await globalConfigPromise;
+  } finally {
+    globalConfigPromise = null;
+  }
+}
+
+async function saveGlobalConfig(config: GlobalFoldConfig): Promise<GlobalFoldConfig> {
+  await mkdir(dirname(GLOBAL_CONFIG_PATH), { recursive: true });
+  await writeFile(GLOBAL_CONFIG_PATH, `${JSON.stringify(config, null, 2)}\n`, "utf8");
+  globalConfigCache = config;
+  globalConfigPromise = null;
+  return config;
+}
+
+function getFoldStateFromBranch(entries: SessionEntry[], globalConfig: GlobalFoldConfig): FoldState {
+  let activeFold: FoldSummaryDetails | null = null;
+  let sessionRounds: number | null | undefined;
+  let effectiveRounds = globalConfig.defaultRounds;
+  let resetTimestamp = 0;
+
+  for (const entry of entries) {
+    if (entry.type === "compaction" && isFoldSummaryDetails(entry.details)) {
+      activeFold = entry.details;
+      resetTimestamp = Math.max(resetTimestamp, getEntryTimestampMs(entry), entry.details.foldedAt);
+      continue;
+    }
+
+    if (!isCustomMessageEntry(entry)) continue;
+
+    if (entry.customType === FOLD_SUMMARY_TYPE && isFoldSummaryDetails(entry.details)) {
+      activeFold = entry.details;
+      resetTimestamp = Math.max(resetTimestamp, entry.details.foldedAt);
+      continue;
+    }
+
+    if (entry.customType === FOLD_CONTROL_TYPE && isFoldControlDetails(entry.details)) {
+      activeFold = null;
+      resetTimestamp = Math.max(resetTimestamp, entry.details.unfoldedAt);
+      continue;
+    }
+
+    if (entry.customType === FOLD_AUTO_CONFIG_TYPE && isFoldAutoConfigDetails(entry.details)) {
+      if (entry.details.inheritGlobal) {
+        sessionRounds = undefined;
+        effectiveRounds = globalConfig.defaultRounds;
+        continue;
+      }
+
+      const nextRounds = getConfiguredRounds(entry.details);
+      if (nextRounds !== undefined) {
+        sessionRounds = nextRounds;
+        effectiveRounds = nextRounds;
+      }
+    }
+  }
+
+  let roundsSinceReset = 0;
+  let awaitingAssistant = false;
+
+  for (const entry of entries) {
+    if (entry.type !== "message") continue;
+    if (getEntryTimestampMs(entry) <= resetTimestamp) continue;
+
+    if (entry.message.role === "user") {
+      awaitingAssistant = true;
+      continue;
+    }
+
+    if (entry.message.role === "assistant" && awaitingAssistant) {
+      roundsSinceReset++;
+      awaitingAssistant = false;
+    }
+  }
+
+  return {
+    activeFold,
+    sessionRounds,
+    effectiveRounds,
+    roundsSinceReset,
+  };
+}
+
+function getActiveFoldInfo(entries: SessionEntry[]): ActiveFoldInfo | null {
+  let activeFold: ActiveFoldInfo | null = null;
+
+  for (const entry of entries) {
+    if (entry.type === "compaction" && isFoldSummaryDetails(entry.details)) {
+      activeFold = {
+        details: entry.details,
+        summaryText: entry.details.summaryText || entry.summary,
+        source: "compaction",
+      };
+      continue;
+    }
+
+    if (!isCustomMessageEntry(entry)) continue;
+
+    if (entry.customType === FOLD_SUMMARY_TYPE && isFoldSummaryDetails(entry.details)) {
+      activeFold = {
+        details: entry.details,
+        summaryText: entry.details.summaryText || extractTextParts(entry.content).join("\n").trim(),
+        source: "custom",
+      };
+      continue;
+    }
+
+    if (entry.customType === FOLD_CONTROL_TYPE && isFoldControlDetails(entry.details)) {
+      activeFold = null;
+    }
+  }
+
+  return activeFold;
+}
+
+function buildConversationText(entries: SessionEntry[]): string {
+  const sections: string[] = [];
+
+  for (const entry of entries) {
+    if (entry.type === "message" && entry.message?.role) {
+      const role = entry.message.role;
+      if (role !== "user" && role !== "assistant") continue;
+
+      const lines: string[] = [];
+      const text = extractTextParts((entry.message as { content?: unknown }).content).join("\n").trim();
+      if (text) lines.push(`${role === "user" ? "User" : "Assistant"}: ${text}`);
+      if (role === "assistant") lines.push(...extractToolCallLines((entry.message as { content?: unknown }).content));
+      if (lines.length > 0) sections.push(lines.join("\n"));
+      continue;
+    }
+
+    if (!isCustomMessageEntry(entry)) continue;
+    if (entry.customType !== FOLD_SUMMARY_TYPE) continue;
+
+    const text = extractTextParts(entry.content).join("\n").trim();
+    if (text) sections.push(`Previous folded summary:\n${text}`);
+  }
+
+  const conversation = sections.join("\n\n");
+  if (conversation.length <= MAX_CONVERSATION_CHARS) return conversation;
+  return conversation.slice(-MAX_CONVERSATION_CHARS);
+}
+
+function buildFoldPrompt(conversationText: string, instruction: string): string {
+  return [
+    "You are preparing a compact handoff summary for a long coding-agent session.",
+    "Summarize only durable context needed to continue the work.",
+    "Include:",
+    "- Current goal and user preferences",
+    "- Files changed or inspected, with paths",
+    "- Important decisions and constraints",
+    "- Commands/tests already run and results",
+    "- Open TODOs / exact next steps",
+    "- Warnings, failures, or things not yet verified",
+    instruction ? `- Extra instruction: ${instruction}` : "",
+    "",
+    "Return concise Markdown. Do not invent facts.",
+    "",
+    "<conversation>",
+    conversationText,
+    "</conversation>",
+  ].filter(Boolean).join("\n");
+}
+
+function fallbackSummary(conversationText: string, instruction: string): string {
+  const tail = conversationText.length > MAX_LOCAL_SUMMARY_CHARS
+    ? conversationText.slice(-MAX_LOCAL_SUMMARY_CHARS)
+    : conversationText;
+
+  return [
+    "## Folded session summary",
+    "",
+    instruction ? `**Instruction:** ${instruction}` : undefined,
+    "",
+    "AI summarization was unavailable, so this fold preserved the tail of the conversation.",
+    "",
+    "```text",
+    tail,
+    "```",
+  ].filter((x): x is string => typeof x === "string").join("\n");
+}
+
+async function summarize(ctx: ExtensionContext, conversationText: string, instruction: string): Promise<string> {
+  const model = ctx.model;
+  if (!model) return fallbackSummary(conversationText, instruction);
+
+  const auth = await ctx.modelRegistry.getApiKeyAndHeaders(model);
+  if (!auth.ok || !auth.apiKey) return fallbackSummary(conversationText, instruction);
+
+  try {
+    const response = await complete(
+      model,
+      {
+        messages: [
+          {
+            role: "user" as const,
+            content: [{ type: "text" as const, text: buildFoldPrompt(conversationText, instruction) }],
+            timestamp: Date.now(),
+          },
+        ],
+      },
+      {
+        apiKey: auth.apiKey,
+        headers: auth.headers,
+        reasoningEffort: "medium",
+      },
+    );
+
+    const text = response.content
+      .filter((c): c is { type: "text"; text: string } => c.type === "text")
+      .map((c) => c.text)
+      .join("\n")
+      .trim();
+
+    return text || fallbackSummary(conversationText, instruction);
+  } catch (error) {
+    return [
+      fallbackSummary(conversationText, instruction),
+      "",
+      `> Fold summarizer error: ${error instanceof Error ? error.message : String(error)}`,
+    ].join("\n");
+  }
+}
+
+function buildFoldContextMessage(summary: string): string {
+  return [
+    "# Folded previous context",
+    "",
+    "Earlier conversation is hidden behind this fold, but the underlying session history is unchanged.",
+    "Use `/unfold` to restore the full earlier context.",
+    "",
+    summary,
+  ].join("\n");
+}
+
+function buildFoldPreviewLines(summary: string): string[] {
+  const lines = summary
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => line.replace(/^#+\s*/, "").replace(/^[-*]\s*/, "• "));
+
+  const preview = lines.slice(0, 4).map((line) => line.length > 110 ? `${line.slice(0, 109)}…` : line);
+  if (lines.length > 4) preview.push("…");
+  return preview;
+}
+
+function refreshFoldWidget(ctx: ExtensionContext): void {
+  if (!ctx.hasUI) return;
+
+  const activeFold = getActiveFoldInfo(ctx.sessionManager.getBranch());
+  if (!activeFold) {
+    ctx.ui.setWidget("fold-summary", undefined);
+    return;
+  }
+
+  const header = `Folded context active — ${activeFold.details.trigger === "auto" ? "auto" : "manual"} · ${activeFold.details.entryCount} entries`;
+  const footer = "Same session preserved. Continue normally, or use /unfold to restore full context.";
+  ctx.ui.setWidget("fold-summary", [header, ...buildFoldPreviewLines(activeFold.summaryText), footer]);
+}
+
+function createSyntheticFoldContextMessage(activeFold: ActiveFoldInfo): AgentMessage {
+  return {
+    role: "custom",
+    customType: FOLD_SUMMARY_TYPE,
+    content: buildFoldContextMessage(activeFold.summaryText),
+    display: false,
+    details: activeFold.details,
+    timestamp: activeFold.details.foldedAt,
+  } as AgentMessage;
+}
+
+function parseAutoFoldArguments(args: string[]): ParsedAutoFoldArgs | null {
+  const first = args[0]?.trim().toLowerCase();
+  if (!first) return null;
+
+  if (first === "inherit") return { mode: "inherit" };
+  if (first === "off" || first === "disable") return { mode: "set", rounds: null };
+
+  let rounds: number;
+  if (first === "on") {
+    rounds = DEFAULT_AUTO_FOLD_THRESHOLD;
+  } else {
+    const parsedRounds = Number.parseInt(first, 10);
+    if (!Number.isFinite(parsedRounds) || parsedRounds <= 0) return null;
+    rounds = parsedRounds;
+  }
+
+  return { mode: "set", rounds };
+}
+
+
+[297 more lines in file. Use offset=501 to continue.]

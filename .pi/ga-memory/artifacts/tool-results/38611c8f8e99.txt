@@ -1,0 +1,502 @@
+package agent
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"strings"
+	"sync"
+	"unicode/utf8"
+
+	"reasonix/internal/diff"
+	"reasonix/internal/event"
+	"reasonix/internal/jobs"
+	"reasonix/internal/provider"
+	"reasonix/internal/tool"
+)
+
+// maxToolOutputBytes caps a single tool result before it goes into the model's
+// context. ~32KB is roughly 8K tokens — enough for a full file read or a busy
+// grep, while preventing one accidental "read this 5 MB log" from blowing the
+// window before the next compaction runs.
+const maxToolOutputBytes = 32 * 1024
+
+// Renderer redraws the assistant's final-answer text as styled output. It is
+// applied only after a turn's text stream completes, so the user sees raw
+// markdown stream live, then a single redraw replaces it with formatted
+// output. The renderer is intentionally interface-shaped so the agent stays
+// independent of the cli's markdown library choice. Consumed by TextSink.
+type Renderer interface {
+	Render(text string) string
+}
+
+// Asker puts structured multiple-choice questions to the user and blocks for the
+// answers. The agent consults it for the `ask` tool. It is interface-shaped so
+// the agent stays independent of the frontend; a nil asker means no interactive
+// user (headless runs), where `ask` returns a "decide for yourself" result. The
+// interactive frontends wire the controller in as the Asker.
+type Asker interface {
+	Ask(ctx context.Context, questions []event.AskQuestion) ([]event.AskAnswer, error)
+}
+
+// callContextKey carries the executing tool call's identity into Execute.
+type callContextKey struct{}
+
+// callContext is the per-call context a tool can read. parentID is the call being
+// executed and sink is the agent's event sink (the `task` tool uses both to nest
+// a sub-agent's events under this call); asker lets the `ask` tool reach the user.
+type callContext struct {
+	parentID string
+	sink     event.Sink
+	asker    Asker
+}
+
+// withCallContext stamps ctx with the executing call's ID, the agent's sink, and
+// the asker. executeOne sets this before every Execute; `task` reads it (via
+// CallContext) to nest sub-agent events, and `ask` reads the asker to prompt.
+func withCallContext(ctx context.Context, parentID string, sink event.Sink, asker Asker) context.Context {
+	return context.WithValue(ctx, callContextKey{}, callContext{parentID: parentID, sink: sink, asker: asker})
+}
+
+// CallContext returns the executing call's ID, the agent's sink, and the asker,
+// if the context was set by an agent's executeOne. ok is false for a plain
+// context (headless tool tests, calls made outside the run loop).
+func CallContext(ctx context.Context) (parentID string, sink event.Sink, asker Asker, ok bool) {
+	cc, ok := ctx.Value(callContextKey{}).(callContext)
+	if !ok {
+		return "", nil, nil, false
+	}
+	return cc.parentID, cc.sink, cc.asker, true
+}
+
+// Gate decides, per tool call, whether it may run. The agent consults it at
+// execute time (after the plan-mode gate). It is interface-shaped so the agent
+// stays independent of the permission package and of how "ask" is resolved
+// (silently in headless runs, interactively in the chat TUI). A nil gate means
+// no gating — every call runs, preserving behaviour for callers that don't wire
+// one in. reason is fed back to the model when allow is false; a non-nil err
+// (e.g. ctx cancelled awaiting approval) is treated as a block for that call.
+type Gate interface {
+	Check(ctx context.Context, toolName string, args json.RawMessage, readOnly bool) (allow bool, reason string, err error)
+}
+
+// ToolHooks fires user-configured shell hooks around each tool call. PreToolUse
+// runs before the call and may block it (block=true; message is the reason fed
+// back to the model); PostToolUse runs after and only surfaces output to the
+// user (it can't block). It is interface-shaped so the agent stays independent
+// of the hook package — a nil hooks field disables hook firing entirely.
+type ToolHooks interface {
+	PreToolUse(ctx context.Context, name string, args json.RawMessage) (block bool, message string)
+	PostToolUse(ctx context.Context, name string, args json.RawMessage, result string)
+}
+
+// Agent drives a single task: a Provider, a tool Registry, and a Session wired
+// into the main loop.
+type Agent struct {
+	prov        provider.Provider
+	tools       *tool.Registry
+	session     *Session
+	maxSteps    int
+	temperature float64
+	pricing     *provider.Pricing
+
+	// sink receives the turn's typed event stream (reasoning/text deltas, tool
+	// dispatch/results, usage, notices). The agent no longer formats output
+	// itself — a frontend's Sink decides how to render. Never nil; New defaults
+	// it to event.Discard.
+	sink event.Sink
+
+	// lastUsage caches the most recent per-turn telemetry the provider
+	// reported so the CLI can expose a context gauge without re-scraping the
+	// usage line out of the output writer.
+	lastUsage *provider.Usage
+
+	// sessCacheHit/sessCacheMiss accumulate cache tokens across every API call
+	// this session, so frontends can show the aggregate hit-rate (Σhit/Σ(hit+miss))
+	// — a steadier, cost-oriented number than the single-turn rate. They are NOT
+	// reset on compaction (compaction only rewrites session.Messages), so the
+	// aggregate never craters when the prefix is summarized away.
+	sessCacheHit  int
+	sessCacheMiss int
+
+	// planMode, when true, refuses any tool call whose ReadOnly() is false.
+	// The system prompt and tool list never change with the toggle so the
+	// prompt-cache prefix stays valid; the gating happens at execute time
+	// and the model sees a "blocked" result it can adapt to. Toggled from
+	// the outside via SetPlanMode.
+	planMode bool
+
+	// gate, when non-nil, is the per-call permission gate consulted after the
+	// plan-mode check. nil disables gating entirely.
+	gate Gate
+
+	// hooks, when non-nil, fires PreToolUse / PostToolUse shell hooks around each
+	// tool call. nil disables hook firing.
+	hooks ToolHooks
+
+	// asker, when non-nil, lets the `ask` tool put questions to the user. nil in
+	// headless runs (no interactive user). Set via SetAsker.
+	asker Asker
+
+	// onPreEdit, when non-nil, is called with a writer tool's previewed change
+	// just before it runs — the seam the checkpoint store uses to snapshot a
+	// file's pre-edit content. Only fires for non-ReadOnly tools that implement
+	// tool.Previewer (so bash, whose targets are unknowable, is never tracked).
+	// Set via SetPreEditHook.
+	onPreEdit func(diff.Change)
+
+	// jobs, when non-nil, is the session's background-job manager. executeOne
+	// stamps it onto each tool call's context so the background tools (bash
+	// run_in_background, task run_in_background, bash_output/kill_shell/wait) can
+	// reach it. nil leaves those tools to degrade gracefully.
+	jobs *jobs.Manager
+
+	// Context management: when a turn's prompt nears contextWindow, the older
+	// middle of the session is summarized away, keeping recentKeep messages
+	// verbatim and archiving the originals under archiveDir.
+	contextWindow int
+	compactRatio  float64
+	recentKeep    int
+	archiveDir    string
+}
+
+// SetPlanMode flips the read-only gate. While true, executeOne refuses any
+// non-ReadOnly tool the model calls and returns a "blocked" result instead of
+// running it. The cache-friendly bits — system prompt, tools schema, message
+// history — are left untouched, so the toggle costs nothing in cache hits.
+func (a *Agent) SetPlanMode(v bool) { a.planMode = v }
+
+// SetGate installs the per-call permission gate. Used by `reasonix chat` to swap the
+// headless gate built in setup for an interactive one that prompts the user;
+// nil disables gating. Safe to call before the run loop starts.
+func (a *Agent) SetGate(g Gate) { a.gate = g }
+
+// SetAsker installs the asker the `ask` tool uses to question the user.
+// Interactive frontends wire one in; headless runs leave it nil.
+func (a *Agent) SetAsker(as Asker) { a.asker = as }
+
+// SetPreEditHook installs the pre-edit snapshot hook (see onPreEdit). The
+// controller wires it to its per-session checkpoint store; nil disables capture.
+func (a *Agent) SetPreEditHook(fn func(diff.Change)) { a.onPreEdit = fn }
+
+// Session returns the agent's current conversation, useful for persistence
+// hooks that need to read the message log between turns.
+func (a *Agent) Session() *Session { return a.session }
+
+// SetSession replaces the agent's conversation wholesale. Used by
+// `reasonix chat --resume` to load a saved JSONL transcript before the first turn,
+// so the model picks up exactly where it left off.
+func (a *Agent) SetSession(s *Session) { a.session = s }
+
+// LastUsage returns the most recent per-turn token telemetry the provider
+// reported (nil if no turn has run yet). The TUI uses it to show a context
+// gauge alongside the prompt; the actual cache decisions still live inside
+// maybeCompact.
+func (a *Agent) LastUsage() *provider.Usage { return a.lastUsage }
+
+// SessionCache returns the cumulative cache hit/miss prompt tokens across every
+// API call this session — the basis for the status line's aggregate hit-rate.
+func (a *Agent) SessionCache() (hit, miss int) { return a.sessCacheHit, a.sessCacheMiss }
+
+// ContextWindow returns the configured context-window size in tokens. 0
+// means compaction is disabled for this agent.
+func (a *Agent) ContextWindow() int { return a.contextWindow }
+
+// CompactNow runs one compaction pass immediately, regardless of the
+// usage-ratio threshold maybeCompact normally honours. Used by the chat
+// TUI's `/compact` command so the user can reset the prefix before it
+// naturally fills up.
+func (a *Agent) CompactNow(ctx context.Context) error { return a.compact(ctx) }
+
+// Options configures an Agent.
+type Options struct {
+	MaxSteps    int
+	Temperature float64
+	Pricing     *provider.Pricing // optional, for per-turn cost display
+
+	// Gate is the per-call permission gate. nil disables gating.
+	Gate Gate
+
+	// Hooks fires PreToolUse / PostToolUse shell hooks around tool calls. nil
+	// disables hook firing.
+	Hooks ToolHooks
+
+	// Jobs is the session's background-job manager (nil disables background tools).
+	Jobs *jobs.Manager
+
+	// Context management. ContextWindow <= 0 disables compaction. CompactRatio
+	// and RecentKeep fall back to defaults when unset.
+	ContextWindow int
+	CompactRatio  float64
+	RecentKeep    int
+	ArchiveDir    string
+}
+
+// New constructs an Agent. MaxSteps <= 0 means no cap — the run loop continues
+// until the model gives a final answer, the context is cancelled, or the
+// provider errors (compaction keeps the context bounded). A nil sink is replaced
+// with event.Discard so the agent can always emit unconditionally.
+func New(prov provider.Provider, tools *tool.Registry, session *Session, opts Options, sink event.Sink) *Agent {
+	if opts.CompactRatio <= 0 {
+		opts.CompactRatio = defaultCompactRatio
+	}
+	if opts.RecentKeep <= 0 {
+		opts.RecentKeep = defaultRecentKeep
+	}
+	if sink == nil {
+		sink = event.Discard
+	}
+	return &Agent{
+		prov:          prov,
+		tools:         tools,
+		session:       session,
+		maxSteps:      opts.MaxSteps,
+		temperature:   opts.Temperature,
+		pricing:       opts.Pricing,
+		sink:          sink,
+		gate:          opts.Gate,
+		hooks:         opts.Hooks,
+		jobs:          opts.Jobs,
+		contextWindow: opts.ContextWindow,
+		compactRatio:  opts.CompactRatio,
+		recentKeep:    opts.RecentKeep,
+		archiveDir:    opts.ArchiveDir,
+	}
+}
+
+// Run appends the user input and drives the tool loop until the model returns a
+// final answer (no tool calls), the context is cancelled, or the provider errors.
+// With maxSteps <= 0 the loop is unbounded — the natural termination is the model
+// finishing, and the real safety bounds are user cancellation and compaction, not
+// a round count. A positive maxSteps imposes an optional hard guard, surfaced as
+// a resumable notice when hit.
+func (a *Agent) Run(ctx context.Context, input string) error {
+	a.sink.Emit(event.Event{Kind: event.TurnStarted})
+	a.session.Add(provider.Message{Role: provider.RoleUser, Content: input})
+
+	for step := 0; a.maxSteps <= 0 || step < a.maxSteps; step++ {
+		text, reasoning, calls, usage, err := a.stream(ctx)
+		if err != nil {
+			return err
+		}
+		if usage != nil && usage.TotalTokens > 0 {
+			a.sink.Emit(event.Event{Kind: event.Usage, Usage: usage, Pricing: a.pricing,
+				SessionHit: a.sessCacheHit, SessionMiss: a.sessCacheMiss})
+		}
+		if msg, ok := finishReasonMessage(usage); ok {
+			a.sink.Emit(event.Event{Kind: event.Notice, Level: event.LevelWarn, Text: msg})
+		}
+
+		// Keep reasoning_content on the assistant turn for display and session
+		// archive. It is NOT re-uploaded to the API: the openai provider drops it
+		// when building the request, since DeepSeek bills re-sent reasoning as
+		// ordinary prompt input (~500 tok/turn) for no cache or coherence gain.
+		a.session.Add(provider.Message{
+			Role:             provider.RoleAssistant,
+			Content:          text,
+			ReasoningContent: reasoning,
+			ToolCalls:        calls,
+		})
+
+		if len(calls) == 0 {
+			return nil // model gave a final answer
+		}
+
+		results := a.executeBatch(ctx, calls)
+		for i, call := range calls {
+			a.session.Add(provider.Message{
+				Role:       provider.RoleTool,
+				Content:    results[i],
+				ToolCallID: call.ID,
+				Name:       call.Name,
+			})
+		}
+
+		// The prompt only grows from here; compact before the next turn so it
+		// stays within the model's window.
+		a.maybeCompact(ctx, usage)
+	}
+	// Only reached when a positive maxSteps guard is configured. The work so far
+	// is already in the session, so the user can just send another message to pick
+	// up where it left off.
+	return fmt.Errorf("paused after %d tool-call rounds (agent.max_steps) — the work so far is saved; send another message to continue, or set max_steps higher or to 0 for no limit", a.maxSteps)
+}
+
+// stream runs one completion, emitting reasoning and text deltas as typed
+// events and collecting complete tool calls. A Message event closes the text
+// stream so a sink can re-render the streamed raw text as styled markdown. The
+// accumulated text and reasoning are also returned so the caller can round-trip
+// reasoning on the next turn.
+func (a *Agent) stream(ctx context.Context) (string, string, []provider.ToolCall, *provider.Usage, error) {
+	ch, err := a.prov.Stream(ctx, provider.Request{
+		Messages:    a.session.Messages,
+		Tools:       a.tools.Schemas(),
+		Temperature: a.temperature,
+	})
+	if err != nil {
+		return "", "", nil, nil, err
+	}
+
+	var text, reasoning strings.Builder
+	var calls []provider.ToolCall
+	var usage *provider.Usage
+	for chunk := range ch {
+		switch chunk.Type {
+		case provider.ChunkReasoning:
+			reasoning.WriteString(chunk.Text)
+			a.sink.Emit(event.Event{Kind: event.Reasoning, Text: chunk.Text})
+		case provider.ChunkText:
+			text.WriteString(chunk.Text)
+			a.sink.Emit(event.Event{Kind: event.Text, Text: chunk.Text})
+		case provider.ChunkToolCallStart:
+			// Surface the tool card as soon as the call begins — before its
+			// (possibly large) arguments finish streaming — so the user sees it
+			// working instead of a stall. executeBatch emits the full dispatch
+			// (with args) once the call completes; the frontend merges by ID.
+			if tc := chunk.ToolCall; tc != nil {
+				a.sink.Emit(event.Event{Kind: event.ToolDispatch, Tool: event.Tool{
+					ID: tc.ID, Name: tc.Name, ReadOnly: a.toolReadOnly(tc.Name), Partial: true,
+				}})
+			}
+		case provider.ChunkToolCall:
+			calls = append(calls, *chunk.ToolCall)
+		case provider.ChunkUsage:
+			usage = chunk.Usage
+			a.lastUsage = chunk.Usage
+			a.sessCacheHit += chunk.Usage.CacheHitTokens
+			a.sessCacheMiss += chunk.Usage.CacheMissTokens
+		case provider.ChunkError:
+			return "", "", nil, nil, chunk.Err
+		}
+	}
+	// Close the text stream: a sink may re-render the streamed raw text as
+	// styled markdown now that it is complete. Reasoning rides along so the sink
+	// has the full chain if it wants it.
+	if text.Len() > 0 || reasoning.Len() > 0 {
+		a.sink.Emit(event.Event{Kind: event.Message, Text: text.String(), Reasoning: reasoning.String()})
+	}
+	return text.String(), reasoning.String(), calls, usage, nil
+}
+
+// executeBatch dispatches one model turn's tool calls. A ToolDispatch event is
+// emitted for every call up front, in call order, so a frontend can show the
+// timeline chronologically. Calls fan out across goroutines only when every
+// call's tool is ReadOnly (canParallelise); a single non-ReadOnly call drops
+// the whole batch back to sequential to preserve write/read ordering. ToolResult
+// events are emitted after the batch in call order, so emission stays serial
+// even when execution parallelised.
+func (a *Agent) executeBatch(ctx context.Context, calls []provider.ToolCall) []string {
+	for _, c := range calls {
+		t, ok := a.tools.Get(c.Name)
+		a.sink.Emit(event.Event{Kind: event.ToolDispatch, Tool: event.Tool{
+			ID:       c.ID,
+			Name:     c.Name,
+			Args:     c.Arguments,
+			ReadOnly: ok && t.ReadOnly(),
+		}})
+	}
+
+	results := make([]string, len(calls))
+	outcomes := make([]toolOutcome, len(calls))
+	run := func(i int) {
+		outcomes[i] = a.executeOne(ctx, calls[i])
+		results[i] = outcomes[i].output
+	}
+
+	if canParallelise(a.tools, calls) && len(calls) > 1 {
+		const maxParallel = 8
+		sem := make(chan struct{}, maxParallel)
+		var wg sync.WaitGroup
+		for i := range calls {
+			i := i
+			sem <- struct{}{}
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				defer func() { <-sem }()
+				run(i)
+			}()
+		}
+		wg.Wait()
+	} else {
+		for i := range calls {
+			run(i)
+		}
+	}
+
+	for i, c := range calls {
+		o := outcomes[i]
+		t, ok := a.tools.Get(c.Name)
+		a.sink.Emit(event.Event{Kind: event.ToolResult, Tool: event.Tool{
+			ID:        c.ID,
+			Name:      c.Name,
+			Args:      c.Arguments,
+			Output:    o.output,
+			Err:       o.errMsg,
+			ReadOnly:  ok && t.ReadOnly(),
+			Truncated: o.truncated,
+		}})
+		if o.truncated && o.truncMsg != "" {
+			a.sink.Emit(event.Event{Kind: event.Notice, Level: event.LevelInfo, Text: o.truncMsg})
+		}
+	}
+	return results
+}
+
+// toolOutcome is one tool call's result, split into the model-facing output and
+// the display-facing notice bits. errMsg is the short failure reason (empty on
+// success) — a refused call, an unknown tool, or an execution error — so a sink
+// renders the result as failed ("⊘ name <errMsg>" / a red card) instead of OK;
+// blocked narrows that to a refusal (plan mode / permission). truncMsg is set
+// (without the "· " prefix) when the output was head+tailed.
+type toolOutcome struct {
+	output    string
+	blocked   bool
+	errMsg    string
+	truncated bool
+	truncMsg  string
+}
+
+// executeOne runs a single tool call. It is pure with respect to the event sink
+// — the caller emits ToolDispatch/ToolResult — so it is safe to invoke from
+// parallel goroutines.
+func (a *Agent) executeOne(ctx context.Context, call provider.ToolCall) toolOutcome {
+	t, ok := a.tools.Get(call.Name)
+	if !ok {
+		return toolOutcome{
+			output: fmt.Sprintf("error: unknown tool %q", call.Name),
+			errMsg: fmt.Sprintf("unknown tool %q", call.Name),
+		}
+	}
+	if a.planMode && !t.ReadOnly() {
+		return toolOutcome{
+			output:  fmt.Sprintf("blocked: %q is a writer tool and plan mode is read-only. Keep exploring with read-only tools, then write your plan as your reply — the user will be asked to approve it before any changes are made.", call.Name),
+			blocked: true,
+			errMsg:  "blocked: plan mode is read-only",
+		}
+	}
+	if a.gate != nil {
+		allow, reason, err := a.gate.Check(ctx, call.Name, json.RawMessage(call.Arguments), t.ReadOnly())
+		if err != nil {
+			return toolOutcome{
+				output:  fmt.Sprintf("blocked: %s (%v)", reason, err),
+				blocked: true,
+				errMsg:  fmt.Sprintf("blocked: %v", err),
+			}
+		}
+		if !allow {
+			return toolOutcome{
+				output:  "blocked: " + reason,
+				blocked: true,
+				errMsg:  "blocked by permission policy",
+			}
+		}
+	}
+	// PreToolUse hooks run after permission is granted but before the call: a
+	// gating hook (exit 2) refuses it, surfaced to the model like a gate denial.
+	if a.hooks != nil {
+		if block, msg := a.hooks.PreToolUse(ctx, call.Name, json.RawMessage(call.Arguments)); block {
+			if msg == "" {
+				msg = "blocked by a PreToolUse hook"
+
+[114 more lines in file. Use offset=501 to continue.]

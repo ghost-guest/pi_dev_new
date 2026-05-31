@@ -1,0 +1,144 @@
+packages/coding-agent/src/core/compaction/branch-summarization.ts:5: * a summary of the branch being left so context isn't lost.
+packages/coding-agent/src/core/compaction/branch-summarization.ts:154:			return createCustomMessage(entry.customType, entry.content, entry.display, entry.details, entry.timestamp);
+packages/coding-agent/src/core/compaction/branch-summarization.ts:156:		case "branch_summary":
+packages/coding-agent/src/core/compaction/branch-summarization.ts:176: * This ensures we keep the most recent context when the branch is too long.
+packages/coding-agent/src/core/compaction/branch-summarization.ts:180: * - Existing branch_summary entries' details (for cumulative tracking)
+packages/coding-agent/src/core/compaction/branch-summarization.ts:191:	// This ensures we capture cumulative file tracking from nested branch summaries
+packages/coding-agent/src/core/compaction/branch-summarization.ts:194:		if (entry.type === "branch_summary" && !entry.fromHook && entry.details) {
+packages/coding-agent/src/core/compaction/branch-summarization.ts:222:			if (entry.type === "compaction" || entry.type === "branch_summary") {
+packages/coding-agent/src/core/compaction/branch-summarization.ts:243:const BRANCH_SUMMARY_PREAMBLE = `The user explored a different conversation branch before returning here.
+packages/coding-agent/src/core/compaction/branch-summarization.ts:248:const BRANCH_SUMMARY_PROMPT = `Create a structured summary of this conversation branch for context when returning later.
+packages/coding-agent/src/core/compaction/branch-summarization.ts:253:[What was the user trying to accomplish in this branch?]
+packages/coding-agent/src/core/compaction/branch-summarization.ts:278: * Generate a summary of abandoned branch entries.
+packages/coding-agent/src/core/compaction/branch-summarization.ts:343:	// Prepend preamble to provide context about the branch summary
+packages/coding-agent/src/modes/interactive/components/footer.ts:8: * Sanitize text for display in a single-line status.
+packages/coding-agent/src/modes/interactive/components/footer.ts:20: * Format token counts for compact footer display.
+packages/coding-agent/src/modes/interactive/components/footer.ts:46: * Computes token/context stats from session, gets git branch and extension statuses from provider.
+packages/coding-agent/src/modes/interactive/components/footer.ts:67:	 * No-op: git branch caching now handled by provider.
+packages/coding-agent/src/modes/interactive/components/footer.ts:71:		// No-op: git branch is cached/invalidated by provider
+packages/coding-agent/src/modes/interactive/components/footer.ts:112:		// Add git branch if available
+packages/coding-agent/src/modes/interactive/components/footer.ts:113:		const branch = this.footerData.getGitBranch();
+packages/coding-agent/src/modes/interactive/components/footer.ts:114:		if (branch) {
+packages/coding-agent/src/modes/interactive/components/footer.ts:115:			pwd = `${pwd} (${branch})`;
+packages/coding-agent/src/core/compaction/utils.ts:2: * Shared utilities for compaction and branch summarization.
+packages/coding-agent/src/modes/interactive/components/index.ts:6:export { BranchSummaryMessageComponent } from "./branch-summary-message.ts";
+packages/coding-agent/src/modes/interactive/components/index.ts:9:export { CustomMessageComponent } from "./custom-message.ts";
+packages/coding-agent/src/core/tools/grep.ts:101:		const displayLines = lines.slice(0, maxLines);
+packages/coding-agent/src/core/tools/grep.ts:103:		text += `\n${displayLines.map((line) => theme.fg("toolOutput", line)).join("\n")}`;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:17:/** Gutter info: position (displayIndent where connector was) and whether to show │ */
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:19:	position: number; // displayIndent level where the connector was shown
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:32:	/** Gutter info for each ancestor branch point */
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:34:	/** True if this node is a root under a virtual branching root (multiple roots) */
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:38:/** Filter mode for tree display */
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:150:		// - At indent 2+: stay flat for single-child chains, +1 only if parent branches
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:156:		// Determine which subtrees contain the active leaf (to sort current branch first)
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:186:		// If multiple roots, treat them as children of a virtual root that branches
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:216:			// Order children so the branch containing the active leaf comes first
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:233:				// Parent branches: children get +1
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:236:				// First generation after a branch: +1 for visual grouping
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:245:			// Only add gutter if connector is actually displayed (not suppressed for virtual root children)
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:247:			// When connector is displayed, add a gutter entry at the connector's position
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:248:			// Connector is at position (displayIndent - 1), so gutter should be there too
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:464:			// Child indent follows flattenTree(): branch points (and first generation after a branch) shift +1
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:536:			case "branch_summary":
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:537:				parts.push("branch summary", entry.summary);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:628:			// If multiple roots, shift display (roots at 0, not 1)
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:629:			const displayIndent = this.multipleRoots ? Math.max(0, flatNode.indent - 1) : flatNode.indent;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:632:			// Each gutter has a position (displayIndent where its connector was shown)
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:635:			const connectorPosition = connector ? displayIndent - 1 : -1;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:638:			const totalChars = displayIndent * 3;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:760:			case "branch_summary":
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:761:				result = theme.fg("warning", `[branch summary]: `) + normalize(entry.summary);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:853:				let display = path;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:857:					display += `:${start}${end ? `-${end}` : ""}`;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:859:				return `[read: ${display}]`;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1020:	 * Find the index of the next branch segment start in the given direction.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1021:	 * A segment start is the first child of a branch point.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1057:/** Component that displays the current search query */
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1192:		const branchKeys = `${keyText("app.tree.foldOrUp")}/${keyText("app.tree.unfoldOrDown")}`;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1197:					`  ↑/↓: move. ←/→: page. ${branchKeys}: fold/branch. ${keyText("app.tree.editLabel")}: label. ${filterKeys}: filters (${cycleKeys} cycle). ${keyText("app.tree.toggleLabelTimestamp")}: label time`,
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:10: * Component that renders a complete assistant message
+packages/coding-agent/src/modes/interactive/components/user-message.ts:9: * Component that renders a user message
+packages/coding-agent/src/core/compaction/compaction.ts:84:		return createCustomMessage(entry.customType, entry.content, entry.display, entry.details, entry.timestamp);
+packages/coding-agent/src/core/compaction/compaction.ts:86:	if (entry.type === "branch_summary") {
+packages/coding-agent/src/core/compaction/compaction.ts:282:		case "branchSummary":
+packages/coding-agent/src/core/compaction/compaction.ts:309:					case "branchSummary":
+packages/coding-agent/src/core/compaction/compaction.ts:323:			case "branch_summary":
+packages/coding-agent/src/core/compaction/compaction.ts:331:		// branch_summary and custom_message are user-role messages, valid cut points
+packages/coding-agent/src/core/compaction/compaction.ts:332:		if (entry.type === "branch_summary" || entry.type === "custom_message") {
+packages/coding-agent/src/core/compaction/compaction.ts:347:		// branch_summary and custom_message are user-role messages, can start a turn
+packages/coding-agent/src/core/compaction/compaction.ts:348:		if (entry.type === "branch_summary" || entry.type === "custom_message") {
+packages/coding-agent/src/core/tools/ls.ts:80:		const displayLines = lines.slice(0, maxLines);
+packages/coding-agent/src/core/tools/ls.ts:82:		text += `\n${displayLines.map((line) => theme.fg("toolOutput", line)).join("\n")}`;
+packages/coding-agent/src/core/tools/edit-diff.ts:271: * Generate a display-oriented diff string with line numbers and context.
+packages/coding-agent/src/core/export-html/template.js:152:       * This allows clicking any node in a branch to show the full branch.
+packages/coding-agent/src/core/export-html/template.js:202:        // Add roots (prioritize branch containing active leaf)
+packages/coding-agent/src/core/export-html/template.js:219:          // Order children (active branch first)
+packages/coding-agent/src/core/export-html/template.js:227:            // Parent branches: children get +1
+packages/coding-agent/src/core/export-html/template.js:230:            // First generation after a branch: +1 for visual grouping
+packages/coding-agent/src/core/export-html/template.js:260:        const displayIndent = multipleRoots ? Math.max(0, indent - 1) : indent;
+packages/coding-agent/src/core/export-html/template.js:262:        const connectorPosition = connector ? displayIndent - 1 : -1;
+packages/coding-agent/src/core/export-html/template.js:264:        const totalChars = displayIndent * 3;
+packages/coding-agent/src/core/export-html/template.js:351:          case 'branch_summary':
+packages/coding-agent/src/core/export-html/template.js:352:            parts.push('branch summary', entry.summary);
+packages/coding-agent/src/core/export-html/template.js:518:          // - Parent branches (multiple children): children get +1
+packages/coding-agent/src/core/export-html/template.js:519:          // - Just branched and indent > 0: children get +1 for visual grouping
+packages/coding-agent/src/core/export-html/template.js:577:            let display = path;
+packages/coding-agent/src/core/export-html/template.js:581:              display += `:${start}${end ? `-${end}` : ''}`;
+packages/coding-agent/src/core/export-html/template.js:583:            return `[read: ${display}]`;
+packages/coding-agent/src/core/export-html/template.js:625:       * Get display text for tree node (returns HTML string).
+packages/coding-agent/src/core/export-html/template.js:675:          case 'branch_summary': {
+packages/coding-agent/src/core/export-html/template.js:677:            return labelHtml + `<span class="tree-branch-summary">[branch summary]:</span> ${escapeHtml(summary)}`;
+packages/coding-agent/src/core/export-html/template.js:804:      /** Safely coerce value to string for display. Returns null if invalid type. */
+packages/coding-agent/src/core/export-html/template.js:839:        const displayLines = lines.slice(0, maxLines);
+packages/coding-agent/src/core/export-html/template.js:851:            const previewCode = displayLines.join('\n');
+packages/coding-agent/src/core/export-html/template.js:872:          for (const line of displayLines) {
+packages/coding-agent/src/core/export-html/template.js:885:        for (const line of displayLines) {
+packages/coding-agent/src/core/export-html/template.js:1038:              // Fallback to JSON display (existing behavior)
+packages/coding-agent/src/core/export-html/template.js:1290:        if (entry.type === 'branch_summary') {
+packages/coding-agent/src/core/export-html/template.js:1291:          return `<div class="branch-summary" id="${entryDomId}">${tsHtml}
+packages/coding-agent/src/core/export-html/template.js:1292:            <div class="branch-summary-header">Branch Summary</div>
+packages/coding-agent/src/core/export-html/template.js:1297:        if (entry.type === 'custom_message' && entry.display) {
+packages/coding-agent/src/core/export-html/template.js:1313:        let customMessages = 0, compactions = 0, branchSummaries = 0, toolCalls = 0;
+packages/coding-agent/src/core/export-html/template.js:1342:          } else if (entry.type === 'branch_summary') {
+packages/coding-agent/src/core/export-html/template.js:1343:            branchSummaries++;
+packages/coding-agent/src/core/export-html/template.js:1349:        return { userMessages, assistantMessages, toolResults, customMessages, compactions, branchSummaries, toolCalls, tokens, cost, models: Array.from(models) };
+packages/coding-agent/src/core/export-html/template.js:1369:        if (globalStats.branchSummaries) msgParts.push(`${globalStats.branchSummaries} branch summaries`);
+packages/coding-agent/src/core/export-html/template.js:1408:              <div class="system-prompt-full" style="display: block">${escapeHtml(systemPrompt)}</div>
+packages/coding-agent/src/core/export-html/template.js:1763:        hamburger.style.display = 'none';
+packages/coding-agent/src/core/export-html/template.js:1769:        hamburger.style.display = '';
+packages/coding-agent/src/core/export-html/template.js:1782:          el.style.display = thinkingExpanded ? '' : 'none';
+packages/coding-agent/src/core/export-html/template.js:1785:          el.style.display = thinkingExpanded ? 'none' : 'block';
+packages/coding-agent/src/core/tools/write.ts:79:	const displayContent = normalizeDisplayText(fileContent);
+packages/coding-agent/src/core/tools/write.ts:80:	const normalized = replaceTabs(displayContent);
+packages/coding-agent/src/core/tools/write.ts:153:		const displayLines = lines.slice(0, maxLines);
+packages/coding-agent/src/core/tools/write.ts:155:		text += `\n\n${displayLines.map((line) => (lang ? line : theme.fg("toolOutput", replaceTabs(line)))).join("\n")}`;
+packages/coding-agent/src/modes/interactive/components/custom-message.ts:9: * Component that renders a custom message entry from extensions.
+packages/coding-agent/src/modes/interactive/components/custom-message.ts:12:export class CustomMessageComponent extends Container {
+packages/coding-agent/src/modes/interactive/components/user-message-selector.ts:91:		// Enter - select message and branch
+packages/coding-agent/src/modes/interactive/components/user-message-selector.ts:108: * Component that renders a user message selector for branching
+packages/coding-agent/src/core/tools/output-accumulator.ts:32: * tail for display snapshots, and opens a temp file when the full output needs
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:39:	displayName: string;
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:61:	let displayPath: string;
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:64:		displayPath = "~";
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:66:		// Replace home prefix with ~, normalize separators for display
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:68:		displayPath = `~${rest.replace(/\\/g, "/")}`;
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:70:		displayPath = baseDir.replace(/\\/g, "/");
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:73:	return displayPath.endsWith("/") ? displayPath : `${displayPath}/`;
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:126:			let displayName: string;
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:128:				displayName = `${parentFolder}/${fileName}`;
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:130:				displayName = parentFolder;
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:132:				displayName = fileName;
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:139:				displayName,
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:168:			subgroup.items.sort((a, b) => a.displayName.localeCompare(b.displayName));
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:284:					item.displayName.toLowerCase().includes(lowerQuery) ||
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:376:				const name = isSelected ? theme.bold(item.displayName) : item.displayName;
+packages/coding-agent/src/core/tools/find.ts:92:		const displayLines = lines.slice(0, maxLines);
+packages/coding-agent/src/core/tools/find.ts:94:		text += `\n${displayLines.map((line) => theme.fg("toolOutput", line)).join("\n")}`;
+packages/coding-agent/src/core/tools/read.ts:186:	const displayLines = lines.slice(0, maxLines);
+packages/coding-agent/src/core/tools/read.ts:188:	let text = `\n${displayLines.map((line) => (lang ? replaceTabs(line) : theme.fg("toolOutput", replaceTabs(line)))).join("\n")}`;
+packages/coding-agent/src/core/model-resolver.ts:320:	 * Error message suitable for CLI display.
+packages/coding-agent/src/core/model-resolver.ts:460:	const display = provider ? `${provider}/${pattern}` : cliModel;
+packages/coding-agent/src/core/model-resolver.ts:465:		error: `Model "${display}" not found. Use --list-models to see available models.`,
+
+[Showing lines 342-483 of 483 (50.0KB limit). Full output: /var/folders/7m/csfvhz791k527kby7nxl7cbc0000h_/T/pi-bash-9ef8317d244cb1c8.log]

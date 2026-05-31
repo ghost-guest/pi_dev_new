@@ -1,0 +1,339 @@
+packages/coding-agent/src/core/agent-session.ts:1955:				summary = compactResult.summary;
+packages/coding-agent/src/core/agent-session.ts:1956:				firstKeptEntryId = compactResult.firstKeptEntryId;
+packages/coding-agent/src/core/agent-session.ts:1957:				tokensBefore = compactResult.tokensBefore;
+packages/coding-agent/src/core/agent-session.ts:1958:				details = compactResult.details;
+packages/coding-agent/src/core/agent-session.ts:1963:					type: "compaction_end",
+packages/coding-agent/src/core/agent-session.ts:1977:			// Get the saved compaction entry for the extension event
+packages/coding-agent/src/core/agent-session.ts:1978:			const savedCompactionEntry = newEntries.find((e) => e.type === "compaction" && e.summary === summary) as
+packages/coding-agent/src/core/agent-session.ts:1984:					type: "session_compact",
+packages/coding-agent/src/core/agent-session.ts:1985:					compactionEntry: savedCompactionEntry,
+packages/coding-agent/src/core/agent-session.ts:1996:			this._emit({ type: "compaction_end", reason, result, aborted: false, willRetry });
+packages/coding-agent/src/core/agent-session.ts:2007:			// Auto-compaction can complete while follow-up/steering/custom messages are waiting.
+packages/coding-agent/src/core/agent-session.ts:2011:			const errorMessage = error instanceof Error ? error.message : "compaction failed";
+packages/coding-agent/src/core/agent-session.ts:2013:				type: "compaction_end",
+packages/coding-agent/src/core/agent-session.ts:2021:						: `Auto-compaction failed: ${errorMessage}`,
+packages/coding-agent/src/core/agent-session.ts:2030:	 * Toggle auto-compaction setting.
+packages/coding-agent/src/core/agent-session.ts:2036:	/** Whether auto-compaction is enabled */
+packages/coding-agent/src/core/agent-session.ts:2227:				compact: (options) => {
+packages/coding-agent/src/core/agent-session.ts:2230:							const result = await this.compact(options?.customInstructions);
+packages/coding-agent/src/core/agent-session.ts:2427:	 * Context overflow errors are NOT retryable (handled by compaction instead).
+packages/coding-agent/src/core/agent-session.ts:2432:		// Context overflow is handled by compaction, not retry
+packages/coding-agent/src/core/agent-session.ts:2929:		// After compaction, the last assistant usage reflects pre-compaction context size.
+packages/coding-agent/src/core/agent-session.ts:2930:		// We can only trust usage from an assistant that responded after the latest compaction.
+packages/coding-agent/src/core/agent-session.ts:2936:			// Check if there's a valid assistant usage after the compaction boundary
+packages/coding-agent/src/core/agent-session.ts:2937:			const compactionIndex = branchEntries.lastIndexOf(latestCompaction);
+packages/coding-agent/src/core/agent-session.ts:2939:			for (let i = branchEntries.length - 1; i > compactionIndex; i--) {
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:131:		const title = this.scope === "current" ? "Resume Session (Current Folder)" : "Resume Session (All)";
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:143:			scopeText = `${theme.fg("muted", "○ Current Folder | ")}${theme.fg("accent", `Loading ${progressText}`)}`;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:145:			scopeText = `${theme.fg("accent", "◉ Current Folder")}${theme.fg("muted", " | ○ All")}`;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:147:			scopeText = `${theme.fg("muted", "○ Current Folder | ")}${theme.fg("accent", "◉ All")}`;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:414:					emptyMessage = `  No named sessions in current folder. Press ${toggleKey} to show all, or Tab to view all.`;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:420:				// "Current folder" scope - hint to try "all"
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:421:				emptyMessage = "  No sessions in current folder. Press Tab to view all.";
+packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts:7: * Component that renders a branch summary message with collapsed/expanded state.
+packages/coding-agent/src/modes/interactive/components/footer.ts:12:	// Replace newlines, tabs, carriage returns with space, then collapse multiple spaces
+packages/coding-agent/src/modes/interactive/components/footer.ts:20: * Format token counts for compact footer display.
+packages/coding-agent/src/modes/interactive/components/footer.ts:85:		// Calculate cumulative usage from ALL session entries (not just post-compaction messages)
+packages/coding-agent/src/modes/interactive/components/footer.ts:102:		// Calculate context usage from session (handles compaction correctly).
+packages/coding-agent/src/modes/interactive/components/footer.ts:103:		// After compaction, tokens are unknown until the next LLM response.
+packages/coding-agent/src/core/export-html/vendor/highlight.min.js:36:n.children.forEach((n=>this._walk(e,n))),e.closeNode(n)),e}static _collapse(e){
+packages/coding-agent/src/core/export-html/vendor/highlight.min.js:38:o._collapse(e)})))}}class l extends o{constructor(e){super(),this.options=e}
+packages/coding-agent/src/core/export-html/vendor/highlight.min.js:317:}),re=["a","abbr","address","article","aside","audio","b","blockquote","body","button","canvas","caption","cite","code","dd","del","details","dfn","div","dl","dt","em","fieldset","figcaption","figure","footer","form","h1","h2","h3","h4","h5","h6","header","hgroup","html","i","iframe","img","input","ins","kbd","label","legend","li","main","mark","menu","nav","object","ol","p","q","quote","samp","section","span","strong","summary","sup","table","tbody","td","textarea","tfoot","th","thead","time","tr","ul","var","video"],se=["any-hover","any-pointer","aspect-ratio","color","color-gamut","color-index","device-aspect-ratio","device-height","device-width","display-mode","forced-colors","grid","height","hover","inverted-colors","monochrome","orientation","overflow-block","overflow-inline","pointer","prefers-color-scheme","prefers-contrast","prefers-reduced-motion","prefers-reduced-transparency","resolution","scan","scripting","update","width","min-width","max-width","min-height","max-height"],oe=["active","any-link","blank","checked","current","default","defined","dir","disabled","drop","empty","enabled","first","first-child","first-of-type","fullscreen","future","focus","focus-visible","focus-within","has","host","host-context","hover","indeterminate","in-range","invalid","is","lang","last-child","last-of-type","left","link","local-link","not","nth-child","nth-col","nth-last-child","nth-last-col","nth-last-of-type","nth-of-type","only-child","only-of-type","optional","out-of-range","past","placeholder-shown","read-only","read-write","required","right","root","scope","target","target-within","user-invalid","valid","visited","where"],le=["after","backdrop","before","cue","cue-region","first-letter","first-line","grammar-error","marker","part","placeholder","selection","slotted","spelling-error"],ce=["align-content","align-items","align-self","all","animation","animation-delay","animation-direction","animation-duration","animation-fill-mode","animation-iteration-count","animation-name","animation-play-state","animation-timing-function","backface-visibility","background","background-attachment","background-blend-mode","background-clip","background-color","background-image","background-origin","background-position","background-repeat","background-size","block-size","border","border-block","border-block-color","border-block-end","border-block-end-color","border-block-end-style","border-block-end-width","border-block-start","border-block-start-color","border-block-start-style","border-block-start-width","border-block-style","border-block-width","border-bottom","border-bottom-color","border-bottom-left-radius","border-bottom-right-radius","border-bottom-style","border-bottom-width","border-collapse","border-color","border-image","border-image-outset","border-image-repeat","border-image-slice","border-image-source","border-image-width","border-inline","border-inline-color","border-inline-end","border-inline-end-color","border-inline-end-style","border-inline-end-width","border-inline-start","border-inline-start-color","border-inline-start-style","border-inline-start-width","border-inline-style","border-inline-width","border-left","border-left-color","border-left-style","border-left-width","border-radius","border-right","border-right-color","border-right-style","border-right-width","border-spacing","border-style","border-top","border-top-color","border-top-left-radius","border-top-right-radius","border-top-style","border-top-width","border-width","bottom","box-decoration-break","box-shadow","box-sizing","break-after","break-before","break-inside","caption-side","caret-color","clear","clip","clip-path","clip-rule","color","column-count","column-fill","column-gap","column-rule","column-rule-color","column-rule-style","column-rule-width","column-span","column-width","columns","contain","content","content-visibility","counter-increment","counter-reset","cue","cue-after","cue-before","cursor","direction","display","empty-cells","filter","flex","flex-basis","flex-direction","flex-flow","flex-grow","flex-shrink","flex-wrap","float","flow","font","font-display","font-family","font-feature-settings","font-kerning","font-language-override","font-size","font-size-adjust","font-smoothing","font-stretch","font-style","font-synthesis","font-variant","font-variant-caps","font-variant-east-asian","font-variant-ligatures","font-variant-numeric","font-variant-position","font-variation-settings","font-weight","gap","glyph-orientation-vertical","grid","grid-area","grid-auto-columns","grid-auto-flow","grid-auto-rows","grid-column","grid-column-end","grid-column-start","grid-gap","grid-row","grid-row-end","grid-row-start","grid-template","grid-template-areas","grid-template-columns","grid-template-rows","hanging-punctuation","height","hyphens","icon","image-orientation","image-rendering","image-resolution","ime-mode","inline-size","isolation","justify-content","left","letter-spacing","line-break","line-height","list-style","list-style-image","list-style-position","list-style-type","margin","margin-block","margin-block-end","margin-block-start","margin-bottom","margin-inline","margin-inline-end","margin-inline-start","margin-left","margin-right","margin-top","marks","mask","mask-border","mask-border-mode","mask-border-outset","mask-border-repeat","mask-border-slice","mask-border-source","mask-border-width","mask-clip","mask-composite","mask-image","mask-mode","mask-origin","mask-position","mask-repeat","mask-size","mask-type","max-block-size","max-height","max-inline-size","max-width","min-block-size","min-height","min-inline-size","min-width","mix-blend-mode","nav-down","nav-index","nav-left","nav-right","nav-up","none","normal","object-fit","object-position","opacity","order","orphans","outline","outline-color","outline-offset","outline-style","outline-width","overflow","overflow-wrap","overflow-x","overflow-y","padding","padding-block","padding-block-end","padding-block-start","padding-bottom","padding-inline","padding-inline-end","padding-inline-start","padding-left","padding-right","padding-top","page-break-after","page-break-before","page-break-inside","pause","pause-after","pause-before","perspective","perspective-origin","pointer-events","position","quotes","resize","rest","rest-after","rest-before","right","row-gap","scroll-margin","scroll-margin-block","scroll-margin-block-end","scroll-margin-block-start","scroll-margin-bottom","scroll-margin-inline","scroll-margin-inline-end","scroll-margin-inline-start","scroll-margin-left","scroll-margin-right","scroll-margin-top","scroll-padding","scroll-padding-block","scroll-padding-block-end","scroll-padding-block-start","scroll-padding-bottom","scroll-padding-inline","scroll-padding-inline-end","scroll-padding-inline-start","scroll-padding-left","scroll-padding-right","scroll-padding-top","scroll-snap-align","scroll-snap-stop","scroll-snap-type","scrollbar-color","scrollbar-gutter","scrollbar-width","shape-image-threshold","shape-margin","shape-outside","speak","speak-as","src","tab-size","table-layout","text-align","text-align-all","text-align-last","text-combine-upright","text-decoration","text-decoration-color","text-decoration-line","text-decoration-style","text-emphasis","text-emphasis-color","text-emphasis-position","text-emphasis-style","text-indent","text-justify","text-orientation","text-overflow","text-rendering","text-shadow","text-transform","text-underline-position","top","transform","transform-box","transform-origin","transform-style","transition","transition-delay","transition-duration","transition-property","transition-timing-function","unicode-bidi","vertical-align","visibility","voice-balance","voice-duration","voice-family","voice-pitch","voice-range","voice-rate","voice-stress","voice-volume","white-space","widows","width","will-change","word-break","word-spacing","word-wrap","writing-mode","z-index"].reverse(),de=oe.concat(le)
+packages/coding-agent/src/core/export-html/vendor/highlight.min.js:420:built_in:["break","cd","continue","eval","exec","exit","export","getopts","hash","pwd","readonly","return","shift","test","times","trap","umask","unset","alias","bind","builtin","caller","command","declare","echo","enable","help","let","local","logout","mapfile","printf","read","readarray","source","type","typeset","ulimit","unalias","set","shopt","autoload","bg","bindkey","bye","cap","chdir","clone","comparguments","compcall","compctl","compdescribe","compfiles","compgroups","compquote","comptags","comptry","compvalues","dirs","disable","disown","echotc","echoti","emulate","fc","fg","float","functions","getcap","getln","history","integer","jobs","kill","limit","log","noglob","popd","print","pushd","pushln","rehash","sched","setcap","setopt","stat","suspend","ttyctl","unfunction","unhash","unlimit","unsetopt","vared","wait","whence","where","which","zcompile","zformat","zftp","zle","zmodload","zparseopts","zprof","zpty","zregexparse","zsocket","zstyle","ztcp","chcon","chgrp","chown","chmod","cp","dd","df","dir","dircolors","ln","ls","mkdir","mkfifo","mknod","mktemp","mv","realpath","rm","rmdir","shred","sync","touch","truncate","vdir","b2sum","base32","base64","cat","cksum","comm","csplit","cut","expand","fmt","fold","head","join","md5sum","nl","numfmt","od","paste","ptx","pr","sha1sum","sha224sum","sha256sum","sha384sum","sha512sum","shuf","sort","split","sum","tac","tail","tr","tsort","unexpand","uniq","wc","arch","basename","chroot","date","dirname","du","echo","env","expr","factor","groups","hostid","id","link","logname","nice","nohup","nproc","pathchk","pinky","printenv","printf","pwd","readlink","runcon","seq","sleep","stat","stdbuf","stty","tee","test","timeout","tty","uname","unlink","uptime","users","who","whoami","yes"]
+packages/coding-agent/src/core/export-html/vendor/highlight.min.js:1029:begin:"\\b(whitespace|wait|w-resize|visible|vertical-text|vertical-ideographic|uppercase|upper-roman|upper-alpha|underline|transparent|top|thin|thick|text|text-top|text-bottom|tb-rl|table-header-group|table-footer-group|sw-resize|super|strict|static|square|solid|small-caps|separate|se-resize|scroll|s-resize|rtl|row-resize|ridge|right|repeat|repeat-y|repeat-x|relative|progress|pointer|overline|outside|outset|oblique|nowrap|not-allowed|normal|none|nw-resize|no-repeat|no-drop|newspaper|ne-resize|n-resize|move|middle|medium|ltr|lr-tb|lowercase|lower-roman|lower-alpha|loose|list-item|line|line-through|line-edge|lighter|left|keep-all|justify|italic|inter-word|inter-ideograph|inside|inset|inline|inline-block|inherit|inactive|ideograph-space|ideograph-parenthesis|ideograph-numeric|ideograph-alpha|horizontal|hidden|help|hand|groove|fixed|ellipsis|e-resize|double|dotted|distribute|distribute-space|distribute-letter|distribute-all-lines|disc|disabled|default|decimal|dashed|crosshair|collapse|col-resize|circle|char|center|capitalize|break-word|break-all|bottom|both|bolder|bold|block|bidi-override|below|baseline|auto|always|all-scroll|absolute|table|table-cell)\\b"
+packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts:7: * Component that renders a compaction message with collapsed/expanded state.
+packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts:36:		const label = theme.fg("customMessageLabel", `\x1b[1m[compaction]\x1b[22m`);
+packages/agent/src/harness/compaction/branch-summarization.ts:12:import { estimateTokens, SUMMARIZATION_SYSTEM_PROMPT } from "./compaction.ts";
+packages/agent/src/harness/compaction/branch-summarization.ts:111:		case "compaction":
+packages/agent/src/harness/compaction/branch-summarization.ts:149:			if (entry.type === "compaction" || entry.type === "branch_summary") {
+packages/coding-agent/src/core/export-html/template.js:348:          case 'compaction':
+packages/coding-agent/src/core/export-html/template.js:349:            parts.push('compaction');
+packages/coding-agent/src/core/export-html/template.js:673:          case 'compaction':
+packages/coding-agent/src/core/export-html/template.js:674:            return labelHtml + `<span class="tree-compaction">[compaction: ${Math.round(entry.tokensBefore/1000)}k tokens]</span>`;
+packages/coding-agent/src/core/export-html/template.js:1024:                // Both collapsed and expanded differ - render expandable section
+packages/coding-agent/src/core/export-html/template.js:1030:                // Only expanded exists (or collapsed is identical) - show directly
+packages/coding-agent/src/core/export-html/template.js:1183:              // Skill invocation (collapsed by default, click to expand)
+packages/coding-agent/src/core/export-html/template.js:1186:                <div class="skill-invocation-collapsed">${escapeHtml(skillBlock.name)} (click to expand)</div>
+packages/coding-agent/src/core/export-html/template.js:1240:                  <div class="thinking-collapsed">Thinking ...</div>
+packages/coding-agent/src/core/export-html/template.js:1282:        if (entry.type === 'compaction') {
+packages/coding-agent/src/core/export-html/template.js:1283:          return `<div class="compaction" id="${entryDomId}" onclick="if(window.getSelection().toString())return;this.classList.toggle('expanded')">
+packages/coding-agent/src/core/export-html/template.js:1284:            <div class="compaction-label">[compaction]</div>
+packages/coding-agent/src/core/export-html/template.js:1285:            <div class="compaction-collapsed">Compacted from ${entry.tokensBefore.toLocaleString()} tokens</div>
+packages/coding-agent/src/core/export-html/template.js:1286:            <div class="compaction-content"><strong>Compacted from ${entry.tokensBefore.toLocaleString()} tokens</strong>\n\n${escapeHtml(entry.summary)}</div>
+packages/coding-agent/src/core/export-html/template.js:1313:        let customMessages = 0, compactions = 0, branchSummaries = 0, toolCalls = 0;
+packages/coding-agent/src/core/export-html/template.js:1340:          } else if (entry.type === 'compaction') {
+packages/coding-agent/src/core/export-html/template.js:1341:            compactions++;
+packages/coding-agent/src/core/export-html/template.js:1349:        return { userMessages, assistantMessages, toolResults, customMessages, compactions, branchSummaries, toolCalls, tokens, cost, models: Array.from(models) };
+packages/coding-agent/src/core/export-html/template.js:1368:        if (globalStats.compactions) msgParts.push(`${globalStats.compactions} compactions`);
+packages/coding-agent/src/core/export-html/template.js:1784:        document.querySelectorAll('.thinking-collapsed').forEach(el => {
+packages/coding-agent/src/core/export-html/template.js:1794:        document.querySelectorAll('.compaction').forEach(el => {
+packages/coding-agent/src/modes/interactive/components/index.ts:7:export { CompactionSummaryMessageComponent } from "./compaction-summary-message.ts";
+packages/coding-agent/src/core/export-html/index.ts:18:	/** Render a tool result to HTML. Returns collapsed/expanded or undefined if tool has no custom renderer. */
+packages/coding-agent/src/core/export-html/index.ts:25:	): { collapsed?: string; expanded?: string } | undefined;
+packages/coding-agent/src/core/export-html/index.ts:221:						resultHtmlCollapsed: rendered.collapsed,
+packages/coding-agent/src/core/export-html/template.css:227:    .tree-compaction {
+packages/coding-agent/src/core/export-html/template.css:448:    .message-timestamp + .thinking-block .thinking-collapsed {
+packages/coding-agent/src/core/export-html/template.css:452:    .thinking-collapsed {
+packages/coding-agent/src/core/export-html/template.css:604:    .compaction {
+packages/coding-agent/src/core/export-html/template.css:611:    .compaction-label {
+packages/coding-agent/src/core/export-html/template.css:616:    .compaction-collapsed {
+packages/coding-agent/src/core/export-html/template.css:620:    .compaction-content {
+packages/coding-agent/src/core/export-html/template.css:627:    .compaction.expanded .compaction-collapsed {
+packages/coding-agent/src/core/export-html/template.css:631:    .compaction.expanded .compaction-content {
+packages/coding-agent/src/core/export-html/template.css:794:    /* Skill invocation - matches compaction style (clickable, collapsed by default) */
+packages/coding-agent/src/core/export-html/template.css:807:    .skill-invocation-collapsed {
+packages/coding-agent/src/core/export-html/template.css:817:    .skill-invocation.expanded .skill-invocation-collapsed {
+packages/coding-agent/src/core/export-html/template.css:936:      border-collapse: collapse;
+packages/coding-agent/src/modes/interactive/components/skill-invocation-message.ts:7: * Component that renders a skill invocation message with collapsed/expanded state.
+packages/coding-agent/src/core/export-html/tool-renderer.ts:28:	/** Render a tool result to collapsed/expanded HTML. Returns undefined if tool has no custom renderer. */
+packages/coding-agent/src/core/export-html/tool-renderer.ts:35:	): { collapsed?: string; expanded?: string } | undefined;
+packages/coding-agent/src/core/export-html/tool-renderer.ts:127:		): { collapsed?: string; expanded?: string } | undefined {
+packages/coding-agent/src/core/export-html/tool-renderer.ts:142:				// Render collapsed
+packages/coding-agent/src/core/export-html/tool-renderer.ts:143:				const collapsedComponent = toolDef.renderResult(
+packages/coding-agent/src/core/export-html/tool-renderer.ts:149:				renderedResultComponents.set(toolCallId, collapsedComponent);
+packages/coding-agent/src/core/export-html/tool-renderer.ts:150:				const collapsed = ansiLinesToHtml(trimRenderedResultLines(collapsedComponent.render(width)));
+packages/coding-agent/src/core/export-html/tool-renderer.ts:163:					...(collapsed && collapsed !== expanded ? { collapsed } : {}),
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:68:	 * Set whether the output is expanded (shows full output) or collapsed (preview only).
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:176:			// Show how many lines are hidden (collapsed preview)
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:179:					statusParts.push(`(${keyHint("app.tools.expand", "to collapse")})`);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:101:import { CompactionSummaryMessageComponent } from "./components/compaction-summary-message.ts";
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:141:/** Interface for components that can be expanded/collapsed */
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:304:	// Auto-compaction state
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:313:	// Messages queued while compaction is running
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:314:	private compactionQueuedMessages: CompactionQueuedMessage[] = [];
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:627:			const compactInstructions = [
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:634:			const compactOnboarding = theme.fg(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:643:				() => `${logo}\n${compactInstructions}\n${compactOnboarding}\n\n${onboarding}`,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1303:			collapsedBody: string,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1304:			expandedBody = collapsedBody,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1308:				() => `${sectionHeader(name, color)}\n${collapsedBody}`,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1609:		this.compactionQueuedMessages = [];
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1648:			compact: (options) => {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1651:						const result = await this.session.compact(options?.customInstructions);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2556:			if (text === "/compact" || text.startsWith("/compact ")) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2557:				const customInstructions = text.startsWith("/compact ") ? text.slice(9).trim() : undefined;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2611:			// Queue input during compaction (extension commands execute immediately)
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2862:			case "compaction_start": {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2866:				// Keep editor active; submissions are queued during compaction.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2876:						: `${event.reason === "overflow" ? "Context overflow detected, " : ""}Auto-compacting... ${cancelHint}`;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2888:			case "compaction_end": {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2905:						this.showStatus("Auto-compaction cancelled");
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3050:			case "compactionSummary": {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3118:	 * Render session context to chat. Used for initial load and rebuild after compaction.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3201:		// Show compaction info if session was compacted
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3203:		const compactionCount = allEntries.filter((e) => e.type === "compaction").length;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3204:		if (compactionCount > 0) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3205:			const times = compactionCount === 1 ? "1 time" : `${compactionCount} times`;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3206:			this.showStatus(`Session compacted ${times}`);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3399:		// Queue input during compaction (extension commands execute immediately)
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3639:	 * Combines session queue and compaction queue.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3645:				...this.compactionQueuedMessages.filter((msg) => msg.mode === "steer").map((msg) => msg.text),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3649:				...this.compactionQueuedMessages.filter((msg) => msg.mode === "followUp").map((msg) => msg.text),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3656:	 * Clears both session queue and compaction queue.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3660:		const compactionSteering = this.compactionQueuedMessages
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3663:		const compactionFollowUp = this.compactionQueuedMessages
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3666:		this.compactionQueuedMessages = [];
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3668:			steering: [...steering, ...compactionSteering],
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3669:			followUp: [...followUp, ...compactionFollowUp],
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3714:		this.compactionQueuedMessages.push({ text, mode });
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3718:		this.showStatus("Queued message for after compaction");
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3732:		if (this.compactionQueuedMessages.length === 0) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3736:		const queuedMessages = [...this.compactionQueuedMessages];
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3737:		this.compactionQueuedMessages = [];
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3742:			this.compactionQueuedMessages = queuedMessages;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3857:					collapseChangelog: this.settingsManager.getCollapseChangelog(),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3946:					onCollapseChangelogChange: (collapsed) => {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3947:						this.settingsManager.setCollapseChangelog(collapsed);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4872:			this.showWarning("Wait for compaction to finish before reloading.");
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5527:			this.showWarning("Nothing to compact (no messages yet)");
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5538:			await this.session.compact(customInstructions);
+packages/coding-agent/src/core/index.ts:29:export type { CompactionResult } from "./compaction/index.ts";
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:125:			const parentFolder = basename(dirname(path));
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:127:			if (resourceType === "extensions" && parentFolder !== "extensions") {
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:128:				displayName = `${parentFolder}/${fileName}`;
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:130:				displayName = parentFolder;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:65:	private foldedNodes: Set<string> = new Set();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:342:		// Filter out descendants of folded nodes.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:343:		if (this.foldedNodes.size > 0) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:347:				if (parentId != null && (this.foldedNodes.has(parentId) || skipSet.has(parentId))) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:533:			case "compaction":
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:534:				parts.push("compaction");
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:640:			const isFolded = this.foldedNodes.has(entry.id);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:654:					// Connector at this level, with fold indicator
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:658:						const foldable = this.isFoldable(entry.id);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:659:						prefixChars.push(isFolded ? "⊞" : foldable ? "⊟" : "─");
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:669:			// Fold marker for nodes without connectors (roots)
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:670:			const showsFoldInConnector = flatNode.showConnector && !flatNode.isVirtualRootChild;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:671:			const foldMarker = isFolded && !showsFoldInConnector ? theme.fg("accent", "⊞ ") : "";
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:684:			let line = cursor + theme.fg("dim", prefix) + foldMarker + pathMarker + label + labelTimestamp + content;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:755:			case "compaction": {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:757:				result = theme.fg("borderAccent", `[compaction: ${tokens}k tokens]`);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:905:		} else if (kb.matches(keyData, "app.tree.foldOrUp")) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:907:			if (currentId && this.isFoldable(currentId) && !this.foldedNodes.has(currentId)) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:908:				this.foldedNodes.add(currentId);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:913:		} else if (kb.matches(keyData, "app.tree.unfoldOrDown")) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:915:			if (currentId && this.foldedNodes.has(currentId)) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:916:				this.foldedNodes.delete(currentId);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:935:				this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:943:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:948:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:953:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:958:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:963:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:970:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:977:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:982:				this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:999:				this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1006:	 * Whether a node can be folded. A node is foldable if it has visible children
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1010:	private isFoldable(entryId: string): boolean {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1192:		const branchKeys = `${keyText("app.tree.foldOrUp")}/${keyText("app.tree.unfoldOrDown")}`;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1197:					`  ↑/↓: move. ←/→: page. ${branchKeys}: fold/branch. ${keyText("app.tree.editLabel")}: label. ${filterKeys}: filters (${cycleKeys} cycle). ${keyText("app.tree.toggleLabelTimestamp")}: label time`,
+packages/coding-agent/src/core/settings-manager.ts:86:	compaction?: CompactionSettings;
+packages/coding-agent/src/core/settings-manager.ts:94:	collapseChangelog?: boolean; // Show condensed changelog after update (use /changelog for full)
+packages/coding-agent/src/core/settings-manager.ts:664:		return this.settings.compaction?.enabled ?? true;
+packages/coding-agent/src/core/settings-manager.ts:668:		if (!this.globalSettings.compaction) {
+packages/coding-agent/src/core/settings-manager.ts:669:			this.globalSettings.compaction = {};
+packages/coding-agent/src/core/settings-manager.ts:671:		this.globalSettings.compaction.enabled = enabled;
+packages/coding-agent/src/core/settings-manager.ts:672:		this.markModified("compaction", "enabled");
+packages/coding-agent/src/core/settings-manager.ts:677:		return this.settings.compaction?.reserveTokens ?? 16384;
+packages/coding-agent/src/core/settings-manager.ts:681:		return this.settings.compaction?.keepRecentTokens ?? 20000;
+packages/coding-agent/src/core/settings-manager.ts:804:		return this.settings.collapseChangelog ?? false;
+packages/coding-agent/src/core/settings-manager.ts:807:	setCollapseChangelog(collapse: boolean): void {
+packages/coding-agent/src/core/settings-manager.ts:808:		this.globalSettings.collapseChangelog = collapse;
+packages/coding-agent/src/core/settings-manager.ts:809:		this.markModified("collapseChangelog");
+packages/agent/src/harness/compaction/utils.ts:4:/** File paths touched by a session branch or compaction range. */
+packages/agent/src/harness/messages.ts:4:export const COMPACTION_SUMMARY_PREFIX = `The conversation history before this point was compacted into the following summary:
+packages/agent/src/harness/messages.ts:48:	role: "compactionSummary";
+packages/agent/src/harness/messages.ts:59:		compactionSummary: CompactionSummaryMessage;
+packages/agent/src/harness/messages.ts:96:		role: "compactionSummary",
+packages/agent/src/harness/messages.ts:147:				case "compactionSummary":
+packages/coding-agent/src/core/keybindings.ts:33:	"app.tree.foldOrUp": true;
+packages/coding-agent/src/core/keybindings.ts:34:	"app.tree.unfoldOrDown": true;
+packages/coding-agent/src/core/keybindings.ts:114:	"app.tree.foldOrUp": {
+packages/coding-agent/src/core/keybindings.ts:116:		description: "Fold tree branch or move up",
+packages/coding-agent/src/core/keybindings.ts:118:	"app.tree.unfoldOrDown": {
+packages/coding-agent/src/core/keybindings.ts:120:		description: "Unfold tree branch or move down",
+packages/coding-agent/src/core/keybindings.ts:255:	treeFoldOrUp: "app.tree.foldOrUp",
+packages/coding-agent/src/core/keybindings.ts:256:	treeUnfoldOrDown: "app.tree.unfoldOrDown",
+packages/coding-agent/src/core/messages.ts:11:export const COMPACTION_SUMMARY_PREFIX = `The conversation history before this point was compacted into the following summary:
+packages/coding-agent/src/core/messages.ts:63:	role: "compactionSummary";
+packages/coding-agent/src/core/messages.ts:75:		compactionSummary: CompactionSummaryMessage;
+packages/coding-agent/src/core/messages.ts:115:		role: "compactionSummary",
+packages/coding-agent/src/core/messages.ts:176:				case "compactionSummary":
+packages/coding-agent/src/core/slash-commands.ts:36:	{ name: "compact", description: "Manually compact the session context" },
+packages/coding-agent/src/core/extensions/runner.ts:130:	{ type: "session_before_switch" | "session_before_fork" | "session_before_compact" | "session_before_tree" }
+packages/coding-agent/src/core/extensions/runner.ts:143:		: TEvent extends { type: "session_before_compact" }
+packages/coding-agent/src/core/extensions/runner.ts:239:	private compactFn: (options?: CompactOptions) => void = () => {};
+packages/coding-agent/src/core/extensions/runner.ts:298:		this.compactFn = contextActions.compact;
+packages/coding-agent/src/core/extensions/runner.ts:625:			compact: (options) => {
+packages/coding-agent/src/core/extensions/runner.ts:627:				runner.compactFn(options);
+packages/coding-agent/src/core/extensions/runner.ts:675:			event.type === "session_before_compact" ||
+packages/coding-agent/src/core/compaction/index.ts:6:export * from "./compaction.ts";
+packages/coding-agent/src/core/session-manager.ts:68:	type: "compaction";
+packages/coding-agent/src/core/session-manager.ts:72:	/** Extension-specific data (e.g., ArtifactIndex, version markers for structured compaction) */
+packages/coding-agent/src/core/session-manager.ts:230:		// Convert firstKeptEntryIndex to firstKeptEntryId for compaction
+packages/coding-agent/src/core/session-manager.ts:231:		if (entry.type === "compaction") {
+packages/coding-agent/src/core/session-manager.ts:283:/** Exported for compaction.test.ts */
+packages/coding-agent/src/core/session-manager.ts:303:		if (entries[i].type === "compaction") {
+packages/coding-agent/src/core/session-manager.ts:313: * Handles compaction and branch summaries along the path.
+packages/coding-agent/src/core/session-manager.ts:354:	// Extract settings and find compaction
+packages/coding-agent/src/core/session-manager.ts:357:	let compaction: CompactionEntry | null = null;
+packages/coding-agent/src/core/session-manager.ts:366:		} else if (entry.type === "compaction") {
+packages/coding-agent/src/core/session-manager.ts:367:			compaction = entry;
+packages/coding-agent/src/core/session-manager.ts:372:	// When there's a compaction, we need to:
+packages/coding-agent/src/core/session-manager.ts:373:	// 1. Emit summary first (entry = compaction)
+packages/coding-agent/src/core/session-manager.ts:374:	// 2. Emit kept messages (from firstKeptEntryId up to compaction)
+packages/coding-agent/src/core/session-manager.ts:375:	// 3. Emit messages after compaction
+packages/coding-agent/src/core/session-manager.ts:390:	if (compaction) {
+packages/coding-agent/src/core/session-manager.ts:392:		messages.push(createCompactionSummaryMessage(compaction.summary, compaction.tokensBefore, compaction.timestamp));
+packages/coding-agent/src/core/session-manager.ts:394:		// Find compaction index in path
+packages/coding-agent/src/core/session-manager.ts:395:		const compactionIdx = path.findIndex((e) => e.type === "compaction" && e.id === compaction.id);
+packages/coding-agent/src/core/session-manager.ts:397:		// Emit kept messages (before compaction, starting from firstKeptEntryId)
+packages/coding-agent/src/core/session-manager.ts:399:		for (let i = 0; i < compactionIdx; i++) {
+packages/coding-agent/src/core/session-manager.ts:401:			if (entry.id === compaction.firstKeptEntryId) {
+packages/coding-agent/src/core/session-manager.ts:409:		// Emit messages after compaction
+packages/coding-agent/src/core/session-manager.ts:410:		for (let i = compactionIdx + 1; i < path.length; i++) {
+packages/coding-agent/src/core/session-manager.ts:415:		// No compaction - emit all messages, handle branch summaries and custom messages
+packages/coding-agent/src/core/session-manager.ts:709: * handles compaction summaries and follows the path from root to current leaf.
+packages/coding-agent/src/core/session-manager.ts:915:	/** Append a compaction summary as child of current leaf, then advance leaf. Returns entry id. */
+packages/coding-agent/src/core/session-manager.ts:924:			type: "compaction",
+packages/coding-agent/src/core/session-manager.ts:1073:	 * Includes all entry types (messages, compaction, model changes, etc.).
+packages/coding-agent/src/core/compaction/compaction.ts:2: * Context compaction for long sessions.
+packages/coding-agent/src/core/compaction/compaction.ts:4: * Pure functions for compaction logic. The session manager handles I/O,
+packages/coding-agent/src/core/compaction/compaction.ts:5: * and after compaction the session is reloaded.
+packages/coding-agent/src/core/compaction/compaction.ts:39: * Extract file operations from messages and previous compaction entries.
+packages/coding-agent/src/core/compaction/compaction.ts:48:	// Collect from previous compaction's details (if pi-generated)
+packages/coding-agent/src/core/compaction/compaction.ts:89:	if (entry.type === "compaction") {
+packages/coding-agent/src/core/compaction/compaction.ts:96:	if (entry.type === "compaction") {
+packages/coding-agent/src/core/compaction/compaction.ts:102:/** Result from compact() - SessionManager adds uuid/parentUuid when saving */
+packages/coding-agent/src/core/compaction/compaction.ts:107:	/** Extension-specific data (e.g., ArtifactIndex, version markers for structured compaction) */
+packages/coding-agent/src/core/compaction/compaction.ts:217: * Check if compaction should trigger based on context usage.
+packages/coding-agent/src/core/compaction/compaction.ts:283:		case "compactionSummary": {
+packages/coding-agent/src/core/compaction/compaction.ts:310:					case "compactionSummary":
+packages/coding-agent/src/core/compaction/compaction.ts:322:			case "compaction":
+packages/coding-agent/src/core/compaction/compaction.ts:426:		// Stop at session header or compaction boundaries
+packages/coding-agent/src/core/compaction/compaction.ts:427:		if (prevEntry.type === "compaction") {
+packages/coding-agent/src/core/compaction/compaction.ts:636:	/** Summary from previous compaction, for iterative update */
+packages/coding-agent/src/core/compaction/compaction.ts:648:	if (pathEntries.length > 0 && pathEntries[pathEntries.length - 1].type === "compaction") {
+packages/coding-agent/src/core/compaction/compaction.ts:654:		if (pathEntries[i].type === "compaction") {
+packages/coding-agent/src/core/compaction/compaction.ts:699:	// Extract file operations from messages and previous compaction
+packages/coding-agent/src/core/compaction/compaction.ts:722:// Main compaction function
+packages/coding-agent/src/core/compaction/compaction.ts:741: * Generate summaries for compaction using prepared data.
+packages/coding-agent/src/core/compaction/compaction.ts:747:export async function compact(
+packages/coding-agent/src/core/compaction/branch-summarization.ts:18:import { estimateTokens } from "./compaction.ts";
+packages/coding-agent/src/core/compaction/branch-summarization.ts:90: * along the way. Does NOT stop at compaction boundaries - those are included and their
+packages/coding-agent/src/core/compaction/branch-summarization.ts:144: * Similar to getMessageFromEntry in compaction.ts but also handles compaction entries.
+packages/coding-agent/src/core/compaction/branch-summarization.ts:159:		case "compaction":
+packages/coding-agent/src/core/compaction/branch-summarization.ts:222:			if (entry.type === "compaction" || entry.type === "branch_summary") {
+packages/coding-agent/src/core/compaction/utils.ts:2: * Shared utilities for compaction and branch summarization.
+packages/coding-agent/src/core/extensions/types.ts:45:import type { CompactionPreparation, CompactionResult } from "../compaction/index.ts";
+packages/coding-agent/src/core/extensions/types.ts:205:	/** Paste text into the editor, triggering paste handling (collapse for large content). */
+packages/coding-agent/src/core/extensions/types.ts:282:	/** Estimated context tokens, or null if unknown (e.g. right after compaction, before next LLM response). */
+packages/coding-agent/src/core/extensions/types.ts:323:	/** Trigger compaction without awaiting completion. */
+packages/coding-agent/src/core/extensions/types.ts:324:	compact(options?: CompactOptions): void;
+packages/coding-agent/src/core/extensions/types.ts:535:/** Fired before context compaction (can be cancelled or customized) */
+packages/coding-agent/src/core/extensions/types.ts:537:	type: "session_before_compact";
+packages/coding-agent/src/core/extensions/types.ts:544:/** Fired after context compaction */
+packages/coding-agent/src/core/extensions/types.ts:546:	type: "session_compact";
+packages/coding-agent/src/core/extensions/types.ts:547:	compactionEntry: CompactionEntry;
+packages/coding-agent/src/core/extensions/types.ts:1026:	compaction?: CompactionResult;
+packages/coding-agent/src/core/extensions/types.ts:1097:		event: "session_before_compact",
+packages/coding-agent/src/core/extensions/types.ts:1100:	on(event: "session_compact", handler: ExtensionHandler<SessionCompactEvent>): void;
+packages/coding-agent/src/core/extensions/types.ts:1501:	compact: (options?: CompactOptions) => void;
+packages/agent/src/harness/compaction/compaction.ts:21:/** File-operation details stored on generated compaction entries. */
+packages/agent/src/harness/compaction/compaction.ts:23:	/** Files read in the compacted history. */
+packages/agent/src/harness/compaction/compaction.ts:25:	/** Files modified in the compacted history. */
+packages/agent/src/harness/compaction/compaction.ts:76:	if (entry.type === "compaction") {
+packages/agent/src/harness/compaction/compaction.ts:83:	if (entry.type === "compaction") {
+packages/agent/src/harness/compaction/compaction.ts:89:/** Generated compaction data ready to be persisted as a compaction entry. */
+packages/agent/src/harness/compaction/compaction.ts:91:	/** Summary text that replaces compacted history in future context. */
+packages/agent/src/harness/compaction/compaction.ts:95:	/** Estimated context tokens before compaction. */
+packages/agent/src/harness/compaction/compaction.ts:97:	/** Optional implementation-specific details stored with the compaction entry. */
+packages/agent/src/harness/compaction/compaction.ts:103:	/** Enable automatic compaction decisions. */
+packages/agent/src/harness/compaction/compaction.ts:107:	/** Approximate recent-context tokens to keep after compaction. */
+packages/agent/src/harness/compaction/compaction.ts:111:/** Default compaction settings used by the harness. */
+packages/agent/src/harness/compaction/compaction.ts:195:/** Return whether context usage exceeds the configured compaction threshold. */
+packages/agent/src/harness/compaction/compaction.ts:253:		case "compactionSummary": {
+packages/agent/src/harness/compaction/compaction.ts:272:					case "compactionSummary":
+packages/agent/src/harness/compaction/compaction.ts:284:			case "compaction":
+packages/agent/src/harness/compaction/compaction.ts:317:/** Cut point selected for compaction. */
+packages/agent/src/harness/compaction/compaction.ts:319:	/** Index of the first entry retained after compaction. */
+packages/agent/src/harness/compaction/compaction.ts:327:/** Find the compaction cut point that keeps approximately the requested recent-token budget. */
+packages/agent/src/harness/compaction/compaction.ts:359:		if (prevEntry.type === "compaction") {
+packages/agent/src/harness/compaction/compaction.ts:454:/** Generate or update a conversation summary for compaction. */
+packages/agent/src/harness/compaction/compaction.ts:520:/** Prepared inputs for a compaction run. */
+packages/agent/src/harness/compaction/compaction.ts:526:	/** Prefix messages summarized separately when compaction splits a turn. */
+packages/agent/src/harness/compaction/compaction.ts:528:	/** Whether compaction splits a turn. */
+packages/agent/src/harness/compaction/compaction.ts:530:	/** Estimated context tokens before compaction. */
+packages/agent/src/harness/compaction/compaction.ts:532:	/** Previous compaction summary used for iterative updates. */
+packages/agent/src/harness/compaction/compaction.ts:536:	/** Settings used to prepare compaction. */
+packages/agent/src/harness/compaction/compaction.ts:540:/** Prepare session entries for compaction, or return undefined when compaction is not applicable. */
+packages/agent/src/harness/compaction/compaction.ts:545:	if (pathEntries.length === 0 || pathEntries[pathEntries.length - 1].type === "compaction") {
+packages/agent/src/harness/compaction/compaction.ts:551:		if (pathEntries[i].type === "compaction") {
+packages/agent/src/harness/compaction/compaction.ts:625:/** Generate compaction summary data from prepared session history. */
+packages/agent/src/harness/compaction/compaction.ts:626:export async function compact(
+packages/coding-agent/src/core/tools/grep.ts:260:								// Truncate long lines so grep output stays compact.
+
+[Showing lines 151-485 of 485 (50.0KB limit). Full output: /var/folders/7m/csfvhz791k527kby7nxl7cbc0000h_/T/pi-bash-63a2318ec9550ea2.log]
+
+Command exited with code 2

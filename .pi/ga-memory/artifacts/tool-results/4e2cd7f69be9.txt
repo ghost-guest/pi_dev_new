@@ -1,0 +1,466 @@
+packages/ai/src/models.generated.ts:6405:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6409:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6422:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6426:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6439:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6443:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6456:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6460:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6473:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6477:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6490:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6494:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6507:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6511:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6525:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6529:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6543:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6547:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6561:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6565:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6579:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6583:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6597:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6601:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6615:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6619:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6633:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6637:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6651:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6655:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6669:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6673:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6687:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6691:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6705:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6709:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6723:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6727:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6741:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6745:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6759:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6763:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6777:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6781:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6795:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6799:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6813:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6817:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6831:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6835:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6849:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6853:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6867:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6871:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6885:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6889:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6903:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6907:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6921:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6925:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6939:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6943:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6956:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6960:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6973:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6977:			api: "openai-responses",
+packages/ai/src/models.generated.ts:6990:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:6994:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7007:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7011:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7024:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7028:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7041:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7045:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7058:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7062:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7075:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7081:			api: "openai-codex-responses",
+packages/ai/src/models.generated.ts:7095:		} satisfies Model<"openai-codex-responses">,
+packages/ai/src/models.generated.ts:7099:			api: "openai-codex-responses",
+packages/ai/src/models.generated.ts:7113:		} satisfies Model<"openai-codex-responses">,
+packages/ai/src/models.generated.ts:7117:			api: "openai-codex-responses",
+packages/ai/src/models.generated.ts:7131:		} satisfies Model<"openai-codex-responses">,
+packages/ai/src/models.generated.ts:7135:			api: "openai-codex-responses",
+packages/ai/src/models.generated.ts:7149:		} satisfies Model<"openai-codex-responses">,
+packages/ai/src/models.generated.ts:7153:			api: "openai-codex-responses",
+packages/ai/src/models.generated.ts:7167:		} satisfies Model<"openai-codex-responses">,
+packages/ai/src/models.generated.ts:7171:			api: "openai-codex-responses",
+packages/ai/src/models.generated.ts:7185:		} satisfies Model<"openai-codex-responses">,
+packages/ai/src/models.generated.ts:7475:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7489:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7493:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7507:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7511:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7525:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7529:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7543:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7547:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7561:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7565:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7579:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7583:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7597:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7601:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7615:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7619:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7633:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7637:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7651:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7655:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7669:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7673:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7687:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7691:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7705:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7709:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7723:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7727:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7741:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:7745:			api: "openai-responses",
+packages/ai/src/models.generated.ts:7759:		} satisfies Model<"openai-responses">,
+packages/ai/src/models.generated.ts:12681:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:12700:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:12719:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12738:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:12756:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12775:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12794:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12813:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12832:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12851:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12870:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":true,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12889:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:12907:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12926:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false},
+packages/ai/src/models.generated.ts:12944:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12963:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/ai/src/models.generated.ts:12982:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":true,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"openai"},
+packages/ai/src/models.generated.ts:13001:			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false,"maxTokensField":"max_tokens","supportsStrictMode":false,"supportsLongCacheRetention":false,"thinkingFormat":"together"},
+packages/coding-agent/src/core/extensions/types.ts:1282:	 *   api: "openai-responses",
+packages/coding-agent/src/core/model-resolver.ts:18:	"azure-openai-responses": "gpt-5.4",
+packages/ai/test/openai-responses-foreign-toolcall-id.test.ts:3:import { convertResponsesMessages } from "../src/providers/openai-responses-shared.ts";
+packages/ai/test/openai-responses-foreign-toolcall-id.test.ts:32:			api: "openai-responses",
+packages/ai/src/types.ts:9:	| "openai-responses"
+packages/ai/src/types.ts:10:	| "azure-openai-responses"
+packages/ai/src/types.ts:11:	| "openai-codex-responses"
+packages/ai/src/types.ts:29:	| "azure-openai-responses"
+packages/ai/src/types.ts:227:	textSignature?: string; // e.g., for OpenAI responses, message metadata (legacy id string or TextSignatureV1 JSON)
+packages/ai/src/types.ts:233:	thinkingSignature?: string; // e.g., for OpenAI responses, the reasoning item ID
+packages/ai/src/types.ts:367:	supportsStore?: boolean;
+packages/ai/src/types.ts:372:	/** Whether the provider supports `stream_options: { include_usage: true }` for token usage in streaming responses. Default: true. */
+packages/ai/src/types.ts:398:	/** Whether the provider supports long prompt cache retention (`prompt_cache_retention: "24h"` or Anthropic-style `cache_control.ttl: "1h"`, depending on format). Default: true. */
+packages/ai/src/types.ts:399:	supportsLongCacheRetention?: boolean;
+packages/ai/src/types.ts:403:export interface OpenAIResponsesCompat {
+packages/ai/src/types.ts:405:	sendSessionIdHeader?: boolean;
+packages/ai/src/types.ts:406:	/** Whether the provider supports `prompt_cache_retention: "24h"`. Default: true. */
+packages/ai/src/types.ts:407:	supportsLongCacheRetention?: boolean;
+packages/ai/src/types.ts:421:	supportsLongCacheRetention?: boolean;
+packages/ai/src/types.ts:563:		: TApi extends "openai-responses"
+packages/ai/src/types.ts:564:			? OpenAIResponsesCompat
+packages/ai/test/responseid.test.ts:82:		const llm = getModel("azure-openai-responses", "gpt-4o-mini");
+packages/coding-agent/test/sdk-codex-cache-probe-tool-loop.ts:27:} from "../../ai/src/providers/openai-codex-responses.ts";
+packages/coding-agent/test/sdk-codex-cache-probe-tool-loop.ts:290:		streamSimpleOpenAICodexResponses(registryModel as Model<"openai-codex-responses">, context, options);
+packages/coding-agent/test/sdk-codex-cache-probe-tool-loop.ts:292:		api: "openai-codex-responses",
+packages/coding-agent/test/theme-detection.test.ts:58:	it("parses 16-bit OSC 11 rgb responses", () => {
+packages/coding-agent/test/theme-detection.test.ts:62:	it("parses OSC 11 hex responses", () => {
+packages/ai/test/faux-provider.test.ts:117:	it("consumes queued responses in order and errors when exhausted", async () => {
+packages/ai/test/faux-provider.test.ts:133:		expect(exhausted.errorMessage).toBe("No more faux responses queued");
+packages/ai/test/faux-provider.test.ts:138:	it("can replace and append queued responses", async () => {
+packages/ai/test/cache-retention.test.ts:5:import { streamOpenAIResponses } from "../src/providers/openai-responses.ts";
+packages/ai/test/cache-retention.test.ts:129:		it("should omit ttl when supportsLongCacheRetention is false", async () => {
+packages/ai/test/cache-retention.test.ts:134:				compat: { supportsLongCacheRetention: false },
+packages/ai/test/cache-retention.test.ts:235:			"should not set prompt_cache_retention when PI_CACHE_RETENTION is not set",
+packages/ai/test/cache-retention.test.ts:252:				expect(capturedPayload.prompt_cache_retention).toBeUndefined();
+packages/ai/test/cache-retention.test.ts:257:			"should set prompt_cache_retention to 24h when PI_CACHE_RETENTION=long",
+packages/ai/test/cache-retention.test.ts:275:				expect(capturedPayload.prompt_cache_retention).toBe("24h");
+packages/ai/test/cache-retention.test.ts:279:		it("should set prompt_cache_retention for non-api.openai.com baseUrl by default", async () => {
+packages/ai/test/cache-retention.test.ts:308:			expect(capturedPayload.prompt_cache_retention).toBe("24h");
+packages/ai/test/cache-retention.test.ts:311:		it("should omit prompt_cache_retention when supportsLongCacheRetention is false", async () => {
+packages/ai/test/cache-retention.test.ts:314:				compat: { supportsLongCacheRetention: false },
+packages/ai/test/cache-retention.test.ts:336:			expect(capturedPayload.prompt_cache_retention).toBeUndefined();
+packages/ai/test/cache-retention.test.ts:339:		it("should omit prompt_cache_key when cacheRetention is none", async () => {
+packages/ai/test/cache-retention.test.ts:361:			expect(capturedPayload.prompt_cache_key).toBeUndefined();
+packages/ai/test/cache-retention.test.ts:362:			expect(capturedPayload.prompt_cache_retention).toBeUndefined();
+packages/ai/test/cache-retention.test.ts:365:		it("should set prompt_cache_retention when cacheRetention is long", async () => {
+packages/ai/test/cache-retention.test.ts:387:			expect(capturedPayload.prompt_cache_key).toBe("session-2");
+packages/ai/test/cache-retention.test.ts:388:			expect(capturedPayload.prompt_cache_retention).toBe("24h");
+packages/ai/test/cache-retention.test.ts:409:		it("should set prompt_cache_retention for non-api.openai.com baseUrl by default", async () => {
+packages/ai/test/cache-retention.test.ts:430:			expect(capturedPayload.prompt_cache_key).toBe("session-completions");
+packages/ai/test/cache-retention.test.ts:431:			expect(capturedPayload.prompt_cache_retention).toBe("24h");
+packages/ai/test/cache-retention.test.ts:434:		it("should omit prompt_cache_retention when supportsLongCacheRetention is false", async () => {
+packages/ai/test/cache-retention.test.ts:438:				const s = streamOpenAICompletions(createCompletionsModel({ supportsLongCacheRetention: false }), context, {
+packages/ai/test/cache-retention.test.ts:455:			expect(capturedPayload.prompt_cache_key).toBeUndefined();
+packages/ai/test/cache-retention.test.ts:456:			expect(capturedPayload.prompt_cache_retention).toBeUndefined();
+packages/coding-agent/test/print-mode.test.ts:41:		api: "openai-responses",
+packages/ai/test/unicode-surrogate.test.ts:336:		const llm = getModel("azure-openai-responses", "gpt-4o-mini");
+packages/ai/test/openai-completions-tool-choice.test.ts:975:				supportsStore: false,
+packages/ai/test/openai-completions-tool-choice.test.ts:990:				supportsLongCacheRetention: true,
+packages/coding-agent/test/suite/harness.ts:77:	setResponses: (responses: FauxResponseStep[]) => void;
+packages/coding-agent/test/suite/harness.ts:78:	appendResponses: (responses: FauxResponseStep[]) => void;
+packages/ai/test/transform-messages-copilot-openai-to-anthropic.test.ts:33:		api: "openai-responses",
+packages/ai/test/transform-messages-copilot-openai-to-anthropic.test.ts:105:				api: "openai-responses",
+packages/ai/test/stream.test.ts:281:	// Collect all text content from all assistant responses
+packages/ai/test/stream.test.ts:525:		const llm = getModel("azure-openai-responses", "gpt-4o-mini");
+packages/ai/test/stream.test.ts:673:		"Cloudflare AI Gateway → OpenAI BYOK (gpt-5.1 via /openai responses)",
+packages/coding-agent/test/test-harness.test.ts:20:		harness = createHarness({ responses: ["hello world"] });
+packages/coding-agent/test/test-harness.test.ts:35:		harness = createHarness({ responses: ["first", "second", "third"] });
+packages/coding-agent/test/test-harness.test.ts:64:			responses: [{ toolCalls: [{ name: "echo", args: { text: "hi" } }] }, "done after tool"],
+packages/coding-agent/test/test-harness.test.ts:80:			responses: [{ error: "something broke" }],
+packages/coding-agent/test/test-harness.test.ts:93:			responses: [{ error: "overloaded_error" }, "recovered"],
+packages/coding-agent/test/test-harness.test.ts:111:			responses: [{ text: "big response", usage: { input: 100000, output: 5000 } }],
+packages/coding-agent/test/test-harness.test.ts:122:		harness = createHarness({ responses: ["hello"] });
+packages/coding-agent/test/test-harness.test.ts:137:		harness = createHarness({ responses: ["reply"] });
+packages/coding-agent/test/test-harness.test.ts:147:	it("wraps around when more calls than responses", async () => {
+packages/coding-agent/test/test-harness.test.ts:148:		harness = createHarness({ responses: ["a", "b"] });
+packages/coding-agent/test/test-harness.test.ts:164:		harness = createHarness({ responses: ["hello world"] });
+packages/coding-agent/test/test-harness.test.ts:179:			responses: [{ thinking: "let me think about this", text: "answer" }],
+packages/coding-agent/test/test-harness.test.ts:207:			responses: [{ toolCalls: [{ name: "echo", args: { text: "hi" } }] }, "done"],
+packages/coding-agent/test/test-harness.test.ts:234:			responses: [
+packages/coding-agent/test/test-harness.test.ts:313:		harness = createHarness({ responses: ["persisted"] });
+packages/ai/test/fireworks-models.test.ts:65:		expect(model.compat?.supportsLongCacheRetention).toBe(false);
+packages/coding-agent/test/session-manager/custom-session-id.test.ts:84:						api: "openai-responses",
+packages/ai/test/codex-websocket-cached-probe.ts:19:} from "../src/providers/openai-codex-responses.ts";
+packages/ai/test/codex-websocket-cached-probe.ts:159:	const model = getModel("openai-codex", "gpt-5.5") as Model<"openai-codex-responses"> | undefined;
+packages/ai/test/openai-completions-tool-result-images.test.ts:23:	supportsStore: true,
+packages/ai/test/openai-completions-tool-result-images.test.ts:39:	supportsLongCacheRetention: true,
+packages/coding-agent/test/model-registry.test.ts:472:						supportsLongCacheRetention: false,
+packages/coding-agent/test/model-registry.test.ts:491:			expect(compat?.supportsLongCacheRetention).toBe(false);
+packages/ai/src/utils/oauth/device-code.ts:4:	"Device flow timed out after one or more slow_down responses. This is often caused by clock drift in WSL or VM environments. Please sync or restart the VM clock and try again.";
+packages/ai/test/github-copilot-oauth.test.ts:186:	it("uses the remaining lifetime for a final poll before timing out after repeated slow_down responses", async () => {
+packages/ai/test/github-copilot-oauth.test.ts:230:			/Device flow timed out after one or more slow_down responses/,
+packages/ai/test/openai-codex-stream.test.ts:10:} from "../src/providers/openai-codex-responses.ts";
+packages/ai/test/openai-codex-stream.test.ts:83:	it("streams SSE responses into AssistantMessageEventStream", async () => {
+packages/ai/test/openai-codex-stream.test.ts:140:			if (url === "https://chatgpt.com/backend-api/codex/responses") {
+packages/ai/test/openai-codex-stream.test.ts:144:				expect(headers?.get("OpenAI-Beta")).toBe("responses=experimental");
+packages/ai/test/openai-codex-stream.test.ts:158:		const model: Model<"openai-codex-responses"> = {
+packages/ai/test/openai-codex-stream.test.ts:161:			api: "openai-codex-responses",
+packages/ai/test/openai-codex-stream.test.ts:215:			if (url === "https://chatgpt.com/backend-api/codex/responses") {
+packages/ai/test/openai-codex-stream.test.ts:225:		const model: Model<"openai-codex-responses"> = {
+packages/ai/test/openai-codex-stream.test.ts:228:			api: "openai-codex-responses",
+packages/ai/test/openai-codex-stream.test.ts:275:			if (url === "https://chatgpt.com/backend-api/codex/responses") {
+packages/ai/test/openai-codex-stream.test.ts:285:		const model: Model<"openai-codex-responses"> = {
+packages/ai/test/openai-codex-stream.test.ts:288:			api: "openai-codex-responses",
+packages/ai/test/openai-codex-stream.test.ts:314:	it("sets session_id/x-client-request-id headers and prompt_cache_key when sessionId is provided", async () => {
+packages/ai/test/openai-codex-stream.test.ts:372:			if (url === "https://chatgpt.com/backend-api/codex/responses") {
+packages/ai/test/openai-codex-stream.test.ts:378:				// Verify sessionId is set in request body as prompt_cache_key
+packages/ai/test/openai-codex-stream.test.ts:380:				expect(body?.prompt_cache_key).toBe(sessionId);
+packages/ai/test/openai-codex-stream.test.ts:392:		const model: Model<"openai-codex-responses"> = {
+packages/ai/test/openai-codex-stream.test.ts:395:			api: "openai-codex-responses",
+packages/ai/test/openai-codex-stream.test.ts:414:	it("clamps prompt_cache_key to OpenAI's 64-character limit", async () => {
+packages/ai/test/openai-codex-stream.test.ts:417:		let capturedPayload: { prompt_cache_key?: string } | undefined;
+packages/ai/test/openai-codex-stream.test.ts:435:		const model: Model<"openai-codex-responses"> = {
+packages/ai/test/openai-codex-stream.test.ts:438:			api: "openai-codex-responses",
+packages/ai/test/openai-codex-stream.test.ts:457:				capturedPayload = payload as { prompt_cache_key?: string };
+packages/ai/test/openai-codex-stream.test.ts:461:		expect(capturedPayload?.prompt_cache_key).toBe("x".repeat(64));
+packages/ai/test/openai-codex-stream.test.ts:486:			if (url === "https://chatgpt.com/backend-api/codex/responses") {
+packages/ai/test/openai-codex-stream.test.ts:498:		const model: Model<"openai-codex-responses"> = {
+packages/ai/test/openai-codex-stream.test.ts:501:			api: "openai-codex-responses",
+packages/ai/test/openai-codex-stream.test.ts:583:			if (url === "https://chatgpt.com/backend-api/codex/responses") {
+packages/ai/test/openai-codex-stream.test.ts:597:		const model: Model<"openai-codex-responses"> = {
+packages/ai/test/openai-codex-stream.test.ts:600:			api: "openai-codex-responses",
+packages/ai/test/openai-codex-stream.test.ts:684:				if (url === "https://chatgpt.com/backend-api/codex/responses") {
+packages/ai/test/openai-codex-stream.test.ts:694:			const model: Model<"openai-codex-responses"> = {
+packages/ai/test/openai-codex-stream.test.ts:697:				api: "openai-codex-responses",
+packages/ai/test/openai-codex-stream.test.ts:781:			if (url === "https://chatgpt.com/backend-api/codex/responses") {
+packages/ai/test/openai-codex-stream.test.ts:797:		const model: Model<"openai-codex-responses"> = {
+packages/ai/test/openai-codex-stream.test.ts:800:			api: "openai-codex-responses",
+packages/ai/test/openai-codex-stream.test.ts:896:		const model: Model<"openai-codex-responses"> = {
+packages/ai/test/openai-codex-stream.test.ts:899:			api: "openai-codex-responses",
+packages/ai/test/openai-codex-stream.test.ts:930:		const responses = [
+packages/ai/test/openai-codex-stream.test.ts:959:				const response = responses.shift();
+packages/ai/test/openai-codex-stream.test.ts:1019:		const model: Model<"openai-codex-responses"> = {
+packages/ai/test/openai-codex-stream.test.ts:1022:			api: "openai-codex-responses",
+packages/ai/test/openai-codex-stream.test.ts:1093:			if (url !== "https://chatgpt.com/backend-api/codex/responses") {
+packages/ai/test/openai-codex-stream.test.ts:1117:		const model: Model<"openai-codex-responses"> = {
+packages/ai/test/openai-codex-stream.test.ts:1120:			api: "openai-codex-responses",
+packages/ai/test/openai-codex-stream.test.ts:1155:			if (url !== "https://chatgpt.com/backend-api/codex/responses") {
+packages/ai/test/openai-codex-stream.test.ts:1179:		const model: Model<"openai-codex-responses"> = {
+packages/ai/test/openai-codex-stream.test.ts:1182:			api: "openai-codex-responses",
+packages/coding-agent/test/suite/regressions/2860-replaced-session-context.test.ts:38:	async function createRuntimeForTest(extensionFactory: ExtensionFactory, responses: string[]) {
+packages/coding-agent/test/suite/regressions/2860-replaced-session-context.test.ts:45:		faux.setResponses(responses.map((response) => fauxAssistantMessage(response)));
+packages/ai/src/env-api-keys.ts:103:		"azure-openai-responses": "AZURE_OPENAI_API_KEY",
+packages/coding-agent/test/suite/agent-session-retry-events.test.ts:324:	it("emits agent_end for error responses", async () => {
+packages/ai/test/image-tool-result.test.ts:252:		const llm = getModel("azure-openai-responses", "gpt-4o-mini");
+packages/ai/test/openai-responses-copilot-provider.test.ts:3:import { streamOpenAIResponses } from "../src/providers/openai-responses.ts";
+packages/ai/test/openai-responses-copilot-provider.test.ts:26:	model: Model<"openai-responses"> = getModel("openai", "gpt-5.4"),
+packages/ai/test/openai-responses-copilot-provider.test.ts:54:describe("openai-responses provider defaults", () => {
+packages/ai/test/openai-responses-copilot-provider.test.ts:174:	it("clamps prompt_cache_key to OpenAI's 64-character limit", async () => {
+packages/ai/test/openai-responses-copilot-provider.test.ts:176:		let capturedPayload: { prompt_cache_key?: string } | undefined;
+packages/ai/test/openai-responses-copilot-provider.test.ts:194:					capturedPayload = payload as { prompt_cache_key?: string };
+packages/ai/test/openai-responses-copilot-provider.test.ts:203:		expect(capturedPayload?.prompt_cache_key).toBe("x".repeat(64));
+packages/ai/test/openai-responses-copilot-provider.test.ts:207:		const proxyModel: Model<"openai-responses"> = {
+packages/ai/test/openai-responses-copilot-provider.test.ts:218:		const proxyModel: Model<"openai-responses"> = {
+packages/ai/test/openai-responses-copilot-provider.test.ts:222:			compat: { sendSessionIdHeader: false },
+packages/coding-agent/test/test-harness.ts:82:	/** Model overrides (provider, model id) for responses that should look like they came from a different model. */
+packages/coding-agent/test/test-harness.ts:276: * The function cycles through responses in order. If more calls are made than
+packages/coding-agent/test/test-harness.ts:277: * responses provided, it wraps around.
+packages/coding-agent/test/test-harness.ts:281:export function createFauxStreamFn(responses: FauxResponseInput[]): {
+packages/coding-agent/test/test-harness.ts:285:	if (responses.length === 0) {
+packages/coding-agent/test/test-harness.ts:292:		const index = state.callCount % responses.length;
+packages/coding-agent/test/test-harness.ts:296:		const resp = normalizeResponse(responses[index]);
+packages/coding-agent/test/test-harness.ts:322:	responses?: FauxResponseInput[];
+packages/coding-agent/test/test-harness.ts:372:	const { streamFn, state: fauxState } = createFauxStreamFn(options.responses ?? ["ok"]);
+packages/ai/test/openai-completions-prompt-cache.test.ts:14:	prompt_cache_key?: string;
+packages/ai/test/openai-completions-prompt-cache.test.ts:15:	prompt_cache_retention?: "24h" | "in-memory" | null;
+packages/ai/test/openai-completions-prompt-cache.test.ts:114:	it("sets prompt_cache_key for direct OpenAI requests when caching is enabled", async () => {
+packages/ai/test/openai-completions-prompt-cache.test.ts:117:		expect(payload?.prompt_cache_key).toBe("session-123");
+packages/ai/test/openai-completions-prompt-cache.test.ts:118:		expect(payload?.prompt_cache_retention).toBeUndefined();
+packages/ai/test/openai-completions-prompt-cache.test.ts:121:	it("sets prompt_cache_retention to 24h for direct OpenAI requests when cacheRetention is long", async () => {
+packages/ai/test/openai-completions-prompt-cache.test.ts:124:		expect(payload?.prompt_cache_key).toBe("session-456");
+packages/ai/test/openai-completions-prompt-cache.test.ts:125:		expect(payload?.prompt_cache_retention).toBe("24h");
+packages/ai/test/openai-completions-prompt-cache.test.ts:128:	it("clamps prompt_cache_key to OpenAI's 64-character limit", async () => {
+packages/ai/test/openai-completions-prompt-cache.test.ts:132:		expect(payload?.prompt_cache_key).toBe("x".repeat(64));
+packages/ai/test/openai-completions-prompt-cache.test.ts:138:		expect(payload?.prompt_cache_key).toBeUndefined();
+packages/ai/test/openai-completions-prompt-cache.test.ts:139:		expect(payload?.prompt_cache_retention).toBeUndefined();
+packages/ai/test/openai-completions-prompt-cache.test.ts:145:			compat: { supportsLongCacheRetention: false },
+packages/ai/test/openai-completions-prompt-cache.test.ts:149:		expect(payload?.prompt_cache_key).toBeUndefined();
+packages/ai/test/openai-completions-prompt-cache.test.ts:150:		expect(payload?.prompt_cache_retention).toBeUndefined();
+packages/ai/test/openai-completions-prompt-cache.test.ts:157:		expect(payload?.prompt_cache_key).toBe("session-env");
+packages/ai/test/openai-completions-prompt-cache.test.ts:158:		expect(payload?.prompt_cache_retention).toBe("24h");
+packages/coding-agent/test/rpc-prompt-response-semantics.test.ts:213:				const responses = getPromptResponses(rpcIo.outputLines, "b1");
+packages/coding-agent/test/rpc-prompt-response-semantics.test.ts:214:				expect(responses).toHaveLength(1);
+packages/coding-agent/test/rpc-prompt-response-semantics.test.ts:215:				expect(responses[0]).toMatchObject({
+packages/coding-agent/test/rpc-prompt-response-semantics.test.ts:237:				const responses = getPromptResponses(rpcIo.outputLines, "b2");
+packages/coding-agent/test/rpc-prompt-response-semantics.test.ts:238:				expect(responses).toHaveLength(1);
+packages/coding-agent/test/rpc-prompt-response-semantics.test.ts:239:				expect(responses[0]).toMatchObject({
+packages/coding-agent/test/rpc-prompt-response-semantics.test.ts:271:				const responses = getPromptResponses(rpcIo.outputLines, "b3");
+packages/coding-agent/test/rpc-prompt-response-semantics.test.ts:272:				expect(responses).toHaveLength(1);
+packages/coding-agent/test/rpc-prompt-response-semantics.test.ts:273:				expect(responses[0]).toMatchObject({
+packages/ai/test/openai-responses-partial-json-cleanup.test.ts:1:import type { ResponseStreamEvent } from "openai/resources/responses/responses.js";
+packages/ai/test/openai-responses-partial-json-cleanup.test.ts:3:import { processResponsesStream } from "../src/providers/openai-responses-shared.ts";
+packages/ai/test/openai-responses-partial-json-cleanup.test.ts:7:function createOutput(model: Model<"openai-responses">): AssistantMessage {
+packages/ai/test/openai-responses-partial-json-cleanup.test.ts:62:describe("openai responses partialJson cleanup", () => {
+packages/ai/test/openai-responses-partial-json-cleanup.test.ts:64:		const model: Model<"openai-responses"> = {
+packages/ai/test/openai-responses-partial-json-cleanup.test.ts:67:			api: "openai-responses",
+packages/ai/test/anthropic-long-cache-retention-e2e.test.ts:77:			supportsLongCacheRetention: true,
+packages/ai/test/together-models.test.ts:35:			supportsStore: false,
+packages/ai/test/together-models.test.ts:41:			supportsLongCacheRetention: false,
+packages/ai/test/tool-call-id-normalization.test.ts:154:			// Step 2: Complete with openai-codex (uses openai-codex-responses API)
+packages/ai/test/tool-call-id-normalization.test.ts:207:			api: "openai-responses",
+packages/ai/test/openai-completions-thinking-as-text.test.ts:25:	supportsStore: true,
+packages/ai/test/openai-completions-thinking-as-text.test.ts:41:	supportsLongCacheRetention: true,
+packages/ai/test/empty.test.ts:209:		const llm = getModel("azure-openai-responses", "gpt-4o-mini");
+packages/coding-agent/test/assistant-message.test.ts:14:		api: "openai-responses",
+packages/ai/test/azure-openai-base-url.test.ts:3:import { streamAzureOpenAIResponses } from "../src/providers/azure-openai-responses.ts";
+packages/ai/test/azure-openai-base-url.test.ts:15:	prompt_cache_key?: string;
+packages/ai/test/azure-openai-base-url.test.ts:25:		responses = {
+packages/ai/test/azure-openai-base-url.test.ts:86:	const model = getModel("azure-openai-responses", "gpt-4o-mini");
+packages/ai/test/azure-openai-base-url.test.ts:92:describe("azure-openai-responses base URL normalization", () => {
+packages/ai/test/azure-openai-base-url.test.ts:130:		const model = getModel("azure-openai-responses", "gpt-4o-mini");
+packages/ai/test/azure-openai-base-url.test.ts:136:	it("clamps prompt_cache_key to OpenAI's 64-character limit", async () => {
+packages/ai/test/azure-openai-base-url.test.ts:137:		const model = getModel("azure-openai-responses", "gpt-4o-mini");
+packages/ai/test/azure-openai-base-url.test.ts:144:		expect(azureMock.lastParams?.prompt_cache_key).toBe("x".repeat(64));
+packages/ai/test/azure-openai-base-url.test.ts:149:		const model = getModel("azure-openai-responses", "gpt-4o-mini");
+packages/ai/src/providers/amazon-bedrock.ts:64:	 * Controls how Claude's thinking content is returned in responses.
+packages/ai/src/providers/faux.ts:122:	setResponses: (responses: FauxResponseStep[]) => void;
+packages/ai/src/providers/faux.ts:123:	appendResponses: (responses: FauxResponseStep[]) => void;
+packages/ai/src/providers/faux.ts:441:						new Error("No more faux responses queued"),
+packages/ai/src/providers/faux.ts:486:		setResponses(responses) {
+packages/ai/src/providers/faux.ts:487:			pendingResponses = [...responses];
+packages/ai/src/providers/faux.ts:489:		appendResponses(responses) {
+packages/ai/src/providers/faux.ts:490:			pendingResponses.push(...responses);
+packages/ai/src/providers/openai-responses-shared.ts:14:} from "openai/resources/responses/responses.js";
+packages/ai/test/cross-provider-handoff.test.ts:67:	{ provider: "openai", model: "gpt-5-mini", label: "openai-responses-gpt-5-mini" },
+packages/ai/test/cross-provider-handoff.test.ts:68:	{ provider: "azure-openai-responses", model: "gpt-4o-mini", label: "azure-openai-responses-gpt-4o-mini" },
+packages/ai/test/cross-provider-handoff.test.ts:159:	if (pair.provider === "azure-openai-responses") {
+packages/ai/src/providers/cloudflare.ts:11:/** AI Gateway → OpenAI passthrough. Used until /compat supports /v1/responses. */
+packages/ai/src/providers/openai-codex-responses.ts:7:} from "openai/resources/responses/responses.js";
+packages/ai/src/providers/openai-codex-responses.ts:44:import { convertResponsesMessages, convertResponsesTools, processResponsesStream } from "./openai-responses-shared.ts";
+packages/ai/src/providers/openai-codex-responses.ts:95:	prompt_cache_key?: string;
+packages/ai/src/providers/openai-codex-responses.ts:128:export const streamOpenAICodexResponses: StreamFunction<"openai-codex-responses", OpenAICodexResponsesOptions> = (
+packages/ai/src/providers/openai-codex-responses.ts:129:	model: Model<"openai-codex-responses">,
+packages/ai/src/providers/openai-codex-responses.ts:139:			api: "openai-codex-responses" as Api,
+packages/ai/src/providers/openai-codex-responses.ts:341:export const streamSimpleOpenAICodexResponses: StreamFunction<"openai-codex-responses", SimpleStreamOptions> = (
+packages/ai/src/providers/openai-codex-responses.ts:342:	model: Model<"openai-codex-responses">,
+packages/ai/src/providers/openai-codex-responses.ts:366:	model: Model<"openai-codex-responses">,
+packages/ai/src/providers/openai-codex-responses.ts:382:		prompt_cache_key: clampOpenAIPromptCacheKey(options?.sessionId),
+packages/ai/src/providers/openai-codex-responses.ts:416:	model: Pick<Model<"openai-codex-responses">, "id">,
+packages/ai/src/providers/openai-codex-responses.ts:432:	model: Pick<Model<"openai-codex-responses">, "id">,
+packages/ai/src/providers/openai-codex-responses.ts:457:	if (normalized.endsWith("/codex/responses")) return normalized;
+packages/ai/src/providers/openai-codex-responses.ts:458:	if (normalized.endsWith("/codex")) return `${normalized}/responses`;
+packages/ai/src/providers/openai-codex-responses.ts:459:	return `${normalized}/codex/responses`;
+packages/ai/src/providers/openai-codex-responses.ts:477:	model: Model<"openai-codex-responses">,
+packages/ai/src/providers/openai-codex-responses.ts:610:const OPENAI_BETA_RESPONSES_WEBSOCKETS = "responses_websockets=2026-02-06";
+packages/ai/src/providers/openai-codex-responses.ts:1195:	model: Model<"openai-codex-responses">,
+packages/ai/src/providers/openai-codex-responses.ts:1346:	headers.set("OpenAI-Beta", "responses=experimental");
+packages/ai/src/providers/openai-responses.ts:2:import type { ResponseCreateParamsStreaming } from "openai/resources/responses/responses.js";
+packages/ai/src/providers/openai-responses.ts:11:	OpenAIResponsesCompat,
+packages/ai/src/providers/openai-responses.ts:22:import { convertResponsesMessages, convertResponsesTools, processResponsesStream } from "./openai-responses-shared.ts";
+packages/ai/src/providers/openai-responses.ts:41:function getCompat(model: Model<"openai-responses">): Required<OpenAIResponsesCompat> {
+packages/ai/src/providers/openai-responses.ts:43:		sendSessionIdHeader: model.compat?.sendSessionIdHeader ?? true,
+packages/ai/src/providers/openai-responses.ts:44:		supportsLongCacheRetention: model.compat?.supportsLongCacheRetention ?? true,
+packages/ai/src/providers/openai-responses.ts:49:	compat: Required<OpenAIResponsesCompat>,
+packages/ai/src/providers/openai-responses.ts:52:	return cacheRetention === "long" && compat.supportsLongCacheRetention ? "24h" : undefined;
+packages/ai/src/providers/openai-responses.ts:81:export const streamOpenAIResponses: StreamFunction<"openai-responses", OpenAIResponsesOptions> = (
+packages/ai/src/providers/openai-responses.ts:82:	model: Model<"openai-responses">,
+packages/ai/src/providers/openai-responses.ts:124:			const { data: openaiStream, response } = await client.responses.create(params, requestOptions).withResponse();
+packages/ai/src/providers/openai-responses.ts:159:export const streamSimpleOpenAIResponses: StreamFunction<"openai-responses", SimpleStreamOptions> = (
+packages/ai/src/providers/openai-responses.ts:160:	model: Model<"openai-responses">,
+packages/ai/src/providers/openai-responses.ts:180:	model: Model<"openai-responses">,
+packages/ai/src/providers/openai-responses.ts:207:		if (compat.sendSessionIdHeader) {
+packages/ai/src/providers/openai-responses.ts:235:function buildParams(model: Model<"openai-responses">, context: Context, options?: OpenAIResponsesOptions) {
+packages/ai/src/providers/openai-responses.ts:244:		prompt_cache_key: cacheRetention === "none" ? undefined : clampOpenAIPromptCacheKey(options?.sessionId),
+packages/ai/src/providers/openai-responses.ts:245:		prompt_cache_retention: getPromptCacheRetention(compat, cacheRetention),
+packages/ai/src/providers/openai-responses.ts:286:	model: Pick<Model<"openai-responses">, "id">,
+packages/ai/src/providers/openai-responses.ts:302:	model: Pick<Model<"openai-responses">, "id">,
+packages/ai/src/providers/openai-completions.ts:517:		prompt_cache_key:
+packages/ai/src/providers/openai-completions.ts:519:			(cacheRetention === "long" && compat.supportsLongCacheRetention)
+packages/ai/src/providers/openai-completions.ts:522:		prompt_cache_retention: cacheRetention === "long" && compat.supportsLongCacheRetention ? "24h" : undefined,
+packages/ai/src/providers/openai-completions.ts:529:	if (compat.supportsStore) {
+packages/ai/src/providers/openai-completions.ts:634:	const ttl = cacheRetention === "long" && compat.supportsLongCacheRetention ? "1h" : undefined;
+packages/ai/src/providers/openai-completions.ts:903:			// This handles aborted assistant responses that got no content.
+packages/ai/src/providers/openai-completions.ts:1007:		prompt_cache_hit_tokens?: number;
+packages/ai/src/providers/openai-completions.ts:1013:	const cacheReadTokens = rawUsage.prompt_tokens_details?.cached_tokens ?? rawUsage.prompt_cache_hit_tokens ?? 0;
+packages/ai/src/providers/openai-completions.ts:1103:		supportsStore: !isNonStandard,
+packages/ai/src/providers/openai-completions.ts:1127:		supportsLongCacheRetention: !(isTogether || isCloudflareWorkersAI || isCloudflareAiGateway),
+packages/ai/src/providers/openai-completions.ts:1140:		supportsStore: model.compat.supportsStore ?? detected.supportsStore,
+packages/ai/src/providers/openai-completions.ts:1159:		supportsLongCacheRetention: model.compat.supportsLongCacheRetention ?? detected.supportsLongCacheRetention,
+packages/ai/src/providers/anthropic.ts:62:	const ttl = retention === "long" && getAnthropicCompat(model).supportsLongCacheRetention ? "1h" : undefined;
+packages/ai/src/providers/anthropic.ts:176:		supportsLongCacheRetention: model.compat?.supportsLongCacheRetention ?? !isFireworks,
+packages/ai/src/providers/anthropic.ts:212:	 * Controls how thinking content is returned in API responses.
+packages/ai/src/providers/anthropic.ts:1073:					// and prevent Claude from mimicking the tags in responses
+packages/ai/src/providers/azure-openai-responses.ts:2:import type { ResponseCreateParamsStreaming } from "openai/resources/responses/responses.js";
+packages/ai/src/providers/azure-openai-responses.ts:17:import { convertResponsesMessages, convertResponsesTools, processResponsesStream } from "./openai-responses-shared.ts";
+packages/ai/src/providers/azure-openai-responses.ts:21:const AZURE_TOOL_CALL_PROVIDERS = new Set(["openai", "openai-codex", "opencode", "azure-openai-responses"]);
+packages/ai/src/providers/azure-openai-responses.ts:36:function resolveDeploymentName(model: Model<"azure-openai-responses">, options?: AzureOpenAIResponsesOptions): string {
+packages/ai/src/providers/azure-openai-responses.ts:73:export const streamAzureOpenAIResponses: StreamFunction<"azure-openai-responses", AzureOpenAIResponsesOptions> = (
+packages/ai/src/providers/azure-openai-responses.ts:74:	model: Model<"azure-openai-responses">,
+packages/ai/src/providers/azure-openai-responses.ts:87:			api: "azure-openai-responses" as Api,
+packages/ai/src/providers/azure-openai-responses.ts:116:			const { data: openaiStream, response } = await client.responses.create(params, requestOptions).withResponse();
+packages/ai/src/providers/azure-openai-responses.ts:148:export const streamSimpleAzureOpenAIResponses: StreamFunction<"azure-openai-responses", SimpleStreamOptions> = (
+packages/ai/src/providers/azure-openai-responses.ts:149:	model: Model<"azure-openai-responses">,
+packages/ai/src/providers/azure-openai-responses.ts:196:	model: Model<"azure-openai-responses">,
+packages/ai/src/providers/azure-openai-responses.ts:226:function createClient(model: Model<"azure-openai-responses">, apiKey: string, options?: AzureOpenAIResponsesOptions) {
+packages/ai/src/providers/azure-openai-responses.ts:254:	model: Model<"azure-openai-responses">,
+packages/ai/src/providers/azure-openai-responses.ts:265:		prompt_cache_key: clampOpenAIPromptCacheKey(options?.sessionId),
+packages/ai/src/providers/mistral.ts:47: * Stream responses from Mistral using `chat.stream`.
+packages/ai/src/providers/register-builtins.ts:15:import type { AzureOpenAIResponsesOptions } from "./azure-openai-responses.ts";
+packages/ai/src/providers/register-builtins.ts:19:import type { OpenAICodexResponsesOptions } from "./openai-codex-responses.ts";
+packages/ai/src/providers/register-builtins.ts:21:import type { OpenAIResponsesOptions } from "./openai-responses.ts";
+packages/ai/src/providers/register-builtins.ts:42:	streamAzureOpenAIResponses: StreamFunction<"azure-openai-responses", AzureOpenAIResponsesOptions>;
+packages/ai/src/providers/register-builtins.ts:43:	streamSimpleAzureOpenAIResponses: StreamFunction<"azure-openai-responses", SimpleStreamOptions>;
+packages/ai/src/providers/register-builtins.ts:62:	streamOpenAICodexResponses: StreamFunction<"openai-codex-responses", OpenAICodexResponsesOptions>;
+packages/ai/src/providers/register-builtins.ts:63:	streamSimpleOpenAICodexResponses: StreamFunction<"openai-codex-responses", SimpleStreamOptions>;
+packages/ai/src/providers/register-builtins.ts:72:	streamOpenAIResponses: StreamFunction<"openai-responses", OpenAIResponsesOptions>;
+packages/ai/src/providers/register-builtins.ts:73:	streamSimpleOpenAIResponses: StreamFunction<"openai-responses", SimpleStreamOptions>;
+packages/ai/src/providers/register-builtins.ts:98:	| Promise<LazyProviderModule<"azure-openai-responses", AzureOpenAIResponsesOptions, SimpleStreamOptions>>
+packages/ai/src/providers/register-builtins.ts:110:	| Promise<LazyProviderModule<"openai-codex-responses", OpenAICodexResponsesOptions, SimpleStreamOptions>>
+packages/ai/src/providers/register-builtins.ts:116:	| Promise<LazyProviderModule<"openai-responses", OpenAIResponsesOptions, SimpleStreamOptions>>
+packages/ai/src/providers/register-builtins.ts:220:	LazyProviderModule<"azure-openai-responses", AzureOpenAIResponsesOptions, SimpleStreamOptions>
+packages/ai/src/providers/register-builtins.ts:222:	azureOpenAIResponsesProviderModulePromise ||= import("./azure-openai-responses.ts").then((module) => {
+packages/ai/src/providers/register-builtins.ts:272:	LazyProviderModule<"openai-codex-responses", OpenAICodexResponsesOptions, SimpleStreamOptions>
+packages/ai/src/providers/register-builtins.ts:274:	openAICodexResponsesProviderModulePromise ||= import("./openai-codex-responses.ts").then((module) => {
+packages/ai/src/providers/register-builtins.ts:298:	LazyProviderModule<"openai-responses", OpenAIResponsesOptions, SimpleStreamOptions>
+packages/ai/src/providers/register-builtins.ts:300:	openAIResponsesProviderModulePromise ||= import("./openai-responses.ts").then((module) => {
+packages/ai/src/providers/register-builtins.ts:365:		api: "openai-responses",
+packages/ai/src/providers/register-builtins.ts:371:		api: "azure-openai-responses",
+packages/ai/src/providers/register-builtins.ts:377:		api: "openai-codex-responses",
+packages/ai/src/providers/google-shared.ts:27: * - For non-functionCall responses, the signature appears on the last part for context replay.
+packages/ai/src/providers/google-shared.ts:68: * Models via Google APIs that require explicit tool call IDs in function calls/responses.
+packages/ai/src/providers/google-shared.ts:187:			// Gemini 3+ models support multimodal function responses with images nested inside
+packages/ai/src/providers/google-shared.ts:212:			// Cloud Code Assist API requires all function responses to be in a single user turn.
+packages/ai/src/providers/google-shared.ts:213:			// Check if the last content is already a user turn with function responses and merge.
+packages/ai/src/providers/google-shared.ts:339: * Map string finish reason to our StopReason (for raw API responses).
+
+[Showing lines 253-716 of 716 (50.0KB limit). Full output: /var/folders/7m/csfvhz791k527kby7nxl7cbc0000h_/T/pi-bash-a66721817abd0ad5.log]

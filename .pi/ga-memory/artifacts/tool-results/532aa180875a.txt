@@ -1,0 +1,200 @@
+packages/ai/src/images-api-registry.ts:10:	api: TApi;
+packages/ai/src/images-api-registry.ts:15:	api: ImagesApi;
+packages/ai/src/images-api-registry.ts:27:	api: TApi,
+packages/ai/src/images-api-registry.ts:31:		if (model.api !== api) {
+packages/ai/src/images-api-registry.ts:32:			throw new Error(`Mismatched api: ${model.api} expected ${api}`);
+packages/ai/src/images-api-registry.ts:44:			api: provider.api,
+packages/ai/src/images-api-registry.ts:51:export function getImagesApiProvider(api: ImagesApi): ImagesApiProviderInternal | undefined {
+packages/ai/src/image-models.ts:17:> = (typeof IMAGE_MODELS)[TProvider][TModelId] extends { api: infer TApi }
+packages/coding-agent/src/config.ts:463:	const baseUrl = process.env.PI_SHARE_VIEWER_URL || DEFAULT_SHARE_VIEWER_URL;
+packages/coding-agent/src/config.ts:464:	return `${baseUrl}#${gistId}`;
+packages/ai/src/image-models.generated.ts:11:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:13:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:26:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:28:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:41:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:43:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:56:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:58:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:71:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:73:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:86:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:88:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:101:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:103:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:116:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:118:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:131:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:133:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:146:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:148:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:161:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:163:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:176:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:178:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:191:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:193:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:206:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:208:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:221:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:223:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:236:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:238:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:251:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:253:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:266:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:268:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:281:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:283:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:296:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:298:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:311:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:313:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:326:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:328:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:341:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:343:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:356:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:358:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:371:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:373:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:386:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:388:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:401:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:403:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:416:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:418:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:431:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:433:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/models.ts:18:> = (typeof MODELS)[TProvider][TModelId] extends { api: infer TApi } ? (TApi extends Api ? TApi : never) : never;
+packages/ai/src/providers/amazon-bedrock.ts:100:			api: "bedrock-converse-stream" as Api,
+packages/ai/src/providers/amazon-bedrock.ts:122:		const endpointRegion = getStandardBedrockEndpointRegion(model.baseUrl);
+packages/ai/src/providers/amazon-bedrock.ts:124:			model.baseUrl,
+packages/ai/src/providers/amazon-bedrock.ts:133:			config.endpoint = model.baseUrl;
+packages/ai/src/providers/amazon-bedrock.ts:161:			const proxyAgents = createHttpProxyAgentsForTarget(model.baseUrl);
+packages/ai/src/providers/amazon-bedrock.ts:842:function getStandardBedrockEndpointRegion(baseUrl: string | undefined): string | undefined {
+packages/ai/src/providers/amazon-bedrock.ts:843:	if (!baseUrl) {
+packages/ai/src/providers/amazon-bedrock.ts:848:		const { hostname } = new URL(baseUrl);
+packages/ai/src/providers/amazon-bedrock.ts:857:	baseUrl: string,
+packages/ai/src/providers/amazon-bedrock.ts:861:	const endpointRegion = getStandardBedrockEndpointRegion(baseUrl);
+packages/coding-agent/src/core/model-registry.ts:147:	api: Type.Optional(Type.String({ minLength: 1 })),
+packages/coding-agent/src/core/model-registry.ts:148:	baseUrl: Type.Optional(Type.String({ minLength: 1 })),
+packages/coding-agent/src/core/model-registry.ts:190:	baseUrl: Type.Optional(Type.String({ minLength: 1 })),
+packages/coding-agent/src/core/model-registry.ts:192:	api: Type.Optional(Type.String({ minLength: 1 })),
+packages/coding-agent/src/core/model-registry.ts:195:	authHeader: Type.Optional(Type.Boolean()),
+packages/coding-agent/src/core/model-registry.ts:228:/** Provider override config (baseUrl, compat) without request auth/headers */
+packages/coding-agent/src/core/model-registry.ts:230:	baseUrl?: string;
+packages/coding-agent/src/core/model-registry.ts:237:	authHeader?: boolean;
+packages/coding-agent/src/core/model-registry.ts:254:	/** Providers with baseUrl/headers/apiKey overrides for built-in models */
+packages/coding-agent/src/core/model-registry.ts:401:		// Let OAuth providers modify their models (e.g., update baseUrl)
+packages/coding-agent/src/core/model-registry.ts:425:				// Apply provider-level baseUrl/headers/compat override
+packages/coding-agent/src/core/model-registry.ts:429:						baseUrl: providerOverride.baseUrl ?? model.baseUrl,
+packages/coding-agent/src/core/model-registry.ts:486:				if (providerConfig.baseUrl || providerConfig.compat) {
+packages/coding-agent/src/core/model-registry.ts:488:						baseUrl: providerConfig.baseUrl,
+packages/coding-agent/src/core/model-registry.ts:525:				// Override-only config: needs baseUrl, headers, compat, modelOverrides, or some combination.
+packages/coding-agent/src/core/model-registry.ts:526:				if (!providerConfig.baseUrl && !providerConfig.headers && !providerConfig.compat && !hasModelOverrides) {
+packages/coding-agent/src/core/model-registry.ts:528:						`Provider ${providerName}: must specify "baseUrl", "headers", "compat", "modelOverrides", or "models".`,
+packages/coding-agent/src/core/model-registry.ts:533:				if (!providerConfig.baseUrl) {
+packages/coding-agent/src/core/model-registry.ts:534:					throw new Error(`Provider ${providerName}: "baseUrl" is required when defining custom models.`);
+packages/coding-agent/src/core/model-registry.ts:540:			// Built-in providers with custom models: baseUrl/apiKey/api are optional,
+packages/coding-agent/src/core/model-registry.ts:567:		// Cache built-in defaults (api, baseUrl) per provider, extracted from first model.
+packages/coding-agent/src/core/model-registry.ts:568:		const builtInDefaultsCache = new Map<string, { api: string; baseUrl: string }>();
+packages/coding-agent/src/core/model-registry.ts:569:		const getBuiltInDefaults = (providerName: string): { api: string; baseUrl: string } | undefined => {
+packages/coding-agent/src/core/model-registry.ts:574:			const defaults = { api: builtIn[0].api, baseUrl: builtIn[0].baseUrl };
+packages/coding-agent/src/core/model-registry.ts:589:				const baseUrl = modelDef.baseUrl ?? providerConfig.baseUrl ?? builtInDefaults?.baseUrl;
+packages/coding-agent/src/core/model-registry.ts:590:				if (!baseUrl) continue;
+packages/coding-agent/src/core/model-registry.ts:599:					api: api as Api,
+packages/coding-agent/src/core/model-registry.ts:601:					baseUrl,
+packages/coding-agent/src/core/model-registry.ts:659:			authHeader?: boolean;
+packages/coding-agent/src/core/model-registry.ts:662:		if (!config.apiKey && !config.headers && !config.authHeader) {
+packages/coding-agent/src/core/model-registry.ts:669:			authHeader: config.authHeader,
+packages/coding-agent/src/core/model-registry.ts:706:			if (providerConfig?.authHeader) {
+packages/coding-agent/src/core/model-registry.ts:793:	 * If provider has only baseUrl/headers: overrides existing models' URLs.
+packages/coding-agent/src/core/model-registry.ts:845:		if (!config.baseUrl) {
+packages/coding-agent/src/core/model-registry.ts:846:			throw new Error(`Provider ${providerName}: "baseUrl" is required when defining models.`);
+packages/coding-agent/src/core/model-registry.ts:875:					api: config.api!,
+packages/coding-agent/src/core/model-registry.ts:897:					api: api as Api,
+packages/coding-agent/src/core/model-registry.ts:899:					baseUrl: modelDef.baseUrl ?? config.baseUrl!,
+packages/coding-agent/src/core/model-registry.ts:911:			// Apply OAuth modifyModels if credentials exist (e.g., to update baseUrl)
+packages/coding-agent/src/core/model-registry.ts:918:		} else if (config.baseUrl || config.headers) {
+packages/coding-agent/src/core/model-registry.ts:919:			// Override-only: update baseUrl for existing models. Request headers are resolved per request.
+packages/coding-agent/src/core/model-registry.ts:924:					baseUrl: config.baseUrl ?? m.baseUrl,
+packages/coding-agent/src/core/model-registry.ts:936:	baseUrl?: string;
+packages/coding-agent/src/core/model-registry.ts:941:	authHeader?: boolean;
+packages/coding-agent/src/core/model-registry.ts:948:		baseUrl?: string;
+packages/ai/src/models.generated.ts:11:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:13:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:28:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:30:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:45:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:47:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:62:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:64:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:79:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:81:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:96:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:98:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:113:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:115:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:130:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:132:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:148:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:150:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:166:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:168:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:184:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:186:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:201:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:203:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:218:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:220:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:235:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:237:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:253:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:255:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:271:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:273:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:288:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:290:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:305:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:307:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:322:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:324:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:339:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:341:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:356:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:358:			baseUrl: "https://bedrock-runtime.eu-central-1.amazonaws.com",
+packages/ai/src/models.generated.ts:373:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:375:			baseUrl: "https://bedrock-runtime.eu-central-1.amazonaws.com",
+packages/ai/src/models.generated.ts:390:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:392:			baseUrl: "https://bedrock-runtime.eu-central-1.amazonaws.com",
+packages/ai/src/models.generated.ts:408:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:410:			baseUrl: "https://bedrock-runtime.eu-central-1.amazonaws.com",
+packages/ai/src/models.generated.ts:426:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:428:			baseUrl: "https://bedrock-runtime.eu-central-1.amazonaws.com",
+packages/ai/src/models.generated.ts:444:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:446:			baseUrl: "https://bedrock-runtime.eu-central-1.amazonaws.com",
+packages/ai/src/models.generated.ts:461:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:463:			baseUrl: "https://bedrock-runtime.eu-central-1.amazonaws.com",
+packages/ai/src/models.generated.ts:478:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:480:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:495:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:497:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:512:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:514:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:530:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:532:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:548:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:550:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:566:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:568:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:583:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:585:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:600:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:602:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:617:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:619:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:634:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:636:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+packages/ai/src/models.generated.ts:652:			api: "bedrock-converse-stream",
+packages/ai/src/models.generated.ts:654:			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",

@@ -1,0 +1,493 @@
+packages/coding-agent/test/model-registry.test.ts:638:			const models = getModelsForProvider(registry, "openrouter");
+packages/coding-agent/test/model-registry.test.ts:647:				openrouter: {
+packages/coding-agent/test/model-registry.test.ts:659:			const models = getModelsForProvider(registry, "openrouter");
+packages/coding-agent/test/model-registry.test.ts:669:				openrouter: {
+packages/coding-agent/test/model-registry.test.ts:682:			const models = getModelsForProvider(registry, "openrouter");
+packages/coding-agent/test/model-registry.test.ts:695:				openrouter: {
+packages/coding-agent/test/model-registry.test.ts:706:			const models = getModelsForProvider(registry, "openrouter");
+packages/coding-agent/test/model-registry.test.ts:721:				openrouter: {
+packages/coding-agent/test/model-registry.test.ts:731:			const models = getModelsForProvider(registry, "openrouter");
+packages/coding-agent/test/model-registry.test.ts:741:				openrouter: {
+packages/coding-agent/test/model-registry.test.ts:751:			const models = getModelsForProvider(registry, "openrouter");
+packages/coding-agent/test/model-registry.test.ts:762:				openrouter: {
+packages/coding-agent/test/model-registry.test.ts:772:			const models = getModelsForProvider(registry, "openrouter");
+packages/coding-agent/test/model-registry.test.ts:785:				openrouter: {
+packages/coding-agent/test/model-registry.test.ts:796:				getModelsForProvider(registry, "openrouter").find((m) => m.id === "anthropic/claude-sonnet-4")?.name,
+packages/coding-agent/test/model-registry.test.ts:801:				openrouter: {
+packages/coding-agent/test/model-registry.test.ts:812:				getModelsForProvider(registry, "openrouter").find((m) => m.id === "anthropic/claude-sonnet-4")?.name,
+packages/coding-agent/test/model-registry.test.ts:818:				openrouter: {
+packages/coding-agent/test/model-registry.test.ts:828:			const customName = getModelsForProvider(registry, "openrouter").find(
+packages/coding-agent/test/model-registry.test.ts:837:			const restoredName = getModelsForProvider(registry, "openrouter").find(
+packages/coding-agent/test/model-registry.test.ts:856:				api: "openai-completions",
+packages/coding-agent/test/model-registry.test.ts:873:				api: "openai-completions",
+packages/coding-agent/test/model-registry.test.ts:915:				api: "openai-completions",
+packages/coding-agent/test/model-registry.test.ts:981:				api: "openai-completions",
+packages/coding-agent/test/model-registry.test.ts:989:				getApiProvider("openai-completions")?.streamSimple(openAiModel, emptyContext);
+packages/coding-agent/test/model-registry.test.ts:999:				getApiProvider("openai-completions")?.streamSimple(openAiModel, emptyContext);
+packages/coding-agent/test/model-registry.test.ts:1051:					providerConfig("https://custom.test/v1", [{ id: "custom-a" }, { id: "custom-b" }], "openai-completions"),
+packages/coding-agent/test/model-registry.test.ts:1066:					providerConfig("https://custom.test/v1", [{ id: "custom-a" }, { id: "custom-b" }], "openai-completions"),
+packages/coding-agent/test/model-registry.test.ts:1087:					providerConfig("https://custom.test/v1", [{ id: "custom-a" }, { id: "custom-b" }], "openai-completions"),
+packages/ai/src/types.ts:7:	| "openai-completions"
+packages/ai/src/types.ts:19:export type KnownImagesApi = "openrouter-images";
+packages/ai/src/types.ts:36:	| "openrouter"
+packages/ai/src/types.ts:58:export type KnownImagesProvider = "openrouter";
+packages/ai/src/types.ts:283:	responseModel?: string; // Concrete `chunk.model` when different from the requested `model` (e.g. OpenRouter `auto` -> `anthropic/...`)
+packages/ai/src/types.ts:372:	/** Whether the provider supports `stream_options: { include_usage: true }` for token usage in streaming responses. Default: true. */
+packages/ai/src/types.ts:384:	/** Format for reasoning/thinking parameter. "openai" uses reasoning_effort, "openrouter" uses reasoning: { effort }, "deepseek" uses thinking: { type } plus reasoning_effort, "together" uses reasoning: { enabled } plus reasoning_effort when supported, "zai" uses top-level enable_thinking: boolean, "qwen" uses top-level enable_thinking: boolean, and "qwen-chat-template" uses chat_template_kwargs.enable_thinking. Default: "openai". */
+packages/ai/src/types.ts:385:	thinkingFormat?: "openai" | "openrouter" | "deepseek" | "together" | "zai" | "qwen" | "qwen-chat-template";
+packages/ai/src/types.ts:386:	/** OpenRouter-specific routing preferences. Only used when baseUrl points to OpenRouter. */
+packages/ai/src/types.ts:387:	openRouterRouting?: OpenRouterRouting;
+packages/ai/src/types.ts:451: * OpenRouter provider routing preferences.
+packages/ai/src/types.ts:452: * Controls which upstream providers OpenRouter routes requests to.
+packages/ai/src/types.ts:453: * Sent as the `provider` field in the OpenRouter API request body.
+packages/ai/src/types.ts:454: * @see https://openrouter.ai/docs/guides/routing/provider-selection
+packages/ai/src/types.ts:456:export interface OpenRouterRouting {
+packages/ai/src/types.ts:561:	compat?: TApi extends "openai-completions"
+packages/coding-agent/test/model-resolver.test.ts:38:// Mock OpenRouter models with colons in IDs
+packages/coding-agent/test/model-resolver.test.ts:39:const mockOpenRouterModels: Model<"anthropic-messages">[] = [
+packages/coding-agent/test/model-resolver.test.ts:44:		provider: "openrouter",
+packages/coding-agent/test/model-resolver.test.ts:45:		baseUrl: "https://openrouter.ai/api/v1",
+packages/coding-agent/test/model-resolver.test.ts:56:		provider: "openrouter",
+packages/coding-agent/test/model-resolver.test.ts:57:		baseUrl: "https://openrouter.ai/api/v1",
+packages/coding-agent/test/model-resolver.test.ts:66:const allModels = [...mockModels, ...mockOpenRouterModels];
+packages/coding-agent/test/model-resolver.test.ts:134:	describe("OpenRouter models with colons in IDs", () => {
+packages/coding-agent/test/model-resolver.test.ts:142:		test("openrouter/qwen/qwen3-coder:exacto matches with provider prefix", () => {
+packages/coding-agent/test/model-resolver.test.ts:143:			const result = parseModelPattern("openrouter/qwen/qwen3-coder:exacto", allModels);
+packages/coding-agent/test/model-resolver.test.ts:145:			expect(result.model?.provider).toBe("openrouter");
+packages/coding-agent/test/model-resolver.test.ts:157:		test("openrouter/qwen/qwen3-coder:exacto:high matches with provider and thinking level", () => {
+packages/coding-agent/test/model-resolver.test.ts:158:			const result = parseModelPattern("openrouter/qwen/qwen3-coder:exacto:high", allModels);
+packages/coding-agent/test/model-resolver.test.ts:160:			expect(result.model?.provider).toBe("openrouter");
+packages/coding-agent/test/model-resolver.test.ts:173:	describe("invalid thinking levels with OpenRouter models", () => {
+packages/coding-agent/test/model-resolver.test.ts:256:	test("prefers exact model id match over provider inference (OpenRouter-style ids)", () => {
+packages/coding-agent/test/model-resolver.test.ts:267:		expect(result.model?.provider).toBe("openrouter");
+packages/coding-agent/test/model-resolver.test.ts:293:			cliProvider: "openrouter",
+packages/coding-agent/test/model-resolver.test.ts:294:			cliModel: "openrouter/openai/ghost-model",
+packages/coding-agent/test/model-resolver.test.ts:299:		expect(result.model?.provider).toBe("openrouter");
+packages/coding-agent/test/model-resolver.test.ts:359:	test("resolves provider-prefixed fuzzy patterns (openrouter/qwen -> openrouter model)", () => {
+packages/coding-agent/test/model-resolver.test.ts:365:			cliModel: "openrouter/qwen",
+packages/coding-agent/test/model-resolver.test.ts:370:		expect(result.model?.provider).toBe("openrouter");
+packages/coding-agent/test/model-resolver.test.ts:378:		expect(defaultModelPerProvider["openai-codex"]).toBe("gpt-5.5");
+packages/coding-agent/test/model-resolver.test.ts:398:			cliProvider: "openrouter",
+packages/coding-agent/test/model-resolver.test.ts:399:			cliModel: "openrouter/openai/ghost-model",
+packages/coding-agent/test/model-resolver.test.ts:405:		expect(result.model?.provider).toBe("openrouter");
+packages/coding-agent/src/cli/args.ts:318:  OPENROUTER_API_KEY               - OpenRouter API key
+packages/ai/src/utils/overflow.ts:18: * - OpenRouter: "This endpoint's maximum context length is X tokens. However, you requested about Y tokens"
+packages/ai/src/utils/overflow.ts:42:	/maximum context length is \d+ tokens/i, // OpenRouter (all backends)
+packages/ai/src/utils/overflow.ts:92: * - OpenRouter (all backends): "maximum context length is X tokens"
+packages/ai/test/openai-responses-tool-result-images.test.ts:186:	describe("OpenAI Codex Responses Provider (gpt-5.5)", () => {
+packages/ai/test/openai-responses-tool-result-images.test.ts:187:		const model = getModel("openai-codex", "gpt-5.5");
+packages/ai/test/openrouter-images.test.ts:61:describe("openrouter images", () => {
+packages/ai/test/openrouter-images.test.ts:68:		const model: ImagesModel<"openrouter-images"> = {
+packages/ai/test/openrouter-images.test.ts:71:			api: "openrouter-images",
+packages/ai/test/openrouter-images.test.ts:72:			provider: "openrouter",
+packages/ai/test/openrouter-images.test.ts:73:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/test/openrouter-images.test.ts:100:		const model: ImagesModel<"openrouter-images"> = {
+packages/ai/test/openrouter-images.test.ts:103:			api: "openrouter-images",
+packages/ai/test/openrouter-images.test.ts:104:			provider: "openrouter",
+packages/ai/test/openrouter-images.test.ts:105:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/test/openrouter-images.test.ts:123:		const model: ImagesModel<"openrouter-images"> = {
+packages/ai/test/openrouter-images.test.ts:126:			api: "openrouter-images",
+packages/ai/test/openrouter-images.test.ts:127:			provider: "openrouter",
+packages/ai/test/openrouter-images.test.ts:128:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/test/openai-responses-foreign-toolcall-id.test.ts:21:		const model = getModel("openai-codex", "gpt-5.5");
+packages/ai/test/openai-responses-foreign-toolcall-id.test.ts:34:			model: "gpt-5.5",
+packages/coding-agent/test/sdk-codex-cache-probe-tool-loop.ts:137:  - Provider/model fixed to openai-codex/gpt-5.5
+packages/coding-agent/test/sdk-codex-cache-probe-tool-loop.ts:280:	const model = getModel("openai-codex", "gpt-5.5");
+packages/coding-agent/test/sdk-codex-cache-probe-tool-loop.ts:282:		throw new Error("Model openai-codex/gpt-5.5 not found");
+packages/coding-agent/test/sdk-codex-cache-probe-tool-loop.ts:329:	console.log(`provider openai-codex, model gpt-5.5`);
+packages/ai/test/cache-retention.test.ts:4:import { streamOpenAICompletions } from "../src/providers/openai-completions.ts";
+packages/ai/test/cache-retention.test.ts:393:		function createCompletionsModel(compat?: Model<"openai-completions">["compat"]): Model<"openai-completions"> {
+packages/ai/test/cache-retention.test.ts:397:				api: "openai-completions",
+packages/ai/test/cache-retention.test.ts:398:				provider: "test-openai-completions",
+packages/ai/test/cache-retention.test.ts:413:				const s = streamOpenAICompletions(createCompletionsModel(), context, {
+packages/ai/test/cache-retention.test.ts:438:				const s = streamOpenAICompletions(createCompletionsModel({ supportsLongCacheRetention: false }), context, {
+packages/coding-agent/test/session-info-modified-timestamp.test.ts:26:		api: "openai-completions",
+packages/coding-agent/test/session-info-modified-timestamp.test.ts:62:			api: "openai-completions",
+packages/ai/test/unicode-surrogate.test.ts:749:			"gpt-5.5 - should handle emoji in tool results",
+packages/ai/test/unicode-surrogate.test.ts:752:				const llm = getModel("openai-codex", "gpt-5.5");
+packages/ai/test/unicode-surrogate.test.ts:758:			"gpt-5.5 - should handle real-world LinkedIn comment data with emoji",
+packages/ai/test/unicode-surrogate.test.ts:761:				const llm = getModel("openai-codex", "gpt-5.5");
+packages/ai/test/unicode-surrogate.test.ts:767:			"gpt-5.5 - should handle unpaired high surrogate (0xD83D) in tool results",
+packages/ai/test/unicode-surrogate.test.ts:770:				const llm = getModel("openai-codex", "gpt-5.5");
+packages/ai/test/transform-messages-copilot-openai-to-anthropic.test.ts:64:				api: "openai-completions",
+packages/ai/src/env-api-keys.ts:110:		openrouter: "OPENROUTER_API_KEY",
+packages/ai/test/openai-codex-cache-affinity-e2e.test.ts:11:		const model = getModel("openai-codex", "gpt-5.5");
+packages/ai/test/abort.test.ts:117:		const llm: Model<"openai-completions"> = {
+packages/ai/test/abort.test.ts:119:			api: "openai-completions",
+packages/ai/test/abort.test.ts:279:			const llm = getModel("openai-codex", "gpt-5.5");
+packages/ai/test/abort.test.ts:284:			const llm = getModel("openai-codex", "gpt-5.5");
+packages/coding-agent/src/core/model-registry.ts:38:// Schema for OpenRouter routing preferences
+packages/coding-agent/src/core/model-registry.ts:46:const OpenRouterRoutingSchema = Type.Object({
+packages/coding-agent/src/core/model-registry.ts:108:			Type.Literal("openrouter"),
+packages/coding-agent/src/core/model-registry.ts:117:	openRouterRouting: Type.Optional(OpenRouterRoutingSchema),
+packages/ai/test/xhigh.test.ts:53:		it("should error with openai-completions when using xhigh", async () => {
+packages/ai/test/xhigh.test.ts:56:			const model: Model<"openai-completions"> = {
+packages/ai/test/xhigh.test.ts:58:				api: "openai-completions",
+packages/ai/test/supports-xhigh.test.ts:29:	it.each(["gpt-5.4", "gpt-5.5"] as const)("includes xhigh for %s models", (modelId) => {
+packages/ai/test/supports-xhigh.test.ts:47:	it("includes only high/xhigh plus off for DeepSeek V4 Flash on OpenRouter", () => {
+packages/ai/test/supports-xhigh.test.ts:48:		const model = getModel("openrouter", "deepseek/deepseek-v4-flash");
+packages/ai/test/supports-xhigh.test.ts:53:	it("includes xhigh for OpenRouter Opus 4.6 (openai-completions API)", () => {
+packages/ai/test/supports-xhigh.test.ts:54:		const model = getModel("openrouter", "anthropic/claude-opus-4.6");
+packages/ai/test/stream.test.ts:427:		const llm: Model<"openai-completions"> = {
+packages/ai/test/stream.test.ts:429:			api: "openai-completions",
+packages/ai/test/stream.test.ts:790:	describe.skipIf(!process.env.OPENROUTER_API_KEY)("OpenRouter Provider (glm-4.5v via OpenAI Completions)", () => {
+packages/ai/test/stream.test.ts:791:		const llm = getModel("openrouter", "z-ai/glm-4.5v");
+packages/ai/test/stream.test.ts:1303:	describe("OpenAI Codex Provider (gpt-5.5)", () => {
+packages/ai/test/stream.test.ts:1304:		const llm = getModel("openai-codex", "gpt-5.5");
+packages/ai/test/stream.test.ts:1331:	describe("OpenAI Codex Provider (gpt-5.5 via WebSocket)", () => {
+packages/ai/test/stream.test.ts:1332:		const llm = getModel("openai-codex", "gpt-5.5");
+packages/ai/test/stream.test.ts:1501:		let llm: Model<"openai-completions">;
+packages/ai/test/stream.test.ts:1543:				api: "openai-completions",
+packages/ai/src/image-models.generated.ts:7:	openrouter: {
+packages/ai/src/image-models.generated.ts:11:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:12:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:13:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:22:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:26:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:27:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:28:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:37:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:41:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:42:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:43:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:52:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:56:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:57:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:58:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:67:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:71:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:72:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:73:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:82:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:86:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:87:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:88:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:97:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:101:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:102:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:103:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:112:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:116:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:117:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:118:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:127:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:131:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:132:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:133:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:142:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:146:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:147:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:148:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:157:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:161:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:162:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:163:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:172:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:173:		"openrouter/auto": {
+packages/ai/src/image-models.generated.ts:174:			id: "openrouter/auto",
+packages/ai/src/image-models.generated.ts:176:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:177:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:178:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:187:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:191:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:192:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:193:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:202:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:206:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:207:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:208:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:217:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:221:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:222:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:223:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:232:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:236:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:237:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:238:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:247:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:251:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:252:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:253:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:262:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:266:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:267:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:268:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:277:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:281:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:282:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:283:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:292:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:296:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:297:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:298:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:307:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:311:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:312:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:313:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:322:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:326:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:327:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:328:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:337:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:341:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:342:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:343:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:352:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:356:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:357:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:358:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:367:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:371:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:372:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:373:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:382:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:386:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:387:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:388:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:397:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:401:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:402:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:403:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:412:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:416:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:417:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:418:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:427:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/src/image-models.generated.ts:431:			api: "openrouter-images",
+packages/ai/src/image-models.generated.ts:432:			provider: "openrouter",
+packages/ai/src/image-models.generated.ts:433:			baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/src/image-models.generated.ts:442:		} satisfies ImagesModel<"openrouter-images">,
+packages/ai/test/google-thinking-disable.test.ts:155:describe.skipIf(!process.env.OPENROUTER_API_KEY)("OpenRouter thinking disable E2E", () => {
+packages/ai/test/google-thinking-disable.test.ts:157:		await expectThinkingDisabledE2E(getModel("openrouter", "qwen/qwen3.5-plus-02-15"), {
+packages/ai/test/codex-websocket-cached-probe.ts:159:	const model = getModel("openai-codex", "gpt-5.5") as Model<"openai-codex-responses"> | undefined;
+packages/ai/test/codex-websocket-cached-probe.ts:160:	if (!model) throw new Error("Model openai-codex/gpt-5.5 not found");
+packages/ai/test/codex-websocket-cached-probe.ts:176:	console.log(`provider openai-codex, model gpt-5.5`);
+packages/ai/test/responseid.test.ts:55:		const llm: Model<"openai-completions"> = {
+packages/ai/test/responseid.test.ts:57:			api: "openai-completions",
+packages/ai/test/responseid.test.ts:117:			const llm = getModel("openai-codex", "gpt-5.5");
+packages/coding-agent/test/extensions-runner.test.ts:40:		api: "openai-completions",
+packages/ai/test/openai-codex-stream.test.ts:464:	it("preserves gpt-5.5 xhigh reasoning effort from simple options", async () => {
+packages/ai/test/openai-codex-stream.test.ts:499:			id: "gpt-5.5",
+packages/ai/test/openai-codex-stream.test.ts:525:	it.each(["gpt-5.3-codex", "gpt-5.4", "gpt-5.5"])("clamps %s minimal reasoning effort to low", async (modelId) => {
+packages/ai/test/openai-codex-stream.test.ts:628:		["gpt-5.5", "flex", 0.5],
+packages/ai/test/openai-codex-stream.test.ts:629:		["gpt-5.5", "priority", 2.5],
+packages/ai/test/openai-codex-stream.test.ts:696:				name: modelId === "gpt-5.5" ? "GPT-5.5" : "GPT-5.1 Codex",
+packages/ai/test/empty.test.ts:707:			"gpt-5.5 - should handle empty content array",
+packages/ai/test/empty.test.ts:710:				const llm = getModel("openai-codex", "gpt-5.5");
+packages/ai/test/empty.test.ts:716:			"gpt-5.5 - should handle empty string content",
+packages/ai/test/empty.test.ts:719:				const llm = getModel("openai-codex", "gpt-5.5");
+packages/ai/test/empty.test.ts:725:			"gpt-5.5 - should handle whitespace-only content",
+packages/ai/test/empty.test.ts:728:				const llm = getModel("openai-codex", "gpt-5.5");
+packages/ai/test/empty.test.ts:734:			"gpt-5.5 - should handle empty assistant message in conversation",
+packages/ai/test/empty.test.ts:737:				const llm = getModel("openai-codex", "gpt-5.5");
+packages/ai/test/image-tool-result.test.ts:225:		const llm: Model<"openai-completions"> = {
+packages/ai/test/image-tool-result.test.ts:227:			api: "openai-completions",
+packages/ai/test/image-tool-result.test.ts:277:	describe.skipIf(!process.env.OPENROUTER_API_KEY)("OpenRouter Provider (glm-4.5v)", () => {
+packages/ai/test/image-tool-result.test.ts:278:		const llm = getModel("openrouter", "z-ai/glm-4.5v");
+packages/ai/test/image-tool-result.test.ts:484:			"gpt-5.5 - should handle tool result with only image",
+packages/ai/test/image-tool-result.test.ts:487:				const llm = getModel("openai-codex", "gpt-5.5");
+packages/ai/test/image-tool-result.test.ts:493:			"gpt-5.5 - should handle tool result with text and image",
+packages/ai/test/image-tool-result.test.ts:496:				const llm = getModel("openai-codex", "gpt-5.5");
+packages/ai/test/openai-completions-response-model.test.ts:5:// Router/virtual ids (e.g. OpenRouter `auto`) keep `model` pinned to the
+packages/ai/test/openai-completions-response-model.test.ts:41:function openRouterAuto(): Model<"openai-completions"> {
+packages/ai/test/openai-completions-response-model.test.ts:43:		id: "openrouter/auto",
+packages/ai/test/openai-completions-response-model.test.ts:44:		name: "OpenRouter Auto",
+packages/ai/test/openai-completions-response-model.test.ts:45:		api: "openai-completions",
+packages/ai/test/openai-completions-response-model.test.ts:46:		provider: "openrouter",
+packages/ai/test/openai-completions-response-model.test.ts:47:		baseUrl: "https://openrouter.ai/api/v1",
+packages/ai/test/openai-completions-response-model.test.ts:56:describe("openai-completions responseModel", () => {
+packages/ai/test/openai-completions-response-model.test.ts:83:		expect(message.model).toBe("openrouter/auto");
+packages/ai/test/openai-completions-response-model.test.ts:85:		expect(message.provider).toBe("openrouter");
+packages/ai/test/openai-completions-response-model.test.ts:91:			{ id: "chatcmpl-2", model: "openrouter/auto", choices: [{ index: 0, delta: { content: "hi" } }] },
+packages/ai/test/openai-completions-response-model.test.ts:94:				model: "openrouter/auto",
+packages/ai/test/openai-completions-response-model.test.ts:111:		expect(message.model).toBe("openrouter/auto");
+packages/ai/test/openai-completions-response-model.test.ts:137:		expect(message.model).toBe("openrouter/auto");
+packages/coding-agent/src/core/sdk.ts:145:	if (model.provider === "openrouter" || model.baseUrl.includes("openrouter.ai")) {
+packages/coding-agent/src/core/sdk.ts:148:			"X-OpenRouter-Title": "pi",
+packages/coding-agent/src/core/sdk.ts:149:			"X-OpenRouter-Categories": "cli-agent",
+packages/ai/test/openai-completions-prompt-cache.test.ts:3:import { streamOpenAICompletions } from "../src/providers/openai-completions.ts";
+packages/ai/test/openai-completions-prompt-cache.test.ts:65:describe("openai-completions prompt caching", () => {
+packages/ai/test/openai-completions-prompt-cache.test.ts:82:	function createModel(overrides: Partial<Model<"openai-completions">> = {}): Model<"openai-completions"> {
+packages/ai/test/openai-completions-prompt-cache.test.ts:85:			...(baseModel as Omit<Model<"openai-completions">, "api">),
+packages/ai/test/openai-completions-prompt-cache.test.ts:86:			api: "openai-completions",
+packages/ai/test/openai-completions-prompt-cache.test.ts:97:		model: Model<"openai-completions"> = createModel(),
+packages/ai/test/openai-completions-prompt-cache.test.ts:99:		await streamOpenAICompletions(
+packages/ai/test/together-models.test.ts:20:		expect(model.api).toBe("openai-completions");
+packages/ai/test/openai-completions-cache-control-format.test.ts:4:import { streamOpenAICompletions } from "../src/providers/openai-completions.ts";
+packages/ai/test/openai-completions-cache-control-format.test.ts:75:	model: Model<"openai-completions">,
+packages/ai/test/openai-completions-cache-control-format.test.ts:80:	await streamOpenAICompletions(
+packages/ai/test/openai-completions-cache-control-format.test.ts:124:describe("openai-completions cacheControlFormat", () => {
+packages/ai/test/openai-completions-cache-control-format.test.ts:130:		const model: Model<"openai-completions"> = {
+packages/ai/test/openai-completions-cache-control-format.test.ts:133:			api: "openai-completions",
+packages/ai/test/openai-completions-cache-control-format.test.ts:134:			provider: "openrouter",
+packages/ai/test/openai-completions-cache-control-format.test.ts:155:	it("preserves Anthropic-style cache markers for OpenRouter Anthropic models", async () => {
+packages/ai/test/openai-completions-cache-control-format.test.ts:156:		const model = getModel("openrouter", "anthropic/claude-sonnet-4");
+packages/ai/test/openai-completions-cache-control-format.test.ts:162:		const model: Model<"openai-completions"> = {
+packages/ai/test/openai-completions-cache-control-format.test.ts:165:			api: "openai-completions",
+packages/ai/test/openai-completions-cache-control-format.test.ts:166:			provider: "openrouter",
+packages/ai/test/openai-responses-copilot-provider.test.ts:94:	it.each(["gpt-5.1", "gpt-5.2", "gpt-5.3-codex", "gpt-5.4", "gpt-5.4-mini", "gpt-5.4-nano", "gpt-5.5"] as const)(
+packages/ai/test/openai-responses-copilot-provider.test.ts:131:	it.each(["gpt-5", "gpt-5-mini", "gpt-5-nano", "gpt-5-pro", "gpt-5.2-pro", "gpt-5.4-pro", "gpt-5.5-pro"] as const)(
+packages/ai/test/openai-responses-copilot-provider.test.ts:249:		["gpt-5.5", "priority", 2.5],
+packages/ai/test/openai-responses-copilot-provider.test.ts:250:		["gpt-5.5", "flex", 0.5],
+packages/ai/src/providers/register-builtins.ts:20:import type { OpenAICompletionsOptions } from "./openai-completions.ts";
+packages/ai/src/providers/register-builtins.ts:67:	streamOpenAICompletions: StreamFunction<"openai-completions", OpenAICompletionsOptions>;
+packages/ai/src/providers/register-builtins.ts:68:	streamSimpleOpenAICompletions: StreamFunction<"openai-completions", SimpleStreamOptions>;
+packages/ai/src/providers/register-builtins.ts:113:	| Promise<LazyProviderModule<"openai-completions", OpenAICompletionsOptions, SimpleStreamOptions>>
+packages/ai/src/providers/register-builtins.ts:285:	LazyProviderModule<"openai-completions", OpenAICompletionsOptions, SimpleStreamOptions>
+packages/ai/src/providers/register-builtins.ts:287:	openAICompletionsProviderModulePromise ||= import("./openai-completions.ts").then((module) => {
+packages/ai/src/providers/register-builtins.ts:290:			stream: provider.streamOpenAICompletions,
+packages/ai/src/providers/register-builtins.ts:291:			streamSimple: provider.streamSimpleOpenAICompletions,
+packages/ai/src/providers/register-builtins.ts:338:export const streamOpenAICompletions = createLazyStream(loadOpenAICompletionsProviderModule);
+packages/ai/src/providers/register-builtins.ts:339:export const streamSimpleOpenAICompletions = createLazySimpleStream(loadOpenAICompletionsProviderModule);
+packages/ai/src/providers/register-builtins.ts:353:		api: "openai-completions",
+packages/ai/src/providers/register-builtins.ts:354:		stream: streamOpenAICompletions,
+packages/ai/src/providers/register-builtins.ts:355:		streamSimple: streamSimpleOpenAICompletions,
+packages/ai/test/openai-completions-tool-choice.test.ts:4:import { convertMessages } from "../src/providers/openai-completions.ts";
+packages/ai/test/openai-completions-tool-choice.test.ts:67:describe("openai-completions tool_choice", () => {
+packages/ai/test/openai-completions-tool-choice.test.ts:75:		const model = { ...baseModel, api: "openai-completions" } as const;
+packages/ai/test/openai-completions-tool-choice.test.ts:118:			api: "openai-completions",
+packages/ai/test/openai-completions-tool-choice.test.ts:423:		const model = { ...baseModel, api: "openai-completions" } as const;
+packages/ai/test/openai-completions-tool-choice.test.ts:458:		const model = { ...baseModel, api: "openai-completions" } as const;
+packages/ai/test/openai-completions-tool-choice.test.ts:542:		const model = { ...baseModel, api: "openai-completions" } as const;
+packages/ai/test/openai-completions-tool-choice.test.ts:689:		const model = { ...baseModel, api: "openai-completions" } as const;
+packages/ai/test/openai-completions-tool-choice.test.ts:836:			api: "openai-completions",
+packages/ai/test/openai-completions-tool-choice.test.ts:899:		const model = { ...baseModel, api: "openai-completions" } as const;
+packages/ai/test/openai-completions-tool-choice.test.ts:926:		const model = { ...baseModel, api: "openai-completions" } as const;
+packages/ai/test/openai-completions-tool-choice.test.ts:946:		const model = { ...baseModel, api: "openai-completions" } as Model<"openai-completions">;
+packages/ai/test/openai-completions-tool-choice.test.ts:953:						api: "openai-completions",
+packages/ai/test/openai-completions-tool-choice.test.ts:1013:		const model = { ...baseModel, api: "openai-completions" } as const;
+packages/ai/test/openai-completions-tool-choice.test.ts:1052:		const model = { ...baseModel, api: "openai-completions" } as const;
+packages/ai/test/openai-completions-tool-choice.test.ts:1098:		const model = { ...baseModel, api: "openai-completions" } as const;
+packages/ai/test/openai-completions-tool-choice.test.ts:1120:	it("uses OpenRouter reasoning object instead of reasoning_effort", async () => {
+packages/ai/test/openai-completions-tool-choice.test.ts:1121:		const model = getModel("openrouter", "deepseek/deepseek-r1")!;
+packages/ai/test/openrouter-cache-write-repro.test.ts:14:describe.skipIf(!process.env.OPENROUTER_API_KEY)("OpenRouter cache_write repro E2E", () => {
+packages/ai/test/openrouter-cache-write-repro.test.ts:16:		"regression: preserves cache_write_tokens on openai-completions stream path",
+packages/ai/test/openrouter-cache-write-repro.test.ts:19:			const model = getModel("openrouter", "google/gemini-2.5-flash");
+packages/ai/test/images.test.ts:73:		"OpenRouter Images Provider (google/gemini-2.5-flash-image)",
+packages/ai/test/images.test.ts:75:			const model = getImageModel("openrouter", "google/gemini-2.5-flash-image");
+packages/ai/test/overflow.test.ts:9:		api: "openai-completions",
+packages/ai/test/overflow.test.ts:83:			api: "openai-completions",
+packages/ai/test/openai-completions-empty-tools.test.ts:57:describe("openai-completions empty tools handling", () => {
+packages/ai/test/openai-completions-empty-tools.test.ts:65:		const model = { ...baseModel, api: "openai-completions" } as const;
+packages/ai/test/openai-completions-empty-tools.test.ts:82:		const model = { ...baseModel, api: "openai-completions" } as const;
+packages/ai/test/openai-completions-empty-tools.test.ts:98:		const model = { ...baseModel, api: "openai-completions" } as const;
+packages/ai/test/openai-completions-empty-tools.test.ts:115:		const model = { ...baseModel, api: "openai-completions" } as const;
+packages/ai/test/openai-completions-empty-tools.test.ts:205:		const model = { ...baseModel, api: "openai-completions" } as const;
+packages/ai/test/openai-completions-empty-tools.test.ts:231:						api: "openai-completions",
+packages/ai/test/tool-call-without-result.test.ts:110:		const model: Model<"openai-completions"> = {
+packages/ai/test/tool-call-without-result.test.ts:112:			api: "openai-completions",
+packages/ai/test/tool-call-without-result.test.ts:320:			"gpt-5.5 - should filter out tool calls without corresponding tool results",
+packages/ai/test/tool-call-without-result.test.ts:323:				const model = getModel("openai-codex", "gpt-5.5");
+packages/ai/test/tool-call-id-normalization.test.ts:22:const openrouterKey = getEnvApiKey("openrouter");
+packages/ai/test/tool-call-id-normalization.test.ts:40: * 2. Switch to openrouter openai/gpt-5.2-codex and complete
+packages/ai/test/tool-call-id-normalization.test.ts:41: * 3. Switch to openai-codex gpt-5.5 and complete
+packages/ai/test/tool-call-id-normalization.test.ts:46:	it.skipIf(!copilotToken || !openrouterKey)(
+packages/ai/test/tool-call-id-normalization.test.ts:47:		"github-copilot -> openrouter should normalize pipe-separated IDs",
+packages/ai/test/tool-call-id-normalization.test.ts:50:			const openrouterModel = getModel("openrouter", "openai/gpt-5.2-codex");
+packages/ai/test/tool-call-id-normalization.test.ts:91:			// Step 2: Complete with openrouter (uses openai-completions API)
+packages/ai/test/tool-call-id-normalization.test.ts:92:			const openrouterResponse = await completeSimple(
+packages/ai/test/tool-call-id-normalization.test.ts:93:				openrouterModel,
+packages/ai/test/tool-call-id-normalization.test.ts:104:				{ apiKey: openrouterKey },
+packages/ai/test/tool-call-id-normalization.test.ts:108:			expect(openrouterResponse.stopReason, `OpenRouter error: ${openrouterResponse.errorMessage}`).not.toBe(
+packages/ai/test/tool-call-id-normalization.test.ts:111:			expect(openrouterResponse.errorMessage).toBeUndefined();
+packages/ai/test/tool-call-id-normalization.test.ts:120:			const codexModel = getModel("openai-codex", "gpt-5.5");
+packages/ai/test/tool-call-id-normalization.test.ts:240:	it.skipIf(!openrouterKey)(
+packages/ai/test/tool-call-id-normalization.test.ts:241:		"openrouter should handle prefilled context with long pipe-separated IDs",
+packages/ai/test/tool-call-id-normalization.test.ts:243:			const model = getModel("openrouter", "openai/gpt-5.2-codex");
+packages/ai/test/tool-call-id-normalization.test.ts:253:				{ apiKey: openrouterKey },
+packages/ai/test/tool-call-id-normalization.test.ts:257:			expect(response.stopReason, `OpenRouter error: ${response.errorMessage}`).not.toBe("error");
+packages/ai/test/tool-call-id-normalization.test.ts:269:			const model = getModel("openai-codex", "gpt-5.5");
+packages/ai/test/openai-completions-tool-result-images.test.ts:3:import { convertMessages } from "../src/providers/openai-completions.ts";
+packages/ai/test/openai-completions-tool-result-images.test.ts:56:describe("openai-completions convertMessages", () => {
+packages/ai/test/openai-completions-tool-result-images.test.ts:59:		const model: Model<"openai-completions"> = {
+packages/ai/test/openai-completions-tool-result-images.test.ts:61:			api: "openai-completions",
+packages/ai/test/openai-completions-thinking-as-text.test.ts:5:import { convertMessages, streamOpenAICompletions } from "../src/providers/openai-completions.ts";
+packages/ai/test/openai-completions-thinking-as-text.test.ts:46:function buildModel(baseUrl = "http://127.0.0.1:1"): Model<"openai-completions"> {
+packages/ai/test/openai-completions-thinking-as-text.test.ts:50:		api: "openai-completions",
+packages/ai/test/openai-completions-thinking-as-text.test.ts:66:		api: "openai-completions",
+packages/ai/test/openai-completions-thinking-as-text.test.ts:97:	stream_options?: { include_usage?: boolean };
+packages/ai/test/openai-completions-thinking-as-text.test.ts:100:describe("openai-completions thinking-as-text replay", () => {
+packages/ai/test/openai-completions-thinking-as-text.test.ts:187:				streamOpenAICompletions(
+packages/ai/test/cross-provider-handoff.test.ts:64:		label: "openai-completions-gpt-4o-mini",
+packages/ai/test/cross-provider-handoff.test.ts:65:		apiOverride: "openai-completions",
+packages/ai/test/cross-provider-handoff.test.ts:70:	{ provider: "openai-codex", model: "gpt-5.5", label: "openai-codex-gpt-5.5" },
+packages/ai/test/total-tokens.test.ts:163:				const llm: Model<"openai-completions"> = {
+packages/ai/test/total-tokens.test.ts:165:					api: "openai-completions",
+packages/ai/test/total-tokens.test.ts:613:	// OpenRouter - Multiple backend providers
+packages/ai/test/total-tokens.test.ts:616:	describe.skipIf(!process.env.OPENROUTER_API_KEY)("OpenRouter", () => {
+packages/ai/test/total-tokens.test.ts:621:				const llm = getModel("openrouter", "anthropic/claude-sonnet-4");
+packages/ai/test/total-tokens.test.ts:623:				console.log(`\nOpenRouter / ${llm.id}:`);
+packages/ai/test/total-tokens.test.ts:638:				const llm = getModel("openrouter", "deepseek/deepseek-chat");
+packages/ai/test/total-tokens.test.ts:640:				console.log(`\nOpenRouter / ${llm.id}:`);
+packages/ai/test/total-tokens.test.ts:655:				const llm = getModel("openrouter", "mistralai/mistral-small-3.2-24b-instruct");
+packages/ai/test/total-tokens.test.ts:657:				console.log(`\nOpenRouter / ${llm.id}:`);
+packages/ai/test/total-tokens.test.ts:672:				const llm = getModel("openrouter", "google/gemini-2.0-flash-001");
+packages/ai/test/total-tokens.test.ts:674:				console.log(`\nOpenRouter / ${llm.id}:`);
+packages/ai/test/total-tokens.test.ts:689:				const llm = getModel("openrouter", "meta-llama/llama-4-scout");
+packages/ai/test/total-tokens.test.ts:691:				console.log(`\nOpenRouter / ${llm.id}:`);
+packages/ai/test/total-tokens.test.ts:774:			"gpt-5.5 - should return totalTokens equal to sum of components",
+packages/ai/test/total-tokens.test.ts:777:				const llm = getModel("openai-codex", "gpt-5.5");
+packages/ai/src/providers/images/register-builtins.ts:3:import type { generateImagesOpenRouter as generateImagesOpenRouterFunction } from "./openrouter.ts";
+packages/ai/src/providers/images/register-builtins.ts:5:interface OpenRouterImagesProviderModule {
+packages/ai/src/providers/images/register-builtins.ts:6:	generateImagesOpenRouter: typeof generateImagesOpenRouterFunction;
+packages/ai/src/providers/images/register-builtins.ts:9:let openRouterImagesProviderModulePromise: Promise<OpenRouterImagesProviderModule> | undefined;
+packages/ai/src/providers/images/register-builtins.ts:11:function createLazyLoadErrorImages(model: ImagesModel<"openrouter-images">, error: unknown): AssistantImages {
+packages/ai/src/providers/images/register-builtins.ts:23:function loadOpenRouterImagesProviderModule(): Promise<OpenRouterImagesProviderModule> {
+packages/ai/src/providers/images/register-builtins.ts:24:	openRouterImagesProviderModulePromise ||= import("./openrouter.ts").then(
+packages/ai/src/providers/images/register-builtins.ts:25:		(module) => module as OpenRouterImagesProviderModule,
+packages/ai/src/providers/images/register-builtins.ts:30:export const generateImagesOpenRouter: ImagesFunction<"openrouter-images", ImagesOptions> = async (
+packages/ai/src/providers/images/register-builtins.ts:31:	model: ImagesModel<"openrouter-images">,
+packages/ai/src/providers/images/register-builtins.ts:36:		const module = await loadOpenRouterImagesProviderModule();
+packages/ai/src/providers/images/register-builtins.ts:37:		return await module.generateImagesOpenRouter(model, context, options);
+packages/ai/src/providers/images/register-builtins.ts:45:		api: "openrouter-images",
+packages/ai/src/providers/images/register-builtins.ts:46:		generateImages: generateImagesOpenRouter,
+packages/ai/src/providers/openai-completions.ts:112:export const streamOpenAICompletions: StreamFunction<"openai-completions", OpenAICompletionsOptions> = (
+packages/ai/src/providers/openai-completions.ts:113:	model: Model<"openai-completions">,
+packages/ai/src/providers/openai-completions.ts:415:			// Some providers via OpenRouter give additional information in this field.
+packages/ai/src/providers/openai-completions.ts:426:export const streamSimpleOpenAICompletions: StreamFunction<"openai-completions", SimpleStreamOptions> = (
+packages/ai/src/providers/openai-completions.ts:427:	model: Model<"openai-completions">,
+packages/ai/src/providers/openai-completions.ts:441:	return streamOpenAICompletions(model, context, {
+packages/ai/src/providers/openai-completions.ts:449:	model: Model<"openai-completions">,
+packages/ai/src/providers/openai-completions.ts:504:	model: Model<"openai-completions">,
+packages/ai/src/providers/openai-completions.ts:526:		(params as any).stream_options = { include_usage: true };
+packages/ai/src/providers/openai-completions.ts:578:	} else if (compat.thinkingFormat === "openrouter" && model.reasoning) {
+packages/ai/src/providers/openai-completions.ts:579:		// OpenRouter normalizes reasoning across providers via a nested reasoning object.
+packages/ai/src/providers/openai-completions.ts:607:	// OpenRouter provider routing preferences
+packages/ai/src/providers/openai-completions.ts:608:	if (model.baseUrl.includes("openrouter.ai") && model.compat?.openRouterRouting) {
+packages/ai/src/providers/openai-completions.ts:742:	model: Model<"openai-completions">,
+packages/ai/src/providers/openai-completions.ts:1010:	model: Model<"openai-completions">,
+packages/ai/src/providers/openai-completions.ts:1016:	// Follow documented OpenAI/OpenRouter semantics: cached_tokens is cache-read
+packages/ai/src/providers/openai-completions.ts:1018:	// OpenRouter-compatible providers can include it as a separate write count.
+packages/ai/src/providers/openai-completions.ts:1019:	// OpenRouter's own provider/tests affirm the separate mapping:
+packages/ai/src/providers/openai-completions.ts:1020:	// https://github.com/OpenRouterTeam/ai-sdk-provider/pull/409
+packages/ai/src/providers/openai-completions.ts:1070:function detectCompat(model: Model<"openai-completions">): ResolvedOpenAICompletionsCompat {
+packages/ai/src/providers/openai-completions.ts:1100:	const cacheControlFormat = provider === "openrouter" && model.id.startsWith("anthropic/") ? "anthropic" : undefined;
+packages/ai/src/providers/openai-completions.ts:1118:					: provider === "openrouter" || baseUrl.includes("openrouter.ai")
+packages/ai/src/providers/openai-completions.ts:1119:						? "openrouter"
+packages/ai/src/providers/openai-completions.ts:1135:function getCompat(model: Model<"openai-completions">): ResolvedOpenAICompletionsCompat {
+packages/ai/src/providers/images/openrouter.ts:22:interface OpenRouterGeneratedImage {
+packages/ai/src/providers/images/openrouter.ts:26:type OpenRouterImageGenerationMessage = ChatCompletion["choices"][number]["message"] & {
+packages/ai/src/providers/images/openrouter.ts:27:	images?: OpenRouterGeneratedImage[];
+packages/ai/src/providers/images/openrouter.ts:30:type OpenRouterImageGenerationChoice = ChatCompletion["choices"][number] & {
+packages/ai/src/providers/images/openrouter.ts:31:	message: OpenRouterImageGenerationMessage;
+packages/ai/src/providers/images/openrouter.ts:34:type OpenRouterImageGenerationResponse = ChatCompletion & {
+packages/ai/src/providers/images/openrouter.ts:35:	choices: OpenRouterImageGenerationChoice[];
+packages/ai/src/providers/images/openrouter.ts:38:export const generateImagesOpenRouter: ImagesFunction<"openrouter-images", ImagesOptions> = async (
+packages/ai/src/providers/images/openrouter.ts:39:	model: ImagesModel<"openrouter-images">,
+packages/ai/src/providers/images/openrouter.ts:73:		const imageResponse = response as OpenRouterImageGenerationResponse;
+packages/ai/src/providers/images/openrouter.ts:108:	model: ImagesModel<"openrouter-images">,
+packages/ai/src/providers/images/openrouter.ts:123:type OpenRouterImagesCreateParams = Omit<ChatCompletionCreateParamsNonStreaming, "modalities"> & {
+packages/ai/src/providers/images/openrouter.ts:127:function buildParams(model: ImagesModel<"openrouter-images">, context: ImagesContext): OpenRouterImagesCreateParams {
+packages/ai/src/providers/images/openrouter.ts:162:	model: ImagesModel<"openrouter-images">,
+packages/ai/src/providers/openai-responses.ts:293:			return model.id === "gpt-5.5" ? 2.5 : 2;
+packages/ai/src/providers/openai-codex-responses.ts:423:			return model.id === "gpt-5.5" ? 2.5 : 2;
+packages/coding-agent/src/core/provider-display-names.ts:23:	openrouter: "OpenRouter",
+packages/coding-agent/src/core/model-resolver.ts:19:	"openai-codex": "gpt-5.5",
+packages/coding-agent/src/core/model-resolver.ts:24:	openrouter: "moonshotai/kimi-k2.6",
+packages/coding-agent/src/core/model-resolver.ts:178: * Handles models with colons in their IDs (e.g., OpenRouter's :exacto suffix).
+packages/coding-agent/src/core/model-resolver.ts:251: * Supports models with colons in their IDs (e.g., OpenRouter's model:exacto).
+packages/coding-agent/src/core/model-resolver.ts:396:	// This handles models whose IDs naturally contain slashes (e.g. OpenRouter-style IDs).
+packages/coding-agent/src/core/model-resolver.ts:426:	// This handles OpenRouter-style IDs like "openai/gpt-4o:extended" where "openai"
+packages/coding-agent/src/core/model-resolver.ts:427:	// looks like a provider but the full string is actually a model id on openrouter.
+
+[Showing lines 1477-1967 of 1967 (50.0KB limit). Full output: /var/folders/7m/csfvhz791k527kby7nxl7cbc0000h_/T/pi-bash-d52bbaeb88b5b3cf.log]

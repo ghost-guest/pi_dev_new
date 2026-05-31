@@ -4,6 +4,7 @@
 
 ### Fixed
 
+- Fixed the Anthropic default model to use Claude Opus 4.8 when available.
 - Fixed managed npm extension updates to avoid package managers installing or resolving pi host packages as peer dependencies ([#4907](https://github.com/earendil-works/pi/issues/4907)).
 
 ## [0.75.5] - 2026-05-23

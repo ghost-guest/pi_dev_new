@@ -1,0 +1,206 @@
+/Users/mac_522/.pi/agent/npm/node_modules/@earendil-works/pi-tui/dist/components/editor.d.ts:108:     * Used for programmatic insertion (e.g., clipboard image markers).
+/Users/mac_522/.pi/agent/npm/node_modules/@earendil-works/pi-tui/dist/components/editor.d.ts:108:     * Used for programmatic insertion (e.g., clipboard image markers).
+/Users/mac_522/.pi/agent/npm/node_modules/@earendil-works/pi-tui/dist/components/editor.js:806:     * Used for programmatic insertion (e.g., clipboard image markers).
+/Users/mac_522/.pi/agent/npm/node_modules/@earendil-works/pi-tui/dist/components/editor.js:806:     * Used for programmatic insertion (e.g., clipboard image markers).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:189:| `/copy` | Copy last assistant message to clipboard |
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/index.d.ts:26:export { copyToClipboard } from "./utils/clipboard.ts";
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/keybindings.md:90:| `app.clipboard.pasteImage` | `ctrl+v` (`alt+v` on Windows) | Paste image from clipboard |
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/termux.md:8:2. Install [Termux:API](https://github.com/termux/termux-api#installation) from GitHub or F-Droid for clipboard and other device integrations
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/termux.md:31:Clipboard operations use `termux-clipboard-set` and `termux-clipboard-get` when running in Termux. The Termux:API app must be installed for these to work.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/termux.md:33:Image clipboard is not supported on Termux (the `ctrl+v` image paste feature will not work).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/termux.md:61:termux-clipboard-set "text"   # Copy
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/termux.md:62:termux-clipboard-get          # Paste
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/termux.md:98:- **No image clipboard**: Termux clipboard API only supports text
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/termux.md:99:- **No native binaries**: Some optional native dependencies (like the clipboard module) are unavailable on Android ARM64 and are skipped during installation
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/usage.md:50:| `/copy` | Copy last assistant message to clipboard |
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/modes/interactive/interactive-mode.js:28:import { copyToClipboard } from "../../utils/clipboard.js";
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/modes/interactive/interactive-mode.js:29:import { extensionForImageMimeType, readClipboardImage } from "../../utils/clipboard-image.js";
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/modes/interactive/interactive-mode.js:454:                hint("app.clipboard.pasteImage", "to paste image"),
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/modes/interactive/interactive-mode.js:1963:        // Handle clipboard image paste (triggered on Ctrl+V)
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/modes/interactive/interactive-mode.js:1977:            const fileName = `pi-clipboard-${crypto.randomUUID()}.${ext}`;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/modes/interactive/interactive-mode.js:1985:            // Silently ignore clipboard errors (may not have permission, etc.)
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/modes/interactive/interactive-mode.js:4345:            this.showStatus("Copied last agent message to clipboard");
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/modes/interactive/interactive-mode.js:4471:        const pasteImage = this.getAppKeyDisplay("app.clipboard.pasteImage");
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/modes/interactive/interactive-mode.js:4513:| \`${pasteImage}\` | Paste image from clipboard |
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:23:- Fixed Bun release archive creation to install and copy the matching `@mariozechner/clipboard` base package and native sidecars ([#5184](https://github.com/earendil-works/pi-mono/issues/5184)).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:55:- Fixed Windows startup crashes under MSYS2 ucrt64 Node.js by updating the native clipboard addon to napi-rs 3.x ([#5028](https://github.com/earendil-works/pi/issues/5028)).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:139:- Fixed macOS Bun release binaries to resolve the native clipboard sidecar so Ctrl+V image paste can load `@mariozechner/clipboard` ([#4307](https://github.com/earendil-works/pi/issues/4307)).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:250:- Fixed macOS clipboard access errors under sandboxed pasteboard denial so they do not abort the process ([#4492](https://github.com/earendil-works/pi/issues/4492)).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:300:- Fixed `/copy` reporting success on Linux without writing the clipboard on Wayland-only compositors (Hyprland, Niri, ...) by skipping the X11-only native addon on Linux and routing through `wl-copy`/`xclip`/`xsel` instead ([#4177](https://github.com/badlogic/pi-mono/issues/4177)).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:403:- Fixed WSL clipboard image paste by passing the PowerShell save path directly instead of through a custom environment variable ([#2469](https://github.com/badlogic/pi-mono/issues/2469)).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:414:- Updated `@mariozechner/clipboard` to an attested release so package managers with trust policies do not reject installs ([#3946](https://github.com/badlogic/pi-mono/issues/3946)).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:524:- Fixed `/copy` to avoid unbounded OSC 52 writes and clipboard races that could break terminal rendering or panic the native clipboard addon ([#3639](https://github.com/badlogic/pi-mono/issues/3639))
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:1250:- Fixed desktop clipboard text copy to prefer native OS clipboard integration before shell fallbacks, improving reliability on macOS and Windows ([#2347](https://github.com/badlogic/pi-mono/issues/2347))
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:1342:- Fixed WSL clipboard image fallback to properly handle missing clipboard utilities and permission errors ([#1722](https://github.com/badlogic/pi-mono/issues/1722))
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:1348:- Fixed headless clipboard fallback logging spurious errors in non-interactive environments ([#2056](https://github.com/badlogic/pi-mono/issues/2056))
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:2014:- **Linux ARM64 musl support**: Pi now runs on Alpine Linux ARM64 (linux-arm64-musl) via updated clipboard dependency.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:2022:- Added Linux ARM64 musl (Alpine Linux) support via clipboard dependency update
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:2023:- Added Android/Termux support with graceful clipboard fallback ([#1164](https://github.com/badlogic/pi-mono/issues/1164))
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:2068:- Fixed clipboard image paste on WSL2/WSLg writing invalid PNG files when clipboard provides `image/bmp` format. BMP images are now converted to PNG before saving. ([#1112](https://github.com/badlogic/pi-mono/pull/1112) by [@lightningRalf](https://github.com/lightningRalf))
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:2094:- **OSC 52 clipboard support for SSH/mosh** - The `/copy` command now works over remote connections using the OSC 52 terminal escape sequence. No more clipboard frustration when using pi over SSH. ([#1069](https://github.com/badlogic/pi-mono/issues/1069) by [@gturkoglu](https://github.com/gturkoglu))
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:2106:- Added OSC 52 clipboard support for SSH/mosh sessions. `/copy` now works over remote connections. ([#1069](https://github.com/badlogic/pi-mono/issues/1069) by [@gturkoglu](https://github.com/gturkoglu))
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:2686:- Wayland clipboard support for `/copy` command using wl-copy with xclip/xsel fallback ([#570](https://github.com/badlogic/pi-mono/pull/570) by [@OgulcanCelik](https://github.com/OgulcanCelik))
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:2789:- Interactive mode: Ctrl+V clipboard image paste now works on Wayland sessions by using `wl-paste` with `xclip` fallback ([#488](https://github.com/badlogic/pi-mono/pull/488) by [@ghoulr](https://github.com/ghoulr))
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/CHANGELOG.md:4189:- **`/copy` Command**: Copy the last agent message to clipboard. Works cross-platform (macOS, Windows, Linux). Useful for extracting text from rendered Markdown output. ([#105](https://github.com/badlogic/pi-mono/pull/105) by [@markusylisiurunen](https://github.com/markusylisiurunen))
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard-image.d.ts:11://# sourceMappingURL=clipboard-image.d.ts.map
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard-image.js:6:import { clipboard } from "./clipboard-native.js";
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard-image.js:125: * On WSL, the Linux clipboard (Wayland/X11) does not receive image data from
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard-image.js:126: * Windows screenshots (Win+Shift+S). PowerShell can access the Windows clipboard
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard-image.js:177:    const targets = runCommand("xclip", ["-selection", "clipboard", "-t", "TARGETS", "-o"], {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard-image.js:191:        const data = runCommand("xclip", ["-selection", "clipboard", "-t", mimeType, "-o"]);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard-image.js:199:    if (!clipboard || !clipboard.hasImage()) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard-image.js:202:    const imageData = await clipboard.getImageBinary();
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard-image.js:245://# sourceMappingURL=clipboard-image.js.map
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/index.js:38:export { copyToClipboard } from "./utils/clipboard.js";
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard-native.d.ts:8:declare const clipboard: ClipboardModule | null;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard-native.d.ts:9:export { clipboard };
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard-native.d.ts:10://# sourceMappingURL=clipboard-native.d.ts.map
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard-native.js:10:            return requireClipboard("@mariozechner/clipboard");
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard-native.js:18:const clipboard = !process.env.TERMUX_VERSION && hasDisplay ? loadClipboardNative() : null;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard-native.js:19:export { clipboard };
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard-native.js:20://# sourceMappingURL=clipboard-native.js.map
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard.js:3:import { isWaylandSession } from "./clipboard-image.js";
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard.js:4:import { clipboard } from "./clipboard-native.js";
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard.js:7:        execSync("xclip -selection clipboard", options);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard.js:10:        execSync("xsel --clipboard --input", options);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard.js:28:    // Prefer direct clipboard writes. Emitting OSC 52 first can make terminals
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard.js:29:    // write the same native clipboard concurrently with the addon, and very large
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard.js:32:    // On Linux, skip the native addon. The underlying `clipboard-rs` crate is
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard.js:36:    // clipboard. The platform tools below (wl-copy, xclip, xsel) properly
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard.js:39:        if (clipboard && p !== "linux") {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard.js:40:            await clipboard.setText(text);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard.js:45:        // Fall through to platform-specific clipboard tools.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard.js:63:                // Linux. Try Termux, Wayland, or X11 clipboard tools.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard.js:66:                        execSync("termux-clipboard-set", options);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard.js:114:        throw new Error("Failed to copy to clipboard");
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard.js:117://# sourceMappingURL=clipboard.js.map
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/utils/clipboard.d.ts:2://# sourceMappingURL=clipboard.d.ts.map
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/core/slash-commands.js:9:    { name: "copy", description: "Copy last agent message to clipboard" },
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/modes/interactive/components/custom-editor.js:30:        if (this.keybindings.matches(data, "app.clipboard.pasteImage")) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/core/export-html/template.js:1109:       * Copy text to clipboard with visual feedback.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/core/export-html/template.js:1110:       * Uses navigator.clipboard with fallback to execCommand for HTTP contexts.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/core/export-html/template.js:1115:          if (navigator.clipboard && navigator.clipboard.writeText) {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/core/export-html/template.js:1116:            await navigator.clipboard.writeText(text);
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/core/keybindings.d.ts:17:    "app.clipboard.pasteImage": true;
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/core/keybindings.d.ts:231:    readonly "app.clipboard.pasteImage": {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/core/keybindings.d.ts:233:        readonly description: "Paste image from clipboard";
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/core/keybindings.js:48:    "app.clipboard.pasteImage": {
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/core/keybindings.js:50:        description: "Paste image from clipboard",
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/dist/core/keybindings.js:191:    pasteImage: "app.clipboard.pasteImage",
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/highlight.js/lib/languages/gml.js:37:      'string_hash_to_newline clipboard_has_text clipboard_set_text ' +
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/highlight.js/lib/languages/gml.js:38:      'clipboard_get_text date_current_datetime date_create_datetime ' +
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/highlight.js/lib/languages/applescript.js:97:    /clipboard info/,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/highlight.js/lib/languages/applescript.js:98:    /the clipboard/,
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@earendil-works/pi-tui/dist/components/editor.d.ts:108:     * Used for programmatic insertion (e.g., clipboard image markers).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@earendil-works/pi-tui/dist/components/editor.js:808:     * Used for programmatic insertion (e.g., clipboard image markers).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/README.md:1:# @mariozechner/clipboard
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/README.md:3:> **Fork of [@crosscopy/clipboard](https://github.com/CrossCopy/clipboard)**
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/README.md:5:> This fork updates to the latest `clipboard-rs` (0.3.1) and adds musl (Alpine Linux) support.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/README.md:8:![NPM Version](https://img.shields.io/npm/v/@mariozechner/clipboard)
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/README.md:9:[![CI](https://github.com/badlogic/clipboard/actions/workflows/CI.yml/badge.svg)](https://github.com/badlogic/clipboard/actions/workflows/CI.yml)
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/README.md:11:**NPM Package**: https://www.npmjs.com/package/@mariozechner/clipboard
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/README.md:13:**GitHub**: https://github.com/badlogic/clipboard
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/README.md:15:> This is a clipboard API npm package that allows you to copy and paste data to and from the clipboard.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/README.md:16:> There doesn't seem to be a good clipboard package for node.js (that supports data format beyond text), so I decided to make one.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/README.md:27:- [ChurchTao/clipboard-rs](https://github.com/ChurchTao/clipboard-rs) is written in rust, which is used to provide the native clipboard support for this package across Linux, Windows and MacOS. This package is basically a wrapper around this rust package.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/README.md:28:  - https://crates.io/crates/clipboard-rs
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/README.md:40:import Clipboard from "@mariozechner/clipboard";
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/README.md:60:The GitHub Actions `NPM_TOKEN` repository secret is a granular npm token with publish access to `@mariozechner/clipboard` and all `@mariozechner/clipboard-*` platform packages. npm granular access tokens expire after 90 days, so this secret must be rotated before expiry.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:73:        return require('./clipboard.android-arm64.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:78:        const binding = require('@mariozechner/clipboard-android-arm64')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:79:        const bindingPackageVersion = require('@mariozechner/clipboard-android-arm64/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:89:        return require('./clipboard.android-arm-eabi.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:94:        const binding = require('@mariozechner/clipboard-android-arm-eabi')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:95:        const bindingPackageVersion = require('@mariozechner/clipboard-android-arm-eabi/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:110:        return require('./clipboard.win32-x64-gnu.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:115:        const binding = require('@mariozechner/clipboard-win32-x64-gnu')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:116:        const bindingPackageVersion = require('@mariozechner/clipboard-win32-x64-gnu/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:126:        return require('./clipboard.win32-x64-msvc.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:131:        const binding = require('@mariozechner/clipboard-win32-x64-msvc')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:132:        const bindingPackageVersion = require('@mariozechner/clipboard-win32-x64-msvc/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:143:        return require('./clipboard.win32-ia32-msvc.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:148:        const binding = require('@mariozechner/clipboard-win32-ia32-msvc')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:149:        const bindingPackageVersion = require('@mariozechner/clipboard-win32-ia32-msvc/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:159:        return require('./clipboard.win32-arm64-msvc.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:164:        const binding = require('@mariozechner/clipboard-win32-arm64-msvc')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:165:        const bindingPackageVersion = require('@mariozechner/clipboard-win32-arm64-msvc/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:178:      return require('./clipboard.darwin-universal.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:183:      const binding = require('@mariozechner/clipboard-darwin-universal')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:184:      const bindingPackageVersion = require('@mariozechner/clipboard-darwin-universal/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:194:        return require('./clipboard.darwin-x64.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:199:        const binding = require('@mariozechner/clipboard-darwin-x64')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:200:        const bindingPackageVersion = require('@mariozechner/clipboard-darwin-x64/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:210:        return require('./clipboard.darwin-arm64.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:215:        const binding = require('@mariozechner/clipboard-darwin-arm64')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:216:        const bindingPackageVersion = require('@mariozechner/clipboard-darwin-arm64/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:230:        return require('./clipboard.freebsd-x64.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:235:        const binding = require('@mariozechner/clipboard-freebsd-x64')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:236:        const bindingPackageVersion = require('@mariozechner/clipboard-freebsd-x64/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:246:        return require('./clipboard.freebsd-arm64.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:251:        const binding = require('@mariozechner/clipboard-freebsd-arm64')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:252:        const bindingPackageVersion = require('@mariozechner/clipboard-freebsd-arm64/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:267:          return require('./clipboard.linux-x64-musl.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:272:          const binding = require('@mariozechner/clipboard-linux-x64-musl')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:273:          const bindingPackageVersion = require('@mariozechner/clipboard-linux-x64-musl/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:283:          return require('./clipboard.linux-x64-gnu.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:288:          const binding = require('@mariozechner/clipboard-linux-x64-gnu')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:289:          const bindingPackageVersion = require('@mariozechner/clipboard-linux-x64-gnu/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:301:          return require('./clipboard.linux-arm64-musl.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:306:          const binding = require('@mariozechner/clipboard-linux-arm64-musl')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:307:          const bindingPackageVersion = require('@mariozechner/clipboard-linux-arm64-musl/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:317:          return require('./clipboard.linux-arm64-gnu.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:322:          const binding = require('@mariozechner/clipboard-linux-arm64-gnu')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:323:          const bindingPackageVersion = require('@mariozechner/clipboard-linux-arm64-gnu/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:335:          return require('./clipboard.linux-arm-musleabihf.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:340:          const binding = require('@mariozechner/clipboard-linux-arm-musleabihf')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:341:          const bindingPackageVersion = require('@mariozechner/clipboard-linux-arm-musleabihf/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:351:          return require('./clipboard.linux-arm-gnueabihf.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:356:          const binding = require('@mariozechner/clipboard-linux-arm-gnueabihf')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:357:          const bindingPackageVersion = require('@mariozechner/clipboard-linux-arm-gnueabihf/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:369:          return require('./clipboard.linux-loong64-musl.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:374:          const binding = require('@mariozechner/clipboard-linux-loong64-musl')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:375:          const bindingPackageVersion = require('@mariozechner/clipboard-linux-loong64-musl/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:385:          return require('./clipboard.linux-loong64-gnu.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:390:          const binding = require('@mariozechner/clipboard-linux-loong64-gnu')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:391:          const bindingPackageVersion = require('@mariozechner/clipboard-linux-loong64-gnu/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:403:          return require('./clipboard.linux-riscv64-musl.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:408:          const binding = require('@mariozechner/clipboard-linux-riscv64-musl')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:409:          const bindingPackageVersion = require('@mariozechner/clipboard-linux-riscv64-musl/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:419:          return require('./clipboard.linux-riscv64-gnu.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:424:          const binding = require('@mariozechner/clipboard-linux-riscv64-gnu')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:425:          const bindingPackageVersion = require('@mariozechner/clipboard-linux-riscv64-gnu/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:436:        return require('./clipboard.linux-ppc64-gnu.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:441:        const binding = require('@mariozechner/clipboard-linux-ppc64-gnu')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:442:        const bindingPackageVersion = require('@mariozechner/clipboard-linux-ppc64-gnu/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:452:        return require('./clipboard.linux-s390x-gnu.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:457:        const binding = require('@mariozechner/clipboard-linux-s390x-gnu')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:458:        const bindingPackageVersion = require('@mariozechner/clipboard-linux-s390x-gnu/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:472:        return require('./clipboard.openharmony-arm64.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:477:        const binding = require('@mariozechner/clipboard-openharmony-arm64')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:478:        const bindingPackageVersion = require('@mariozechner/clipboard-openharmony-arm64/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:488:        return require('./clipboard.openharmony-x64.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:493:        const binding = require('@mariozechner/clipboard-openharmony-x64')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:494:        const bindingPackageVersion = require('@mariozechner/clipboard-openharmony-x64/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:504:        return require('./clipboard.openharmony-arm.node')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:509:        const binding = require('@mariozechner/clipboard-openharmony-arm')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:510:        const bindingPackageVersion = require('@mariozechner/clipboard-openharmony-arm/package.json').version
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:542:    wasiBinding = require('./clipboard.wasi.cjs')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard/index.js:551:      wasiBinding = require('@mariozechner/clipboard-wasm32-wasi')
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard-linux-arm64-gnu/README.md:1:# `@mariozechner/clipboard-linux-arm64-gnu`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard-linux-arm64-gnu/README.md:3:This is the **aarch64-unknown-linux-gnu** binary for `@mariozechner/clipboard`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard-win32-arm64-msvc/README.md:1:# `@mariozechner/clipboard-win32-arm64-msvc`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard-win32-arm64-msvc/README.md:3:This is the **aarch64-pc-windows-msvc** binary for `@mariozechner/clipboard`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard-darwin-arm64/README.md:1:# `@mariozechner/clipboard-darwin-arm64`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard-darwin-arm64/README.md:3:This is the **aarch64-apple-darwin** binary for `@mariozechner/clipboard`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard-darwin-x64/README.md:1:# `@mariozechner/clipboard-darwin-x64`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard-darwin-x64/README.md:3:This is the **x86_64-apple-darwin** binary for `@mariozechner/clipboard`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard-linux-riscv64-gnu/README.md:1:# `@mariozechner/clipboard-linux-riscv64-gnu`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard-linux-riscv64-gnu/README.md:3:This is the **riscv64gc-unknown-linux-gnu** binary for `@mariozechner/clipboard`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard-linux-x64-gnu/README.md:1:# `@mariozechner/clipboard-linux-x64-gnu`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard-linux-x64-gnu/README.md:3:This is the **x86_64-unknown-linux-gnu** binary for `@mariozechner/clipboard`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard-darwin-universal/README.md:1:# `@mariozechner/clipboard-darwin-universal`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard-darwin-universal/README.md:3:This is the **universal-apple-darwin** binary for `@mariozechner/clipboard`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard-win32-x64-msvc/README.md:1:# `@mariozechner/clipboard-win32-x64-msvc`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard-win32-x64-msvc/README.md:3:This is the **x86_64-pc-windows-msvc** binary for `@mariozechner/clipboard`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard-linux-x64-musl/README.md:1:# `@mariozechner/clipboard-linux-x64-musl`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/node_modules/@mariozechner/clipboard-linux-x64-musl/README.md:3:This is the **x86_64-unknown-linux-musl** binary for `@mariozechner/clipboard`

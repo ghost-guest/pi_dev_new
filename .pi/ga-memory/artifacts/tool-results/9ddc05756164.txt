@@ -1,0 +1,902 @@
+  const response = await fetch("https://example.com/api", {
+    method: "POST",
+    body: JSON.stringify(event),
+    signal: ctx.signal,
+  });
+
+  const data = await response.json();
+  return { details: data };
+});
+```
+
+### ctx.isIdle() / ctx.abort() / ctx.hasPendingMessages()
+
+Control flow helpers.
+
+### ctx.shutdown()
+
+Request a graceful shutdown of pi.
+
+- **Interactive mode:** Deferred until the agent becomes idle (after processing all queued steering and follow-up messages).
+- **RPC mode:** Deferred until the next idle state (after completing the current command response, when waiting for the next command).
+- **Print mode:** No-op. The process exits automatically when all prompts are processed.
+
+Emits `session_shutdown` event to all extensions before exiting. Available in all contexts (event handlers, tools, commands, shortcuts).
+
+```typescript
+pi.on("tool_call", (event, ctx) => {
+  if (isFatal(event.input)) {
+    ctx.shutdown();
+  }
+});
+```
+
+### ctx.getContextUsage()
+
+Returns current context usage for the active model. Uses last assistant usage when available, then estimates tokens for trailing messages.
+
+```typescript
+const usage = ctx.getContextUsage();
+if (usage && usage.tokens > 100_000) {
+  // ...
+}
+```
+
+### ctx.compact()
+
+Trigger compaction without awaiting completion. Use `onComplete` and `onError` for follow-up actions.
+
+```typescript
+ctx.compact({
+  customInstructions: "Focus on recent changes",
+  onComplete: (result) => {
+    ctx.ui.notify("Compaction completed", "info");
+  },
+  onError: (error) => {
+    ctx.ui.notify(`Compaction failed: ${error.message}`, "error");
+  },
+});
+```
+
+### ctx.getSystemPrompt()
+
+Returns Pi's current system prompt string.
+
+- During `before_agent_start`, this reflects chained system-prompt changes made so far for the current turn.
+- It does not include later `context` message mutations.
+- It does not include `before_provider_request` payload rewrites.
+- If later-loaded extensions run after yours, they can still change what is ultimately sent.
+
+```typescript
+pi.on("before_agent_start", (event, ctx) => {
+  const prompt = ctx.getSystemPrompt();
+  console.log(`System prompt length: ${prompt.length}`);
+});
+```
+
+## ExtensionCommandContext
+
+Command handlers receive `ExtensionCommandContext`, which extends `ExtensionContext` with session control methods. These are only available in commands because they can deadlock if called from event handlers.
+
+### ctx.waitForIdle()
+
+Wait for the agent to finish streaming:
+
+```typescript
+pi.registerCommand("my-cmd", {
+  handler: async (args, ctx) => {
+    await ctx.waitForIdle();
+    // Agent is now idle, safe to modify session
+  },
+});
+```
+
+### ctx.newSession(options?)
+
+Create a new session:
+
+```typescript
+const parentSession = ctx.sessionManager.getSessionFile();
+const kickoff = "Continue in the replacement session";
+
+const result = await ctx.newSession({
+  parentSession,
+  setup: async (sm) => {
+    sm.appendMessage({
+      role: "user",
+      content: [{ type: "text", text: "Context from previous session..." }],
+      timestamp: Date.now(),
+    });
+  },
+  withSession: async (ctx) => {
+    // Use only the replacement-session ctx here.
+    await ctx.sendUserMessage(kickoff);
+  },
+});
+
+if (result.cancelled) {
+  // An extension cancelled the new session
+}
+```
+
+Options:
+- `parentSession`: parent session file to record in the new session header
+- `setup`: mutate the new session's `SessionManager` before `withSession` runs
+- `withSession`: run post-switch work against a fresh replacement-session context. Do not use captured old `pi` / command `ctx`; see [Session replacement lifecycle and footguns](#session-replacement-lifecycle-and-footguns).
+
+### ctx.fork(entryId, options?)
+
+Fork from a specific entry, creating a new session file:
+
+```typescript
+const result = await ctx.fork("entry-id-123", {
+  withSession: async (ctx) => {
+    // Use only the replacement-session ctx here.
+    ctx.ui.notify("Now in the forked session", "info");
+  },
+});
+if (result.cancelled) {
+  // An extension cancelled the fork
+}
+
+const cloneResult = await ctx.fork("entry-id-456", { position: "at" });
+if (cloneResult.cancelled) {
+  // An extension cancelled the clone
+}
+```
+
+Options:
+- `position`: `"before"` (default) forks before the selected user message, restoring that prompt into the editor
+- `position`: `"at"` duplicates the active path through the selected entry without restoring editor text
+- `withSession`: run post-switch work against a fresh replacement-session context. Do not use captured old `pi` / command `ctx`; see [Session replacement lifecycle and footguns](#session-replacement-lifecycle-and-footguns).
+
+### ctx.navigateTree(targetId, options?)
+
+Navigate to a different point in the session tree:
+
+```typescript
+const result = await ctx.navigateTree("entry-id-456", {
+  summarize: true,
+  customInstructions: "Focus on error handling changes",
+  replaceInstructions: false, // true = replace default prompt entirely
+  label: "review-checkpoint",
+});
+```
+
+Options:
+- `summarize`: Whether to generate a summary of the abandoned branch
+- `customInstructions`: Custom instructions for the summarizer
+- `replaceInstructions`: If true, `customInstructions` replaces the default prompt instead of being appended
+- `label`: Label to attach to the branch summary entry (or target entry if not summarizing)
+
+### ctx.switchSession(sessionPath, options?)
+
+Switch to a different session file:
+
+```typescript
+const result = await ctx.switchSession("/path/to/session.jsonl", {
+  withSession: async (ctx) => {
+    await ctx.sendUserMessage("Resume work in the replacement session");
+  },
+});
+if (result.cancelled) {
+  // An extension cancelled the switch via session_before_switch
+}
+```
+
+Options:
+- `withSession`: run post-switch work against a fresh replacement-session context. Do not use captured old `pi` / command `ctx`; see [Session replacement lifecycle and footguns](#session-replacement-lifecycle-and-footguns).
+
+To discover available sessions, use the static `SessionManager.list()` or `SessionManager.listAll()` methods:
+
+```typescript
+import { SessionManager } from "@earendil-works/pi-coding-agent";
+
+pi.registerCommand("switch", {
+  description: "Switch to another session",
+  handler: async (args, ctx) => {
+    const sessions = await SessionManager.list(ctx.cwd);
+    if (sessions.length === 0) return;
+    const choice = await ctx.ui.select(
+      "Pick session:",
+      sessions.map(s => s.file),
+    );
+    if (choice) {
+      await ctx.switchSession(choice, {
+        withSession: async (ctx) => {
+          ctx.ui.notify("Switched session", "info");
+        },
+      });
+    }
+  },
+});
+```
+
+### Session replacement lifecycle and footguns
+
+`withSession` receives a fresh `ReplacedSessionContext`, which extends `ExtensionCommandContext` with async `sendMessage()` and `sendUserMessage()` helpers bound to the replacement session.
+
+Lifecycle and footguns:
+- `withSession` runs only after the old session has emitted `session_shutdown`, the old runtime has been torn down, the replacement session has been rebound, and the new extension instance has already received `session_start`.
+- The callback still executes in the original closure, not inside the new extension instance. That means your old extension instance may already have run its shutdown cleanup before `withSession` starts.
+- Captured old `pi` / old command `ctx` session-bound objects are stale after replacement and will throw if used. Use only the `ctx` passed to `withSession` for session-bound work.
+- Previously extracted raw objects are still your responsibility. For example, if you capture `const sm = ctx.sessionManager` before replacement, `sm` is still the old `SessionManager` object. Do not reuse it after replacement.
+- Code in `withSession` should assume any state invalidated by your `session_shutdown` handler is already gone. Only capture plain data that survives shutdown cleanly, such as strings, ids, and serialized config.
+
+Safe pattern:
+
+```typescript
+pi.registerCommand("handoff", {
+  handler: async (_args, ctx) => {
+    const kickoff = "Continue from the replacement session";
+    await ctx.newSession({
+      withSession: async (ctx) => {
+        await ctx.sendUserMessage(kickoff);
+      },
+    });
+  },
+});
+```
+
+Unsafe pattern:
+
+```typescript
+pi.registerCommand("handoff", {
+  handler: async (_args, ctx) => {
+    const oldSessionManager = ctx.sessionManager;
+    await ctx.newSession({
+      withSession: async (_ctx) => {
+        // stale old objects: do not do this
+        oldSessionManager.getSessionFile();
+        pi.sendUserMessage("wrong");
+      },
+    });
+  },
+});
+```
+
+### ctx.reload()
+
+Run the same reload flow as `/reload`.
+
+```typescript
+pi.registerCommand("reload-runtime", {
+  description: "Reload extensions, skills, prompts, and themes",
+  handler: async (_args, ctx) => {
+    await ctx.reload();
+    return;
+  },
+});
+```
+
+Important behavior:
+- `await ctx.reload()` emits `session_shutdown` for the current extension runtime
+- It then reloads resources and emits `session_start` with `reason: "reload"` and `resources_discover` with reason `"reload"`
+- The currently running command handler still continues in the old call frame
+- Code after `await ctx.reload()` still runs from the pre-reload version
+- Code after `await ctx.reload()` must not assume old in-memory extension state is still valid
+- After the handler returns, future commands/events/tool calls use the new extension version
+
+For predictable behavior, treat reload as terminal for that handler (`await ctx.reload(); return;`).
+
+Tools run with `ExtensionContext`, so they cannot call `ctx.reload()` directly. Use a command as the reload entrypoint, then expose a tool that queues that command as a follow-up user message.
+
+Example tool the LLM can call to trigger reload:
+
+```typescript
+import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import { Type } from "typebox";
+
+export default function (pi: ExtensionAPI) {
+  pi.registerCommand("reload-runtime", {
+    description: "Reload extensions, skills, prompts, and themes",
+    handler: async (_args, ctx) => {
+      await ctx.reload();
+      return;
+    },
+  });
+
+  pi.registerTool({
+    name: "reload_runtime",
+    label: "Reload Runtime",
+    description: "Reload extensions, skills, prompts, and themes",
+    parameters: Type.Object({}),
+    async execute() {
+      pi.sendUserMessage("/reload-runtime", { deliverAs: "followUp" });
+      return {
+        content: [{ type: "text", text: "Queued /reload-runtime as a follow-up command." }],
+      };
+    },
+  });
+}
+```
+
+## ExtensionAPI Methods
+
+### pi.on(event, handler)
+
+Subscribe to events. See [Events](#events) for event types and return values.
+
+### pi.registerTool(definition)
+
+Register a custom tool callable by the LLM. See [Custom Tools](#custom-tools) for full details.
+
+`pi.registerTool()` works both during extension load and after startup. You can call it inside `session_start`, command handlers, or other event handlers. New tools are refreshed immediately in the same session, so they appear in `pi.getAllTools()` and are callable by the LLM without `/reload`.
+
+Use `pi.setActiveTools()` to enable or disable tools (including dynamically added tools) at runtime.
+
+Use `promptSnippet` to opt a custom tool into a one-line entry in `Available tools`, and `promptGuidelines` to append tool-specific bullets to the default `Guidelines` section when the tool is active.
+
+**Important:** `promptGuidelines` bullets are appended flat to the `Guidelines` section with no tool name prefix. Each guideline must name the tool it refers to — avoid "Use this tool when..." because the LLM cannot tell which tool "this" means. Write "Use my_tool when..." instead.
+
+See [dynamic-tools.ts](../examples/extensions/dynamic-tools.ts) for a full example.
+
+```typescript
+import { Type } from "typebox";
+import { StringEnum } from "@earendil-works/pi-ai";
+
+pi.registerTool({
+  name: "my_tool",
+  label: "My Tool",
+  description: "What this tool does",
+  promptSnippet: "Summarize or transform text according to action",
+  promptGuidelines: ["Use my_tool when the user asks to summarize previously generated text."],
+  parameters: Type.Object({
+    action: StringEnum(["list", "add"] as const),
+    text: Type.Optional(Type.String()),
+  }),
+  prepareArguments(args) {
+    // Optional compatibility shim. Runs before schema validation.
+    // Return the current schema shape, for example to fold legacy fields
+    // into the modern parameter object.
+    return args;
+  },
+
+  async execute(toolCallId, params, signal, onUpdate, ctx) {
+    // Stream progress
+    onUpdate?.({ content: [{ type: "text", text: "Working..." }] });
+
+    return {
+      content: [{ type: "text", text: "Done" }],
+      details: { result: "..." },
+    };
+  },
+
+  // Optional: Custom rendering
+  renderCall(args, theme, context) { ... },
+  renderResult(result, options, theme, context) { ... },
+});
+```
+
+### pi.sendMessage(message, options?)
+
+Inject a custom message into the session.
+
+```typescript
+pi.sendMessage({
+  customType: "my-extension",
+  content: "Message text",
+  display: true,
+  details: { ... },
+}, {
+  triggerTurn: true,
+  deliverAs: "steer",
+});
+```
+
+**Options:**
+- `deliverAs` - Delivery mode:
+  - `"steer"` (default) - Queues the message while streaming. Delivered after the current assistant turn finishes executing its tool calls, before the next LLM call.
+  - `"followUp"` - Waits for agent to finish. Delivered only when agent has no more tool calls.
+  - `"nextTurn"` - Queued for next user prompt. Does not interrupt or trigger anything.
+- `triggerTurn: true` - If agent is idle, trigger an LLM response immediately. Only applies to `"steer"` and `"followUp"` modes (ignored for `"nextTurn"`).
+
+### pi.sendUserMessage(content, options?)
+
+Send a user message to the agent. Unlike `sendMessage()` which sends custom messages, this sends an actual user message that appears as if typed by the user. Always triggers a turn.
+
+```typescript
+// Simple text message
+pi.sendUserMessage("What is 2+2?");
+
+// With content array (text + images)
+pi.sendUserMessage([
+  { type: "text", text: "Describe this image:" },
+  { type: "image", source: { type: "base64", mediaType: "image/png", data: "..." } },
+]);
+
+// During streaming - must specify delivery mode
+pi.sendUserMessage("Focus on error handling", { deliverAs: "steer" });
+pi.sendUserMessage("And then summarize", { deliverAs: "followUp" });
+```
+
+**Options:**
+- `deliverAs` - Required when agent is streaming:
+  - `"steer"` - Queues the message for delivery after the current assistant turn finishes executing its tool calls
+  - `"followUp"` - Waits for agent to finish all tools
+
+When not streaming, the message is sent immediately and triggers a new turn. When streaming without `deliverAs`, throws an error.
+
+See [send-user-message.ts](../examples/extensions/send-user-message.ts) for a complete example.
+
+### pi.appendEntry(customType, data?)
+
+Persist extension state (does NOT participate in LLM context).
+
+```typescript
+pi.appendEntry("my-state", { count: 42 });
+
+// Restore on reload
+pi.on("session_start", async (_event, ctx) => {
+  for (const entry of ctx.sessionManager.getEntries()) {
+    if (entry.type === "custom" && entry.customType === "my-state") {
+      // Reconstruct from entry.data
+    }
+  }
+});
+```
+
+### pi.setSessionName(name)
+
+Set the session display name (shown in session selector instead of first message).
+
+```typescript
+pi.setSessionName("Refactor auth module");
+```
+
+### pi.getSessionName()
+
+Get the current session name, if set.
+
+```typescript
+const name = pi.getSessionName();
+if (name) {
+  console.log(`Session: ${name}`);
+}
+```
+
+### pi.setLabel(entryId, label)
+
+Set or clear a label on an entry. Labels are user-defined markers for bookmarking and navigation (shown in `/tree` selector).
+
+```typescript
+// Set a label
+pi.setLabel(entryId, "checkpoint-before-refactor");
+
+// Clear a label
+pi.setLabel(entryId, undefined);
+
+// Read labels via sessionManager
+const label = ctx.sessionManager.getLabel(entryId);
+```
+
+Labels persist in the session and survive restarts. Use them to mark important points (turns, checkpoints) in the conversation tree.
+
+### pi.registerCommand(name, options)
+
+Register a command.
+
+If multiple extensions register the same command name, pi keeps them all and assigns numeric invocation suffixes in load order, for example `/review:1` and `/review:2`.
+
+```typescript
+pi.registerCommand("stats", {
+  description: "Show session statistics",
+  handler: async (args, ctx) => {
+    const count = ctx.sessionManager.getEntries().length;
+    ctx.ui.notify(`${count} entries`, "info");
+  }
+});
+```
+
+Optional: add argument auto-completion for `/command ...`:
+
+```typescript
+import type { AutocompleteItem } from "@earendil-works/pi-tui";
+
+pi.registerCommand("deploy", {
+  description: "Deploy to an environment",
+  getArgumentCompletions: (prefix: string): AutocompleteItem[] | null => {
+    const envs = ["dev", "staging", "prod"];
+    const items = envs.map((e) => ({ value: e, label: e }));
+    const filtered = items.filter((i) => i.value.startsWith(prefix));
+    return filtered.length > 0 ? filtered : null;
+  },
+  handler: async (args, ctx) => {
+    ctx.ui.notify(`Deploying: ${args}`, "info");
+  },
+});
+```
+
+### pi.getCommands()
+
+Get the slash commands available for invocation via `prompt` in the current session. Includes extension commands, prompt templates, and skill commands.
+The list matches the RPC `get_commands` ordering: extensions first, then templates, then skills.
+
+```typescript
+const commands = pi.getCommands();
+const bySource = commands.filter((command) => command.source === "extension");
+const userScoped = commands.filter((command) => command.sourceInfo.scope === "user");
+```
+
+Each entry has this shape:
+
+```typescript
+{
+  name: string; // Invokable command name without the leading slash. May be suffixed like "review:1"
+  description?: string;
+  source: "extension" | "prompt" | "skill";
+  sourceInfo: {
+    path: string;
+    source: string;
+    scope: "user" | "project" | "temporary";
+    origin: "package" | "top-level";
+    baseDir?: string;
+  };
+}
+```
+
+Use `sourceInfo` as the canonical provenance field. Do not infer ownership from command names or from ad hoc path parsing.
+
+Built-in interactive commands (like `/model` and `/settings`) are not included here. They are handled only in interactive
+mode and would not execute if sent via `prompt`.
+
+### pi.registerMessageRenderer(customType, renderer)
+
+Register a custom TUI renderer for messages with your `customType`. See [Custom UI](#custom-ui).
+
+### pi.registerShortcut(shortcut, options)
+
+Register a keyboard shortcut. See [keybindings.md](keybindings.md) for the shortcut format and built-in keybindings.
+
+```typescript
+pi.registerShortcut("ctrl+shift+p", {
+  description: "Toggle plan mode",
+  handler: async (ctx) => {
+    ctx.ui.notify("Toggled!");
+  },
+});
+```
+
+### pi.registerFlag(name, options)
+
+Register a CLI flag.
+
+```typescript
+pi.registerFlag("plan", {
+  description: "Start in plan mode",
+  type: "boolean",
+  default: false,
+});
+
+// Check value
+if (pi.getFlag("plan")) {
+  // Plan mode enabled
+}
+```
+
+### pi.exec(command, args, options?)
+
+Execute a shell command.
+
+```typescript
+const result = await pi.exec("git", ["status"], { signal, timeout: 5000 });
+// result.stdout, result.stderr, result.code, result.killed
+```
+
+### pi.getActiveTools() / pi.getAllTools() / pi.setActiveTools(names)
+
+Manage active tools. This works for both built-in tools and dynamically registered tools.
+
+```typescript
+const active = pi.getActiveTools();
+const all = pi.getAllTools();
+// [{
+//   name: "read",
+//   description: "Read file contents...",
+//   parameters: ...,
+//   promptGuidelines: ["Use read to examine files instead of cat or sed."],
+//   sourceInfo: { path: "<builtin:read>", source: "builtin", scope: "temporary", origin: "top-level" }
+// }, ...]
+const names = all.map(t => t.name);
+const builtinTools = all.filter((t) => t.sourceInfo.source === "builtin");
+const extensionTools = all.filter((t) => t.sourceInfo.source !== "builtin" && t.sourceInfo.source !== "sdk");
+pi.setActiveTools(["read", "bash"]); // Switch to read-only
+```
+
+`pi.getAllTools()` returns `name`, `description`, `parameters`, `promptGuidelines`, and `sourceInfo`.
+
+Typical `sourceInfo.source` values:
+- `builtin` for built-in tools
+- `sdk` for tools passed via `createAgentSession({ customTools })`
+- extension source metadata for tools registered by extensions
+
+### pi.setModel(model)
+
+Set the current model. Returns `false` if no API key is available for the model. See [models.md](models.md) for configuring custom models.
+
+```typescript
+const model = ctx.modelRegistry.find("anthropic", "claude-sonnet-4-5");
+if (model) {
+  const success = await pi.setModel(model);
+  if (!success) {
+    ctx.ui.notify("No API key for this model", "error");
+  }
+}
+```
+
+### pi.getThinkingLevel() / pi.setThinkingLevel(level)
+
+Get or set the thinking level. Level is clamped to model capabilities (non-reasoning models always use "off"). Changes emit `thinking_level_select`.
+
+```typescript
+const current = pi.getThinkingLevel();  // "off" | "minimal" | "low" | "medium" | "high" | "xhigh"
+pi.setThinkingLevel("high");
+```
+
+### pi.events
+
+Shared event bus for communication between extensions:
+
+```typescript
+pi.events.on("my:event", (data) => { ... });
+pi.events.emit("my:event", { ... });
+```
+
+### pi.registerProvider(name, config)
+
+Register or override a model provider dynamically. Useful for proxies, custom endpoints, or team-wide model configurations.
+
+Calls made during the extension factory function are queued and applied once the runner initialises. Calls made after that — for example from a command handler following a user setup flow — take effect immediately without requiring a `/reload`.
+
+If you need to discover models from a remote endpoint, prefer an async extension factory over deferring the fetch to `session_start`. pi waits for the factory before startup continues, so the registered models are available immediately, including to `pi --list-models`.
+
+```typescript
+// Register a new provider with custom models
+pi.registerProvider("my-proxy", {
+  name: "My Proxy",
+  baseUrl: "https://proxy.example.com",
+  apiKey: "$PROXY_API_KEY",  // env var reference
+  api: "anthropic-messages",
+  models: [
+    {
+      id: "claude-sonnet-4-20250514",
+      name: "Claude 4 Sonnet (proxy)",
+      reasoning: false,
+      input: ["text", "image"],
+      cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
+      contextWindow: 200000,
+      maxTokens: 16384
+    }
+  ]
+});
+
+// Override baseUrl for an existing provider (keeps all models)
+pi.registerProvider("anthropic", {
+  baseUrl: "https://proxy.example.com"
+});
+
+// Register provider with OAuth support for /login
+pi.registerProvider("corporate-ai", {
+  baseUrl: "https://ai.corp.com",
+  api: "openai-responses",
+  models: [...],
+  oauth: {
+    name: "Corporate AI (SSO)",
+    async login(callbacks) {
+      // Custom OAuth flow
+      callbacks.onAuth({ url: "https://sso.corp.com/..." });
+      const code = await callbacks.onPrompt({ message: "Enter code:" });
+      return { refresh: code, access: code, expires: Date.now() + 3600000 };
+    },
+    async refreshToken(credentials) {
+      // Refresh logic
+      return credentials;
+    },
+    getApiKey(credentials) {
+      return credentials.access;
+    }
+  }
+});
+```
+
+**Config options:**
+- `name` - Display name for the provider in UI such as `/login`.
+- `baseUrl` - API endpoint URL. Required when defining models.
+- `apiKey` - API key literal, environment interpolation (`$ENV_VAR` or `${ENV_VAR}`), or leading `!command`. Required when defining models (unless `oauth` provided). `$$` escapes `$`, and `$!` escapes a literal `!` without triggering command execution.
+- `api` - API type: `"anthropic-messages"`, `"openai-completions"`, `"openai-responses"`, etc.
+- `headers` - Custom headers to include in requests.
+- `authHeader` - If true, adds `Authorization: Bearer` header automatically.
+- `models` - Array of model definitions. If provided, replaces all existing models for this provider. Model definitions can set `baseUrl` to override the provider endpoint for that model.
+- `oauth` - OAuth provider config for `/login` support. When provided, the provider appears in the login menu.
+- `streamSimple` - Custom streaming implementation for non-standard APIs.
+
+See [custom-provider.md](custom-provider.md) for advanced topics: custom streaming APIs, OAuth details, model definition reference.
+
+### pi.unregisterProvider(name)
+
+Remove a previously registered provider and its models. Built-in models that were overridden by the provider are restored. Has no effect if the provider was not registered.
+
+Like `registerProvider`, this takes effect immediately when called after the initial load phase, so a `/reload` is not required.
+
+```typescript
+pi.registerCommand("my-setup-teardown", {
+  description: "Remove the custom proxy provider",
+  handler: async (_args, _ctx) => {
+    pi.unregisterProvider("my-proxy");
+  },
+});
+```
+
+## State Management
+
+Extensions with state should store it in tool result `details` for proper branching support:
+
+```typescript
+export default function (pi: ExtensionAPI) {
+  let items: string[] = [];
+
+  // Reconstruct state from session
+  pi.on("session_start", async (_event, ctx) => {
+    items = [];
+    for (const entry of ctx.sessionManager.getBranch()) {
+      if (entry.type === "message" && entry.message.role === "toolResult") {
+        if (entry.message.toolName === "my_tool") {
+          items = entry.message.details?.items ?? [];
+        }
+      }
+    }
+  });
+
+  pi.registerTool({
+    name: "my_tool",
+    // ...
+    async execute(toolCallId, params, signal, onUpdate, ctx) {
+      items.push("new item");
+      return {
+        content: [{ type: "text", text: "Added" }],
+        details: { items: [...items] },  // Store for reconstruction
+      };
+    },
+  });
+}
+```
+
+## Custom Tools
+
+Register tools the LLM can call via `pi.registerTool()`. Tools appear in the system prompt and can have custom rendering.
+
+Use `promptSnippet` for a short one-line entry in the `Available tools` section in the default system prompt. If omitted, custom tools are left out of that section.
+
+Use `promptGuidelines` to add tool-specific bullets to the default system prompt `Guidelines` section. These bullets are included only while the tool is active (for example, after `pi.setActiveTools([...])`).
+
+**Important:** `promptGuidelines` bullets are appended flat to the `Guidelines` section with no tool name prefix or grouping. Each guideline must name the tool it refers to — avoid "Use this tool when..." because the LLM cannot tell which tool "this" means. Write "Use my_tool when..." instead.
+
+Note: Some models are idiots and include the @ prefix in tool path arguments. Built-in tools strip a leading @ before resolving paths. If your custom tool accepts a path, normalize a leading @ as well.
+
+If your custom tool mutates files, use `withFileMutationQueue()` so it participates in the same per-file queue as built-in `edit` and `write`. This matters because tool calls run in parallel by default. Without the queue, two tools can read the same old file contents, compute different updates, and then whichever write lands last overwrites the other.
+
+Example failure case: your custom tool edits `foo.ts` while built-in `edit` also changes `foo.ts` in the same assistant turn. If your tool does not participate in the queue, both can read the original `foo.ts`, apply separate changes, and one of those changes is lost.
+
+Pass the real target file path to `withFileMutationQueue()`, not the raw user argument. Resolve it to an absolute path first, relative to `ctx.cwd` or your tool's working directory. For existing files, the helper canonicalizes through `realpath()`, so symlink aliases for the same file share one queue. For new files, it falls back to the resolved absolute path because there is nothing to `realpath()` yet.
+
+Queue the entire mutation window on that target path. That includes read-modify-write logic, not just the final write.
+
+```typescript
+import { withFileMutationQueue } from "@earendil-works/pi-coding-agent";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { dirname, resolve } from "node:path";
+
+async execute(_toolCallId, params, _signal, _onUpdate, ctx) {
+  const absolutePath = resolve(ctx.cwd, params.path);
+
+  return withFileMutationQueue(absolutePath, async () => {
+    await mkdir(dirname(absolutePath), { recursive: true });
+    const current = await readFile(absolutePath, "utf8");
+    const next = current.replace(params.oldText, params.newText);
+    await writeFile(absolutePath, next, "utf8");
+
+    return {
+      content: [{ type: "text", text: `Updated ${params.path}` }],
+      details: {},
+    };
+  });
+}
+```
+
+### Tool Definition
+
+```typescript
+import { Type } from "typebox";
+import { StringEnum } from "@earendil-works/pi-ai";
+import { Text } from "@earendil-works/pi-tui";
+
+pi.registerTool({
+  name: "my_tool",
+  label: "My Tool",
+  description: "What this tool does (shown to LLM)",
+  promptSnippet: "List or add items in the project todo list",
+  promptGuidelines: [
+    "Use my_tool for todo planning instead of direct file edits when the user asks for a task list."
+  ],
+  parameters: Type.Object({
+    action: StringEnum(["list", "add"] as const),  // Use StringEnum for Google compatibility
+    text: Type.Optional(Type.String()),
+  }),
+  prepareArguments(args) {
+    if (!args || typeof args !== "object") return args;
+    const input = args as { action?: string; oldAction?: string };
+    if (typeof input.oldAction === "string" && input.action === undefined) {
+      return { ...input, action: input.oldAction };
+    }
+    return args;
+  },
+
+  async execute(toolCallId, params, signal, onUpdate, ctx) {
+    // Check for cancellation
+    if (signal?.aborted) {
+      return { content: [{ type: "text", text: "Cancelled" }] };
+    }
+
+    // Stream progress updates
+    onUpdate?.({
+      content: [{ type: "text", text: "Working..." }],
+      details: { progress: 50 },
+    });
+
+    // Run commands via pi.exec (captured from extension closure)
+    const result = await pi.exec("some-command", [], { signal });
+
+    // Return result
+    return {
+      content: [{ type: "text", text: "Done" }],  // Sent to LLM
+      details: { data: result },                   // For rendering & state
+      // Optional: stop after this tool batch when every finalized tool result
+      // in the batch also returns terminate: true.
+      terminate: true,
+    };
+  },
+
+  // Optional: Custom rendering
+  renderCall(args, theme, context) { ... },
+  renderResult(result, options, theme, context) { ... },
+});
+```
+
+**Signaling errors:** To mark a tool execution as failed (sets `isError: true` on the result and reports it to the LLM), throw an error from `execute`. Returning a value never sets the error flag regardless of what properties you include in the return object.
+
+**Early termination:** Return `terminate: true` from `execute()` to hint that the automatic follow-up LLM call should be skipped after the current tool batch. This only takes effect when every finalized tool result in that batch is terminating. See [examples/extensions/structured-output.ts](../examples/extensions/structured-output.ts) for a minimal example where the agent ends on a final structured-output tool call.
+
+```typescript
+// Correct: throw to signal an error
+async execute(toolCallId, params) {
+  if (!isValid(params.input)) {
+    throw new Error(`Invalid input: ${params.input}`);
+  }
+  return { content: [{ type: "text", text: "OK" }], details: {} };
+}
+```
+
+**Important:** Use `StringEnum` from `@earendil-works/pi-ai` for string enums. `Type.Union`/`Type.Literal` doesn't work with Google's API.
+
+**Argument preparation:** `prepareArguments(args)` is optional. If defined, it runs before schema validation and before `execute()`. Use it to mimic an older accepted input shape when pi resumes an older session whose stored tool call arguments no longer match the current schema. Return the object you want validated against `parameters`. Keep the public schema strict. Do not add deprecated compatibility fields to `parameters` just to keep old resumed sessions working.
+
+Example: an older session may contain an `edit` tool call with top-level `oldText` and `newText`, while the current schema only accepts `edits: [{ oldText, newText }]`.
+
+```typescript
+pi.registerTool({
+  name: "edit",
+  label: "Edit",
+  description: "Edit a single file using exact text replacement",
+  parameters: Type.Object({
+    path: Type.String(),
+    edits: Type.Array(
+      Type.Object({
+        oldText: Type.String(),
+        newText: Type.String(),
+      }),
+    ),
+  }),
+  prepareArguments(args) {
+    if (!args || typeof args !== "object") return args;
+
+[803 more lines in file. Use offset=1801 to continue.]

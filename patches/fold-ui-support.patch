@@ -1,0 +1,151 @@
+diff --git a/packages/coding-agent/src/core/agent-session.ts b/packages/coding-agent/src/core/agent-session.ts
+index cf13594b..385931d1 100644
+--- a/packages/coding-agent/src/core/agent-session.ts
++++ b/packages/coding-agent/src/core/agent-session.ts
+@@ -189,6 +189,7 @@ export interface ExtensionBindings {
+ 	abortHandler?: () => void;
+ 	shutdownHandler?: ShutdownHandler;
+ 	onError?: ExtensionErrorListener;
++	onAppendEntry?: (customType: string) => void;
+ }
+ 
+ /** Options for AgentSession.prompt() */
+@@ -301,6 +302,7 @@ export class AgentSession {
+ 	private _extensionAbortHandler?: () => void;
+ 	private _extensionShutdownHandler?: ShutdownHandler;
+ 	private _extensionErrorListener?: ExtensionErrorListener;
++	private _extensionAppendEntryListener?: (customType: string) => void;
+ 	private _extensionErrorUnsubscriber?: () => void;
+ 
+ 	// Model registry for API key resolution
+@@ -2054,6 +2056,9 @@ export class AgentSession {
+ 		if (bindings.onError !== undefined) {
+ 			this._extensionErrorListener = bindings.onError;
+ 		}
++		if (bindings.onAppendEntry !== undefined) {
++			this._extensionAppendEntryListener = bindings.onAppendEntry;
++		}
+ 
+ 		this._applyExtensionBindings(this._extensionRunner);
+ 		await this._extensionRunner.emit(this._sessionStartEvent);
+@@ -2185,6 +2190,7 @@ export class AgentSession {
+ 				},
+ 				appendEntry: (customType, data) => {
+ 					this.sessionManager.appendCustomEntry(customType, data);
++					this._extensionAppendEntryListener?.(customType);
+ 				},
+ 				setSessionName: (name) => {
+ 					this.setSessionName(name);
+diff --git a/packages/coding-agent/src/modes/interactive/interactive-mode.ts b/packages/coding-agent/src/modes/interactive/interactive-mode.ts
+index 3068c89c..335cdd91 100644
+--- a/packages/coding-agent/src/modes/interactive/interactive-mode.ts
++++ b/packages/coding-agent/src/modes/interactive/interactive-mode.ts
+@@ -79,7 +79,7 @@ import { DefaultPackageManager } from "../../core/package-manager.ts";
+ import { BUILT_IN_PROVIDER_DISPLAY_NAMES } from "../../core/provider-display-names.ts";
+ import type { ResourceDiagnostic } from "../../core/resource-loader.ts";
+ import { formatMissingSessionCwdPrompt, MissingSessionCwdError } from "../../core/session-cwd.ts";
+-import { type SessionContext, SessionManager } from "../../core/session-manager.ts";
++import { buildSessionContext, type SessionContext, SessionManager } from "../../core/session-manager.ts";
+ import { BUILTIN_SLASH_COMMANDS } from "../../core/slash-commands.ts";
+ import type { SourceInfo } from "../../core/source-info.ts";
+ import { isInstallTelemetryEnabled } from "../../core/telemetry.ts";
+@@ -1555,6 +1555,12 @@ export class InteractiveMode {
+ 			onError: (error) => {
+ 				this.showExtensionError(error.extensionPath, error.error, error.stack);
+ 			},
++			onAppendEntry: (customType) => {
++				if (customType === "fold-state" || customType === "fold-control") {
++					this.renderCurrentSessionState();
++					this.ui.requestRender();
++				}
++			},
+ 		});
+ 
+ 		setRegisteredThemes(this.session.resourceLoader.getThemes().themes);
+@@ -3114,6 +3120,51 @@ export class InteractiveMode {
+ 		}
+ 	}
+ 
++	private getActiveFoldState(): { cutoffEntryId: string | null; hideAll: boolean } {
++		const allEntries = this.sessionManager.getEntries();
++		let cutoffEntryId: string | null = null;
++		let hideAll = false;
++
++		for (const entry of allEntries) {
++			if (entry.type !== "custom") continue;
++			if (entry.customType === "fold-state") {
++				const data = entry.data as { cutoffEntryId?: unknown; hideAll?: unknown } | undefined;
++				if (typeof data?.cutoffEntryId === "string") {
++					cutoffEntryId = data.cutoffEntryId;
++					hideAll = data?.hideAll === true;
++				}
++			} else if (entry.customType === "fold-control") {
++				const data = entry.data as { action?: unknown } | undefined;
++				if (data?.action === "unfold-all") {
++					cutoffEntryId = null;
++					hideAll = false;
++				}
++			}
++		}
++
++		return { cutoffEntryId, hideAll };
++	}
++
++	private getVisibleSessionContext(): SessionContext {
++		const { cutoffEntryId, hideAll } = this.getActiveFoldState();
++		if (hideAll) {
++			return { messages: [], thinkingLevel: "off", model: null };
++		}
++		if (!cutoffEntryId) {
++			return this.sessionManager.buildSessionContext();
++		}
++
++		const branch = this.sessionManager.getBranch();
++		const cutoffIndex = branch.findIndex((entry) => entry.id === cutoffEntryId);
++		if (cutoffIndex <= 0) {
++			return this.sessionManager.buildSessionContext();
++		}
++
++		const visibleEntries = branch.slice(cutoffIndex);
++		const byId = new Map(visibleEntries.map((entry) => [entry.id, entry]));
++		return buildSessionContext(visibleEntries, visibleEntries[visibleEntries.length - 1]?.id, byId);
++	}
++
+ 	/**
+ 	 * Render session context to chat. Used for initial load and rebuild after compaction.
+ 	 * @param sessionContext Session context to render
+@@ -3132,6 +3183,16 @@ export class InteractiveMode {
+ 			this.updateEditorBorderColor();
+ 		}
+ 
++		const fullContext = this.sessionManager.buildSessionContext();
++		const hiddenMessageCount = Math.max(0, fullContext.messages.length - sessionContext.messages.length);
++		if (hiddenMessageCount > 0) {
++			const currentTheme = this.getTheme();
++			this.chatContainer.addChild(
++				new Text(currentTheme.fg("muted", `[Folded: ${hiddenMessageCount} earlier message(s) hidden]`), 1, 0),
++			);
++			this.chatContainer.addChild(new Spacer(1));
++		}
++
+ 		for (const message of sessionContext.messages) {
+ 			// Assistant messages need special handling for tool calls
+ 			if (message.role === "assistant") {
+@@ -3192,7 +3253,7 @@ export class InteractiveMode {
+ 
+ 	renderInitialMessages(): void {
+ 		// Get aligned messages and entries from session context
+-		const context = this.sessionManager.buildSessionContext();
++		const context = this.getVisibleSessionContext();
+ 		this.renderSessionContext(context, {
+ 			updateFooter: true,
+ 			populateHistory: true,
+@@ -3218,7 +3279,7 @@ export class InteractiveMode {
+ 
+ 	private rebuildChatFromMessages(): void {
+ 		this.chatContainer.clear();
+-		const context = this.sessionManager.buildSessionContext();
++		const context = this.getVisibleSessionContext();
+ 		this.renderSessionContext(context);
+ 	}
+ 

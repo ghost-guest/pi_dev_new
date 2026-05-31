@@ -79,7 +79,7 @@ import { DefaultPackageManager } from "../../core/package-manager.ts";
 import { BUILT_IN_PROVIDER_DISPLAY_NAMES } from "../../core/provider-display-names.ts";
 import type { ResourceDiagnostic } from "../../core/resource-loader.ts";
 import { formatMissingSessionCwdPrompt, MissingSessionCwdError } from "../../core/session-cwd.ts";
-import { type SessionContext, SessionManager } from "../../core/session-manager.ts";
+import { buildSessionContext, type SessionContext, SessionManager } from "../../core/session-manager.ts";
 import { BUILTIN_SLASH_COMMANDS } from "../../core/slash-commands.ts";
 import type { SourceInfo } from "../../core/source-info.ts";
 import { isInstallTelemetryEnabled } from "../../core/telemetry.ts";
@@ -1554,6 +1554,12 @@ export class InteractiveMode {
 			},
 			onError: (error) => {
 				this.showExtensionError(error.extensionPath, error.error, error.stack);
+			},
+			onAppendEntry: (customType) => {
+				if (customType === "fold-state" || customType === "fold-control") {
+					this.renderCurrentSessionState();
+					this.ui.requestRender();
+				}
 			},
 		});
 
@@ -3114,6 +3120,51 @@ export class InteractiveMode {
 		}
 	}
 
+	private getActiveFoldState(): { cutoffEntryId: string | null; hideAll: boolean } {
+		const allEntries = this.sessionManager.getEntries();
+		let cutoffEntryId: string | null = null;
+		let hideAll = false;
+
+		for (const entry of allEntries) {
+			if (entry.type !== "custom") continue;
+			if (entry.customType === "fold-state") {
+				const data = entry.data as { cutoffEntryId?: unknown; hideAll?: unknown } | undefined;
+				if (typeof data?.cutoffEntryId === "string") {
+					cutoffEntryId = data.cutoffEntryId;
+					hideAll = data?.hideAll === true;
+				}
+			} else if (entry.customType === "fold-control") {
+				const data = entry.data as { action?: unknown } | undefined;
+				if (data?.action === "unfold-all") {
+					cutoffEntryId = null;
+					hideAll = false;
+				}
+			}
+		}
+
+		return { cutoffEntryId, hideAll };
+	}
+
+	private getVisibleSessionContext(): SessionContext {
+		const { cutoffEntryId, hideAll } = this.getActiveFoldState();
+		if (hideAll) {
+			return { messages: [], thinkingLevel: "off", model: null };
+		}
+		if (!cutoffEntryId) {
+			return this.sessionManager.buildSessionContext();
+		}
+
+		const branch = this.sessionManager.getBranch();
+		const cutoffIndex = branch.findIndex((entry) => entry.id === cutoffEntryId);
+		if (cutoffIndex <= 0) {
+			return this.sessionManager.buildSessionContext();
+		}
+
+		const visibleEntries = branch.slice(cutoffIndex);
+		const byId = new Map(visibleEntries.map((entry) => [entry.id, entry]));
+		return buildSessionContext(visibleEntries, visibleEntries[visibleEntries.length - 1]?.id, byId);
+	}
+
 	/**
 	 * Render session context to chat. Used for initial load and rebuild after compaction.
 	 * @param sessionContext Session context to render
@@ -3130,6 +3181,15 @@ export class InteractiveMode {
 		if (options.updateFooter) {
 			this.footer.invalidate();
 			this.updateEditorBorderColor();
+		}
+
+		const fullContext = this.sessionManager.buildSessionContext();
+		const hiddenMessageCount = Math.max(0, fullContext.messages.length - sessionContext.messages.length);
+		if (hiddenMessageCount > 0) {
+			this.chatContainer.addChild(
+				new Text(theme.fg("muted", `[Folded: ${hiddenMessageCount} earlier message(s) hidden]`), 1, 0),
+			);
+			this.chatContainer.addChild(new Spacer(1));
 		}
 
 		for (const message of sessionContext.messages) {
@@ -3192,7 +3252,7 @@ export class InteractiveMode {
 
 	renderInitialMessages(): void {
 		// Get aligned messages and entries from session context
-		const context = this.sessionManager.buildSessionContext();
+		const context = this.getVisibleSessionContext();
 		this.renderSessionContext(context, {
 			updateFooter: true,
 			populateHistory: true,
@@ -3218,7 +3278,7 @@ export class InteractiveMode {
 
 	private rebuildChatFromMessages(): void {
 		this.chatContainer.clear();
-		const context = this.sessionManager.buildSessionContext();
+		const context = this.getVisibleSessionContext();
 		this.renderSessionContext(context);
 	}
 

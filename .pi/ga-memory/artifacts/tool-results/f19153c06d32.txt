@@ -1,0 +1,131 @@
+packages/ai/src/image-models.ts:1:import { IMAGE_MODELS } from "./image-models.generated.ts";
+packages/ai/src/image-models.ts:6:for (const [provider, models] of Object.entries(IMAGE_MODELS)) {
+packages/ai/src/image-models.ts:16:	TModelId extends keyof (typeof IMAGE_MODELS)[TProvider],
+packages/ai/src/image-models.ts:17:> = (typeof IMAGE_MODELS)[TProvider][TModelId] extends { api: infer TApi }
+packages/ai/src/image-models.ts:25:	TModelId extends keyof (typeof IMAGE_MODELS)[TProvider],
+packages/ai/src/image-models.ts:37:): ImagesModel<ImageModelApi<TProvider, keyof (typeof IMAGE_MODELS)[TProvider]>>[] {
+packages/ai/src/image-models.ts:40:		? (Array.from(models.values()) as ImagesModel<ImageModelApi<TProvider, keyof (typeof IMAGE_MODELS)[TProvider]>>[])
+packages/ai/src/models.ts:1:import { MODELS } from "./models.generated.ts";
+packages/ai/src/models.ts:6:// Initialize registry from MODELS on module load
+packages/ai/src/models.ts:7:for (const [provider, models] of Object.entries(MODELS)) {
+packages/ai/src/models.ts:17:	TModelId extends keyof (typeof MODELS)[TProvider],
+packages/ai/src/models.ts:18:> = (typeof MODELS)[TProvider][TModelId] extends { api: infer TApi } ? (TApi extends Api ? TApi : never) : never;
+packages/ai/src/models.ts:20:export function getModel<TProvider extends KnownProvider, TModelId extends keyof (typeof MODELS)[TProvider]>(
+packages/ai/src/models.ts:34:): Model<ModelApi<TProvider, keyof (typeof MODELS)[TProvider]>>[] {
+packages/ai/src/models.ts:36:	return models ? (Array.from(models.values()) as Model<ModelApi<TProvider, keyof (typeof MODELS)[TProvider]>>[]) : [];
+packages/coding-agent/src/config.ts:438:		configDir?: string;
+packages/coding-agent/src/config.ts:444:const piConfigName: string | undefined = pkg.piConfig?.name;
+packages/coding-agent/src/config.ts:448:export const CONFIG_DIR_NAME: string = pkg.piConfig?.configDir || ".pi";
+packages/coding-agent/src/config.ts:468:// User Config Paths (~/.pi/agent/*)
+packages/coding-agent/src/config.ts:471:/** Get the agent config directory (e.g., ~/.pi/agent/) */
+packages/coding-agent/src/config.ts:485:/** Get path to models.json */
+packages/coding-agent/src/config.ts:487:	return join(getAgentDir(), "models.json");
+packages/coding-agent/src/migrations.ts:76: * Migrate sessions from ~/.pi/agent/*.jsonl to proper session directories.
+packages/coding-agent/src/migrations.ts:78: * Bug in v0.30.0: Sessions were saved to ~/.pi/agent/ instead of
+packages/coding-agent/src/migrations.ts:79: * ~/.pi/agent/sessions/<encoded-cwd>/. This migration moves them
+packages/coding-agent/src/package-manager-cli.ts:90:  -l, --local    Install project-locally (.pi/settings.json)
+packages/coding-agent/src/package-manager-cli.ts:110:  -l, --local    Remove from project settings (.pi/settings.json)
+packages/ai/src/types.ts:440:	 * `output_config.effort`) regardless of the model id. Built-in models that
+packages/ai/src/image-models.generated.ts:6:export const IMAGE_MODELS = {
+packages/ai/src/providers/amazon-bedrock.ts:129:		// Only pin standard AWS Bedrock runtime endpoints when no region/profile is configured.
+packages/ai/src/providers/amazon-bedrock.ts:555: * also checks model.name which is user-controlled via models.json or registerProvider.
+packages/ai/src/providers/amazon-bedrock.ts:817:		case BedrockStopReason.MODEL_CONTEXT_WINDOW_EXCEEDED:
+packages/ai/src/utils/overflow.ts:109: * If you've added custom models via settings.json, this function may not detect
+packages/coding-agent/src/utils/tools-manager.ts:275:		`extract_tmp_${config.binaryName}_${process.pid}_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`,
+packages/ai/src/models.generated.ts:6:export const MODELS = {
+packages/ai/src/models.generated.ts:939:		"mistral.pixtral-large-2502-v1:0": {
+packages/ai/src/models.generated.ts:940:			id: "mistral.pixtral-large-2502-v1:0",
+packages/coding-agent/src/cli/config-selector.ts:2: * TUI config selector for `pi config` command
+packages/coding-agent/src/cli/list-models.ts:32:		console.error(chalk.yellow(`Warning: errors loading models.json:\n${loadError}`));
+packages/ai/src/providers/faux.ts:22:const DEFAULT_MODEL_ID = "faux-1";
+packages/ai/src/providers/faux.ts:23:const DEFAULT_MODEL_NAME = "Faux Model";
+packages/ai/src/providers/faux.ts:87:		model: DEFAULT_MODEL_ID,
+packages/ai/src/providers/faux.ts:409:					id: DEFAULT_MODEL_ID,
+packages/ai/src/providers/faux.ts:410:					name: DEFAULT_MODEL_NAME,
+packages/coding-agent/src/utils/windows-self-update.ts:6:const QUARANTINE_DIR_NAME = ".pi-native-quarantine";
+packages/coding-agent/src/utils/windows-self-update.ts:74:	const quarantineRunDir = join(quarantineRoot, `${Date.now()}-${process.pid}-${randomUUID()}`);
+packages/coding-agent/src/core/model-registry.ts:2: * Model registry - manages built-in and custom models, provides API key resolution.
+packages/coding-agent/src/core/model-registry.ts:142:// Schema for custom model definition
+packages/coding-agent/src/core/model-registry.ts:251:/** Result of loading custom models from models.json */
+packages/coding-agent/src/core/model-registry.ts:333: * Model registry - loads and manages models, resolves API keys via AuthStorage.
+packages/coding-agent/src/core/model-registry.ts:350:	static create(authStorage: AuthStorage, modelsJsonPath: string = join(getAgentDir(), "models.json")): ModelRegistry {
+packages/coding-agent/src/core/model-registry.ts:359:	 * Reload models from disk (built-in + custom from models.json).
+packages/coding-agent/src/core/model-registry.ts:378:	 * Get any error from loading models.json (undefined if no error).
+packages/coding-agent/src/core/model-registry.ts:385:		// Load custom models and overrides from models.json
+packages/coding-agent/src/core/model-registry.ts:391:		} = this.modelsJsonPath ? this.loadCustomModels(this.modelsJsonPath) : emptyCustomModelsResult();
+packages/coding-agent/src/core/model-registry.ts:395:			// Keep built-in models even if custom models failed to load
+packages/coding-agent/src/core/model-registry.ts:445:	/** Merge custom models into built-in list by provider+id (custom wins on conflicts). */
+packages/coding-agent/src/core/model-registry.ts:459:	private loadCustomModels(modelsJsonPath: string): CustomModelsResult {
+packages/coding-agent/src/core/model-registry.ts:474:				return emptyCustomModelsResult(`Invalid models.json schema:\n${errors}\n\nFile: ${modelsJsonPath}`);
+packages/coding-agent/src/core/model-registry.ts:506:				return emptyCustomModelsResult(`Failed to parse models.json: ${error.message}\n\nFile: ${modelsJsonPath}`);
+packages/coding-agent/src/core/model-registry.ts:509:				`Failed to load models.json: ${error instanceof Error ? error.message : error}\n\nFile: ${modelsJsonPath}`,
+packages/coding-agent/src/core/model-registry.ts:532:				// Non-built-in providers with custom models require endpoint + auth.
+packages/coding-agent/src/core/model-registry.ts:534:					throw new Error(`Provider ${providerName}: "baseUrl" is required when defining custom models.`);
+packages/coding-agent/src/core/model-registry.ts:537:					throw new Error(`Provider ${providerName}: "apiKey" is required when defining custom models.`);
+packages/coding-agent/src/core/model-registry.ts:540:			// Built-in providers with custom models: baseUrl/apiKey/api are optional,
+packages/coding-agent/src/core/model-registry.ts:581:			if (modelDefs.length === 0) continue; // Override-only, no custom models
+packages/coding-agent/src/core/model-registry.ts:619:	 * If models.json had errors, returns only built-in models.
+packages/coding-agent/src/core/model-registry.ts:662:		if (!config.apiKey && !config.headers && !config.authHeader) {
+packages/coding-agent/src/core/model-registry.ts:667:			apiKey: config.apiKey,
+packages/coding-agent/src/core/model-registry.ts:727:	 * Return auth status for a provider, including request auth configured in models.json.
+packages/coding-agent/src/core/model-registry.ts:742:			return { configured: true, source: "models_json_command" };
+packages/coding-agent/src/core/model-registry.ts:749:		return { configured: true, source: "models_json_key" };
+packages/coding-agent/src/core/model-registry.ts:805:	 * Removes the provider from the registry and reloads models from disk so that
+packages/coding-agent/src/core/model-registry.ts:841:		if (!config.models || config.models.length === 0) {
+packages/coding-agent/src/core/model-registry.ts:848:		if (!config.apiKey && !config.oauth) {
+packages/coding-agent/src/core/model-registry.ts:852:		for (const modelDef of config.models) {
+packages/coding-agent/src/core/model-registry.ts:853:			const api = modelDef.api || config.api;
+packages/coding-agent/src/core/model-registry.ts:875:					api: config.api!,
+packages/coding-agent/src/core/model-registry.ts:885:		if (config.models && config.models.length > 0) {
+packages/coding-agent/src/core/model-registry.ts:890:			for (const modelDef of config.models) {
+packages/coding-agent/src/core/model-registry.ts:891:				const api = modelDef.api || config.api;
+packages/coding-agent/src/core/model-registry.ts:915:					this.models = config.oauth.modifyModels(this.models, cred);
+packages/coding-agent/src/core/auth-storage.ts:240:	 * Used for custom provider keys from models.json.
+packages/coding-agent/src/core/auth-storage.ts:460:	 * 5. Fallback resolver (models.json custom providers)
+packages/coding-agent/src/core/auth-storage.ts:517:		// Fall back to custom resolver (e.g., models.json custom providers)
+packages/coding-agent/src/core/extensions/types.ts:1254:	 * // Register a new provider with custom models
+packages/coding-agent/src/core/package-manager.ts:521:		return pkg.pi ?? null;
+packages/coding-agent/src/core/package-manager.ts:1053:				if (!parsed.pinned) {
+packages/coding-agent/src/core/package-manager.ts:1159:				if (parsed.type === "local" || parsed.pinned) {
+packages/coding-agent/src/core/package-manager.ts:1236:					(parsed.pinned && !(await this.installedNpmMatchesPinnedVersion(parsed, installedPath)));
+packages/coding-agent/src/core/package-manager.ts:1252:				} else if (scope === "temporary" && !parsed.pinned && !isOfflineModeEnabled()) {
+packages/coding-agent/src/core/package-manager.ts:2130:			return pkg.pi ?? null;
+packages/coding-agent/src/core/package-manager.ts:2260:		// Project extensions from .pi/
+packages/coding-agent/src/core/package-manager.ts:2269:		// Project skills from .pi/
+packages/coding-agent/src/core/package-manager.ts:2309:		// User extensions from ~/.pi/agent/
+packages/coding-agent/src/core/package-manager.ts:2318:		// User skills from ~/.pi/agent/
+packages/coding-agent/src/core/extensions/loader.ts:451:		if (pkg.pi && typeof pkg.pi === "object") {
+packages/coding-agent/src/core/extensions/loader.ts:452:			return pkg.pi as PiManifest;
+packages/coding-agent/src/core/agent-session-services.ts:137:	const modelRegistry = options.modelRegistry ?? ModelRegistry.create(authStorage, join(agentDir, "models.json"));
+packages/coding-agent/src/core/tools/bash.ts:86:			if (child.pid) trackDetachedChildPid(child.pid);
+packages/coding-agent/src/core/tools/bash.ts:90:				if (child.pid) killProcessTree(child.pid);
+packages/coding-agent/src/core/tools/bash.ts:98:						if (child.pid) killProcessTree(child.pid);
+packages/coding-agent/src/core/tools/bash.ts:120:				if (child.pid) untrackDetachedChildPid(child.pid);
+packages/coding-agent/src/core/export-html/vendor/highlight.min.js:713:built_in:"_G _ENV _VERSION __index __newindex __mode __call __metatable __tostring __len __gc __add __sub __mul __div __mod __pow __concat __unm __eq __lt __le assert collectgarbage dofile error getfenv getmetatable ipairs load loadfile loadstring module next pairs pcall print rawequal rawget rawset require select setfenv setmetatable tonumber tostring type unpack xpcall arg self coroutine resume yield status wrap create running debug getupvalue debug sethook getmetatable gethook setmetatable setlocal traceback setfenv getinfo setupvalue getlocal getregistry getfenv io lines write close flush open output type read stderr stdin input stdout popen tmpfile math log max acos huge ldexp pi cos tanh pow deg tan cosh sinh random randomseed frexp ceil floor rad abs sqrt modf asin min mod fmod log10 atan2 exp sin atan os exit setlocale date getenv difftime remove time clock tmpname rename execute package preload loadlib loaded loaders cpath config path seeall string sub upper len gfind rep find match char dump gmatch reverse byte format gsub lower table setn insert getn foreachi maxn foreach concat sort remove"
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:140:		// Refresh to pick up any changes to models.json
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:143:		// Check for models.json errors
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:149:		// Load available models (built-in models still work even if models.json failed)
+packages/coding-agent/src/core/session-manager.ts:426: * Encodes cwd into a safe directory name under ~/.pi/agent/sessions/.
+packages/coding-agent/src/core/session-manager.ts:1309:	 * @param sessionDir Optional session directory. If omitted, uses default (~/.pi/agent/sessions/<encoded-cwd>/).
+packages/coding-agent/src/core/session-manager.ts:1336:	 * @param sessionDir Optional session directory. If omitted, uses default (~/.pi/agent/sessions/<encoded-cwd>/).
+packages/coding-agent/src/core/session-manager.ts:1407:	 * @param sessionDir Optional session directory. If omitted, uses default (~/.pi/agent/sessions/<encoded-cwd>/).
+packages/coding-agent/src/core/sdk.ts:37:	/** Global config directory. Default: ~/.pi/agent */
+packages/coding-agent/src/core/sdk.ts:42:	/** Model registry. Default: ModelRegistry.create(authStorage, agentDir/models.json) */
+packages/coding-agent/src/core/sdk.ts:209:	const modelsPath = options.agentDir ? join(agentDir, "models.json") : undefined;
+packages/coding-agent/src/core/system-prompt.ts:147:- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md)
+packages/coding-agent/src/core/export-html/template.js:388:          const isSettingsEntry = ['label', 'custom', 'model_change', 'thinking_level_change'].includes(entry.type);
+packages/coding-agent/src/core/export-html/template.js:1349:        return { userMessages, assistantMessages, toolResults, customMessages, compactions, branchSummaries, toolCalls, tokens, cost, models: Array.from(models) };
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:158:		if (provider.authType !== "api_key") return theme.fg("muted", " • unconfigured");
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:169:				return theme.fg("success", " ✓ key in models.json");
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:171:				return theme.fg("success", " ✓ command in models.json");
+packages/coding-agent/src/modes/interactive/components/config-selector.ts:87:		return metadata.scope === "user" ? "User (~/.pi/agent/)" : "Project (.pi/)";
+packages/coding-agent/src/core/model-resolver.ts:355:			error: "No models available. Check your installation or add models to models.json.",
+packages/coding-agent/src/core/model-resolver.ts:454:				? `${warning} Model "${pattern}" not found for provider "${provider}". Using custom model id.`
+packages/coding-agent/src/core/model-resolver.ts:455:				: `Model "${pattern}" not found for provider "${provider}". Using custom model id.`;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:203:const BUILT_IN_MODEL_PROVIDERS = new Set<string>(getProviders());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:208:	builtInProviderIds: ReadonlySet<string> = BUILT_IN_MODEL_PROVIDERS,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:749:			this.showError(`models.json error: ${modelsJsonError}`);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3521:		const tmpFile = path.join(os.tmpdir(), `pi-editor-${Date.now()}.pi.md`);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4572:				"No stored credentials to remove. /logout only removes credentials saved by /login; environment variables and models.json config are unchanged.",
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4597:								: `Removed stored API key for ${providerOption.name}. Environment variables and models.json config are unchanged.`;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4938:				this.showError(`models.json error: ${modelsJsonError}`);

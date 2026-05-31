@@ -1,0 +1,156 @@
+/Users/mac_522/.pi/agent/extensions/fold.ts:24:  summaryText?: string;
+/Users/mac_522/.pi/agent/extensions/fold.ts:52:  summary: string;
+/Users/mac_522/.pi/agent/extensions/fold.ts:58:  summaryText: string;
+/Users/mac_522/.pi/agent/extensions/fold.ts:76:const FOLD_SUMMARY_TYPE = "fold-summary";
+/Users/mac_522/.pi/agent/extensions/fold.ts:149:    && (v.summaryText === undefined || typeof v.summaryText === "string")
+/Users/mac_522/.pi/agent/extensions/fold.ts:240:    if (entry.customType === FOLD_SUMMARY_TYPE && isFoldSummaryDetails(entry.details)) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:300:        summaryText: entry.details.summaryText || entry.summary,
+/Users/mac_522/.pi/agent/extensions/fold.ts:308:    if (entry.customType === FOLD_SUMMARY_TYPE && isFoldSummaryDetails(entry.details)) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:311:        summaryText: entry.details.summaryText || extractTextParts(entry.content).join("\n").trim(),
+/Users/mac_522/.pi/agent/extensions/fold.ts:342:    if (entry.customType !== FOLD_SUMMARY_TYPE) continue;
+/Users/mac_522/.pi/agent/extensions/fold.ts:345:    if (text) sections.push(`Previous folded summary:\n${text}`);
+/Users/mac_522/.pi/agent/extensions/fold.ts:355:    "You are preparing a compact handoff summary for a long coding-agent session.",
+/Users/mac_522/.pi/agent/extensions/fold.ts:380:    "## Folded session summary",
+/Users/mac_522/.pi/agent/extensions/fold.ts:384:    "AI summarization was unavailable, so this fold preserved the tail of the conversation.",
+/Users/mac_522/.pi/agent/extensions/fold.ts:392:async function summarize(ctx: ExtensionContext, conversationText: string, instruction: string): Promise<string> {
+/Users/mac_522/.pi/agent/extensions/fold.ts:400:    const response = await complete(
+/Users/mac_522/.pi/agent/extensions/fold.ts:429:      `> Fold summarizer error: ${error instanceof Error ? error.message : String(error)}`,
+/Users/mac_522/.pi/agent/extensions/fold.ts:434:function buildFoldContextMessage(summary: string): string {
+/Users/mac_522/.pi/agent/extensions/fold.ts:441:    summary,
+/Users/mac_522/.pi/agent/extensions/fold.ts:445:function buildFoldPreviewLines(summary: string): string[] {
+/Users/mac_522/.pi/agent/extensions/fold.ts:446:  const lines = summary
+/Users/mac_522/.pi/agent/extensions/fold.ts:460:  const activeFold = getActiveFoldInfo(ctx.sessionManager.getBranch());
+/Users/mac_522/.pi/agent/extensions/fold.ts:462:    ctx.ui.setWidget("fold-summary", undefined);
+/Users/mac_522/.pi/agent/extensions/fold.ts:468:  ctx.ui.setWidget("fold-summary", [header, ...buildFoldPreviewLines(activeFold.summaryText), footer]);
+/Users/mac_522/.pi/agent/extensions/fold.ts:474:    customType: FOLD_SUMMARY_TYPE,
+/Users/mac_522/.pi/agent/extensions/fold.ts:475:    content: buildFoldContextMessage(activeFold.summaryText),
+/Users/mac_522/.pi/agent/extensions/fold.ts:502:  const branch = ctx.sessionManager.getBranch();
+/Users/mac_522/.pi/agent/extensions/fold.ts:505:  const leaf = ctx.sessionManager.getLeafEntry();
+/Users/mac_522/.pi/agent/extensions/fold.ts:514:  const summary = await summarize(ctx, conversationText, instruction);
+/Users/mac_522/.pi/agent/extensions/fold.ts:520:    sourceLeafId: ctx.sessionManager.getLeafId(),
+/Users/mac_522/.pi/agent/extensions/fold.ts:522:    summaryText: summary,
+/Users/mac_522/.pi/agent/extensions/fold.ts:528:    summary,
+/Users/mac_522/.pi/agent/extensions/fold.ts:546:      customType: FOLD_SUMMARY_TYPE,
+/Users/mac_522/.pi/agent/extensions/fold.ts:547:      content: prepared.summary,
+/Users/mac_522/.pi/agent/extensions/fold.ts:575:  pi.registerMessageRenderer<FoldSummaryDetails>(FOLD_SUMMARY_TYPE, (message, { expanded }, theme) => {
+/Users/mac_522/.pi/agent/extensions/fold.ts:582:      : theme.fg("dim", "\n  Press Enter to expand this folded summary.");
+/Users/mac_522/.pi/agent/extensions/fold.ts:601:  pi.on("context", async (event, ctx) => {
+/Users/mac_522/.pi/agent/extensions/fold.ts:602:    const activeFold = getActiveFoldInfo(ctx.sessionManager.getBranch());
+/Users/mac_522/.pi/agent/extensions/fold.ts:612:        if (custom.customType === FOLD_SUMMARY_TYPE) {
+/Users/mac_522/.pi/agent/extensions/fold.ts:656:    const state = getFoldStateFromBranch(ctx.sessionManager.getBranch(), globalConfig);
+/Users/mac_522/.pi/agent/extensions/fold.ts:666:  pi.registerCommand("fold", {
+/Users/mac_522/.pi/agent/extensions/fold.ts:667:    description: "Fold earlier conversation into a summary inside the current session (usage: /fold [instruction])",
+/Users/mac_522/.pi/agent/extensions/fold.ts:674:  pi.registerCommand("unfold", {
+/Users/mac_522/.pi/agent/extensions/fold.ts:679:      const state = getFoldStateFromBranch(ctx.sessionManager.getBranch(), globalConfig);
+/Users/mac_522/.pi/agent/extensions/fold.ts:681:        ctx.ui.notify("No active folded context", "warning");
+/Users/mac_522/.pi/agent/extensions/fold.ts:697:      ctx.ui.notify("Full earlier context restored", "info");
+/Users/mac_522/.pi/agent/extensions/fold.ts:706:      const state = getFoldStateFromBranch(ctx.sessionManager.getBranch(), globalConfig);
+packages/coding-agent/src/core/extensions/types.ts:138:	clearChat(): void;
+packages/coding-agent/src/core/extensions/types.ts:177:	 * etc. are available via ctx.sessionManager and ctx.model.
+packages/coding-agent/src/core/extensions/types.ts:309:	sessionManager: ReadonlySessionManager;
+packages/coding-agent/src/core/extensions/types.ts:343:		setup?: (sessionManager: SessionManager) => Promise<void>;
+packages/coding-agent/src/core/extensions/types.ts:356:		options?: { summarize?: boolean; customInstructions?: string; replaceInstructions?: boolean; label?: string },
+packages/coding-agent/src/core/extensions/types.ts:569:	/** Custom instructions for summarization */
+packages/coding-agent/src/core/extensions/types.ts:573:	/** Label to attach to the branch summary entry */
+packages/coding-agent/src/core/extensions/types.ts:589:	summaryEntry?: BranchSummaryEntry;
+packages/coding-agent/src/core/extensions/types.ts:1034:	summary?: {
+packages/coding-agent/src/core/extensions/types.ts:1035:		summary: string;
+packages/coding-agent/src/core/extensions/types.ts:1038:	/** Override custom instructions for summarization */
+packages/coding-agent/src/core/extensions/types.ts:1042:	/** Override label to attach to the branch summary entry */
+packages/coding-agent/src/core/extensions/types.ts:1516:		setup?: (sessionManager: SessionManager) => Promise<void>;
+packages/coding-agent/src/core/extensions/types.ts:1525:		options?: { summarize?: boolean; customInstructions?: string; replaceInstructions?: boolean; label?: string },
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:24:  summaryText?: string;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:52:  summary: string;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:58:  summaryText: string;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:76:const FOLD_SUMMARY_TYPE = "fold-summary";
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:149:    && (v.summaryText === undefined || typeof v.summaryText === "string")
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:240:    if (entry.customType === FOLD_SUMMARY_TYPE && isFoldSummaryDetails(entry.details)) {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:300:        summaryText: entry.details.summaryText || entry.summary,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:308:    if (entry.customType === FOLD_SUMMARY_TYPE && isFoldSummaryDetails(entry.details)) {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:311:        summaryText: entry.details.summaryText || extractTextParts(entry.content).join("\n").trim(),
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:342:    if (entry.customType !== FOLD_SUMMARY_TYPE) continue;
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:345:    if (text) sections.push(`Previous folded summary:\n${text}`);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:355:    "You are preparing a compact handoff summary for a long coding-agent session.",
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:380:    "## Folded session summary",
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:384:    "AI summarization was unavailable, so this fold preserved the tail of the conversation.",
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:392:async function summarize(ctx: ExtensionContext, conversationText: string, instruction: string): Promise<string> {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:400:    const response = await complete(
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:429:      `> Fold summarizer error: ${error instanceof Error ? error.message : String(error)}`,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:434:function buildFoldContextMessage(summary: string): string {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:441:    summary,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:445:function buildFoldPreviewLines(summary: string): string[] {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:446:  const lines = summary
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:460:  const activeFold = getActiveFoldInfo(ctx.sessionManager.getBranch());
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:462:    ctx.ui.setWidget("fold-summary", undefined);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:468:  ctx.ui.setWidget("fold-summary", [header, ...buildFoldPreviewLines(activeFold.summaryText), footer]);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:474:    customType: FOLD_SUMMARY_TYPE,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:475:    content: buildFoldContextMessage(activeFold.summaryText),
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:502:  const branch = ctx.sessionManager.getBranch();
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:505:  const leaf = ctx.sessionManager.getLeafEntry();
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:514:  const summary = await summarize(ctx, conversationText, instruction);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:520:    sourceLeafId: ctx.sessionManager.getLeafId(),
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:522:    summaryText: summary,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:528:    summary,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:546:      customType: FOLD_SUMMARY_TYPE,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:547:      content: prepared.summary,
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:575:  pi.registerMessageRenderer<FoldSummaryDetails>(FOLD_SUMMARY_TYPE, (message, { expanded }, theme) => {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:582:      : theme.fg("dim", "\n  Press Enter to expand this folded summary.");
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:601:  pi.on("context", async (event, ctx) => {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:602:    const activeFold = getActiveFoldInfo(ctx.sessionManager.getBranch());
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:612:        if (custom.customType === FOLD_SUMMARY_TYPE) {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:656:    const state = getFoldStateFromBranch(ctx.sessionManager.getBranch(), globalConfig);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:666:  pi.registerCommand("fold", {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:667:    description: "Fold earlier conversation into a summary inside the current session (usage: /fold [instruction])",
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:674:  pi.registerCommand("unfold", {
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:679:      const state = getFoldStateFromBranch(ctx.sessionManager.getBranch(), globalConfig);
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:681:        ctx.ui.notify("No active folded context", "warning");
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:697:      ctx.ui.notify("Full earlier context restored", "info");
+/Users/mac_522/Desktop/pi_dev/pi-config/agent/extensions/fold.ts:706:      const state = getFoldStateFromBranch(ctx.sessionManager.getBranch(), globalConfig);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:100:import { BranchSummaryMessageComponent } from "./components/branch-summary-message.ts";
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:101:import { CompactionSummaryMessageComponent } from "./components/compaction-summary-message.ts";
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:352:	private get sessionManager() {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:353:		return this.session.sessionManager;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:388:		this.footerDataProvider = new FooterDataProvider(this.sessionManager.getCwd());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:520:			this.sessionManager.getCwd(),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:703:		const cwdBasename = path.basename(this.sessionManager.getCwd());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:704:		const sessionName = this.sessionManager.getSessionName();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:798:				cwd: this.sessionManager.getCwd(),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:936:		const cwd = path.resolve(this.sessionManager.getCwd());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1524:						summarize: options?.summarize,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1573:		this.footerDataProvider.setCwd(this.sessionManager.getCwd());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1634:			cwd: this.sessionManager.getCwd(),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1635:			sessionManager: this.sessionManager,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2747:									this.sessionManager.getCwd(),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2816:						this.sessionManager.getCwd(),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2917:							event.result.summary,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3157:							this.sessionManager.getCwd(),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3200:		const context = this.sessionManager.buildSessionContext();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3207:		const allEntries = this.sessionManager.getEntries();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3226:		const context = this.sessionManager.buildSessionContext();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4236:		const leafId = this.sessionManager.getLeafId();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4258:		const tree = this.sessionManager.getTree();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4259:		const realLeafId = this.sessionManager.getLeafId();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4280:					// Ask about summarization
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4287:					// Check if we should skip the prompt (user preference to always default to no summary)
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4290:							const summaryChoice = await this.showExtensionSelector("Summarize branch?", [
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4291:								"No summary",
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4296:							if (summaryChoice === undefined) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4302:							wantsSummary = summaryChoice !== "No summary";
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4304:							if (summaryChoice === "Summarize with custom prompt") {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4305:								customInstructions = await this.showExtensionEditor("Custom summarization instructions");
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4307:									// User cancelled - loop back to summary selector
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4317:					// Set up escape handler and loader if summarizing
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4318:					let summaryLoader: Loader | undefined;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4326:						summaryLoader = new Loader(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4332:						this.statusContainer.addChild(summaryLoader);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4338:							summarize: wantsSummary,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4344:							this.showStatus("Branch summarization cancelled");
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4364:						if (summaryLoader) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4365:							summaryLoader.stop();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4376:					this.sessionManager.appendLabelChange(entryId, label);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4390:					SessionManager.list(this.sessionManager.getCwd(), this.sessionManager.getSessionDir(), onProgress),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4415:				this.sessionManager.getSessionFile(),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5159:			const currentName = this.sessionManager.getSessionName();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5178:		const sessionName = this.sessionManager.getSessionName();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5448:			cwd: this.sessionManager.getCwd(),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5528:		const entries = this.sessionManager.getEntries();

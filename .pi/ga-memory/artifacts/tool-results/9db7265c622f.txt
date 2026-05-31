@@ -1,0 +1,127 @@
+packages/coding-agent/src/modes/interactive/components/user-message-selector.ts:33:	render(width: number): string[] {
+packages/coding-agent/src/modes/interactive/components/user-message-selector.ts:48:		// Render visible messages (2 lines per message + blank line)
+packages/coding-agent/src/modes/interactive/components/user-message-selector.ts:108: * Component that renders a user message selector for branching
+packages/coding-agent/src/core/export-html/template.js:15:      const { header, entries, leafId: defaultLeafId, systemPrompt, tools, renderedTools } = data;
+packages/coding-agent/src/core/export-html/template.js:693:      // TREE RENDERING (DOM manipulation)
+packages/coding-agent/src/core/export-html/template.js:698:      let treeRendered = false;
+packages/coding-agent/src/core/export-html/template.js:700:      function renderTree() {
+packages/coding-agent/src/core/export-html/template.js:707:        // Full render only on first call or when filter/search changes
+packages/coding-agent/src/core/export-html/template.js:708:        if (!treeRendered) {
+packages/coding-agent/src/core/export-html/template.js:748:          treeRendered = true;
+packages/coding-agent/src/core/export-html/template.js:778:      function forceTreeRerender() {
+packages/coding-agent/src/core/export-html/template.js:779:        treeRendered = false;
+packages/coding-agent/src/core/export-html/template.js:780:        renderTree();
+packages/coding-agent/src/core/export-html/template.js:784:      // MESSAGE RENDERING
+packages/coding-agent/src/core/export-html/template.js:892:      function renderToolCall(call) {
+packages/coding-agent/src/core/export-html/template.js:908:        const renderResultImages = () => {
+packages/coding-agent/src/core/export-html/template.js:948:              html += renderResultImages();
+packages/coding-agent/src/core/export-html/template.js:1013:            // Check for pre-rendered custom tool HTML
+packages/coding-agent/src/core/export-html/template.js:1014:            const rendered = renderedTools?.[call.id];
+packages/coding-agent/src/core/export-html/template.js:1015:            if (rendered?.callHtml || rendered?.resultHtmlCollapsed || rendered?.resultHtmlExpanded) {
+packages/coding-agent/src/core/export-html/template.js:1016:              // Custom tool with pre-rendered HTML from TUI renderer
+packages/coding-agent/src/core/export-html/template.js:1017:              if (rendered.callHtml) {
+packages/coding-agent/src/core/export-html/template.js:1018:                html += `<div class="tool-header ansi-rendered">${rendered.callHtml}</div>`;
+packages/coding-agent/src/core/export-html/template.js:1023:              if (rendered.resultHtmlCollapsed && rendered.resultHtmlExpanded && rendered.resultHtmlCollapsed !== rendered.resultHtmlExpanded) {
+packages/coding-agent/src/core/export-html/template.js:1024:                // Both collapsed and expanded differ - render expandable section
+packages/coding-agent/src/core/export-html/template.js:1025:                html += `<div class="tool-output expandable ansi-rendered" onclick="if(window.getSelection().toString())return;this.classList.toggle('expanded')">
+packages/coding-agent/src/core/export-html/template.js:1026:                  <div class="output-preview">${rendered.resultHtmlCollapsed}</div>
+packages/coding-agent/src/core/export-html/template.js:1027:                  <div class="output-full">${rendered.resultHtmlExpanded}</div>
+packages/coding-agent/src/core/export-html/template.js:1029:              } else if (rendered.resultHtmlExpanded) {
+packages/coding-agent/src/core/export-html/template.js:1031:                html += `<div class="tool-output ansi-rendered">${rendered.resultHtmlExpanded}</div>`;
+packages/coding-agent/src/core/export-html/template.js:1033:                // No pre-rendered result HTML - fallback to JSON
+packages/coding-agent/src/core/export-html/template.js:1151:       * Render the copy-link button HTML for a message.
+packages/coding-agent/src/core/export-html/template.js:1153:      function renderCopyLinkButton(entryId) {
+packages/coding-agent/src/core/export-html/template.js:1162:      function renderEntry(entry) {
+packages/coding-agent/src/core/export-html/template.js:1166:        const copyBtnHtml = renderCopyLinkButton(entry.id);
+packages/coding-agent/src/core/export-html/template.js:1247:                html += renderToolCall(block);
+packages/coding-agent/src/core/export-html/template.js:1354:      function renderHeader() {
+packages/coding-agent/src/core/export-html/template.js:1392:        // Render system prompt (user's base prompt, applies to all providers)
+packages/coding-agent/src/core/export-html/template.js:1449:      // Cache for rendered entry DOM nodes
+packages/coding-agent/src/core/export-html/template.js:1456:          // were already resolved from the escaped id rendered by renderToolCall().
+packages/coding-agent/src/core/export-html/template.js:1462:      function renderEntryToNode(entry) {
+packages/coding-agent/src/core/export-html/template.js:1468:        // Render to HTML string, then parse to node
+packages/coding-agent/src/core/export-html/template.js:1469:        const html = renderEntry(entry);
+packages/coding-agent/src/core/export-html/template.js:1488:        renderTree();
+packages/coding-agent/src/core/export-html/template.js:1490:        document.getElementById('header-container').innerHTML = renderHeader();
+packages/coding-agent/src/core/export-html/template.js:1498:          const node = renderEntryToNode(entry);
+packages/coding-agent/src/core/export-html/template.js:1524:            // Tool result entries are rendered inside their assistant tool-call block,
+packages/coding-agent/src/core/export-html/template.js:1553:          // matching the TUI markdown renderer.
+packages/coding-agent/src/core/export-html/template.js:1571:        renderer: {
+packages/coding-agent/src/core/export-html/template.js:1626:      // Simple marked parse (escaping handled in renderers)
+packages/coding-agent/src/core/export-html/template.js:1635:        forceTreeRerender();
+packages/coding-agent/src/core/export-html/template.js:1644:          forceTreeRerender();
+packages/coding-agent/src/core/export-html/template.js:1838:      // Initial render
+packages/coding-agent/src/core/export-html/vendor/highlight.min.js:317:}),re=["a","abbr","address","article","aside","audio","b","blockquote","body","button","canvas","caption","cite","code","dd","del","details","dfn","div","dl","dt","em","fieldset","figcaption","figure","footer","form","h1","h2","h3","h4","h5","h6","header","hgroup","html","i","iframe","img","input","ins","kbd","label","legend","li","main","mark","menu","nav","object","ol","p","q","quote","samp","section","span","strong","summary","sup","table","tbody","td","textarea","tfoot","th","thead","time","tr","ul","var","video"],se=["any-hover","any-pointer","aspect-ratio","color","color-gamut","color-index","device-aspect-ratio","device-height","device-width","display-mode","forced-colors","grid","height","hover","inverted-colors","monochrome","orientation","overflow-block","overflow-inline","pointer","prefers-color-scheme","prefers-contrast","prefers-reduced-motion","prefers-reduced-transparency","resolution","scan","scripting","update","width","min-width","max-width","min-height","max-height"],oe=["active","any-link","blank","checked","current","default","defined","dir","disabled","drop","empty","enabled","first","first-child","first-of-type","fullscreen","future","focus","focus-visible","focus-within","has","host","host-context","hover","indeterminate","in-range","invalid","is","lang","last-child","last-of-type","left","link","local-link","not","nth-child","nth-col","nth-last-child","nth-last-col","nth-last-of-type","nth-of-type","only-child","only-of-type","optional","out-of-range","past","placeholder-shown","read-only","read-write","required","right","root","scope","target","target-within","user-invalid","valid","visited","where"],le=["after","backdrop","before","cue","cue-region","first-letter","first-line","grammar-error","marker","part","placeholder","selection","slotted","spelling-error"],ce=["align-content","align-items","align-self","all","animation","animation-delay","animation-direction","animation-duration","animation-fill-mode","animation-iteration-count","animation-name","animation-play-state","animation-timing-function","backface-visibility","background","background-attachment","background-blend-mode","background-clip","background-color","background-image","background-origin","background-position","background-repeat","background-size","block-size","border","border-block","border-block-color","border-block-end","border-block-end-color","border-block-end-style","border-block-end-width","border-block-start","border-block-start-color","border-block-start-style","border-block-start-width","border-block-style","border-block-width","border-bottom","border-bottom-color","border-bottom-left-radius","border-bottom-right-radius","border-bottom-style","border-bottom-width","border-collapse","border-color","border-image","border-image-outset","border-image-repeat","border-image-slice","border-image-source","border-image-width","border-inline","border-inline-color","border-inline-end","border-inline-end-color","border-inline-end-style","border-inline-end-width","border-inline-start","border-inline-start-color","border-inline-start-style","border-inline-start-width","border-inline-style","border-inline-width","border-left","border-left-color","border-left-style","border-left-width","border-radius","border-right","border-right-color","border-right-style","border-right-width","border-spacing","border-style","border-top","border-top-color","border-top-left-radius","border-top-right-radius","border-top-style","border-top-width","border-width","bottom","box-decoration-break","box-shadow","box-sizing","break-after","break-before","break-inside","caption-side","caret-color","clear","clip","clip-path","clip-rule","color","column-count","column-fill","column-gap","column-rule","column-rule-color","column-rule-style","column-rule-width","column-span","column-width","columns","contain","content","content-visibility","counter-increment","counter-reset","cue","cue-after","cue-before","cursor","direction","display","empty-cells","filter","flex","flex-basis","flex-direction","flex-flow","flex-grow","flex-shrink","flex-wrap","float","flow","font","font-display","font-family","font-feature-settings","font-kerning","font-language-override","font-size","font-size-adjust","font-smoothing","font-stretch","font-style","font-synthesis","font-variant","font-variant-caps","font-variant-east-asian","font-variant-ligatures","font-variant-numeric","font-variant-position","font-variation-settings","font-weight","gap","glyph-orientation-vertical","grid","grid-area","grid-auto-columns","grid-auto-flow","grid-auto-rows","grid-column","grid-column-end","grid-column-start","grid-gap","grid-row","grid-row-end","grid-row-start","grid-template","grid-template-areas","grid-template-columns","grid-template-rows","hanging-punctuation","height","hyphens","icon","image-orientation","image-rendering","image-resolution","ime-mode","inline-size","isolation","justify-content","left","letter-spacing","line-break","line-height","list-style","list-style-image","list-style-position","list-style-type","margin","margin-block","margin-block-end","margin-block-start","margin-bottom","margin-inline","margin-inline-end","margin-inline-start","margin-left","margin-right","margin-top","marks","mask","mask-border","mask-border-mode","mask-border-outset","mask-border-repeat","mask-border-slice","mask-border-source","mask-border-width","mask-clip","mask-composite","mask-image","mask-mode","mask-origin","mask-position","mask-repeat","mask-size","mask-type","max-block-size","max-height","max-inline-size","max-width","min-block-size","min-height","min-inline-size","min-width","mix-blend-mode","nav-down","nav-index","nav-left","nav-right","nav-up","none","normal","object-fit","object-position","opacity","order","orphans","outline","outline-color","outline-offset","outline-style","outline-width","overflow","overflow-wrap","overflow-x","overflow-y","padding","padding-block","padding-block-end","padding-block-start","padding-bottom","padding-inline","padding-inline-end","padding-inline-start","padding-left","padding-right","padding-top","page-break-after","page-break-before","page-break-inside","pause","pause-after","pause-before","perspective","perspective-origin","pointer-events","position","quotes","resize","rest","rest-after","rest-before","right","row-gap","scroll-margin","scroll-margin-block","scroll-margin-block-end","scroll-margin-block-start","scroll-margin-bottom","scroll-margin-inline","scroll-margin-inline-end","scroll-margin-inline-start","scroll-margin-left","scroll-margin-right","scroll-margin-top","scroll-padding","scroll-padding-block","scroll-padding-block-end","scroll-padding-block-start","scroll-padding-bottom","scroll-padding-inline","scroll-padding-inline-end","scroll-padding-inline-start","scroll-padding-left","scroll-padding-right","scroll-padding-top","scroll-snap-align","scroll-snap-stop","scroll-snap-type","scrollbar-color","scrollbar-gutter","scrollbar-width","shape-image-threshold","shape-margin","shape-outside","speak","speak-as","src","tab-size","table-layout","text-align","text-align-all","text-align-last","text-combine-upright","text-decoration","text-decoration-color","text-decoration-line","text-decoration-style","text-emphasis","text-emphasis-color","text-emphasis-position","text-emphasis-style","text-indent","text-justify","text-orientation","text-overflow","text-rendering","text-shadow","text-transform","text-underline-position","top","transform","transform-box","transform-origin","transform-style","transition","transition-delay","transition-duration","transition-property","transition-timing-function","unicode-bidi","vertical-align","visibility","voice-balance","voice-duration","voice-family","voice-pitch","voice-range","voice-rate","voice-stress","voice-volume","white-space","widows","width","will-change","word-break","word-spacing","word-wrap","writing-mode","z-index"].reverse(),de=oe.concat(le)
+packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:33: * provides plain AgentTool overrides that do not include prompt metadata or renderers.
+packages/coding-agent/src/core/tools/ls.ts:7:import type { ToolDefinition, ToolRenderResultOptions } from "../extensions/types.ts";
+packages/coding-agent/src/core/tools/ls.ts:9:import { getTextOutput, invalidArgText, shortenPath, str } from "./render-utils.ts";
+packages/coding-agent/src/core/tools/ls.ts:71:	options: ToolRenderResultOptions,
+packages/coding-agent/src/core/tools/ls.ts:214:		renderCall(args, theme, context) {
+packages/coding-agent/src/core/tools/ls.ts:219:		renderResult(result, options, theme, context) {
+packages/coding-agent/src/core/tools/grep.ts:10:import type { ToolDefinition, ToolRenderResultOptions } from "../extensions/types.ts";
+packages/coding-agent/src/core/tools/grep.ts:12:import { getTextOutput, invalidArgText, shortenPath, str } from "./render-utils.ts";
+packages/coding-agent/src/core/tools/grep.ts:92:	options: ToolRenderResultOptions,
+packages/coding-agent/src/core/tools/grep.ts:369:		renderCall(args, theme, context) {
+packages/coding-agent/src/core/tools/grep.ts:374:		renderResult(result, options, theme, context) {
+packages/coding-agent/src/core/tools/find.ts:9:import type { ToolDefinition, ToolRenderResultOptions } from "../extensions/types.ts";
+packages/coding-agent/src/core/tools/find.ts:11:import { getTextOutput, invalidArgText, shortenPath, str } from "./render-utils.ts";
+packages/coding-agent/src/core/tools/find.ts:83:	options: ToolRenderResultOptions,
+packages/coding-agent/src/core/tools/find.ts:354:		renderCall(args, theme, context) {
+packages/coding-agent/src/core/tools/find.ts:359:		renderResult(result, options, theme, context) {
+packages/coding-agent/src/core/tools/edit.ts:6:import { renderDiff } from "../../modes/interactive/components/diff.ts";
+packages/coding-agent/src/core/tools/edit.ts:23:import { invalidArgText, shortenPath, str } from "./render-utils.ts";
+packages/coding-agent/src/core/tools/edit.ts:28:type EditRenderState = {
+packages/coding-agent/src/core/tools/edit.ts:29:	callComponent?: EditCallRenderComponent;
+packages/coding-agent/src/core/tools/edit.ts:126:type RenderableEditArgs = {
+packages/coding-agent/src/core/tools/edit.ts:139:type EditCallRenderComponent = Box & {
+packages/coding-agent/src/core/tools/edit.ts:146:function createEditCallRenderComponent(): EditCallRenderComponent {
+packages/coding-agent/src/core/tools/edit.ts:155:function getEditCallRenderComponent(state: EditRenderState, lastComponent: unknown): EditCallRenderComponent {
+packages/coding-agent/src/core/tools/edit.ts:157:		const component = lastComponent as EditCallRenderComponent;
+packages/coding-agent/src/core/tools/edit.ts:164:	const component = createEditCallRenderComponent();
+packages/coding-agent/src/core/tools/edit.ts:169:function getRenderablePreviewInput(args: RenderableEditArgs | undefined): { path: string; edits: Edit[] } | null {
+packages/coding-agent/src/core/tools/edit.ts:195:	args: RenderableEditArgs | undefined,
+packages/coding-agent/src/core/tools/edit.ts:206:	args: RenderableEditArgs | undefined,
+packages/coding-agent/src/core/tools/edit.ts:228:		return renderDiff(resultDiff, { filePath: rawPath ?? undefined });
+packages/coding-agent/src/core/tools/edit.ts:252:	component: EditCallRenderComponent,
+packages/coding-agent/src/core/tools/edit.ts:253:	args: RenderableEditArgs | undefined,
+packages/coding-agent/src/core/tools/edit.ts:255:): EditCallRenderComponent {
+packages/coding-agent/src/core/tools/edit.ts:265:		"error" in component.preview ? theme.fg("error", component.preview.error) : renderDiff(component.preview.diff);
+packages/coding-agent/src/core/tools/edit.ts:272:	component: EditCallRenderComponent,
+packages/coding-agent/src/core/tools/edit.ts:294:): ToolDefinition<typeof editSchema, EditToolDetails | undefined, EditRenderState> {
+packages/coding-agent/src/core/tools/edit.ts:310:		renderShell: "self",
+packages/coding-agent/src/core/tools/edit.ts:367:		renderCall(args, theme, context) {
+packages/coding-agent/src/core/tools/edit.ts:368:			const component = getEditCallRenderComponent(context.state, context.lastComponent);
+packages/coding-agent/src/core/tools/edit.ts:369:			const previewInput = getRenderablePreviewInput(args as RenderableEditArgs | undefined);
+packages/coding-agent/src/core/tools/edit.ts:394:		renderResult(result, _options, theme, context) {
+packages/coding-agent/src/core/tools/edit.ts:396:			const previewInput = getRenderablePreviewInput(context.args as RenderableEditArgs | undefined);
+packages/coding-agent/src/core/tools/edit.ts:417:					buildEditCallComponent(callComponent, context.args as RenderableEditArgs | undefined, theme);
+packages/coding-agent/src/core/tools/read.ts:14:import type { ToolDefinition, ToolRenderResultOptions } from "../extensions/types.ts";
+packages/coding-agent/src/core/tools/read.ts:16:import { getTextOutput, invalidArgText, replaceTabs, shortenPath, str } from "./render-utils.ts";
+packages/coding-agent/src/core/tools/read.ts:65:type ReadRenderArgs = { path?: string; file_path?: string; offset?: number; limit?: number };
+packages/coding-agent/src/core/tools/read.ts:67:function formatReadLineRange(args: ReadRenderArgs | undefined, theme: Theme): string {
+packages/coding-agent/src/core/tools/read.ts:74:function formatReadCall(args: ReadRenderArgs | undefined, theme: Theme): string {
+packages/coding-agent/src/core/tools/read.ts:121:	args: ReadRenderArgs | undefined,
+packages/coding-agent/src/core/tools/read.ts:145:	args: ReadRenderArgs | undefined,
+packages/coding-agent/src/core/tools/read.ts:168:	args: ReadRenderArgs | undefined,
+packages/coding-agent/src/core/tools/read.ts:170:	options: ToolRenderResultOptions,
+packages/coding-agent/src/core/tools/read.ts:183:	const renderedLines = lang ? highlightCode(replaceTabs(output), lang) : output.split("\n");
+packages/coding-agent/src/core/tools/read.ts:184:	const lines = trimTrailingEmptyLines(renderedLines);
+packages/coding-agent/src/core/tools/read.ts:343:		renderCall(args, theme, context) {
+packages/coding-agent/src/core/tools/read.ts:351:		renderResult(result, options, theme, context) {
+packages/coding-agent/src/core/tools/bash.ts:18:import type { ToolDefinition, ToolRenderResultOptions } from "../extensions/types.ts";
+packages/coding-agent/src/core/tools/bash.ts:20:import { getTextOutput, invalidArgText, str } from "./render-utils.ts";
+packages/coding-agent/src/core/tools/bash.ts:155:type BashRenderState = {
+packages/coding-agent/src/core/tools/bash.ts:161:type BashResultRenderState = {
+packages/coding-agent/src/core/tools/bash.ts:167:class BashResultRenderComponent extends Container {
+packages/coding-agent/src/core/tools/bash.ts:168:	state: BashResultRenderState = {
+packages/coding-agent/src/core/tools/bash.ts:187:function rebuildBashResultRenderComponent(
+packages/coding-agent/src/core/tools/bash.ts:188:	component: BashResultRenderComponent,
+packages/coding-agent/src/core/tools/bash.ts:193:	options: ToolRenderResultOptions,
+packages/coding-agent/src/core/tools/bash.ts:221:				render: (width: number) => {
+packages/coding-agent/src/core/tools/bash.ts:272:): ToolDefinition<typeof bashSchema, BashToolDetails | undefined, BashRenderState> {
+packages/coding-agent/src/core/tools/bash.ts:405:		renderCall(args, _theme, context) {
+packages/coding-agent/src/core/tools/bash.ts:415:		renderResult(result, options, _theme, context) {
+packages/coding-agent/src/core/tools/bash.ts:428:				(context.lastComponent as BashResultRenderComponent | undefined) ?? new BashResultRenderComponent();
+packages/coding-agent/src/core/tools/bash.ts:429:			rebuildBashResultRenderComponent(
+
+[Showing lines 571-695 of 695 (50.0KB limit). Full output: /var/folders/7m/csfvhz791k527kby7nxl7cbc0000h_/T/pi-bash-feb33da6d0e95898.log]

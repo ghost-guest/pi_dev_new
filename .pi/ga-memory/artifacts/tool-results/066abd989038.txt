@@ -1,0 +1,478 @@
+packages/ai/src/providers/register-builtins.ts:385:		streamSimple: streamSimpleGoogle,
+packages/ai/src/providers/register-builtins.ts:390:		stream: streamGoogleVertex,
+packages/ai/src/providers/register-builtins.ts:391:		streamSimple: streamSimpleGoogleVertex,
+packages/ai/src/providers/register-builtins.ts:395:		api: "bedrock-converse-stream",
+packages/ai/src/providers/register-builtins.ts:396:		stream: streamBedrockLazy,
+packages/ai/src/providers/register-builtins.ts:397:		streamSimple: streamSimpleBedrockLazy,
+packages/ai/src/providers/openai-completions.ts:33:import { AssistantMessageEventStream } from "../utils/event-stream.ts";
+packages/ai/src/providers/openai-completions.ts:112:export const streamOpenAICompletions: StreamFunction<"openai-completions", OpenAICompletionsOptions> = (
+packages/ai/src/providers/openai-completions.ts:117:	const stream = new AssistantMessageEventStream();
+packages/ai/src/providers/openai-completions.ts:158:			stream.push({ type: "start", partial: output });
+packages/ai/src/providers/openai-completions.ts:162:				streamIndex?: number;
+packages/ai/src/providers/openai-completions.ts:180:					stream.push({
+packages/ai/src/providers/openai-completions.ts:187:					stream.push({
+packages/ai/src/providers/openai-completions.ts:198:					delete block.streamIndex;
+packages/ai/src/providers/openai-completions.ts:199:					stream.push({
+packages/ai/src/providers/openai-completions.ts:211:					stream.push({ type: "text_start", contentIndex: getContentIndex(textBlock), partial: output });
+packages/ai/src/providers/openai-completions.ts:223:					stream.push({ type: "thinking_start", contentIndex: getContentIndex(thinkingBlock), partial: output });
+packages/ai/src/providers/openai-completions.ts:228:				const streamIndex = typeof toolCall.index === "number" ? toolCall.index : undefined;
+packages/ai/src/providers/openai-completions.ts:229:				let block = streamIndex !== undefined ? toolCallBlocksByIndex.get(streamIndex) : undefined;
+packages/ai/src/providers/openai-completions.ts:240:						streamIndex,
+packages/ai/src/providers/openai-completions.ts:242:					if (streamIndex !== undefined) {
+packages/ai/src/providers/openai-completions.ts:243:						toolCallBlocksByIndex.set(streamIndex, block);
+packages/ai/src/providers/openai-completions.ts:249:					stream.push({
+packages/ai/src/providers/openai-completions.ts:255:				if (streamIndex !== undefined && block.streamIndex === undefined) {
+packages/ai/src/providers/openai-completions.ts:256:					block.streamIndex = streamIndex;
+packages/ai/src/providers/openai-completions.ts:257:					toolCallBlocksByIndex.set(streamIndex, block);
+packages/ai/src/providers/openai-completions.ts:269:				// and each chunk in a streamed completion carries the same id.
+packages/ai/src/providers/openai-completions.ts:304:						stream.push({
+packages/ai/src/providers/openai-completions.ts:336:							stream.push({
+packages/ai/src/providers/openai-completions.ts:362:							stream.push({
+packages/ai/src/providers/openai-completions.ts:404:			stream.push({ type: "done", reason: output.stopReason, message: output });
+packages/ai/src/providers/openai-completions.ts:405:			stream.end();
+packages/ai/src/providers/openai-completions.ts:411:				delete (block as { streamIndex?: number }).streamIndex;
+packages/ai/src/providers/openai-completions.ts:415:			// Some providers via OpenRouter give additional information in this field.
+packages/ai/src/providers/openai-completions.ts:418:			stream.push({ type: "error", reason: output.stopReason, error: output });
+packages/ai/src/providers/openai-completions.ts:419:			stream.end();
+packages/ai/src/providers/openai-completions.ts:423:	return stream;
+packages/ai/src/providers/openai-completions.ts:426:export const streamSimpleOpenAICompletions: StreamFunction<"openai-completions", SimpleStreamOptions> = (
+packages/ai/src/providers/openai-completions.ts:441:	return streamOpenAICompletions(model, context, {
+packages/ai/src/providers/openai-completions.ts:516:		stream: true,
+packages/ai/src/providers/openai-completions.ts:526:		(params as any).stream_options = { include_usage: true };
+packages/ai/src/providers/openai-completions.ts:548:			(params as any).tool_stream = true;
+packages/ai/src/providers/openai-completions.ts:578:	} else if (compat.thinkingFormat === "openrouter" && model.reasoning) {
+packages/ai/src/providers/openai-completions.ts:579:		// OpenRouter normalizes reasoning across providers via a nested reasoning object.
+packages/ai/src/providers/openai-completions.ts:607:	// OpenRouter provider routing preferences
+packages/ai/src/providers/openai-completions.ts:608:	if (model.baseUrl.includes("openrouter.ai") && model.compat?.openRouterRouting) {
+packages/ai/src/providers/openai-completions.ts:1016:	// Follow documented OpenAI/OpenRouter semantics: cached_tokens is cache-read
+packages/ai/src/providers/openai-completions.ts:1018:	// OpenRouter-compatible providers can include it as a separate write count.
+packages/ai/src/providers/openai-completions.ts:1019:	// OpenRouter's own provider/tests affirm the separate mapping:
+packages/ai/src/providers/openai-completions.ts:1020:	// https://github.com/OpenRouterTeam/ai-sdk-provider/pull/409
+packages/ai/src/providers/openai-completions.ts:1100:	const cacheControlFormat = provider === "openrouter" && model.id.startsWith("anthropic/") ? "anthropic" : undefined;
+packages/ai/src/providers/openai-completions.ts:1118:					: provider === "openrouter" || baseUrl.includes("openrouter.ai")
+packages/ai/src/providers/openai-completions.ts:1119:						? "openrouter"
+packages/ai/src/providers/openai-responses.ts:17:import { AssistantMessageEventStream } from "../utils/event-stream.ts";
+packages/ai/src/providers/openai-responses.ts:81:export const streamOpenAIResponses: StreamFunction<"openai-responses", OpenAIResponsesOptions> = (
+packages/ai/src/providers/openai-responses.ts:86:	const stream = new AssistantMessageEventStream();
+packages/ai/src/providers/openai-responses.ts:126:			stream.push({ type: "start", partial: output });
+packages/ai/src/providers/openai-responses.ts:128:			await processResponsesStream(openaiStream, output, stream, model, {
+packages/ai/src/providers/openai-responses.ts:141:			stream.push({ type: "done", reason: output.stopReason, message: output });
+packages/ai/src/providers/openai-responses.ts:142:			stream.end();
+packages/ai/src/providers/openai-responses.ts:146:				// partialJson is only a streaming scratch buffer; never persist it.
+packages/ai/src/providers/openai-responses.ts:151:			stream.push({ type: "error", reason: output.stopReason, error: output });
+packages/ai/src/providers/openai-responses.ts:152:			stream.end();
+packages/ai/src/providers/openai-responses.ts:156:	return stream;
+packages/ai/src/providers/openai-responses.ts:159:export const streamSimpleOpenAIResponses: StreamFunction<"openai-responses", SimpleStreamOptions> = (
+packages/ai/src/providers/openai-responses.ts:173:	return streamOpenAIResponses(model, context, {
+packages/ai/src/providers/openai-responses.ts:243:		stream: true,
+packages/ai/src/providers/openai-responses.ts:293:			return model.id === "gpt-5.5" ? 2.5 : 2;
+packages/ai/src/providers/google-shared.ts:19: * Determines whether a streamed Gemini `Part` should be treated as "thinking".
+packages/ai/src/providers/google-shared.ts:38: * Retain thought signatures during streaming.
+packages/ai/src/providers/google-shared.ts:44: * a signature from being overwritten with `undefined` within the same streamed block.
+packages/ai/src/providers/google-shared.ts:19: * Determines whether a streamed Gemini `Part` should be treated as "thinking".
+packages/ai/src/providers/google-shared.ts:38: * Retain thought signatures during streaming.
+packages/ai/src/providers/google-shared.ts:44: * a signature from being overwritten with `undefined` within the same streamed block.
+packages/ai/src/providers/images/register-builtins.ts:3:import type { generateImagesOpenRouter as generateImagesOpenRouterFunction } from "./openrouter.ts";
+packages/ai/src/providers/images/register-builtins.ts:5:interface OpenRouterImagesProviderModule {
+packages/ai/src/providers/images/register-builtins.ts:6:	generateImagesOpenRouter: typeof generateImagesOpenRouterFunction;
+packages/ai/src/providers/images/register-builtins.ts:9:let openRouterImagesProviderModulePromise: Promise<OpenRouterImagesProviderModule> | undefined;
+packages/ai/src/providers/images/register-builtins.ts:11:function createLazyLoadErrorImages(model: ImagesModel<"openrouter-images">, error: unknown): AssistantImages {
+packages/ai/src/providers/images/register-builtins.ts:23:function loadOpenRouterImagesProviderModule(): Promise<OpenRouterImagesProviderModule> {
+packages/ai/src/providers/images/register-builtins.ts:24:	openRouterImagesProviderModulePromise ||= import("./openrouter.ts").then(
+packages/ai/src/providers/images/register-builtins.ts:25:		(module) => module as OpenRouterImagesProviderModule,
+packages/ai/src/providers/images/register-builtins.ts:30:export const generateImagesOpenRouter: ImagesFunction<"openrouter-images", ImagesOptions> = async (
+packages/ai/src/providers/images/register-builtins.ts:31:	model: ImagesModel<"openrouter-images">,
+packages/ai/src/providers/images/register-builtins.ts:36:		const module = await loadOpenRouterImagesProviderModule();
+packages/ai/src/providers/images/register-builtins.ts:37:		return await module.generateImagesOpenRouter(model, context, options);
+packages/ai/src/providers/images/register-builtins.ts:45:		api: "openrouter-images",
+packages/ai/src/providers/images/register-builtins.ts:46:		generateImages: generateImagesOpenRouter,
+packages/ai/src/providers/images/register-builtins.ts:3:import type { generateImagesOpenRouter as generateImagesOpenRouterFunction } from "./openrouter.ts";
+packages/ai/src/providers/images/register-builtins.ts:5:interface OpenRouterImagesProviderModule {
+packages/ai/src/providers/images/register-builtins.ts:6:	generateImagesOpenRouter: typeof generateImagesOpenRouterFunction;
+packages/ai/src/providers/images/register-builtins.ts:9:let openRouterImagesProviderModulePromise: Promise<OpenRouterImagesProviderModule> | undefined;
+packages/ai/src/providers/images/register-builtins.ts:11:function createLazyLoadErrorImages(model: ImagesModel<"openrouter-images">, error: unknown): AssistantImages {
+packages/ai/src/providers/images/register-builtins.ts:23:function loadOpenRouterImagesProviderModule(): Promise<OpenRouterImagesProviderModule> {
+packages/ai/src/providers/images/register-builtins.ts:24:	openRouterImagesProviderModulePromise ||= import("./openrouter.ts").then(
+packages/ai/src/providers/images/register-builtins.ts:25:		(module) => module as OpenRouterImagesProviderModule,
+packages/ai/src/providers/images/register-builtins.ts:30:export const generateImagesOpenRouter: ImagesFunction<"openrouter-images", ImagesOptions> = async (
+packages/ai/src/providers/images/register-builtins.ts:31:	model: ImagesModel<"openrouter-images">,
+packages/ai/src/providers/images/register-builtins.ts:36:		const module = await loadOpenRouterImagesProviderModule();
+packages/ai/src/providers/images/register-builtins.ts:37:		return await module.generateImagesOpenRouter(model, context, options);
+packages/ai/src/providers/images/register-builtins.ts:45:		api: "openrouter-images",
+packages/ai/src/providers/images/register-builtins.ts:46:		generateImages: generateImagesOpenRouter,
+packages/coding-agent/src/core/bash-executor.ts:2: * Bash command execution with streaming support and cancellation.
+packages/coding-agent/src/core/bash-executor.ts:23:	/** Callback for streaming output chunks (already sanitized) */
+packages/coding-agent/src/core/bash-executor.ts:82:		const text = sanitizeBinaryOutput(stripAnsi(decoder.decode(data, { stream: true }))).replace(/\r/g, "");
+packages/ai/src/providers/images/openrouter.ts:22:interface OpenRouterGeneratedImage {
+packages/ai/src/providers/images/openrouter.ts:26:type OpenRouterImageGenerationMessage = ChatCompletion["choices"][number]["message"] & {
+packages/ai/src/providers/images/openrouter.ts:27:	images?: OpenRouterGeneratedImage[];
+packages/ai/src/providers/images/openrouter.ts:30:type OpenRouterImageGenerationChoice = ChatCompletion["choices"][number] & {
+packages/ai/src/providers/images/openrouter.ts:31:	message: OpenRouterImageGenerationMessage;
+packages/ai/src/providers/images/openrouter.ts:34:type OpenRouterImageGenerationResponse = ChatCompletion & {
+packages/ai/src/providers/images/openrouter.ts:35:	choices: OpenRouterImageGenerationChoice[];
+packages/ai/src/providers/images/openrouter.ts:38:export const generateImagesOpenRouter: ImagesFunction<"openrouter-images", ImagesOptions> = async (
+packages/ai/src/providers/images/openrouter.ts:39:	model: ImagesModel<"openrouter-images">,
+packages/ai/src/providers/images/openrouter.ts:73:		const imageResponse = response as OpenRouterImageGenerationResponse;
+packages/ai/src/providers/images/openrouter.ts:108:	model: ImagesModel<"openrouter-images">,
+packages/ai/src/providers/images/openrouter.ts:123:type OpenRouterImagesCreateParams = Omit<ChatCompletionCreateParamsNonStreaming, "modalities"> & {
+packages/ai/src/providers/images/openrouter.ts:127:function buildParams(model: ImagesModel<"openrouter-images">, context: ImagesContext): OpenRouterImagesCreateParams {
+packages/ai/src/providers/images/openrouter.ts:151:		stream: false,
+packages/ai/src/providers/images/openrouter.ts:162:	model: ImagesModel<"openrouter-images">,
+packages/ai/src/providers/images/openrouter.ts:22:interface OpenRouterGeneratedImage {
+packages/ai/src/providers/images/openrouter.ts:26:type OpenRouterImageGenerationMessage = ChatCompletion["choices"][number]["message"] & {
+packages/ai/src/providers/images/openrouter.ts:27:	images?: OpenRouterGeneratedImage[];
+packages/ai/src/providers/images/openrouter.ts:30:type OpenRouterImageGenerationChoice = ChatCompletion["choices"][number] & {
+packages/ai/src/providers/images/openrouter.ts:31:	message: OpenRouterImageGenerationMessage;
+packages/ai/src/providers/images/openrouter.ts:34:type OpenRouterImageGenerationResponse = ChatCompletion & {
+packages/ai/src/providers/images/openrouter.ts:35:	choices: OpenRouterImageGenerationChoice[];
+packages/ai/src/providers/images/openrouter.ts:38:export const generateImagesOpenRouter: ImagesFunction<"openrouter-images", ImagesOptions> = async (
+packages/ai/src/providers/images/openrouter.ts:39:	model: ImagesModel<"openrouter-images">,
+packages/ai/src/providers/images/openrouter.ts:73:		const imageResponse = response as OpenRouterImageGenerationResponse;
+packages/ai/src/providers/images/openrouter.ts:108:	model: ImagesModel<"openrouter-images">,
+packages/ai/src/providers/images/openrouter.ts:123:type OpenRouterImagesCreateParams = Omit<ChatCompletionCreateParamsNonStreaming, "modalities"> & {
+packages/ai/src/providers/images/openrouter.ts:127:function buildParams(model: ImagesModel<"openrouter-images">, context: ImagesContext): OpenRouterImagesCreateParams {
+packages/ai/src/providers/images/openrouter.ts:151:		stream: false,
+packages/ai/src/providers/images/openrouter.ts:162:	model: ImagesModel<"openrouter-images">,
+packages/ai/src/providers/google.ts:23:import { AssistantMessageEventStream } from "../utils/event-stream.ts";
+packages/ai/src/providers/google.ts:48:export const streamGoogle: StreamFunction<"google-generative-ai", GoogleOptions> = (
+packages/ai/src/providers/google.ts:53:	const stream = new AssistantMessageEventStream();
+packages/ai/src/providers/google.ts:84:			stream.push({ type: "start", partial: output });
+packages/ai/src/providers/google.ts:90:				// used to identify each response. Keep the first non-empty one from the stream.
+packages/ai/src/providers/google.ts:104:										stream.push({
+packages/ai/src/providers/google.ts:111:										stream.push({
+packages/ai/src/providers/google.ts:122:									stream.push({ type: "thinking_start", contentIndex: blockIndex(), partial: output });
+packages/ai/src/providers/google.ts:126:									stream.push({ type: "text_start", contentIndex: blockIndex(), partial: output });
+packages/ai/src/providers/google.ts:135:								stream.push({
+packages/ai/src/providers/google.ts:147:								stream.push({
+packages/ai/src/providers/google.ts:159:									stream.push({
+packages/ai/src/providers/google.ts:166:									stream.push({
+packages/ai/src/providers/google.ts:193:							stream.push({ type: "toolcall_start", contentIndex: blockIndex(), partial: output });
+packages/ai/src/providers/google.ts:194:							stream.push({
+packages/ai/src/providers/google.ts:200:							stream.push({ type: "toolcall_end", contentIndex: blockIndex(), toolCall, partial: output });
+packages/ai/src/providers/google.ts:235:					stream.push({
+packages/ai/src/providers/google.ts:242:					stream.push({
+packages/ai/src/providers/google.ts:259:			stream.push({ type: "done", reason: output.stopReason, message: output });
+packages/ai/src/providers/google.ts:260:			stream.end();
+packages/ai/src/providers/google.ts:262:			// Remove internal index property used during streaming
+packages/ai/src/providers/google.ts:270:			stream.push({ type: "error", reason: output.stopReason, error: output });
+packages/ai/src/providers/google.ts:271:			stream.end();
+packages/ai/src/providers/google.ts:275:	return stream;
+packages/ai/src/providers/google.ts:278:export const streamSimpleGoogle: StreamFunction<"google-generative-ai", SimpleStreamOptions> = (
+packages/ai/src/providers/google.ts:290:		return streamGoogle(model, context, { ...base, thinking: { enabled: false } } satisfies GoogleOptions);
+packages/ai/src/providers/google.ts:298:		return streamGoogle(model, context, {
+packages/ai/src/providers/google.ts:307:	return streamGoogle(model, context, {
+packages/ai/src/providers/google.ts:23:import { AssistantMessageEventStream } from "../utils/event-stream.ts";
+packages/ai/src/providers/google.ts:48:export const streamGoogle: StreamFunction<"google-generative-ai", GoogleOptions> = (
+packages/ai/src/providers/google.ts:53:	const stream = new AssistantMessageEventStream();
+packages/ai/src/providers/google.ts:84:			stream.push({ type: "start", partial: output });
+packages/ai/src/providers/google.ts:90:				// used to identify each response. Keep the first non-empty one from the stream.
+packages/ai/src/providers/google.ts:104:										stream.push({
+packages/ai/src/providers/google.ts:111:										stream.push({
+packages/ai/src/providers/google.ts:122:									stream.push({ type: "thinking_start", contentIndex: blockIndex(), partial: output });
+packages/ai/src/providers/google.ts:126:									stream.push({ type: "text_start", contentIndex: blockIndex(), partial: output });
+packages/ai/src/providers/google.ts:135:								stream.push({
+packages/ai/src/providers/google.ts:147:								stream.push({
+packages/ai/src/providers/google.ts:159:									stream.push({
+packages/ai/src/providers/google.ts:166:									stream.push({
+packages/ai/src/providers/google.ts:193:							stream.push({ type: "toolcall_start", contentIndex: blockIndex(), partial: output });
+packages/ai/src/providers/google.ts:194:							stream.push({
+packages/ai/src/providers/google.ts:200:							stream.push({ type: "toolcall_end", contentIndex: blockIndex(), toolCall, partial: output });
+packages/ai/src/providers/google.ts:235:					stream.push({
+packages/ai/src/providers/google.ts:242:					stream.push({
+packages/ai/src/providers/google.ts:259:			stream.push({ type: "done", reason: output.stopReason, message: output });
+packages/ai/src/providers/google.ts:260:			stream.end();
+packages/ai/src/providers/google.ts:262:			// Remove internal index property used during streaming
+packages/ai/src/providers/google.ts:270:			stream.push({ type: "error", reason: output.stopReason, error: output });
+packages/ai/src/providers/google.ts:271:			stream.end();
+packages/ai/src/providers/google.ts:275:	return stream;
+packages/ai/src/providers/google.ts:278:export const streamSimpleGoogle: StreamFunction<"google-generative-ai", SimpleStreamOptions> = (
+packages/ai/src/providers/google.ts:290:		return streamGoogle(model, context, { ...base, thinking: { enabled: false } } satisfies GoogleOptions);
+packages/ai/src/providers/google.ts:298:		return streamGoogle(model, context, {
+packages/ai/src/providers/google.ts:307:	return streamGoogle(model, context, {
+packages/ai/src/providers/faux.ts:18:import { createAssistantMessageEventStream } from "../utils/event-stream.ts";
+packages/ai/src/providers/faux.ts:296:async function streamWithDeltas(
+packages/ai/src/providers/faux.ts:297:	stream: AssistantMessageEventStream,
+packages/ai/src/providers/faux.ts:307:		stream.push({ type: "error", reason: "aborted", error: aborted });
+packages/ai/src/providers/faux.ts:308:		stream.end(aborted);
+packages/ai/src/providers/faux.ts:312:	stream.push({ type: "start", partial: { ...partial } });
+packages/ai/src/providers/faux.ts:317:			stream.push({ type: "error", reason: "aborted", error: aborted });
+packages/ai/src/providers/faux.ts:318:			stream.end(aborted);
+packages/ai/src/providers/faux.ts:326:			stream.push({ type: "thinking_start", contentIndex: index, partial: { ...partial } });
+packages/ai/src/providers/faux.ts:331:					stream.push({ type: "error", reason: "aborted", error: aborted });
+packages/ai/src/providers/faux.ts:332:					stream.end(aborted);
+packages/ai/src/providers/faux.ts:336:				stream.push({ type: "thinking_delta", contentIndex: index, delta: chunk, partial: { ...partial } });
+packages/ai/src/providers/faux.ts:338:			stream.push({
+packages/ai/src/providers/faux.ts:349:			stream.push({ type: "text_start", contentIndex: index, partial: { ...partial } });
+packages/ai/src/providers/faux.ts:354:					stream.push({ type: "error", reason: "aborted", error: aborted });
+packages/ai/src/providers/faux.ts:355:					stream.end(aborted);
+packages/ai/src/providers/faux.ts:359:				stream.push({ type: "text_delta", contentIndex: index, delta: chunk, partial: { ...partial } });
+packages/ai/src/providers/faux.ts:361:			stream.push({ type: "text_end", contentIndex: index, content: block.text, partial: { ...partial } });
+packages/ai/src/providers/faux.ts:366:		stream.push({ type: "toolcall_start", contentIndex: index, partial: { ...partial } });
+packages/ai/src/providers/faux.ts:371:				stream.push({ type: "error", reason: "aborted", error: aborted });
+packages/ai/src/providers/faux.ts:372:				stream.end(aborted);
+packages/ai/src/providers/faux.ts:375:			stream.push({ type: "toolcall_delta", contentIndex: index, delta: chunk, partial: { ...partial } });
+packages/ai/src/providers/faux.ts:378:		stream.push({ type: "toolcall_end", contentIndex: index, toolCall: block, partial: { ...partial } });
+packages/ai/src/providers/faux.ts:382:		stream.push({ type: "error", reason: message.stopReason, error: message });
+packages/ai/src/providers/faux.ts:383:		stream.end(message);
+packages/ai/src/providers/faux.ts:387:	stream.push({ type: "done", reason: message.stopReason, message });
+packages/ai/src/providers/faux.ts:388:	stream.end(message);
+packages/ai/src/providers/faux.ts:431:	const stream: StreamFunction<string, StreamOptions> = (requestModel, context, streamOptions) => {
+packages/ai/src/providers/faux.ts:438:				await streamOptions?.onResponse?.({ status: 200, headers: {} }, requestModel);
+packages/ai/src/providers/faux.ts:446:					message = withUsageEstimate(message, context, streamOptions, promptCache);
+packages/ai/src/providers/faux.ts:453:					typeof step === "function" ? await step(context, streamOptions, state, requestModel) : step;
+packages/ai/src/providers/faux.ts:455:				message = withUsageEstimate(message, context, streamOptions, promptCache);
+packages/ai/src/providers/faux.ts:456:				await streamWithDeltas(outer, message, minTokenSize, maxTokenSize, tokensPerSecond, streamOptions?.signal);
+packages/ai/src/providers/faux.ts:467:	const streamSimple: StreamFunction<string, SimpleStreamOptions> = (streamModel, context, streamOptions) =>
+packages/ai/src/providers/faux.ts:468:		stream(streamModel, context, streamOptions);
+packages/ai/src/providers/faux.ts:470:	registerApiProvider({ api, stream, streamSimple }, sourceId);
+packages/ai/src/providers/faux.ts:18:import { createAssistantMessageEventStream } from "../utils/event-stream.ts";
+packages/ai/src/providers/faux.ts:296:async function streamWithDeltas(
+packages/ai/src/providers/faux.ts:297:	stream: AssistantMessageEventStream,
+packages/ai/src/providers/faux.ts:307:		stream.push({ type: "error", reason: "aborted", error: aborted });
+packages/ai/src/providers/faux.ts:308:		stream.end(aborted);
+packages/ai/src/providers/faux.ts:312:	stream.push({ type: "start", partial: { ...partial } });
+packages/ai/src/providers/faux.ts:317:			stream.push({ type: "error", reason: "aborted", error: aborted });
+packages/ai/src/providers/faux.ts:318:			stream.end(aborted);
+packages/ai/src/providers/faux.ts:326:			stream.push({ type: "thinking_start", contentIndex: index, partial: { ...partial } });
+packages/ai/src/providers/faux.ts:331:					stream.push({ type: "error", reason: "aborted", error: aborted });
+packages/ai/src/providers/faux.ts:332:					stream.end(aborted);
+packages/ai/src/providers/faux.ts:336:				stream.push({ type: "thinking_delta", contentIndex: index, delta: chunk, partial: { ...partial } });
+packages/ai/src/providers/faux.ts:338:			stream.push({
+packages/ai/src/providers/faux.ts:349:			stream.push({ type: "text_start", contentIndex: index, partial: { ...partial } });
+packages/ai/src/providers/faux.ts:354:					stream.push({ type: "error", reason: "aborted", error: aborted });
+packages/ai/src/providers/faux.ts:355:					stream.end(aborted);
+packages/ai/src/providers/faux.ts:359:				stream.push({ type: "text_delta", contentIndex: index, delta: chunk, partial: { ...partial } });
+packages/ai/src/providers/faux.ts:361:			stream.push({ type: "text_end", contentIndex: index, content: block.text, partial: { ...partial } });
+packages/ai/src/providers/faux.ts:366:		stream.push({ type: "toolcall_start", contentIndex: index, partial: { ...partial } });
+packages/ai/src/providers/faux.ts:371:				stream.push({ type: "error", reason: "aborted", error: aborted });
+packages/ai/src/providers/faux.ts:372:				stream.end(aborted);
+packages/ai/src/providers/faux.ts:375:			stream.push({ type: "toolcall_delta", contentIndex: index, delta: chunk, partial: { ...partial } });
+packages/ai/src/providers/faux.ts:378:		stream.push({ type: "toolcall_end", contentIndex: index, toolCall: block, partial: { ...partial } });
+packages/ai/src/providers/faux.ts:382:		stream.push({ type: "error", reason: message.stopReason, error: message });
+packages/ai/src/providers/faux.ts:383:		stream.end(message);
+packages/ai/src/providers/faux.ts:387:	stream.push({ type: "done", reason: message.stopReason, message });
+packages/ai/src/providers/faux.ts:388:	stream.end(message);
+packages/ai/src/providers/faux.ts:431:	const stream: StreamFunction<string, StreamOptions> = (requestModel, context, streamOptions) => {
+packages/ai/src/providers/faux.ts:438:				await streamOptions?.onResponse?.({ status: 200, headers: {} }, requestModel);
+packages/ai/src/providers/faux.ts:446:					message = withUsageEstimate(message, context, streamOptions, promptCache);
+packages/ai/src/providers/faux.ts:453:					typeof step === "function" ? await step(context, streamOptions, state, requestModel) : step;
+packages/ai/src/providers/faux.ts:455:				message = withUsageEstimate(message, context, streamOptions, promptCache);
+packages/ai/src/providers/faux.ts:456:				await streamWithDeltas(outer, message, minTokenSize, maxTokenSize, tokensPerSecond, streamOptions?.signal);
+packages/ai/src/providers/faux.ts:467:	const streamSimple: StreamFunction<string, SimpleStreamOptions> = (streamModel, context, streamOptions) =>
+packages/ai/src/providers/faux.ts:468:		stream(streamModel, context, streamOptions);
+packages/ai/src/providers/faux.ts:470:	registerApiProvider({ api, stream, streamSimple }, sourceId);
+packages/ai/src/providers/google-vertex.ts:25:import { AssistantMessageEventStream } from "../utils/event-stream.ts";
+packages/ai/src/providers/google-vertex.ts:63:export const streamGoogleVertex: StreamFunction<"google-vertex", GoogleVertexOptions> = (
+packages/ai/src/providers/google-vertex.ts:68:	const stream = new AssistantMessageEventStream();
+packages/ai/src/providers/google-vertex.ts:102:			stream.push({ type: "start", partial: output });
+packages/ai/src/providers/google-vertex.ts:122:										stream.push({
+packages/ai/src/providers/google-vertex.ts:129:										stream.push({
+packages/ai/src/providers/google-vertex.ts:140:									stream.push({ type: "thinking_start", contentIndex: blockIndex(), partial: output });
+packages/ai/src/providers/google-vertex.ts:144:									stream.push({ type: "text_start", contentIndex: blockIndex(), partial: output });
+packages/ai/src/providers/google-vertex.ts:153:								stream.push({
+packages/ai/src/providers/google-vertex.ts:165:								stream.push({
+packages/ai/src/providers/google-vertex.ts:177:									stream.push({
+packages/ai/src/providers/google-vertex.ts:184:									stream.push({
+packages/ai/src/providers/google-vertex.ts:210:							stream.push({ type: "toolcall_start", contentIndex: blockIndex(), partial: output });
+packages/ai/src/providers/google-vertex.ts:211:							stream.push({
+packages/ai/src/providers/google-vertex.ts:217:							stream.push({ type: "toolcall_end", contentIndex: blockIndex(), toolCall, partial: output });
+packages/ai/src/providers/google-vertex.ts:252:					stream.push({
+packages/ai/src/providers/google-vertex.ts:259:					stream.push({
+packages/ai/src/providers/google-vertex.ts:276:			stream.push({ type: "done", reason: output.stopReason, message: output });
+packages/ai/src/providers/google-vertex.ts:277:			stream.end();
+packages/ai/src/providers/google-vertex.ts:279:			// Remove internal index property used during streaming
+packages/ai/src/providers/google-vertex.ts:287:			stream.push({ type: "error", reason: output.stopReason, error: output });
+packages/ai/src/providers/google-vertex.ts:288:			stream.end();
+packages/ai/src/providers/google-vertex.ts:292:	return stream;
+packages/ai/src/providers/google-vertex.ts:295:export const streamSimpleGoogleVertex: StreamFunction<"google-vertex", SimpleStreamOptions> = (
+packages/ai/src/providers/google-vertex.ts:302:		return streamGoogleVertex(model, context, {
+packages/ai/src/providers/google-vertex.ts:313:		return streamGoogleVertex(model, context, {
+packages/ai/src/providers/google-vertex.ts:322:	return streamGoogleVertex(model, context, {
+packages/coding-agent/src/core/extensions/types.ts:108:/** Working indicator configuration for the interactive streaming loader. */
+packages/coding-agent/src/core/extensions/types.ts:143:	/** Set the working/loading message shown during streaming. Call with no argument to restore default. */
+packages/coding-agent/src/core/extensions/types.ts:146:	/** Show or hide the built-in interactive working loader row during streaming. */
+packages/coding-agent/src/core/extensions/types.ts:150:	 * Configure the interactive working indicator shown during streaming.
+packages/coding-agent/src/core/extensions/types.ts:311:	/** Whether the agent is idle (not streaming) */
+packages/coding-agent/src/core/extensions/types.ts:313:	/** The current abort signal, or undefined when the agent is not streaming. */
+packages/coding-agent/src/core/extensions/types.ts:334:	/** Wait for the agent to finish streaming */
+packages/coding-agent/src/core/extensions/types.ts:391:	/** Whether this is a partial/streaming result */
+packages/coding-agent/src/core/extensions/types.ts:413:	/** Whether the tool result is partial/streaming. */
+packages/coding-agent/src/core/extensions/types.ts:616:/** Fired after a provider response is received and before the response stream is consumed. */
+packages/coding-agent/src/core/extensions/types.ts:668:/** Fired during assistant message streaming with token-by-token updates */
+packages/coding-agent/src/core/extensions/types.ts:689:/** Fired during tool execution with partial/streaming output */
+packages/coding-agent/src/core/extensions/types.ts:1185:	 * When the agent is streaming, use deliverAs to specify how to queue the message.
+packages/coding-agent/src/core/extensions/types.ts:1246:	 * If `streamSimple` is provided: registers a custom API stream handler.
+packages/coding-agent/src/core/extensions/types.ts:1327:	/** Optional streamSimple handler for custom APIs. */
+packages/coding-agent/src/core/extensions/types.ts:1328:	streamSimple?: (model: Model<Api>, context: Context, options?: SimpleStreamOptions) => AssistantMessageEventStream;
+packages/coding-agent/src/core/extensions/types.ts:108:/** Working indicator configuration for the interactive streaming loader. */
+packages/coding-agent/src/core/extensions/types.ts:143:	/** Set the working/loading message shown during streaming. Call with no argument to restore default. */
+packages/coding-agent/src/core/extensions/types.ts:146:	/** Show or hide the built-in interactive working loader row during streaming. */
+packages/coding-agent/src/core/extensions/types.ts:150:	 * Configure the interactive working indicator shown during streaming.
+packages/coding-agent/src/core/extensions/types.ts:311:	/** Whether the agent is idle (not streaming) */
+packages/coding-agent/src/core/extensions/types.ts:313:	/** The current abort signal, or undefined when the agent is not streaming. */
+packages/coding-agent/src/core/extensions/types.ts:334:	/** Wait for the agent to finish streaming */
+packages/coding-agent/src/core/extensions/types.ts:391:	/** Whether this is a partial/streaming result */
+packages/coding-agent/src/core/extensions/types.ts:413:	/** Whether the tool result is partial/streaming. */
+packages/coding-agent/src/core/extensions/types.ts:616:/** Fired after a provider response is received and before the response stream is consumed. */
+packages/coding-agent/src/core/extensions/types.ts:668:/** Fired during assistant message streaming with token-by-token updates */
+packages/coding-agent/src/core/extensions/types.ts:689:/** Fired during tool execution with partial/streaming output */
+packages/coding-agent/src/core/extensions/types.ts:1185:	 * When the agent is streaming, use deliverAs to specify how to queue the message.
+packages/coding-agent/src/core/extensions/types.ts:1246:	 * If `streamSimple` is provided: registers a custom API stream handler.
+packages/coding-agent/src/core/extensions/types.ts:1327:	/** Optional streamSimple handler for custom APIs. */
+packages/coding-agent/src/core/extensions/types.ts:1328:	streamSimple?: (model: Model<Api>, context: Context, options?: SimpleStreamOptions) => AssistantMessageEventStream;
+packages/coding-agent/src/core/tools/bash.ts:42:	 * Execute a command and stream output.
+packages/ai/src/providers/openai-responses.ts:17:import { AssistantMessageEventStream } from "../utils/event-stream.ts";
+packages/ai/src/providers/openai-responses.ts:81:export const streamOpenAIResponses: StreamFunction<"openai-responses", OpenAIResponsesOptions> = (
+packages/ai/src/providers/openai-responses.ts:86:	const stream = new AssistantMessageEventStream();
+packages/ai/src/providers/openai-responses.ts:126:			stream.push({ type: "start", partial: output });
+packages/ai/src/providers/openai-responses.ts:128:			await processResponsesStream(openaiStream, output, stream, model, {
+packages/ai/src/providers/openai-responses.ts:141:			stream.push({ type: "done", reason: output.stopReason, message: output });
+packages/ai/src/providers/openai-responses.ts:142:			stream.end();
+packages/ai/src/providers/openai-responses.ts:146:				// partialJson is only a streaming scratch buffer; never persist it.
+packages/ai/src/providers/openai-responses.ts:151:			stream.push({ type: "error", reason: output.stopReason, error: output });
+packages/ai/src/providers/openai-responses.ts:152:			stream.end();
+packages/ai/src/providers/openai-responses.ts:156:	return stream;
+packages/ai/src/providers/openai-responses.ts:159:export const streamSimpleOpenAIResponses: StreamFunction<"openai-responses", SimpleStreamOptions> = (
+packages/ai/src/providers/openai-responses.ts:173:	return streamOpenAIResponses(model, context, {
+packages/ai/src/providers/openai-responses.ts:243:		stream: true,
+packages/ai/src/providers/openai-responses.ts:293:			return model.id === "gpt-5.5" ? 2.5 : 2;
+packages/ai/src/providers/azure-openai-responses.ts:14:import { AssistantMessageEventStream } from "../utils/event-stream.ts";
+packages/ai/src/providers/azure-openai-responses.ts:73:export const streamAzureOpenAIResponses: StreamFunction<"azure-openai-responses", AzureOpenAIResponsesOptions> = (
+packages/ai/src/providers/azure-openai-responses.ts:78:	const stream = new AssistantMessageEventStream();
+packages/ai/src/providers/azure-openai-responses.ts:118:			stream.push({ type: "start", partial: output });
+packages/ai/src/providers/azure-openai-responses.ts:120:			await processResponsesStream(openaiStream, output, stream, model);
+packages/ai/src/providers/azure-openai-responses.ts:130:			stream.push({ type: "done", reason: output.stopReason, message: output });
+packages/ai/src/providers/azure-openai-responses.ts:131:			stream.end();
+packages/ai/src/providers/azure-openai-responses.ts:135:				// partialJson is only a streaming scratch buffer; never persist it.
+packages/ai/src/providers/azure-openai-responses.ts:140:			stream.push({ type: "error", reason: output.stopReason, error: output });
+packages/ai/src/providers/azure-openai-responses.ts:141:			stream.end();
+packages/ai/src/providers/azure-openai-responses.ts:145:	return stream;
+packages/ai/src/providers/azure-openai-responses.ts:148:export const streamSimpleAzureOpenAIResponses: StreamFunction<"azure-openai-responses", SimpleStreamOptions> = (
+packages/ai/src/providers/azure-openai-responses.ts:162:	return streamAzureOpenAIResponses(model, context, {
+packages/ai/src/providers/azure-openai-responses.ts:264:		stream: true,
+packages/ai/src/providers/azure-openai-responses.ts:14:import { AssistantMessageEventStream } from "../utils/event-stream.ts";
+packages/ai/src/providers/azure-openai-responses.ts:73:export const streamAzureOpenAIResponses: StreamFunction<"azure-openai-responses", AzureOpenAIResponsesOptions> = (
+packages/ai/src/providers/azure-openai-responses.ts:78:	const stream = new AssistantMessageEventStream();
+packages/ai/src/providers/azure-openai-responses.ts:118:			stream.push({ type: "start", partial: output });
+packages/ai/src/providers/azure-openai-responses.ts:120:			await processResponsesStream(openaiStream, output, stream, model);
+packages/ai/src/providers/azure-openai-responses.ts:130:			stream.push({ type: "done", reason: output.stopReason, message: output });
+packages/ai/src/providers/azure-openai-responses.ts:131:			stream.end();
+packages/ai/src/providers/azure-openai-responses.ts:135:				// partialJson is only a streaming scratch buffer; never persist it.
+packages/ai/src/providers/azure-openai-responses.ts:140:			stream.push({ type: "error", reason: output.stopReason, error: output });
+packages/ai/src/providers/azure-openai-responses.ts:141:			stream.end();
+packages/ai/src/providers/azure-openai-responses.ts:145:	return stream;
+packages/ai/src/providers/azure-openai-responses.ts:148:export const streamSimpleAzureOpenAIResponses: StreamFunction<"azure-openai-responses", SimpleStreamOptions> = (
+packages/ai/src/providers/azure-openai-responses.ts:162:	return streamAzureOpenAIResponses(model, context, {
+packages/ai/src/providers/azure-openai-responses.ts:264:		stream: true,
+packages/ai/src/providers/google-vertex.ts:25:import { AssistantMessageEventStream } from "../utils/event-stream.ts";
+packages/ai/src/providers/google-vertex.ts:63:export const streamGoogleVertex: StreamFunction<"google-vertex", GoogleVertexOptions> = (
+packages/ai/src/providers/google-vertex.ts:68:	const stream = new AssistantMessageEventStream();
+packages/ai/src/providers/google-vertex.ts:102:			stream.push({ type: "start", partial: output });
+packages/ai/src/providers/google-vertex.ts:122:										stream.push({
+packages/ai/src/providers/google-vertex.ts:129:										stream.push({
+packages/ai/src/providers/google-vertex.ts:140:									stream.push({ type: "thinking_start", contentIndex: blockIndex(), partial: output });
+packages/ai/src/providers/google-vertex.ts:144:									stream.push({ type: "text_start", contentIndex: blockIndex(), partial: output });
+packages/ai/src/providers/google-vertex.ts:153:								stream.push({
+packages/ai/src/providers/google-vertex.ts:165:								stream.push({
+packages/ai/src/providers/google-vertex.ts:177:									stream.push({
+packages/ai/src/providers/google-vertex.ts:184:									stream.push({
+packages/ai/src/providers/google-vertex.ts:210:							stream.push({ type: "toolcall_start", contentIndex: blockIndex(), partial: output });
+packages/ai/src/providers/google-vertex.ts:211:							stream.push({
+packages/ai/src/providers/google-vertex.ts:217:							stream.push({ type: "toolcall_end", contentIndex: blockIndex(), toolCall, partial: output });
+packages/ai/src/providers/google-vertex.ts:252:					stream.push({
+packages/ai/src/providers/google-vertex.ts:259:					stream.push({
+packages/ai/src/providers/google-vertex.ts:276:			stream.push({ type: "done", reason: output.stopReason, message: output });
+packages/ai/src/providers/google-vertex.ts:277:			stream.end();
+packages/ai/src/providers/google-vertex.ts:279:			// Remove internal index property used during streaming
+packages/ai/src/providers/google-vertex.ts:287:			stream.push({ type: "error", reason: output.stopReason, error: output });
+packages/ai/src/providers/google-vertex.ts:288:			stream.end();
+packages/ai/src/providers/google-vertex.ts:292:	return stream;
+packages/ai/src/providers/google-vertex.ts:295:export const streamSimpleGoogleVertex: StreamFunction<"google-vertex", SimpleStreamOptions> = (
+packages/ai/src/providers/google-vertex.ts:302:		return streamGoogleVertex(model, context, {
+packages/ai/src/providers/google-vertex.ts:313:		return streamGoogleVertex(model, context, {
+packages/ai/src/providers/google-vertex.ts:322:	return streamGoogleVertex(model, context, {
+packages/ai/src/providers/openai-codex-responses.ts:41:import { AssistantMessageEventStream } from "../utils/event-stream.ts";
+packages/ai/src/providers/openai-codex-responses.ts:83:	stream?: boolean;
+packages/ai/src/providers/openai-codex-responses.ts:107:	return /rate.?limit|overloaded|service.?unavailable|upstream.?connect|connection.?refused/i.test(errorText);
+packages/ai/src/providers/openai-codex-responses.ts:128:export const streamOpenAICodexResponses: StreamFunction<"openai-codex-responses", OpenAICodexResponsesOptions> = (
+packages/ai/src/providers/openai-codex-responses.ts:133:	const stream = new AssistantMessageEventStream();
+packages/ai/src/providers/openai-codex-responses.ts:190:						stream,
+packages/ai/src/providers/openai-codex-responses.ts:201:					stream.push({
+packages/ai/src/providers/openai-codex-responses.ts:206:					stream.end();
+packages/ai/src/providers/openai-codex-responses.ts:219:							phase: websocketStarted ? "after_message_stream_start" : "before_message_stream_start",
+packages/ai/src/providers/openai-codex-responses.ts:317:			stream.push({ type: "start", partial: output });
+packages/ai/src/providers/openai-codex-responses.ts:318:			await processStream(response, output, stream, model, options);
+packages/ai/src/providers/openai-codex-responses.ts:324:			stream.push({ type: "done", reason: output.stopReason as "stop" | "length" | "toolUse", message: output });
+packages/ai/src/providers/openai-codex-responses.ts:325:			stream.end();
+packages/ai/src/providers/openai-codex-responses.ts:328:				// partialJson is only a streaming scratch buffer; never persist it.
+packages/ai/src/providers/openai-codex-responses.ts:333:			stream.push({ type: "error", reason: output.stopReason, error: output });
+packages/ai/src/providers/openai-codex-responses.ts:334:			stream.end();
+packages/ai/src/providers/openai-codex-responses.ts:338:	return stream;
+packages/ai/src/providers/openai-codex-responses.ts:341:export const streamSimpleOpenAICodexResponses: StreamFunction<"openai-codex-responses", SimpleStreamOptions> = (
+packages/ai/src/providers/openai-codex-responses.ts:355:	return streamOpenAICodexResponses(model, context, {
+packages/ai/src/providers/openai-codex-responses.ts:377:		stream: true,
+packages/ai/src/providers/openai-codex-responses.ts:423:			return model.id === "gpt-5.5" ? 2.5 : 2;
+packages/ai/src/providers/openai-codex-responses.ts:476:	stream: AssistantMessageEventStream,
+packages/ai/src/providers/openai-codex-responses.ts:480:	await processResponsesStream(mapCodexEvents(parseSSE(response)), output, stream, model, {
+packages/ai/src/providers/openai-codex-responses.ts:569:			buffer += decoder.decode(value, { stream: true });
+packages/ai/src/providers/openai-codex-responses.ts:1108:			throw new Error("WebSocket stream closed before response.completed");
+packages/ai/src/providers/openai-codex-responses.ts:1175:	stream: AssistantMessageEventStream,
+packages/ai/src/providers/openai-codex-responses.ts:1183:			stream.push({ type: "start", partial: output });
+packages/ai/src/providers/openai-codex-responses.ts:1194:	stream: AssistantMessageEventStream,
+packages/ai/src/providers/openai-codex-responses.ts:1230:				stream,
+packages/ai/src/providers/openai-codex-responses.ts:1234:			stream,
+packages/ai/src/providers/openai-codex-responses.ts:1347:	headers.set("accept", "text/event-stream");
+packages/coding-agent/src/core/tools/grep.ts:269:						// Collect matches during streaming, then format them after rg exits.
+packages/coding-agent/src/core/tools/grep.ts:315:							// Format matches after streaming finishes so custom readFile() backends can be async.
+packages/coding-agent/src/core/model-resolver.ts:19:	"openai-codex": "gpt-5.5",
+packages/coding-agent/src/core/model-resolver.ts:24:	openrouter: "moonshotai/kimi-k2.6",
+packages/coding-agent/src/core/model-resolver.ts:178: * Handles models with colons in their IDs (e.g., OpenRouter's :exacto suffix).
+packages/coding-agent/src/core/model-resolver.ts:251: * Supports models with colons in their IDs (e.g., OpenRouter's model:exacto).
+packages/coding-agent/src/core/model-resolver.ts:396:	// This handles models whose IDs naturally contain slashes (e.g. OpenRouter-style IDs).
+packages/coding-agent/src/core/model-resolver.ts:426:	// This handles OpenRouter-style IDs like "openai/gpt-4o:extended" where "openai"
+packages/coding-agent/src/core/model-resolver.ts:427:	// looks like a provider but the full string is actually a model id on openrouter.
+packages/coding-agent/src/core/tools/output-accumulator.ts:29: * Incrementally tracks streaming output with bounded memory.
+packages/coding-agent/src/core/tools/output-accumulator.ts:31: * Appends decode chunks with a streaming UTF-8 decoder, keeps only a decoded
+packages/coding-agent/src/core/tools/output-accumulator.ts:70:		this.appendDecodedText(this.decoder.decode(data, { stream: true }));
+packages/coding-agent/src/core/tools/output-accumulator.ts:126:		const stream = this.tempFileStream;
+packages/coding-agent/src/core/tools/output-accumulator.ts:131:				stream.off("finish", onFinish);
+packages/coding-agent/src/core/tools/output-accumulator.ts:135:				stream.off("error", onError);
+packages/coding-agent/src/core/tools/output-accumulator.ts:138:			stream.once("error", onError);
+packages/coding-agent/src/core/tools/output-accumulator.ts:139:			stream.once("finish", onFinish);
+packages/coding-agent/src/core/tools/output-accumulator.ts:140:			stream.end();
+packages/coding-agent/src/core/compaction/compaction.ts:545:	streamFn?: StreamFn,
+packages/coding-agent/src/core/compaction/compaction.ts:547:	if (!streamFn) {
+packages/coding-agent/src/core/compaction/compaction.ts:550:	const stream = await streamFn(model, context, options);
+packages/coding-agent/src/core/compaction/compaction.ts:551:	return stream.result();
+packages/coding-agent/src/core/compaction/compaction.ts:568:	streamFn?: StreamFn,
+packages/coding-agent/src/core/compaction/compaction.ts:607:		streamFn,
+packages/coding-agent/src/core/compaction/compaction.ts:755:	streamFn?: StreamFn,
+packages/coding-agent/src/core/compaction/compaction.ts:785:						streamFn,
+packages/coding-agent/src/core/compaction/compaction.ts:796:				streamFn,
+packages/coding-agent/src/core/compaction/compaction.ts:813:			streamFn,
+packages/coding-agent/src/core/compaction/compaction.ts:844:	streamFn?: StreamFn,
+packages/coding-agent/src/core/compaction/compaction.ts:865:		streamFn,
+packages/coding-agent/src/core/model-resolver.ts:19:	"openai-codex": "gpt-5.5",
+packages/coding-agent/src/core/model-resolver.ts:24:	openrouter: "moonshotai/kimi-k2.6",
+packages/coding-agent/src/core/model-resolver.ts:178: * Handles models with colons in their IDs (e.g., OpenRouter's :exacto suffix).
+packages/coding-agent/src/core/model-resolver.ts:251: * Supports models with colons in their IDs (e.g., OpenRouter's model:exacto).
+packages/coding-agent/src/core/model-resolver.ts:396:	// This handles models whose IDs naturally contain slashes (e.g. OpenRouter-style IDs).
+packages/coding-agent/src/core/model-resolver.ts:426:	// This handles OpenRouter-style IDs like "openai/gpt-4o:extended" where "openai"
+packages/coding-agent/src/core/model-resolver.ts:427:	// looks like a provider but the full string is actually a model id on openrouter.
+packages/coding-agent/src/core/tools/output-accumulator.ts:29: * Incrementally tracks streaming output with bounded memory.
+packages/coding-agent/src/core/tools/output-accumulator.ts:31: * Appends decode chunks with a streaming UTF-8 decoder, keeps only a decoded
+packages/coding-agent/src/core/tools/output-accumulator.ts:70:		this.appendDecodedText(this.decoder.decode(data, { stream: true }));
+packages/coding-agent/src/core/tools/output-accumulator.ts:126:		const stream = this.tempFileStream;
+packages/coding-agent/src/core/tools/output-accumulator.ts:131:				stream.off("finish", onFinish);
+packages/coding-agent/src/core/tools/output-accumulator.ts:135:				stream.off("error", onError);
+packages/coding-agent/src/core/tools/output-accumulator.ts:138:			stream.once("error", onError);
+packages/coding-agent/src/core/tools/output-accumulator.ts:139:			stream.once("finish", onFinish);
+packages/coding-agent/src/core/tools/output-accumulator.ts:140:			stream.end();
+packages/coding-agent/src/core/tools/bash.ts:42:	 * Execute a command and stream output.
+packages/coding-agent/src/core/bash-executor.ts:2: * Bash command execution with streaming support and cancellation.
+packages/coding-agent/src/core/bash-executor.ts:23:	/** Callback for streaming output chunks (already sanitized) */
+packages/coding-agent/src/core/bash-executor.ts:82:		const text = sanitizeBinaryOutput(stripAnsi(decoder.decode(data, { stream: true }))).replace(/\r/g, "");
+packages/coding-agent/src/core/tools/grep.ts:269:						// Collect matches during streaming, then format them after rg exits.
+packages/coding-agent/src/core/tools/grep.ts:315:							// Format matches after streaming finishes so custom readFile() backends can be async.
+
+[Showing lines 2696-3171 of 3171 (50.0KB limit). Full output: /var/folders/7m/csfvhz791k527kby7nxl7cbc0000h_/T/pi-bash-f7a86846ec68d7cf.log]

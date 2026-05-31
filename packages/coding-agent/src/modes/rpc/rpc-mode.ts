@@ -169,6 +169,10 @@ export async function runRpcMode(runtimeHost: AgentSessionRuntime): Promise<neve
 			} as RpcExtensionUIRequest);
 		},
 
+		clearChat(): void {
+			// Chat clearing is not supported in RPC mode - no TUI chat area
+		},
+
 		setWorkingMessage(_message?: string): void {
 			// Working message not supported in RPC mode - requires TUI loader access
 		},

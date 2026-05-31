@@ -1,0 +1,182 @@
+/bin/bash: trellis-implement: command not found
+.trellis/tasks/00-bootstrap-guidelines/prd.md:12:`trellis-implement` and `trellis-check` sub-agents — auto-loads spec files
+.trellis/tasks/00-bootstrap-guidelines/prd.md:13:listed in per-task jsonl manifests. Empty spec = sub-agents write generic
+.trellis/tasks/00-bootstrap-guidelines/prd.md:14:code. Real spec = sub-agents match the team's actual patterns.
+.trellis/tasks/00-bootstrap-guidelines/prd.md:120:codebase will cause sub-agents to write code that looks out of place.
+.trellis/tasks/00-bootstrap-guidelines/prd.md:129:- Every AI coding task spawns two sub-agents: `trellis-implement` (writes
+.trellis/tasks/00-bootstrap-guidelines/prd.md:130:  code) and `trellis-check` (verifies quality).
+.trellis/tasks/00-bootstrap-guidelines/prd.md:134:  into every sub-agent prompt, so the sub-agent codes/reviews per team
+.pi/ga-memory/L1/insight.md:10:- L2:325ae9eae726 User prefers no sub-agent by default
+.trellis/workflow.md:55:# `implement.jsonl` / `check.jsonl` are seeded on `task create` for sub-agent-capable
+.trellis/workflow.md:155:**C Inline change** (per-turn only, escape hatch for B) — the user's CURRENT message MUST contain one of: "skip trellis" / "no task" / "just do it" / "don't create a task" / "跳过 trellis" / "别走流程" / "小修一下" / "直接改" / "先别建任务" → briefly acknowledge ("ok, skipping trellis flow this turn"), then inline. **Without seeing one of these phrases you must NOT inline on your own**; do not invent an override the user never said.
+.trellis/workflow.md:170:Phase 1.3 (required, once): before `task.py start`, you MUST curate `implement.jsonl` and `check.jsonl` — list the spec / research files sub-agents need so they get the right context injected. You may skip only if the jsonl already has agent-curated entries (the seed `_example` row alone doesn't count).
+.trellis/workflow.md:174:<!-- Per-turn breadcrumb: shown throughout Phase 1 when codex.dispatch_mode=inline.
+.trellis/workflow.md:177:     the inline workflow loads `trellis-before-dev` instead of injecting JSONL
+.trellis/workflow.md:178:     into a sub-agent. -->
+.trellis/workflow.md:180:[workflow-state:planning-inline]
+.trellis/workflow.md:182:Phase 1.3 jsonl curation is **skipped** in inline dispatch mode — the main session loads `trellis-before-dev` directly in Phase 2 and reads spec context itself, so there is no sub-agent to inject jsonl into.
+.trellis/workflow.md:184:[/workflow-state:planning-inline]
+.trellis/workflow.md:198:**Tools**: `trellis-implement` / `trellis-research` are sub-agent types only (Task/Agent tool, NOT Skill — there is no skill by these names). `trellis-update-spec` is a skill. `trellis-check` exists as both; prefer the Agent form when verifying after code changes.
+.trellis/workflow.md:199:**Flow**: trellis-implement → trellis-check → trellis-update-spec → commit (Phase 3.4) → `/trellis:finish-work`.
+.trellis/workflow.md:200:**Main-session default (no override)**: dispatch the `trellis-implement` / `trellis-check` sub-agents — the main agent does NOT edit code by default. Phase 3.4 commit (required, once): after trellis-update-spec, or whenever implementation is verifiably complete, the main agent **drives the commit** — state the commit plan in user-facing text, then run `git commit` — BEFORE suggesting `/trellis:finish-work`. `/finish-work` refuses to run on a dirty working tree (paths outside `.trellis/workspace/` and `.trellis/tasks/`).
+.trellis/workflow.md:201:**Sub-agent self-exemption**: if you are already running as `trellis-implement`, implement directly from the loaded task context and do NOT spawn another `trellis-implement`; if you are already running as `trellis-check`, review/fix directly and do NOT spawn another `trellis-check`. The default dispatch rule applies to the main session only.
+.trellis/workflow.md:202:**Sub-agent dispatch protocol (all platforms, all sub-agents)**: When you spawn `trellis-implement` / `trellis-check` / `trellis-research`, your dispatch prompt **MUST** start with one line: `Active task: <task path from \`task.py current\`>`. No exceptions. On class-2 platforms (codex / copilot / gemini / qoder) the sub-agent depends on this line because there is no hook to inject task context. On class-1 platforms (claude / cursor / opencode / kiro / codebuddy / droid) the line is normally redundant — the hook injects context directly — but it serves as a critical fallback when the hook fails (Windows + Claude Code PreToolUse silent skip, `--continue` resume, fork distribution, hooks disabled, etc.). For `trellis-research`, the line tells the sub-agent which `{task_dir}/research/` to write into.
+.trellis/workflow.md:203:**Inline override** (per-turn only, escape hatch for sub-agent dispatch): the user's CURRENT message MUST explicitly contain one of: "do it inline" / "no sub-agent" / "你直接改" / "别派 sub-agent" / "main session 写就行" / "不用 sub-agent". **Without seeing one of these phrases you must NOT inline on your own**; do not invent an override the user never said.
+.trellis/workflow.md:207:     codex.dispatch_mode=inline. Codex-only opt-in alternate to
+.trellis/workflow.md:209:     instead of dispatching sub-agents. -->
+.trellis/workflow.md:211:[workflow-state:in_progress-inline]
+.trellis/workflow.md:212:**Flow** (inline mode): main session loads `trellis-before-dev` → main session edits code → main session loads `trellis-check` → run lint / type-check / tests → fix → `trellis-update-spec` → commit (Phase 3.4) → `/trellis:finish-work`.
+.trellis/workflow.md:213:**Main-session default (inline dispatch_mode)**: the main agent edits code directly. Do NOT dispatch `trellis-implement` / `trellis-check` sub-agents. Load the `trellis-before-dev` skill before writing code; load the `trellis-check` skill before reporting completion.
+.trellis/workflow.md:215:[/workflow-state:in_progress-inline]
+.trellis/workflow.md:247:When a user request matches one of these intents, load the corresponding skill (or dispatch the corresponding sub-agent) first — do not skip skills.
+.trellis/workflow.md:249:[Claude Code, Cursor, OpenCode, codex-sub-agent, Kiro, Gemini, Qoder, CodeBuddy, Copilot, Droid, Pi]
+.trellis/workflow.md:254:| About to write code / start implementing | Dispatch the `trellis-implement` sub-agent per Phase 2.1 |
+.trellis/workflow.md:255:| Finished writing / want to verify | Dispatch the `trellis-check` sub-agent per Phase 2.2 |
+.trellis/workflow.md:259:**Why `trellis-before-dev` is NOT in this table:** you are not the one writing code — the `trellis-implement` sub-agent is. Sub-agent platforms get spec context via `implement.jsonl` injection / prelude, not via the main thread loading `trellis-before-dev`.
+.trellis/workflow.md:261:[/Claude Code, Cursor, OpenCode, codex-sub-agent, Kiro, Gemini, Qoder, CodeBuddy, Copilot, Droid, Pi]
+.trellis/workflow.md:263:[codex-inline, Kilo, Antigravity, Windsurf]
+.trellis/workflow.md:269:| Finished writing / want to verify | `trellis-check` |
+.trellis/workflow.md:273:[/codex-inline, Kilo, Antigravity, Windsurf]
+.trellis/workflow.md:277:[Claude Code, Cursor, OpenCode, codex-sub-agent, Kiro, Gemini, Qoder, CodeBuddy, Copilot, Droid, Pi]
+.trellis/workflow.md:281:| "This is simple, I'll just code it in the main thread" | Dispatching `trellis-implement` is the cheap path; skipping it tempts you to write code in the main thread and lose spec context — sub-agents get `implement.jsonl` injected, you don't |
+.trellis/workflow.md:282:| "I already thought it through in plan mode" | Plan-mode output lives in memory — sub-agents can't see it; must be persisted to prd.md |
+.trellis/workflow.md:283:| "I already know the spec" | The spec may have been updated since you last read it; the sub-agent gets the fresh copy, you may not |
+.trellis/workflow.md:284:| "Code first, check later" | `trellis-check` surfaces issues you won't notice yourself; earlier is cheaper |
+.trellis/workflow.md:286:[/Claude Code, Cursor, OpenCode, codex-sub-agent, Kiro, Gemini, Qoder, CodeBuddy, Copilot, Droid, Pi]
+.trellis/workflow.md:288:[codex-inline, Kilo, Antigravity, Windsurf]
+.trellis/workflow.md:295:| "Code first, check later" | `trellis-check` surfaces issues you won't notice yourself; earlier is cheaper |
+.trellis/workflow.md:297:[/codex-inline, Kilo, Antigravity, Windsurf]
+.trellis/workflow.md:346:[Claude Code, Cursor, OpenCode, codex-sub-agent, Kiro, Gemini, Qoder, CodeBuddy, Copilot, Droid, Pi]
+.trellis/workflow.md:348:Spawn the research sub-agent:
+.trellis/workflow.md:354:[/Claude Code, Cursor, OpenCode, codex-sub-agent, Kiro, Gemini, Qoder, CodeBuddy, Copilot, Droid, Pi]
+.trellis/workflow.md:356:[codex-inline, Kilo, Antigravity, Windsurf]
+.trellis/workflow.md:358:Do the research in the main session directly and write findings into `{TASK_DIR}/research/`. (For `codex-inline` this avoids the `fork_turns="none"` isolation that prevents `trellis-research` sub-agents from resolving the active task path.)
+.trellis/workflow.md:360:[/codex-inline, Kilo, Antigravity, Windsurf]
+.trellis/workflow.md:373:[Claude Code, Cursor, OpenCode, codex-sub-agent, Kiro, Gemini, Qoder, CodeBuddy, Copilot, Droid, Pi]
+.trellis/workflow.md:375:Curate `implement.jsonl` and `check.jsonl` so the Phase 2 sub-agents get the right spec context. These files were seeded on `task create` with a single self-describing `_example` line; your job here is to fill in real entries.
+.trellis/workflow.md:383:- **Research files** — `{TASK_DIR}/research/*.md` that the sub-agent will need to consult
+.trellis/workflow.md:386:- Code files (`src/**`, `packages/**/*.ts`, etc.) — those are read by the sub-agent during implementation, not pre-registered here
+.trellis/workflow.md:390:- `implement.jsonl` → specs + research the implement sub-agent needs to write code correctly
+.trellis/workflow.md:391:- `check.jsonl` → specs for the check sub-agent (quality guidelines, check conventions, same research if needed)
+.trellis/workflow.md:414:[/Claude Code, Cursor, OpenCode, codex-sub-agent, Kiro, Gemini, Qoder, CodeBuddy, Copilot, Droid, Pi]
+.trellis/workflow.md:416:[codex-inline, Kilo, Antigravity, Windsurf]
+.trellis/workflow.md:420:[/codex-inline, Kilo, Antigravity, Windsurf]
+.trellis/workflow.md:444:[Claude Code, Cursor, OpenCode, codex-sub-agent, Kiro, Gemini, Qoder, CodeBuddy, Copilot, Droid, Pi]
+.trellis/workflow.md:448:[/Claude Code, Cursor, OpenCode, codex-sub-agent, Kiro, Gemini, Qoder, CodeBuddy, Copilot, Droid, Pi]
+.trellis/workflow.md:460:Spawn the implement sub-agent:
+.trellis/workflow.md:462:- **Agent type**: `trellis-implement`
+.trellis/workflow.md:464:- **Dispatch prompt guard**: Tell the spawned agent it is already the `trellis-implement` sub-agent and must implement directly, not spawn another `trellis-implement` / `trellis-check`.
+.trellis/workflow.md:472:[codex-sub-agent]
+.trellis/workflow.md:474:Spawn the implement sub-agent:
+.trellis/workflow.md:476:- **Agent type**: `trellis-implement`
+.trellis/workflow.md:478:- **Dispatch prompt guard**: The prompt MUST start with `Active task: <task path>`, then explicitly say the spawned agent is already `trellis-implement` and must implement directly without spawning another `trellis-implement` / `trellis-check`.
+.trellis/workflow.md:480:The Codex sub-agent definition auto-handles the context load requirement:
+.trellis/workflow.md:484:[/codex-sub-agent]
+.trellis/workflow.md:488:Spawn the implement sub-agent:
+.trellis/workflow.md:490:- **Agent type**: `trellis-implement`
+.trellis/workflow.md:492:- **Dispatch prompt guard**: Tell the spawned agent it is already the `trellis-implement` sub-agent and must implement directly, not spawn another `trellis-implement` / `trellis-check`.
+.trellis/workflow.md:500:[codex-inline, Kilo, Antigravity, Windsurf]
+.trellis/workflow.md:508:[/codex-inline, Kilo, Antigravity, Windsurf]
+.trellis/workflow.md:512:[Claude Code, Cursor, OpenCode, codex-sub-agent, Kiro, Gemini, Qoder, CodeBuddy, Copilot, Droid, Pi]
+.trellis/workflow.md:514:Spawn the check sub-agent:
+.trellis/workflow.md:516:- **Agent type**: `trellis-check`
+.trellis/workflow.md:518:- **Dispatch prompt guard**: Tell the spawned agent it is already the `trellis-check` sub-agent and must review/fix directly, not spawn another `trellis-check` / `trellis-implement`.
+.trellis/workflow.md:525:[/Claude Code, Cursor, OpenCode, codex-sub-agent, Kiro, Gemini, Qoder, CodeBuddy, Copilot, Droid, Pi]
+.trellis/workflow.md:527:[codex-inline, Kilo, Antigravity, Windsurf]
+.trellis/workflow.md:529:Load the `trellis-check` skill and verify the code per its guidance:
+.trellis/workflow.md:536:[/codex-inline, Kilo, Antigravity, Windsurf]
+.trellis/workflow.md:552:Load the `trellis-check` skill and do a final verification:
+.pi/skills/trellis-meta/SKILL.md:35:- `references/local-architecture/context-injection.md`: Hooks, sub-agent preludes, and context injection paths.
+.pi/skills/trellis-meta/SKILL.md:42:- `references/platform-files/agents.md`: Local file responsibilities for `trellis-research`, `trellis-implement`, and `trellis-check`.
+.pi/agents/trellis-check.md:2:name: trellis-check
+.pi/agents/trellis-check.md:39:You are already the `trellis-check` sub-agent that the main session dispatched. Do the review and fixes directly.
+.pi/agents/trellis-check.md:41:- Do NOT spawn another `trellis-check` or `trellis-implement` sub-agent.
+.pi/agents/trellis-check.md:42:- If SessionStart context, workflow-state breadcrumbs, or workflow.md say to dispatch `trellis-implement` / `trellis-check`, treat that as a main-session instruction that is already satisfied by your current role.
+.pi/agents/trellis-implement.md:2:name: trellis-implement
+.pi/agents/trellis-implement.md:39:You are already the `trellis-implement` sub-agent that the main session dispatched. Do the implementation work directly.
+.pi/agents/trellis-implement.md:41:- Do NOT spawn another `trellis-implement` or `trellis-check` sub-agent.
+.pi/agents/trellis-implement.md:42:- If SessionStart context, workflow-state breadcrumbs, or workflow.md say to dispatch `trellis-implement` / `trellis-check`, treat that as a main-session instruction that is already satisfied by your current role.
+.pi/skills/trellis-meta/references/local-architecture/task-system.md:61:`implement.jsonl` and `check.jsonl` are context manifests for sub-agents to read first.
+.pi/skills/trellis-meta/references/local-architecture/spec-system.md:75:Sub-agents or platform preludes read these JSONL files and load the referenced specs. On platforms without sub-agent support, the AI should read the relevant specs directly according to the workflow.
+.pi/extensions/trellis/index.ts:52:  // Parsed for pi-subagents-compatible agent files; Pi CLI has no documented fallback-model flag to pass through here.
+.pi/extensions/trellis/index.ts:67:  "trellis-implement": "implement.jsonl",
+.pi/extensions/trellis/index.ts:69:  "trellis-check": "check.jsonl",
+.pi/extensions/trellis/index.ts:598:      // Seed rows and malformed lines must not block sub-agent startup.
+.pi/extensions/trellis/index.ts:784:// Sub-agent dispatch protocol snippet (registered with the `subagent` tool).
+.pi/extensions/trellis/index.ts:790:const SUBAGENT_DISPATCH_PROTOCOL = `Sub-agent dispatch protocol (Trellis): your dispatch prompt MUST start with one line "Active task: <task path from \`task.py current\`>" before any other instructions. No exceptions. On class-2 platforms (codex / copilot / gemini / qoder) the sub-agent depends on this line because there is no hook to inject task context. On class-1 platforms (claude / cursor / opencode / kiro / codebuddy / droid) and on Pi, the line is the canonical fallback when hook/extension injection misses. trellis-research uses the line to know which {task_dir}/research/ to write into.
+.pi/extensions/trellis/index.ts:854:      reject(new Error("pi subagent cancelled"));
+.pi/extensions/trellis/index.ts:920:        fail(new Error("pi subagent cancelled"));
+.pi/extensions/trellis/index.ts:942:    agentName ?? normalizeAgentName(input.agent ?? "trellis-implement");
+.pi/extensions/trellis/index.ts:971:  const agentName = normalizeAgentName(input.agent ?? "trellis-implement");
+.pi/extensions/trellis/index.ts:1073:    name: "subagent",
+.pi/extensions/trellis/index.ts:1075:    description: "Run a Trellis project sub-agent with active task context.",
+.pi/extensions/trellis/index.ts:1084:            "Agent name, such as trellis-implement or trellis-check.",
+.pi/extensions/trellis/index.ts:1088:          description: "Task prompt for the sub-agent.",
+.pi/extensions/trellis/index.ts:1103:            "Optional Pi model override for the child sub-agent process.",
+.pi/extensions/trellis/index.ts:1109:            "Optional Pi thinking level override for the child sub-agent process.",
+.pi/extensions/trellis/index.ts:1126:          agent: input.agent ?? "trellis-implement",
+.pi/extensions/trellis/index.ts:1145:      "trellis-implement",
+.pi/skills/trellis-spec-bootstarp/references/spec-task-planning.md:53:If the host supports subagents, helpers can inspect independent packages or run verification. They are optional. The main agent still owns integration and final quality.
+.pi/skills/trellis-meta/references/local-architecture/generated-files.md:42:| hooks | `.claude/hooks/`, `.codex/hooks/`, `.cursor/hooks/` | Inject session context, workflow-state, and sub-agent context. |
+.pi/skills/trellis-meta/references/local-architecture/generated-files.md:44:| agents | `.claude/agents/`, `.codex/agents/`, `.kiro/agents/` | Define agents such as `trellis-research`, `trellis-implement`, and `trellis-check`. |
+.pi/skills/trellis-meta/references/local-architecture/workflow.md:27:- Platforms with sub-agent support: dispatch `trellis-implement` by default for implementation and `trellis-check` for checking.
+.pi/skills/trellis-meta/references/local-architecture/workflow.md:28:- Platforms without sub-agent support: the main session reads skills such as `trellis-before-dev`, then executes directly.
+.pi/skills/trellis-meta/references/local-architecture/workflow.md:51:If the user wants to change policies such as "whether to create a task when there is no task," "when task creation may be skipped," or "whether sub-agents are required," edit these state blocks and the routing table above them.
+.pi/skills/trellis-meta/references/local-architecture/workflow.md:71:- skills, such as `trellis-brainstorm` and `trellis-check`.
+.pi/extensions/ga-evolve.ts:16:	inlineOriginalPointerMinBytes: number;
+.pi/extensions/ga-evolve.ts:74:		inlineOriginalPointerMinBytes: 1_500,
+.pi/extensions/ga-evolve.ts:171:		inlineOriginalPointerMinBytes:
+.pi/extensions/ga-evolve.ts:172:			typeof obj.inlineOriginalPointerMinBytes === "number" && obj.inlineOriginalPointerMinBytes >= 0
+.pi/extensions/ga-evolve.ts:173:				? obj.inlineOriginalPointerMinBytes
+.pi/extensions/ga-evolve.ts:174:				: DEFAULT_CONFIG.promptOptimization.inlineOriginalPointerMinBytes,
+.pi/skills/trellis-meta/references/local-architecture/context-injection.md:33:## sub-agent context
+.pi/skills/trellis-meta/references/local-architecture/context-injection.md:64:| Change how sub-agents read context | Platform agent definitions, the `inject-subagent-context` hook, or agent preludes. |
+.pi/skills/trellis-meta/references/local-architecture/context-injection.md:68:When modifying context injection, verify two things: new sessions can see the correct task, and sub-agents can see the correct PRD/spec/research.
+.pi/skills/trellis-meta/references/local-architecture/overview.md:51:- To change hooks or sub-agent context loading, read `context-injection.md`.
+.pi/skills/trellis-meta/references/platform-files/hooks-and-settings.md:11:- sub-agent context hook: injects task context when implementation/check/research agents start.
+.pi/skills/trellis-meta/references/platform-files/hooks-and-settings.md:39:| `inject-subagent-context.py` | Injects PRD, JSONL context, and related spec/research into sub-agents. |
+.pi/skills/trellis-meta/references/platform-files/hooks-and-settings.md:50:| Sub-agent cannot read PRD/spec | `inject-subagent-context` hook or agent prelude. |
+.pi/skills/trellis-brainstorm/SKILL.md:203:### Delegate to `trellis-research` sub-agent (don't research inline)
+.pi/skills/trellis-brainstorm/SKILL.md:205:For each research topic, **spawn a `trellis-research` sub-agent via the Task tool** — don't do WebFetch / WebSearch / `gh api` inline in the main conversation.
+.pi/skills/trellis-brainstorm/SKILL.md:208:- The sub-agent has its own context window → doesn't pollute brainstorm context with raw tool output
+.pi/skills/trellis-brainstorm/SKILL.md:211:- Independent topics can be **parallelized** — spawn multiple sub-agents in one tool call
+.pi/skills/trellis-brainstorm/SKILL.md:213:> **Codex exception**: on Codex CLI, do NOT dispatch `trellis-research` for research-first mode — do the research inline (WebFetch / WebSearch in the main session) and write findings to `{TASK_DIR}/research/<topic>.md` yourself. Reason: Codex `spawn_agent` runs sub-agents with `fork_turns="none"` (isolated context, no parent session inheritance), so the research sub-agent cannot resolve the active task path via `task.py current` and silently aborts without producing files. Inline research on Codex avoids this failure mode. The 3+ inline research calls limit (B rule in `workflow.md`) is relaxed for Codex specifically.
+.pi/skills/trellis-brainstorm/SKILL.md:221:          → WebSearch(q1) → WebSearch(q2) → ... (10+ inline calls)
+.pi/skills/trellis-brainstorm/SKILL.md:228:Main agent: Task(subagent_type="trellis-research",
+.pi/skills/trellis-brainstorm/SKILL.md:230:          + Task(subagent_type="trellis-research",
+.pi/skills/trellis-brainstorm/SKILL.md:232:          + Task(subagent_type="trellis-research",
+.pi/skills/trellis-brainstorm/SKILL.md:237:### Research steps (to pass into each sub-agent prompt)
+.pi/skills/trellis-brainstorm/SKILL.md:239:Each `trellis-research` sub-agent should:
+.pi/skills/trellis-meta/references/platform-files/agents.md:6:- `trellis-implement`
+.pi/skills/trellis-meta/references/platform-files/agents.md:7:- `trellis-check`
+.pi/skills/trellis-meta/references/platform-files/agents.md:16:| `trellis-implement` | Implement against `prd.md`, `info.md`, `implement.jsonl`, and related spec/research. |
+.pi/skills/trellis-meta/references/platform-files/agents.md:17:| `trellis-check` | Review changes, fix discovered issues, and run necessary checks. |
+.pi/skills/trellis-meta/references/platform-files/agents.md:38:Main-session workflow platforms such as Kilo, Antigravity, and Windsurf may not have Trellis sub-agent files. They usually rely on workflows/skills to guide the main session.
+.pi/skills/trellis-meta/references/platform-files/agents.md:58:This mode fits platforms whose hooks cannot reliably rewrite sub-agent prompts.
+.pi/skills/trellis-meta/references/platform-files/agents.md:64:| Implement agent must follow extra restrictions | The platform's `trellis-implement` agent file. |
+.pi/skills/trellis-meta/references/platform-files/agents.md:65:| Check agent must run project-specific commands | `trellis-check` agent file, and `.trellis/spec/` if needed. |
+.pi/skills/trellis-meta/references/platform-files/agents.md:67:| Agent cannot read task context | Agent prelude or `inject-subagent-context` hook. |
+.pi/skills/trellis-meta/references/platform-files/platform-map.md:28:These platforms usually have `trellis-research`, `trellis-implement`, and `trellis-check` files:
+.pi/skills/trellis-meta/references/platform-files/platform-map.md:52:When changing behavior, inspect workflows and skills first. Do not assume Trellis sub-agents exist.
+.pi/skills/trellis-meta/references/platform-files/overview.md:18:| agents | `.claude/agents/`, `.codex/agents/`, `.kiro/agents/` | Define `trellis-research`, `trellis-implement`, and `trellis-check`. |
+.pi/skills/trellis-meta/references/platform-files/overview.md:32:- PRD/spec/research injection when sub-agents start.
+.pi/skills/trellis-meta/references/platform-files/overview.md:39:Some platforms cannot reliably let hooks rewrite sub-agent prompts, so the agent file itself instructs the agent to read the active task, PRD, and JSONL context after startup.
+.pi/skills/trellis-meta/references/platform-files/overview.md:41:To change how sub-agents load context, inspect the agent files themselves.
+.pi/skills/trellis-meta/references/platform-files/overview.md:45:Some platforms do not have Trellis sub-agent or hook capabilities. They rely on workflows/skills/commands to guide the main-session AI to read files, run scripts, and move tasks forward.
+.pi/skills/trellis-meta/references/platform-files/skills-and-commands.md:12:| workflow | Explicit user selection or platform auto-match | Guides the main session when no sub-agent/hook exists. |
+.pi/skills/trellis-meta/references/customize-local/change-hooks.md:19:| sub-agent context | Injects PRD/spec/research before an agent starts. |
+.pi/skills/trellis-meta/references/customize-local/change-hooks.md:50:If the task and JSONL are correct, determine whether the platform uses hook push or agent pull. For hook push, edit `inject-subagent-context`; for agent pull, edit the agent file.
+.pi/skills/trellis-meta/references/customize-local/change-context-loading.md:33:| Agent did not read specs | Task JSONL, agent prelude, `inject-subagent-context` hook. |
+.pi/skills/trellis-meta/references/customize-local/change-context-loading.md:61:- hook push: edit the `inject-subagent-context` hook.
+.pi/skills/trellis-meta/references/customize-local/change-context-loading.md:62:- agent pull: edit the read steps in the corresponding `trellis-implement` / `trellis-check` agent file.
+.pi/skills/trellis-meta/references/customize-local/change-agents.md:3:When the user wants to change `trellis-research`, `trellis-implement`, or `trellis-check` behavior, edit platform agent files in the user project.
+.pi/skills/trellis-meta/references/customize-local/change-agents.md:35:| Certain local specs must be read before implementation | `trellis-implement` + `implement.jsonl` configuration rules |
+.pi/skills/trellis-meta/references/customize-local/change-agents.md:36:| Specific commands must run during checking | `trellis-check` |
+.pi/skills/trellis-meta/references/customize-local/change-workflow.md:3:When the user wants to change Trellis phases, next-action hints, whether to create tasks, whether to use sub-agents, or when to check/wrap up, edit `.trellis/workflow.md` first.
+.pi/skills/trellis-meta/references/customize-local/change-workflow.md:44:If the user wants only one platform to avoid sub-agents, first confirm whether that platform has a separate group in the workflow. Then change Phase 2 routing for that platform group instead of deleting all `trellis-implement` / `trellis-check` instructions across platforms.
+.pi/skills/trellis-meta/references/customize-local/change-workflow.md:55:| `in_progress` | no implementation in conversation history | Phase 2.1 (`trellis-implement`) |
+.pi/skills/trellis-meta/references/customize-local/change-workflow.md:56:| `in_progress` | implementation done, no `trellis-check` run | Phase 2.2 (`trellis-check`) |
+.pi/skills/trellis-check/SKILL.md:2:name: trellis-check
+.trellis/spec/guides/cross-layer-thinking-guide.md:122:**Real-world example**: Codex inline mode changed workflow platform markers from
+.trellis/spec/guides/cross-layer-thinking-guide.md:123:`[Codex]` / `[Kilo, Antigravity, Windsurf]` to `[codex-sub-agent]` /
+.trellis/spec/guides/cross-layer-thinking-guide.md:124:`[codex-inline, Kilo, Antigravity, Windsurf]`. Fresh init was correct, but

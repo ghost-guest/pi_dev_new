@@ -1,0 +1,392 @@
+packages/tui/src/tui.ts:417:	private isOverlayVisible(entry: (typeof this.overlayStack)[number]): boolean {
+packages/tui/src/tui.ts:425:	/** Find the topmost visible capturing overlay, if any */
+packages/tui/src/tui.ts:426:	private getTopmostVisibleOverlay(): (typeof this.overlayStack)[number] | undefined {
+packages/tui/src/tui.ts:427:		for (let i = this.overlayStack.length - 1; i >= 0; i--) {
+packages/tui/src/tui.ts:428:			if (this.overlayStack[i].options?.nonCapturing) continue;
+packages/tui/src/tui.ts:429:			if (this.isOverlayVisible(this.overlayStack[i])) {
+packages/tui/src/tui.ts:430:				return this.overlayStack[i];
+packages/tui/src/tui.ts:438:		for (const overlay of this.overlayStack) overlay.component.invalidate?.();
+packages/tui/src/tui.ts:573:		// If focused component is an overlay, verify it's still visible
+packages/tui/src/tui.ts:575:		const focusedOverlay = this.overlayStack.find((o) => o.component === this.focusedComponent);
+packages/tui/src/tui.ts:577:			// Focused overlay is no longer visible, redirect to topmost visible overlay
+packages/tui/src/tui.ts:582:				// No visible overlays, restore to preFocus
+packages/tui/src/tui.ts:620:	 * Resolve overlay layout from options.
+packages/tui/src/tui.ts:625:		overlayHeight: number,
+packages/tui/src/tui.ts:661:		// Effective overlay height (may be clamped by maxHeight)
+packages/tui/src/tui.ts:662:		const effectiveHeight = maxHeight !== undefined ? Math.min(overlayHeight, maxHeight) : overlayHeight;
+packages/tui/src/tui.ts:670:				// Percentage: 0% = top, 100% = bottom (overlay stays within bounds)
+packages/tui/src/tui.ts:692:				// Percentage: 0% = left, 100% = right (overlay stays within bounds)
+packages/tui/src/tui.ts:757:	/** Composite all overlays into content lines (sorted by focusOrder, higher = on top). */
+packages/tui/src/tui.ts:759:		if (this.overlayStack.length === 0) return lines;
+packages/tui/src/tui.ts:762:		// Pre-render all visible overlays and calculate positions
+packages/tui/src/tui.ts:763:		const rendered: { overlayLines: string[]; row: number; col: number; w: number }[] = [];
+packages/tui/src/tui.ts:766:		const visibleEntries = this.overlayStack.filter((e) => this.isOverlayVisible(e));
+packages/tui/src/tui.ts:772:			// (width and maxHeight don't depend on overlay height)
+packages/tui/src/tui.ts:776:			let overlayLines = component.render(width);
+packages/tui/src/tui.ts:779:			if (maxHeight !== undefined && overlayLines.length > maxHeight) {
+packages/tui/src/tui.ts:780:				overlayLines = overlayLines.slice(0, maxHeight);
+packages/tui/src/tui.ts:783:			// Get final row/col with actual overlay height
+packages/tui/src/tui.ts:784:			const { row, col } = this.resolveOverlayLayout(options, overlayLines.length, termWidth, termHeight);
+packages/tui/src/tui.ts:786:			rendered.push({ overlayLines, row, col, w: width });
+packages/tui/src/tui.ts:787:			minLinesNeeded = Math.max(minLinesNeeded, row + overlayLines.length);
+packages/tui/src/tui.ts:790:		// Pad to at least terminal height so overlays have screen-relative positions.
+packages/tui/src/tui.ts:795:		// Extend result with empty lines if content is too short for overlay placement or working area
+packages/tui/src/tui.ts:802:		// Composite each overlay
+packages/tui/src/tui.ts:803:		for (const { overlayLines, row, col, w } of rendered) {
+packages/tui/src/tui.ts:804:			for (let i = 0; i < overlayLines.length; i++) {
+packages/tui/src/tui.ts:807:					// Defensive: truncate overlay line to declared width before compositing
+packages/tui/src/tui.ts:810:						visibleWidth(overlayLines[i]) > w ? sliceByColumn(overlayLines[i], 0, w, true) : overlayLines[i];
+packages/tui/src/tui.ts:874:	/** Splice overlay content into a base line at a specific column. Single-pass optimized. */
+packages/tui/src/tui.ts:877:		overlayLine: string,
+packages/tui/src/tui.ts:879:		overlayWidth: number,
+packages/tui/src/tui.ts:885:		const afterStart = startCol + overlayWidth;
+packages/tui/src/tui.ts:888:		// Extract overlay with width tracking (strict=true to exclude wide chars at boundary)
+packages/tui/src/tui.ts:889:		const overlay = sliceWithWidth(overlayLine, 0, overlayWidth, true);
+packages/tui/src/tui.ts:893:		const overlayPad = Math.max(0, overlayWidth - overlay.width);
+packages/tui/src/tui.ts:895:		const actualOverlayWidth = Math.max(overlayWidth, overlay.width);
+packages/tui/src/tui.ts:905:			overlay.text +
+packages/tui/src/tui.ts:906:			" ".repeat(overlayPad) +
+packages/tui/src/tui.ts:972:		// Composite overlays into the rendered lines (before differential compare)
+packages/tui/src/tui.ts:973:		if (this.overlayStack.length > 0) {
+packages/tui/src/tui.ts:1044:		// Content shrunk below the working area and no overlays - re-render to clear empty rows
+packages/tui/src/tui.ts:1045:		// (overlays need the padding, so only do this when no overlays are active)
+packages/tui/src/tui.ts:1047:		if (this.clearOnShrink && newLines.length < this.maxLinesRendered && this.overlayStack.length === 0) {
+packages/coding-agent/src/modes/rpc/rpc-mode.ts:145:		notify(message: string, type?: "info" | "warning" | "error"): void {
+packages/coding-agent/src/modes/rpc/rpc-mode.ts:167:				statusKey: key,
+packages/coding-agent/src/modes/rpc/rpc-mode.ts:168:				statusText: text,
+packages/coding-agent/src/modes/rpc/rpc-mode.ts:192:		setWidget(key: string, content: unknown, options?: ExtensionWidgetOptions): void {
+packages/coding-agent/src/modes/rpc/rpc-mode.ts:198:					method: "setWidget",
+packages/coding-agent/src/modes/rpc/rpc-mode.ts:199:					widgetKey: key,
+packages/coding-agent/src/modes/rpc/rpc-mode.ts:200:					widgetLines: content as string[] | undefined,
+packages/coding-agent/src/modes/rpc/rpc-mode.ts:201:					widgetPlacement: options?.placement,
+packages/tui/src/stdin-buffer.ts:205:				const status = isCompleteSequence(candidate);
+packages/tui/src/stdin-buffer.ts:207:				if (status === "complete") {
+packages/tui/src/stdin-buffer.ts:234:				} else if (status === "incomplete") {
+packages/coding-agent/src/core/model-registry.ts:727:	 * Return auth status for a provider, including request auth configured in models.json.
+packages/coding-agent/src/utils/tools-manager.ts:114:		throw new Error(`GitHub API error: ${response.status}`);
+packages/coding-agent/src/utils/tools-manager.ts:128:		throw new Error(`Failed to download: ${response.status}`);
+packages/coding-agent/src/utils/tools-manager.ts:173:	return `exit status ${result.status ?? "unknown"}`;
+packages/coding-agent/src/utils/tools-manager.ts:178:	if (!result.error && result.status === 0) {
+packages/coding-agent/src/core/extensions/runner.ts:203:	setWidget: () => {},
+packages/coding-agent/src/core/extensions/types.ts:96:/** Placement for extension widgets. */
+packages/coding-agent/src/core/extensions/types.ts:99:/** Options for extension widgets. */
+packages/coding-agent/src/core/extensions/types.ts:101:	/** Where the widget is rendered. Defaults to "aboveEditor". */
+packages/coding-agent/src/core/extensions/types.ts:135:	notify(message: string, type?: "info" | "warning" | "error"): void;
+packages/coding-agent/src/core/extensions/types.ts:143:	/** Set status text in the footer/status bar. Pass undefined to clear. */
+packages/coding-agent/src/core/extensions/types.ts:165:	/** Set a widget to display above or below the editor. Accepts string array or component factory. */
+packages/coding-agent/src/core/extensions/types.ts:166:	setWidget(key: string, content: string[] | undefined, options?: ExtensionWidgetOptions): void;
+packages/coding-agent/src/core/extensions/types.ts:167:	setWidget(
+packages/coding-agent/src/core/extensions/types.ts:176:	 * git branch and extension statuses from setStatus(). Token stats, model info,
+packages/coding-agent/src/core/extensions/types.ts:200:			overlay?: boolean;
+packages/coding-agent/src/core/extensions/types.ts:202:			overlayOptions?: OverlayOptions | (() => OverlayOptions);
+packages/coding-agent/src/core/extensions/types.ts:203:			/** Called with the overlay handle after the overlay is shown. Use to control visibility. */
+packages/coding-agent/src/core/extensions/types.ts:622:	status: number;
+packages/coding-agent/src/modes/rpc/rpc-types.ts:236:			statusKey: string;
+packages/coding-agent/src/modes/rpc/rpc-types.ts:237:			statusText: string | undefined;
+packages/coding-agent/src/modes/rpc/rpc-types.ts:242:			method: "setWidget";
+packages/coding-agent/src/modes/rpc/rpc-types.ts:243:			widgetKey: string;
+packages/coding-agent/src/modes/rpc/rpc-types.ts:244:			widgetLines: string[] | undefined;
+packages/coding-agent/src/modes/rpc/rpc-types.ts:245:			widgetPlacement?: "aboveEditor" | "belowEditor";
+packages/coding-agent/src/core/footer-data-provider.ts:57:	const branch = result.status === 0 ? result.stdout.trim() : "";
+packages/coding-agent/src/core/footer-data-provider.ts:84: * Provides git branch and extension statuses - data not otherwise accessible to extensions.
+packages/coding-agent/src/core/footer-data-provider.ts:120:	/** Extension status texts set via ctx.ui.setStatus() */
+packages/coding-agent/src/core/footer-data-provider.ts:131:	/** Internal: set extension status */
+packages/coding-agent/src/core/footer-data-provider.ts:140:	/** Internal: clear extension statuses */
+packages/coding-agent/src/core/package-manager.ts:2531:		if (result.error || result.status !== 0) {
+packages/coding-agent/src/core/agent-session.ts:2655:	 * @returns Result with editorText (if user message) and cancelled status
+packages/coding-agent/src/utils/shell.ts:23:			if (result.status === 0 && result.stdout) {
+packages/coding-agent/src/utils/shell.ts:38:		if (result.status === 0 && result.stdout) {
+packages/coding-agent/src/core/sdk.ts:370:				status: response.status,
+packages/coding-agent/src/core/auth-storage.ts:347:	 * Return auth status without exposing credential values or refreshing tokens.
+packages/coding-agent/src/core/export-html/template.html:12:  <button id="hamburger" title="Open sidebar"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><rect x="5" y="6" width="2" height="12"/><path d="M6 12h10c1 0 2 0 2-2V8"/></svg></button>
+packages/coding-agent/src/core/export-html/template.html:13:  <div id="sidebar-overlay"></div>
+packages/coding-agent/src/core/export-html/template.html:15:    <aside id="sidebar">
+packages/coding-agent/src/core/export-html/template.html:16:      <div class="sidebar-header">
+packages/coding-agent/src/core/export-html/template.html:17:        <div class="sidebar-controls">
+packages/coding-agent/src/core/export-html/template.html:18:          <input type="text" class="sidebar-search" id="tree-search" placeholder="Search...">
+packages/coding-agent/src/core/export-html/template.html:20:        <div class="sidebar-filters">
+packages/coding-agent/src/core/export-html/template.html:26:          <button class="sidebar-close" id="sidebar-close" title="Close">✕</button>
+packages/coding-agent/src/core/export-html/template.html:30:      <div class="tree-status" id="tree-status"></div>
+packages/coding-agent/src/core/export-html/template.html:32:    <div id="sidebar-resizer" role="separator" aria-orientation="vertical" aria-label="Resize session tree sidebar"></div>
+packages/coding-agent/src/utils/clipboard-image.ts:107:	if (result.status !== 0) {
+packages/coding-agent/src/core/export-html/vendor/highlight.min.js:713:built_in:"_G _ENV _VERSION __index __newindex __mode __call __metatable __tostring __len __gc __add __sub __mul __div __mod __pow __concat __unm __eq __lt __le assert collectgarbage dofile error getfenv getmetatable ipairs load loadfile loadstring module next pairs pcall print rawequal rawget rawset require select setfenv setmetatable tonumber tostring type unpack xpcall arg self coroutine resume yield status wrap create running debug getupvalue debug sethook getmetatable gethook setmetatable setlocal traceback setfenv getinfo setupvalue getlocal getregistry getfenv io lines write close flush open output type read stderr stdin input stdout popen tmpfile math log max acos huge ldexp pi cos tanh pow deg tan cosh sinh random randomseed frexp ceil floor rad abs sqrt modf asin min mod fmod log10 atan2 exp sin atan os exit setlocale date getenv difftime remove time clock tmpname rename execute package preload loadlib loaded loaders cpath config path seeall string sub upper len gfind rep find match char dump gmatch reverse byte format gsub lower table setn insert getn foreachi maxn foreach concat sort remove"
+packages/coding-agent/src/core/export-html/vendor/highlight.min.js:1041:const n=e.regex,t=e.COMMENT("--","$"),a=["true","false","unknown"],i=["bigint","binary","blob","boolean","char","character","clob","date","dec","decfloat","decimal","float","int","integer","interval","nchar","nclob","national","numeric","real","row","smallint","time","timestamp","varchar","varying","varbinary"],r=["abs","acos","array_agg","asin","atan","avg","cast","ceil","ceiling","coalesce","corr","cos","cosh","count","covar_pop","covar_samp","cume_dist","dense_rank","deref","element","exp","extract","first_value","floor","json_array","json_arrayagg","json_exists","json_object","json_objectagg","json_query","json_table","json_table_primitive","json_value","lag","last_value","lead","listagg","ln","log","log10","lower","max","min","mod","nth_value","ntile","nullif","percent_rank","percentile_cont","percentile_disc","position","position_regex","power","rank","regr_avgx","regr_avgy","regr_count","regr_intercept","regr_r2","regr_slope","regr_sxx","regr_sxy","regr_syy","row_number","sin","sinh","sqrt","stddev_pop","stddev_samp","substring","substring_regex","sum","tan","tanh","translate","translate_regex","treat","trim","trim_array","unnest","upper","value_of","var_pop","var_samp","width_bucket"],s=["create table","insert into","primary key","foreign key","not null","alter table","add constraint","grouping sets","on overflow","character set","respect nulls","ignore nulls","nulls first","nulls last","depth first","breadth first"],o=r,l=["abs","acos","all","allocate","alter","and","any","are","array","array_agg","array_max_cardinality","as","asensitive","asin","asymmetric","at","atan","atomic","authorization","avg","begin","begin_frame","begin_partition","between","bigint","binary","blob","boolean","both","by","call","called","cardinality","cascaded","case","cast","ceil","ceiling","char","char_length","character","character_length","check","classifier","clob","close","coalesce","collate","collect","column","commit","condition","connect","constraint","contains","convert","copy","corr","corresponding","cos","cosh","count","covar_pop","covar_samp","create","cross","cube","cume_dist","current","current_catalog","current_date","current_default_transform_group","current_path","current_role","current_row","current_schema","current_time","current_timestamp","current_path","current_role","current_transform_group_for_type","current_user","cursor","cycle","date","day","deallocate","dec","decimal","decfloat","declare","default","define","delete","dense_rank","deref","describe","deterministic","disconnect","distinct","double","drop","dynamic","each","element","else","empty","end","end_frame","end_partition","end-exec","equals","escape","every","except","exec","execute","exists","exp","external","extract","false","fetch","filter","first_value","float","floor","for","foreign","frame_row","free","from","full","function","fusion","get","global","grant","group","grouping","groups","having","hold","hour","identity","in","indicator","initial","inner","inout","insensitive","insert","int","integer","intersect","intersection","interval","into","is","join","json_array","json_arrayagg","json_exists","json_object","json_objectagg","json_query","json_table","json_table_primitive","json_value","lag","language","large","last_value","lateral","lead","leading","left","like","like_regex","listagg","ln","local","localtime","localtimestamp","log","log10","lower","match","match_number","match_recognize","matches","max","member","merge","method","min","minute","mod","modifies","module","month","multiset","national","natural","nchar","nclob","new","no","none","normalize","not","nth_value","ntile","null","nullif","numeric","octet_length","occurrences_regex","of","offset","old","omit","on","one","only","open","or","order","out","outer","over","overlaps","overlay","parameter","partition","pattern","per","percent","percent_rank","percentile_cont","percentile_disc","period","portion","position","position_regex","power","precedes","precision","prepare","primary","procedure","ptf","range","rank","reads","real","recursive","ref","references","referencing","regr_avgx","regr_avgy","regr_count","regr_intercept","regr_r2","regr_slope","regr_sxx","regr_sxy","regr_syy","release","result","return","returns","revoke","right","rollback","rollup","row","row_number","rows","running","savepoint","scope","scroll","search","second","seek","select","sensitive","session_user","set","show","similar","sin","sinh","skip","smallint","some","specific","specifictype","sql","sqlexception","sqlstate","sqlwarning","sqrt","start","static","stddev_pop","stddev_samp","submultiset","subset","substring","substring_regex","succeeds","sum","symmetric","system","system_time","system_user","table","tablesample","tan","tanh","then","time","timestamp","timezone_hour","timezone_minute","to","trailing","translate","translate_regex","translation","treat","trigger","trim","trim_array","true","truncate","uescape","union","unique","unknown","unnest","update","upper","user","using","value","values","value_of","var_pop","var_samp","varbinary","varchar","varying","versioning","when","whenever","where","width_bucket","window","with","within","without","year","add","asc","collation","desc","final","first","last","view"].filter((e=>!r.includes(e))),c={
+packages/coding-agent/src/core/export-html/template.css:12:      --sidebar-width: 400px;
+packages/coding-agent/src/core/export-html/template.css:13:      --sidebar-min-width: 240px;
+packages/coding-agent/src/core/export-html/template.css:14:      --sidebar-max-width: 840px;
+packages/coding-agent/src/core/export-html/template.css:15:      --sidebar-resizer-width: 6px;
+packages/coding-agent/src/core/export-html/template.css:26:    body.sidebar-resizing {
+packages/coding-agent/src/core/export-html/template.css:37:    #sidebar {
+packages/coding-agent/src/core/export-html/template.css:38:      width: var(--sidebar-width);
+packages/coding-agent/src/core/export-html/template.css:39:      min-width: var(--sidebar-width);
+packages/coding-agent/src/core/export-html/template.css:40:      max-width: var(--sidebar-width);
+packages/coding-agent/src/core/export-html/template.css:51:    #sidebar-resizer {
+packages/coding-agent/src/core/export-html/template.css:52:      width: var(--sidebar-resizer-width);
+packages/coding-agent/src/core/export-html/template.css:63:    #sidebar-resizer:hover,
+packages/coding-agent/src/core/export-html/template.css:64:    body.sidebar-resizing #sidebar-resizer {
+packages/coding-agent/src/core/export-html/template.css:69:    .sidebar-header {
+packages/coding-agent/src/core/export-html/template.css:74:    .sidebar-controls {
+packages/coding-agent/src/core/export-html/template.css:78:    .sidebar-search {
+packages/coding-agent/src/core/export-html/template.css:90:    .sidebar-filters {
+packages/coding-agent/src/core/export-html/template.css:98:    .sidebar-search:focus {
+packages/coding-agent/src/core/export-html/template.css:103:    .sidebar-search::placeholder {
+packages/coding-agent/src/core/export-html/template.css:129:    .sidebar-close {
+packages/coding-agent/src/core/export-html/template.css:142:    .sidebar-close:hover {
+packages/coding-agent/src/core/export-html/template.css:239:    .tree-status {
+packages/coding-agent/src/core/export-html/template.css:1007:    #sidebar-overlay {
+packages/coding-agent/src/core/export-html/template.css:1019:      #sidebar {
+packages/coding-agent/src/core/export-html/template.css:1022:        width: min(var(--sidebar-width), 100vw);
+packages/coding-agent/src/core/export-html/template.css:1023:        min-width: min(var(--sidebar-width), 100vw);
+packages/coding-agent/src/core/export-html/template.css:1024:        max-width: min(var(--sidebar-width), 100vw);
+packages/coding-agent/src/core/export-html/template.css:1033:      #sidebar.open {
+packages/coding-agent/src/core/export-html/template.css:1037:      #sidebar-resizer {
+packages/coding-agent/src/core/export-html/template.css:1041:      #sidebar-overlay.open {
+packages/coding-agent/src/core/export-html/template.css:1049:      .sidebar-close {
+packages/coding-agent/src/core/export-html/template.css:1063:      #sidebar, #sidebar-resizer, #sidebar-toggle { display: none !important; }
+packages/coding-agent/src/core/tools/bash.ts:370:			const appendStatus = (text: string, status: string) => `${text ? `${text}\n\n` : ""}${status}`;
+packages/coding-agent/src/core/resolve-config-value.ts:44:		if (result.status !== 0) {
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:120:			const statusIndicator = this.formatStatusIndicator(provider);
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:125:				line = prefix + text + statusIndicator;
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:128:				line = text + statusIndicator;
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:160:		const status = this.getAuthStatus(provider.id);
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:161:		switch (status.source) {
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:163:				return theme.fg("success", ` ✓ env: ${status.label ?? "API key"}`);
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:216:			const status = allEnabled ? "" : item.enabled ? theme.fg("success", " ✓") : theme.fg("dim", " ✗");
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:217:			this.listContainer.addChild(new Text(`${prefix}${modelText}${providerBadge}${status}`, 0, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:240:	private chatContainer: Container;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:242:	private statusContainer: Container;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:271:	// Status line tracking (for mutating immediately-sequential status updates)
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:325:	// Extension widgets (components rendered above/below the editor)
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:328:	private widgetContainerAbove!: Container;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:329:	private widgetContainerBelow!: Container;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:372:		this.chatContainer = new Container();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:374:		this.statusContainer = new Container();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:375:		this.widgetContainerAbove = new Container();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:376:		this.widgetContainerBelow = new Container();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:548:		if (this.chatContainer.children.length > 0) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:549:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:551:		this.chatContainer.addChild(new DynamicBorder());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:556:			this.chatContainer.addChild(new Text(condensedText, 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:558:			this.chatContainer.addChild(new Text(theme.bold(theme.fg("accent", "What's New")), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:559:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:560:			this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:563:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:565:		this.chatContainer.addChild(new DynamicBorder());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:660:		this.ui.addChild(this.chatContainer);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:662:		this.ui.addChild(this.statusContainer);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:664:		this.ui.addChild(this.widgetContainerAbove);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:666:		this.ui.addChild(this.widgetContainerBelow);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1314:			this.chatContainer.addChild(section);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1315:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1352:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1435:				this.chatContainer.addChild(new Text(`${theme.fg("warning", "[Skill conflicts]")}\n${warningLines}`, 0, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1436:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1442:				this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1445:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1465:				this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1468:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1474:				this.chatContainer.addChild(new Text(`${theme.fg("warning", "[Theme conflicts]")}\n${warningLines}`, 0, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1475:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1497:					this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1533:					this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1607:		this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1679:	 * Set extension status text in the footer.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1705:		this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1716:			this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1718:			this.statusContainer.addChild(this.loadingAnimation);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1731:		for (const child of this.chatContainer.children) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1743:	 * Set an extension widget (string array or custom component).
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1774:				container.addChild(new Text(theme.fg("muted", "... (widget truncated)"), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1788:		for (const widget of this.extensionWidgetsAbove.values()) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1789:			widget.dispose?.();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1791:		for (const widget of this.extensionWidgetsBelow.values()) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1792:			widget.dispose?.();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1830:	// Maximum total widget lines to prevent viewport overflow
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1834:	 * Render all extension widgets to the widget container.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1837:		if (!this.widgetContainerAbove || !this.widgetContainerBelow) return;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1838:		this.renderWidgetContainer(this.widgetContainerAbove, this.extensionWidgetsAbove, true, true);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1839:		this.renderWidgetContainer(this.widgetContainerBelow, this.extensionWidgetsBelow, false, false);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1845:		widgets: Map<string, Component & { dispose?(): void }>,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1851:		if (widgets.size === 0) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1861:		for (const component of widgets.values()) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1971:				this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1986:			setWidget: (key, content, options) => this.setExtensionWidget(key, content, options),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2286:			overlay?: boolean;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2287:			overlayOptions?: OverlayOptions | (() => OverlayOptions);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2292:		const isOverlay = options?.overlay ?? false;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2325:						// Resolve overlay options - can be static or dynamic function
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2327:							if (options?.overlayOptions) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2329:									typeof options.overlayOptions === "function"
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2330:										? options.overlayOptions()
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2331:										: options.overlayOptions;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2362:		this.chatContainer.addChild(errorText);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2371:				this.chatContainer.addChild(new Text(stackLines, 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2686:					this.statusContainer.addChild(this.loadingAnimation);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2723:					this.chatContainer.addChild(this.streamingComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2750:								this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2819:					this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2853:					this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2856:					this.chatContainer.removeChild(this.streamingComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2876:				this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2888:				this.statusContainer.addChild(this.autoCompactionLoader);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2904:					this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2913:					this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2927:						this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2928:						this.chatContainer.addChild(new Text(theme.fg("error", event.errorMessage), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2943:				this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2963:				this.statusContainer.addChild(this.retryLoader);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2982:					this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3005:	 * Show a status message in the chat.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3007:	 * If multiple status messages are emitted back-to-back (without anything else being added to the chat),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3008:	 * we update the previous status line instead of appending new ones to avoid log spam.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3011:		const children = this.chatContainer.children;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3023:		this.chatContainer.addChild(spacer);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3024:		this.chatContainer.addChild(text);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3043:				this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3051:					this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3056:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3059:				this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3063:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3066:				this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3072:					if (this.chatContainer.children.length > 0) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3073:						this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3083:						this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3090:							this.chatContainer.addChild(userComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3094:						this.chatContainer.addChild(userComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3109:				this.chatContainer.addChild(assistantComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3128:	private renderSessionContext(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3160:						this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3201:		this.renderSessionContext(context, {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3225:		this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3227:		this.renderSessionContext(context);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3491:		for (const child of this.chatContainer.children) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3504:		this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3511:			this.chatContainer.addChild(this.streamingComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3543:			const status = await new Promise<number | null>((resolve) => {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3552:			// On successful exit (status 0), replace editor content
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3553:			if (status === 0) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3583:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3584:		this.chatContainer.addChild(new Text(theme.fg("error", `Error: ${errorMessage}`), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3585:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3590:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3591:		this.chatContainer.addChild(new Text(theme.fg("warning", `Warning: ${warningMessage}`), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3605:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3606:		this.chatContainer.addChild(new DynamicBorder((text) => theme.fg("warning", text)));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3607:		this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3611:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3612:			this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3617:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3619:		this.chatContainer.addChild(new Text(changelogLine, 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3620:		this.chatContainer.addChild(new DynamicBorder((text) => theme.fg("warning", text)));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3629:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3630:		this.chatContainer.addChild(new DynamicBorder((text) => theme.fg("warning", text)));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3631:		this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3638:		this.chatContainer.addChild(new DynamicBorder((text) => theme.fg("warning", text)));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3817:			this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3881:						for (const child of this.chatContainer.children) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3889:						for (const child of this.chatContainer.children) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3943:						for (const child of this.chatContainer.children) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3948:						this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4325:						this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4332:						this.statusContainer.addChild(summaryLoader);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4354:						this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4366:							this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4429:		this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5015:			this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5050:			const authResult = spawnSync("gh", ["auth", "status"], { encoding: "utf-8" });
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5051:			if (authResult.status !== 0) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5161:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5162:				this.chatContainer.addChild(new Text(theme.fg("dim", `Session name: ${currentName}`), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5171:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5172:		this.chatContainer.addChild(new Text(theme.fg("dim", `Session name set: ${name}`), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5208:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5209:		this.chatContainer.addChild(new Text(info, 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5225:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5226:		this.chatContainer.addChild(new DynamicBorder());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5227:		this.chatContainer.addChild(new Text(theme.bold(theme.fg("accent", "What's New")), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5228:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5229:		this.chatContainer.addChild(new Markdown(changelogMarkdown, 1, 1, this.getMarkdownThemeWithSettings()));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5230:		this.chatContainer.addChild(new DynamicBorder());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5354:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5355:		this.chatContainer.addChild(new DynamicBorder());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5356:		this.chatContainer.addChild(new Text(theme.bold(theme.fg("accent", "Keyboard Shortcuts")), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5357:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5358:		this.chatContainer.addChild(new Markdown(hotkeys.trim(), 1, 1, this.getMarkdownThemeWithSettings()));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5359:		this.chatContainer.addChild(new DynamicBorder());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5368:		this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5375:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5376:			this.chatContainer.addChild(new Text(`${theme.fg("accent", "✓ New session started")}`, 1, 1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5409:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5410:		this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5417:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5418:		this.chatContainer.addChild(new ArminComponent(this.ui));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5423:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5424:		this.chatContainer.addChild(new EarendilAnnouncementComponent());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5429:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5430:		this.chatContainer.addChild(new DaxnutsComponent(this.ui));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5461:				this.chatContainer.addChild(this.bashComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5492:			this.chatContainer.addChild(this.bashComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5540:		this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:24:	private status: "running" | "complete" | "cancelled" | "error" = "running";
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:105:		this.status = cancelled
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:170:		// Loader or status
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:171:		if (this.status === "running") {
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:174:			const statusParts: string[] = [];
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:179:					statusParts.push(`(${keyHint("app.tools.expand", "to collapse")})`);
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:181:					statusParts.push(
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:187:			if (this.status === "cancelled") {
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:188:				statusParts.push(theme.fg("warning", "(cancelled)"));
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:189:			} else if (this.status === "error") {
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:190:				statusParts.push(theme.fg("error", `(exit ${this.exitCode})`));
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:196:				statusParts.push(theme.fg("warning", `Output truncated. Full output: ${this.fullOutputPath}`));
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:199:			if (statusParts.length > 0) {
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:200:				this.contentContainer.addChild(new Text(`\n${statusParts.join("\n")}`, 1, 0));
+packages/coding-agent/src/core/export-html/template.js:767:        document.getElementById('tree-status').textContent = `${filtered.length} / ${flatNodes.length} entries`;
+packages/coding-agent/src/core/export-html/template.js:895:        const statusClass = result ? (isError ? 'error' : 'success') : 'pending';
+packages/coding-agent/src/core/export-html/template.js:917:        let html = `<div class="tool-execution ${statusClass}" id="${toolDomId}">`;
+packages/coding-agent/src/core/export-html/template.js:1649:      const sidebar = document.getElementById('sidebar');
+packages/coding-agent/src/core/export-html/template.js:1650:      const overlay = document.getElementById('sidebar-overlay');
+packages/coding-agent/src/core/export-html/template.js:1652:      const sidebarResizer = document.getElementById('sidebar-resizer');
+packages/coding-agent/src/core/export-html/template.js:1653:      const SIDEBAR_WIDTH_STORAGE_KEY = 'pi-share:v1:sidebar-width';
+packages/coding-agent/src/core/export-html/template.js:1662:        const minWidth = parseFloat(rootStyles.getPropertyValue('--sidebar-min-width')) || 240;
+packages/coding-agent/src/core/export-html/template.js:1663:        const maxWidth = parseFloat(rootStyles.getPropertyValue('--sidebar-max-width')) || 720;
+packages/coding-agent/src/core/export-html/template.js:1677:        document.documentElement.style.setProperty('--sidebar-width', `${Math.round(clampSidebarWidth(width))}px`);
+packages/coding-agent/src/core/export-html/template.js:1705:        if (!sidebarResizer) return;
+packages/coding-agent/src/core/export-html/template.js:1716:        sidebarResizer.addEventListener('pointerdown', (e) => {
+packages/coding-agent/src/core/export-html/template.js:1721:          const startWidth = sidebar.getBoundingClientRect().width;
+packages/coding-agent/src/core/export-html/template.js:1722:          document.body.classList.add('sidebar-resizing');
+packages/coding-agent/src/core/export-html/template.js:1723:          sidebarResizer.setPointerCapture?.(e.pointerId);
+packages/coding-agent/src/core/export-html/template.js:1730:            document.body.classList.remove('sidebar-resizing');
+packages/coding-agent/src/core/export-html/template.js:1731:            sidebarResizer.releasePointerCapture?.(pointerIdToRelease);
+packages/coding-agent/src/core/export-html/template.js:1735:            saveSidebarWidth(sidebar.getBoundingClientRect().width);
+packages/coding-agent/src/core/export-html/template.js:1746:        sidebarResizer.addEventListener('dblclick', () => {
+packages/coding-agent/src/core/export-html/template.js:1754:          applySidebarWidth(sidebar.getBoundingClientRect().width);
+packages/coding-agent/src/core/export-html/template.js:1761:        sidebar.classList.add('open');
+packages/coding-agent/src/core/export-html/template.js:1762:        overlay.classList.add('open');
+packages/coding-agent/src/core/export-html/template.js:1767:        sidebar.classList.remove('open');
+packages/coding-agent/src/core/export-html/template.js:1768:        overlay.classList.remove('open');
+packages/coding-agent/src/core/export-html/template.js:1772:      overlay.addEventListener('click', closeSidebar);
+packages/coding-agent/src/core/export-html/template.js:1773:      document.getElementById('sidebar-close').addEventListener('click', closeSidebar);
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:65:	private statusMessage: { type: "info" | "error"; message: string } | null = null;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:66:	private statusTimeout: ReturnType<typeof setTimeout> | null = null;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:111:		if (!this.statusTimeout) return;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:112:		clearTimeout(this.statusTimeout);
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:113:		this.statusTimeout = null;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:118:		this.statusMessage = msg;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:121:		this.statusTimeout = setTimeout(() => {
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:122:			this.statusMessage = null;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:123:			this.statusTimeout = null;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:162:		} else if (this.statusMessage) {
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:163:			const color = this.statusMessage.type === "error" ? "error" : "accent";
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:164:			hintLine1 = theme.fg(color, truncateToWidth(this.statusMessage.message, width, "…"));
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:652:	if (trashResult.status === 0 || !existsSync(sessionPath)) {
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:778:		// Ensure header status timeouts are cleared when leaving the selector
+packages/coding-agent/src/modes/interactive/components/extension-editor.ts:132:			const status = await new Promise<number | null>((resolve) => {
+packages/coding-agent/src/modes/interactive/components/extension-editor.ts:141:			if (status === 0) {
+packages/coding-agent/src/modes/interactive/components/footer.ts:8: * Sanitize text for display in a single-line status.
+packages/coding-agent/src/modes/interactive/components/footer.ts:46: * Computes token/context stats from session, gets git branch and extension statuses from provider.
+packages/coding-agent/src/modes/interactive/components/footer.ts:220:		// Add extension statuses on a single line, sorted by key alphabetically
+packages/coding-agent/src/modes/interactive/components/footer.ts:226:			const statusLine = sortedStatuses.join(" ");
+packages/coding-agent/src/modes/interactive/components/footer.ts:228:			lines.push(truncateToWidth(statusLine, width, theme.fg("dim", "...")));
+
+[Showing lines 74-463 of 463 (50.0KB limit). Full output: /var/folders/7m/csfvhz791k527kby7nxl7cbc0000h_/T/pi-bash-396d1eeccf38c129.log]

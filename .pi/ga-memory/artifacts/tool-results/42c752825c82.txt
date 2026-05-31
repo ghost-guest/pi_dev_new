@@ -1,0 +1,122 @@
+
+--- anyrouter log tail ---
+[2026-05-31T01:12:33.929Z] error {"attempt":1,"message":"HTTP 524: ","sawSseEvent":false}
+[2026-05-31T01:26:32.554Z] request {"attempt":1,"fallbackMode":false,"url":"https://a-ocnfniawgw.cn-shanghai.fcapp.run/v1/messages?beta=true","model":"claude-opus-4-8","stream":true,"thinking":{"type":"adaptive"},"max_tokens":32000,"headerKeys":["content-type","anthropic-version","anthropic-beta","anthropic-dangerous-direct-browser-access","user-agent","x-app","authorization"]}
+[2026-05-31T01:26:32.565Z] response_headers {"attempt":1,"status":524,"ok":false,"contentType":"application/octet-stream"}
+[2026-05-31T01:26:32.566Z] response_error {"attempt":1,"fallbackMode":false,"status":524,"body":""}
+[2026-05-31T01:26:33.570Z] request {"attempt":2,"fallbackMode":true,"url":"https://a-ocnfniawgw.cn-shanghai.fcapp.run/v1/messages?beta=true","model":"claude-opus-4-8","stream":true,"thinking":{"type":"disabled"},"max_tokens":8192,"headerKeys":["content-type","anthropic-version","anthropic-beta","anthropic-dangerous-direct-browser-access","user-agent","x-app","authorization"]}
+[2026-05-31T01:26:33.571Z] response_headers {"attempt":2,"status":200,"ok":true,"contentType":"text/event-stream"}
+[2026-05-31T01:26:33.574Z] stream_event {"type":"message_start"}
+[2026-05-31T01:26:33.575Z] stream_event {"type":"content_block_start"}
+[2026-05-31T01:26:33.576Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T01:26:33.576Z] stream_event {"type":"content_block_stop"}
+[2026-05-31T01:26:33.576Z] stream_event {"type":"message_delta"}
+[2026-05-31T01:26:33.585Z] stream_event {"type":"message_stop"}
+[2026-05-31T01:48:06.445Z] request {"attempt":1,"fallbackMode":false,"url":"https://a-ocnfniawgw.cn-shanghai.fcapp.run/v1/messages?beta=true","model":"claude-opus-4-8","stream":true,"thinking":{"type":"adaptive"},"max_tokens":32000,"headerKeys":["content-type","anthropic-version","anthropic-beta","anthropic-dangerous-direct-browser-access","user-agent","x-app","authorization"]}
+[2026-05-31T01:48:15.069Z] response_headers {"attempt":1,"status":200,"ok":true,"contentType":"text/event-stream"}
+[2026-05-31T01:48:15.074Z] stream_event {"type":"message_start"}
+[2026-05-31T01:48:15.076Z] stream_event {"type":"content_block_start"}
+[2026-05-31T01:48:15.077Z] stream_event {"type":"ping"}
+[2026-05-31T01:48:15.077Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T01:48:15.077Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T01:48:15.077Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T01:48:15.078Z] stream_event {"type":"content_block_stop"}
+[2026-05-31T01:48:15.078Z] stream_event {"type":"content_block_start"}
+[2026-05-31T01:48:15.078Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T01:48:15.078Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T01:48:15.081Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T01:48:15.082Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T01:48:15.082Z] stream_event {"type":"content_block_stop"}
+[2026-05-31T01:48:15.082Z] stream_event {"type":"message_delta"}
+[2026-05-31T01:48:15.083Z] stream_event {"type":"message_stop"}
+[2026-05-31T01:48:16.237Z] request {"attempt":1,"fallbackMode":false,"url":"https://a-ocnfniawgw.cn-shanghai.fcapp.run/v1/messages?beta=true","model":"claude-opus-4-8","stream":true,"thinking":{"type":"adaptive"},"max_tokens":32000,"headerKeys":["content-type","anthropic-version","anthropic-beta","anthropic-dangerous-direct-browser-access","user-agent","x-app","authorization"]}
+[2026-05-31T01:50:04.666Z] error {"attempt":1,"fallbackMode":false,"message":"This operation was aborted","sawSseEvent":false}
+[2026-05-31T03:23:11.973Z] request {"attempt":1,"fallbackMode":false,"url":"https://a-ocnfniawgw.cn-shanghai.fcapp.run/v1/messages?beta=true","model":"claude-opus-4-8","stream":true,"thinking":{"type":"adaptive"},"max_tokens":32000,"headerKeys":["content-type","anthropic-version","anthropic-beta","anthropic-dangerous-direct-browser-access","user-agent","x-app","authorization"]}
+[2026-05-31T03:23:20.138Z] response_headers {"attempt":1,"status":200,"ok":true,"contentType":"text/event-stream"}
+[2026-05-31T03:23:20.140Z] stream_event {"type":"message_start"}
+[2026-05-31T03:23:20.141Z] stream_event {"type":"content_block_start"}
+[2026-05-31T03:23:20.141Z] stream_event {"type":"ping"}
+[2026-05-31T03:23:20.141Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T03:23:20.141Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T03:23:20.141Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T03:23:20.141Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T03:23:20.141Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T03:23:20.141Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T03:23:20.141Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T03:23:20.141Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T03:23:20.141Z] stream_event {"type":"content_block_stop"}
+[2026-05-31T03:23:20.578Z] stream_event {"type":"content_block_start"}
+[2026-05-31T03:23:20.578Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T03:23:20.578Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T03:23:20.578Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T03:23:20.578Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T03:23:20.578Z] stream_event {"type":"content_block_stop"}
+[2026-05-31T03:23:20.578Z] stream_event {"type":"message_delta"}
+[2026-05-31T03:23:20.578Z] stream_event {"type":"message_stop"}
+[2026-05-31T03:23:21.067Z] request {"attempt":1,"fallbackMode":false,"url":"https://a-ocnfniawgw.cn-shanghai.fcapp.run/v1/messages?beta=true","model":"claude-opus-4-8","stream":true,"thinking":{"type":"adaptive"},"max_tokens":32000,"headerKeys":["content-type","anthropic-version","anthropic-beta","anthropic-dangerous-direct-browser-access","user-agent","x-app","authorization"]}
+[2026-05-31T03:23:54.633Z] error {"attempt":1,"fallbackMode":false,"message":"This operation was aborted","sawSseEvent":false}
+[2026-05-31T07:12:50.370Z] request {"attempt":1,"fallbackMode":false,"url":"https://a-ocnfniawgw.cn-shanghai.fcapp.run/v1/messages?beta=true","model":"claude-opus-4-8","stream":true,"thinking":{"type":"adaptive"},"max_tokens":32000,"headerKeys":["content-type","anthropic-version","anthropic-beta","anthropic-dangerous-direct-browser-access","user-agent","x-app","authorization"]}
+[2026-05-31T07:12:50.893Z] response_headers {"attempt":1,"status":413,"ok":false,"contentType":"text/html"}
+[2026-05-31T07:12:50.895Z] response_error {"attempt":1,"fallbackMode":false,"status":413,"body":"<html>\r\n<head><title>413 Request Entity Too Large</title></head>\r\n<body>\r\n<center><h1>413 Request Entity Too Large</h1></center>\r\n<hr><center>nginx/1.24.0</center>\r\n</body>\r\n</html>\r\n"}
+[2026-05-31T07:12:50.896Z] error {"attempt":1,"fallbackMode":false,"message":"HTTP 413: <html>\r\n<head><title>413 Request Entity Too Large</title></head>\r\n<body>\r\n<center><h1>413 Request Entity Too Large</h1></center>\r\n<hr><center>nginx/1.24.0</center>\r\n</body>\r\n</html>\r\n","sawSseEvent":false}
+[2026-05-31T07:12:51.898Z] request {"attempt":2,"fallbackMode":true,"url":"https://a-ocnfniawgw.cn-shanghai.fcapp.run/v1/messages?beta=true","model":"claude-opus-4-8","stream":true,"thinking":{"type":"disabled"},"max_tokens":8192,"headerKeys":["content-type","anthropic-version","anthropic-beta","anthropic-dangerous-direct-browser-access","user-agent","x-app","authorization"]}
+[2026-05-31T07:12:52.121Z] response_headers {"attempt":2,"status":413,"ok":false,"contentType":"text/html"}
+[2026-05-31T07:12:52.122Z] response_error {"attempt":2,"fallbackMode":true,"status":413,"body":"<html>\r\n<head><title>413 Request Entity Too Large</title></head>\r\n<body>\r\n<center><h1>413 Request Entity Too Large</h1></center>\r\n<hr><center>nginx/1.24.0</center>\r\n</body>\r\n</html>\r\n"}
+[2026-05-31T07:12:52.122Z] error {"attempt":2,"fallbackMode":true,"message":"HTTP 413: <html>\r\n<head><title>413 Request Entity Too Large</title></head>\r\n<body>\r\n<center><h1>413 Request Entity Too Large</h1></center>\r\n<hr><center>nginx/1.24.0</center>\r\n</body>\r\n</html>\r\n","sawSseEvent":false}
+[2026-05-31T07:13:03.321Z] request {"attempt":1,"fallbackMode":false,"url":"https://a-ocnfniawgw.cn-shanghai.fcapp.run/v1/messages?beta=true","model":"claude-opus-4-8","stream":true,"thinking":{"type":"adaptive"},"max_tokens":32000,"headerKeys":["content-type","anthropic-version","anthropic-beta","anthropic-dangerous-direct-browser-access","user-agent","x-app","authorization"]}
+[2026-05-31T07:13:03.783Z] response_headers {"attempt":1,"status":413,"ok":false,"contentType":"text/html"}
+[2026-05-31T07:13:03.784Z] response_error {"attempt":1,"fallbackMode":false,"status":413,"body":"<html>\r\n<head><title>413 Request Entity Too Large</title></head>\r\n<body>\r\n<center><h1>413 Request Entity Too Large</h1></center>\r\n<hr><center>nginx/1.24.0</center>\r\n</body>\r\n</html>\r\n"}
+[2026-05-31T07:13:03.784Z] error {"attempt":1,"fallbackMode":false,"message":"HTTP 413: <html>\r\n<head><title>413 Request Entity Too Large</title></head>\r\n<body>\r\n<center><h1>413 Request Entity Too Large</h1></center>\r\n<hr><center>nginx/1.24.0</center>\r\n</body>\r\n</html>\r\n","sawSseEvent":false}
+[2026-05-31T07:13:04.786Z] request {"attempt":2,"fallbackMode":true,"url":"https://a-ocnfniawgw.cn-shanghai.fcapp.run/v1/messages?beta=true","model":"claude-opus-4-8","stream":true,"thinking":{"type":"disabled"},"max_tokens":8192,"headerKeys":["content-type","anthropic-version","anthropic-beta","anthropic-dangerous-direct-browser-access","user-agent","x-app","authorization"]}
+[2026-05-31T07:13:05.024Z] response_headers {"attempt":2,"status":413,"ok":false,"contentType":"text/html"}
+[2026-05-31T07:13:05.025Z] response_error {"attempt":2,"fallbackMode":true,"status":413,"body":"<html>\r\n<head><title>413 Request Entity Too Large</title></head>\r\n<body>\r\n<center><h1>413 Request Entity Too Large</h1></center>\r\n<hr><center>nginx/1.24.0</center>\r\n</body>\r\n</html>\r\n"}
+[2026-05-31T07:13:05.025Z] error {"attempt":2,"fallbackMode":true,"message":"HTTP 413: <html>\r\n<head><title>413 Request Entity Too Large</title></head>\r\n<body>\r\n<center><h1>413 Request Entity Too Large</h1></center>\r\n<hr><center>nginx/1.24.0</center>\r\n</body>\r\n</html>\r\n","sawSseEvent":false}
+[2026-05-31T07:13:51.475Z] request {"attempt":1,"fallbackMode":false,"url":"https://a-ocnfniawgw.cn-shanghai.fcapp.run/v1/messages?beta=true","model":"claude-opus-4-8","stream":true,"thinking":{"type":"adaptive"},"max_tokens":32000,"headerKeys":["content-type","anthropic-version","anthropic-beta","anthropic-dangerous-direct-browser-access","user-agent","x-app","authorization"]}
+[2026-05-31T07:13:58.031Z] response_headers {"attempt":1,"status":200,"ok":true,"contentType":"text/event-stream"}
+[2026-05-31T07:13:58.033Z] stream_event {"type":"message_start"}
+[2026-05-31T07:13:58.033Z] stream_event {"type":"ping"}
+[2026-05-31T07:13:58.033Z] stream_event {"type":"content_block_start"}
+[2026-05-31T07:13:58.033Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T07:13:58.033Z] stream_event {"type":"content_block_stop"}
+[2026-05-31T07:13:58.033Z] stream_event {"type":"message_delta"}
+[2026-05-31T07:13:58.033Z] stream_event {"type":"message_stop"}
+[2026-05-31T07:17:56.245Z] request {"attempt":1,"fallbackMode":false,"url":"https://a-ocnfniawgw.cn-shanghai.fcapp.run/v1/messages?beta=true","model":"claude-opus-4-8","stream":true,"thinking":{"type":"adaptive"},"max_tokens":32000,"messageCount":1,"requestBytes":48072,"headerKeys":["content-type","anthropic-version","anthropic-beta","anthropic-dangerous-direct-browser-access","user-agent","x-app","authorization"]}
+[2026-05-31T07:18:00.677Z] response_headers {"attempt":1,"status":200,"ok":true,"contentType":"text/event-stream"}
+[2026-05-31T07:18:00.682Z] stream_event {"type":"message_start"}
+[2026-05-31T07:18:00.683Z] stream_event {"type":"content_block_start"}
+[2026-05-31T07:18:00.684Z] stream_event {"type":"ping"}
+[2026-05-31T07:18:00.684Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T07:18:00.684Z] stream_event {"type":"content_block_stop"}
+[2026-05-31T07:18:00.685Z] stream_event {"type":"message_delta"}
+[2026-05-31T07:18:00.685Z] stream_event {"type":"message_stop"}
+[2026-05-31T07:18:48.080Z] request {"attempt":1,"fallbackMode":false,"url":"http://127.0.0.1:39129/v1/messages?beta=true","model":"claude-opus-4-8","stream":true,"thinking":{"type":"adaptive"},"max_tokens":32000,"messageCount":3,"requestBytes":100724,"headerKeys":["content-type","anthropic-version","anthropic-beta","anthropic-dangerous-direct-browser-access","user-agent","x-app","authorization"]}
+[2026-05-31T07:18:48.103Z] response_headers {"attempt":1,"status":413,"ok":false,"contentType":"text/html"}
+[2026-05-31T07:18:48.104Z] response_error {"attempt":1,"fallbackMode":false,"status":413,"body":"<html><body>too large</body></html>"}
+[2026-05-31T07:18:48.104Z] error {"attempt":1,"fallbackMode":false,"message":"HTTP 413: <html><body>too large</body></html>","sawSseEvent":false}
+[2026-05-31T07:18:49.105Z] request {"attempt":2,"fallbackMode":true,"url":"http://127.0.0.1:39129/v1/messages?beta=true","model":"claude-opus-4-8","stream":true,"thinking":{"type":"disabled"},"max_tokens":8192,"messageCount":1,"requestBytes":564,"headerKeys":["content-type","anthropic-version","anthropic-beta","anthropic-dangerous-direct-browser-access","user-agent","x-app","authorization"]}
+[2026-05-31T07:18:49.110Z] response_headers {"attempt":2,"status":200,"ok":true,"contentType":"text/event-stream; charset=utf-8"}
+[2026-05-31T07:18:49.113Z] stream_event {"type":"message_start"}
+[2026-05-31T07:18:49.116Z] stream_event {"type":"content_block_start"}
+[2026-05-31T07:18:49.116Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T07:18:49.117Z] stream_event {"type":"content_block_stop"}
+[2026-05-31T07:18:49.117Z] stream_event {"type":"message_delta"}
+[2026-05-31T07:18:49.118Z] stream_event {"type":"message_stop"}
+[2026-05-31T07:20:44.341Z] request {"attempt":1,"fallbackMode":false,"url":"https://a-ocnfniawgw.cn-shanghai.fcapp.run/v1/messages?beta=true","model":"claude-opus-4-8","stream":true,"thinking":{"type":"adaptive"},"max_tokens":32000,"messageCount":1,"requestBytes":48127,"headerKeys":["content-type","anthropic-version","anthropic-beta","anthropic-dangerous-direct-browser-access","user-agent","x-app","authorization"]}
+[2026-05-31T07:20:51.371Z] response_headers {"attempt":1,"status":200,"ok":true,"contentType":"text/event-stream"}
+[2026-05-31T07:20:51.374Z] stream_event {"type":"message_start"}
+[2026-05-31T07:20:51.377Z] stream_event {"type":"content_block_start"}
+[2026-05-31T07:20:51.378Z] stream_event {"type":"ping"}
+[2026-05-31T07:20:51.378Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T07:20:51.378Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T07:20:51.378Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T07:20:51.378Z] stream_event {"type":"content_block_stop"}
+[2026-05-31T07:20:51.378Z] stream_event {"type":"content_block_start"}
+[2026-05-31T07:20:51.378Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T07:20:51.378Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T07:20:51.379Z] stream_event {"type":"content_block_delta"}
+[2026-05-31T07:20:51.379Z] stream_event {"type":"content_block_stop"}
+[2026-05-31T07:20:51.379Z] stream_event {"type":"message_delta"}
+[2026-05-31T07:20:51.379Z] stream_event {"type":"message_stop"}
+[2026-05-31T07:20:51.396Z] request {"attempt":1,"fallbackMode":false,"url":"https://a-ocnfniawgw.cn-shanghai.fcapp.run/v1/messages?beta=true","model":"claude-opus-4-8","stream":true,"thinking":{"type":"adaptive"},"max_tokens":32000,"messageCount":3,"requestBytes":48974,"headerKeys":["content-type","anthropic-version","anthropic-beta","anthropic-dangerous-direct-browser-access","user-agent","x-app","authorization"]}
+[2026-05-31T07:22:51.404Z] error {"attempt":1,"fallbackMode":false,"message":"Anyrouter stream idle timeout after 120000ms","sawSseEvent":false}
+[2026-05-31T07:22:52.410Z] request {"attempt":2,"fallbackMode":true,"url":"https://a-ocnfniawgw.cn-shanghai.fcapp.run/v1/messages?beta=true","model":"claude-opus-4-8","stream":true,"thinking":{"type":"disabled"},"max_tokens":8192,"messageCount":3,"requestBytes":48939,"headerKeys":["content-type","anthropic-version","anthropic-beta","anthropic-dangerous-direct-browser-access","user-agent","x-app","authorization"]}

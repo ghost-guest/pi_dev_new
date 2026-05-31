@@ -1,0 +1,335 @@
+packages/coding-agent/src/core/agent-session.ts:2708:			// Emit session_before_tree event
+packages/coding-agent/src/core/agent-session.ts:2709:			if (this._extensionRunner.hasHandlers("session_before_tree")) {
+packages/coding-agent/src/core/agent-session.ts:2711:					type: "session_before_tree",
+packages/coding-agent/src/core/agent-session.ts:2777:			} else if (targetEntry.type === "custom_message") {
+packages/coding-agent/src/core/agent-session.ts:2826:			// Emit session_tree event
+packages/coding-agent/src/core/agent-session.ts:2828:				type: "session_tree",
+packages/coding-agent/src/core/compaction/compaction.ts:83:	if (entry.type === "custom_message") {
+packages/coding-agent/src/core/compaction/compaction.ts:325:			case "custom_message":
+packages/coding-agent/src/core/compaction/compaction.ts:331:		// branch_summary and custom_message are user-role messages, valid cut points
+packages/coding-agent/src/core/compaction/compaction.ts:332:		if (entry.type === "branch_summary" || entry.type === "custom_message") {
+packages/coding-agent/src/core/compaction/compaction.ts:347:		// branch_summary and custom_message are user-role messages, can start a turn
+packages/coding-agent/src/core/compaction/compaction.ts:348:		if (entry.type === "branch_summary" || entry.type === "custom_message") {
+packages/coding-agent/src/core/keybindings.ts:30:	"app.session.tree": true;
+packages/coding-agent/src/core/keybindings.ts:33:	"app.tree.foldOrUp": true;
+packages/coding-agent/src/core/keybindings.ts:34:	"app.tree.unfoldOrDown": true;
+packages/coding-agent/src/core/keybindings.ts:35:	"app.tree.editLabel": true;
+packages/coding-agent/src/core/keybindings.ts:36:	"app.tree.toggleLabelTimestamp": true;
+packages/coding-agent/src/core/keybindings.ts:48:	"app.tree.filter.default": true;
+packages/coding-agent/src/core/keybindings.ts:49:	"app.tree.filter.noTools": true;
+packages/coding-agent/src/core/keybindings.ts:50:	"app.tree.filter.userOnly": true;
+packages/coding-agent/src/core/keybindings.ts:51:	"app.tree.filter.labeledOnly": true;
+packages/coding-agent/src/core/keybindings.ts:52:	"app.tree.filter.all": true;
+packages/coding-agent/src/core/keybindings.ts:53:	"app.tree.filter.cycleForward": true;
+packages/coding-agent/src/core/keybindings.ts:54:	"app.tree.filter.cycleBackward": true;
+packages/coding-agent/src/core/keybindings.ts:111:	"app.session.tree": { defaultKeys: [], description: "Open session tree" },
+packages/coding-agent/src/core/keybindings.ts:114:	"app.tree.foldOrUp": {
+packages/coding-agent/src/core/keybindings.ts:116:		description: "Fold tree branch or move up",
+packages/coding-agent/src/core/keybindings.ts:118:	"app.tree.unfoldOrDown": {
+packages/coding-agent/src/core/keybindings.ts:120:		description: "Unfold tree branch or move down",
+packages/coding-agent/src/core/keybindings.ts:122:	"app.tree.editLabel": {
+packages/coding-agent/src/core/keybindings.ts:124:		description: "Edit tree label",
+packages/coding-agent/src/core/keybindings.ts:126:	"app.tree.toggleLabelTimestamp": {
+packages/coding-agent/src/core/keybindings.ts:128:		description: "Toggle tree label timestamps",
+packages/coding-agent/src/core/keybindings.ts:174:	"app.tree.filter.default": {
+packages/coding-agent/src/core/keybindings.ts:178:	"app.tree.filter.noTools": {
+packages/coding-agent/src/core/keybindings.ts:182:	"app.tree.filter.userOnly": {
+packages/coding-agent/src/core/keybindings.ts:186:	"app.tree.filter.labeledOnly": {
+packages/coding-agent/src/core/keybindings.ts:190:	"app.tree.filter.all": {
+packages/coding-agent/src/core/keybindings.ts:194:	"app.tree.filter.cycleForward": {
+packages/coding-agent/src/core/keybindings.ts:198:	"app.tree.filter.cycleBackward": {
+packages/coding-agent/src/core/keybindings.ts:252:	tree: "app.session.tree",
+packages/coding-agent/src/core/keybindings.ts:255:	treeFoldOrUp: "app.tree.foldOrUp",
+packages/coding-agent/src/core/keybindings.ts:256:	treeUnfoldOrDown: "app.tree.unfoldOrDown",
+packages/coding-agent/src/core/keybindings.ts:257:	treeEditLabel: "app.tree.editLabel",
+packages/coding-agent/src/core/keybindings.ts:258:	treeToggleLabelTimestamp: "app.tree.toggleLabelTimestamp",
+packages/coding-agent/src/core/session-manager.ts:126: * - false: hidden entirely
+packages/coding-agent/src/core/session-manager.ts:130:	type: "custom_message";
+packages/coding-agent/src/core/session-manager.ts:137:/** Session entry - has id/parentId for tree structure (returned by "read" methods in SessionManager) */
+packages/coding-agent/src/core/session-manager.ts:215:/** Migrate v1 → v2: add id/parentId tree structure. Mutates in place. */
+packages/coding-agent/src/core/session-manager.ts:311: * Build the session context from entries using tree traversal.
+packages/coding-agent/src/core/session-manager.ts:381:		} else if (entry.type === "custom_message") {
+packages/coding-agent/src/core/session-manager.ts:701: * Manages conversation sessions as append-only trees stored in JSONL files.
+packages/coding-agent/src/core/session-manager.ts:703: * Each session entry has an id and parentId forming a tree structure. The "leaf"
+packages/coding-agent/src/core/session-manager.ts:983:	 * @param display Whether to show in TUI (true = styled display, false = hidden)
+packages/coding-agent/src/core/session-manager.ts:994:			type: "custom_message",
+packages/coding-agent/src/core/session-manager.ts:1089:	 * Uses tree traversal from current leaf.
+packages/coding-agent/src/core/session-manager.ts:1113:	 * Get the session as a tree structure. Returns a shallow defensive copy of all entries.
+packages/coding-agent/src/core/session-manager.ts:1129:		// Build tree
+packages/coding-agent/src/core/session-manager.ts:1146:		// Use iterative approach to avoid stack overflow on deep trees
+packages/coding-agent/src/core/footer-data-provider.ts:14: * Handles both regular git repos (.git is a directory) and worktrees (.git is a file).
+packages/coding-agent/src/core/export-html/tool-renderer.ts:28:	/** Render a tool result to collapsed/expanded HTML. Returns undefined if tool has no custom renderer. */
+packages/coding-agent/src/core/export-html/tool-renderer.ts:35:	): { collapsed?: string; expanded?: string } | undefined;
+packages/coding-agent/src/core/export-html/tool-renderer.ts:127:		): { collapsed?: string; expanded?: string } | undefined {
+packages/coding-agent/src/core/export-html/tool-renderer.ts:142:				// Render collapsed
+packages/coding-agent/src/core/export-html/tool-renderer.ts:143:				const collapsedComponent = toolDef.renderResult(
+packages/coding-agent/src/core/export-html/tool-renderer.ts:149:				renderedResultComponents.set(toolCallId, collapsedComponent);
+packages/coding-agent/src/core/export-html/tool-renderer.ts:150:				const collapsed = ansiLinesToHtml(trimRenderedResultLines(collapsedComponent.render(width)));
+packages/coding-agent/src/core/export-html/tool-renderer.ts:163:					...(collapsed && collapsed !== expanded ? { collapsed } : {}),
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:50:	collapseChangelog: boolean;
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:52:	doubleEscapeAction: "fork" | "tree" | "none";
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:53:	treeFilterMode: "default" | "no-tools" | "user-only" | "labeled-only" | "all";
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:77:	onHideThinkingBlockChange: (hidden: boolean) => void;
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:78:	onCollapseChangelogChange: (collapsed: boolean) => void;
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:80:	onDoubleEscapeActionChange: (action: "fork" | "tree" | "none") => void;
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:260:				id: "collapse-changelog",
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:263:				currentValue: config.collapseChangelog ? "true" : "false",
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:285:				values: ["tree", "fork", "none"],
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:288:				id: "tree-filter-mode",
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:290:				description: "Default filter when opening /tree",
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:291:				currentValue: config.treeFilterMode,
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:506:					case "collapse-changelog":
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:516:						callbacks.onDoubleEscapeActionChange(newValue as "fork" | "tree");
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:518:					case "tree-filter-mode":
+packages/coding-agent/src/core/export-html/template.css:147:    .tree-container {
+packages/coding-agent/src/core/export-html/template.css:153:    .tree-node {
+packages/coding-agent/src/core/export-html/template.css:163:    .tree-node:hover {
+packages/coding-agent/src/core/export-html/template.css:167:    .tree-node.active {
+packages/coding-agent/src/core/export-html/template.css:171:    .tree-node.active .tree-content {
+packages/coding-agent/src/core/export-html/template.css:175:    .tree-node.in-path {
+packages/coding-agent/src/core/export-html/template.css:179:    .tree-node:not(.in-path) {
+packages/coding-agent/src/core/export-html/template.css:183:    .tree-node:not(.in-path):hover {
+packages/coding-agent/src/core/export-html/template.css:187:    .tree-prefix {
+packages/coding-agent/src/core/export-html/template.css:194:    .tree-marker {
+packages/coding-agent/src/core/export-html/template.css:199:    .tree-content {
+packages/coding-agent/src/core/export-html/template.css:203:    .tree-role-user {
+packages/coding-agent/src/core/export-html/template.css:207:    .tree-role-skill {
+packages/coding-agent/src/core/export-html/template.css:211:    .tree-role-assistant {
+packages/coding-agent/src/core/export-html/template.css:215:    .tree-role-tool {
+packages/coding-agent/src/core/export-html/template.css:219:    .tree-muted {
+packages/coding-agent/src/core/export-html/template.css:223:    .tree-error {
+packages/coding-agent/src/core/export-html/template.css:227:    .tree-compaction {
+packages/coding-agent/src/core/export-html/template.css:231:    .tree-branch-summary {
+packages/coding-agent/src/core/export-html/template.css:235:    .tree-custom-message {
+packages/coding-agent/src/core/export-html/template.css:239:    .tree-status {
+packages/coding-agent/src/core/export-html/template.css:448:    .message-timestamp + .thinking-block .thinking-collapsed {
+packages/coding-agent/src/core/export-html/template.css:452:    .thinking-collapsed {
+packages/coding-agent/src/core/export-html/template.css:616:    .compaction-collapsed {
+packages/coding-agent/src/core/export-html/template.css:627:    .compaction.expanded .compaction-collapsed {
+packages/coding-agent/src/core/export-html/template.css:794:    /* Skill invocation - matches compaction style (clickable, collapsed by default) */
+packages/coding-agent/src/core/export-html/template.css:807:    .skill-invocation-collapsed {
+packages/coding-agent/src/core/export-html/template.css:817:    .skill-invocation.expanded .skill-invocation-collapsed {
+packages/coding-agent/src/core/export-html/template.css:936:      border-collapse: collapse;
+packages/coding-agent/src/core/export-html/index.ts:18:	/** Render a tool result to HTML. Returns collapsed/expanded or undefined if tool has no custom renderer. */
+packages/coding-agent/src/core/export-html/index.ts:25:	): { collapsed?: string; expanded?: string } | undefined;
+packages/coding-agent/src/core/export-html/index.ts:221:						resultHtmlCollapsed: rendered.collapsed,
+packages/coding-agent/src/core/export-html/template.html:18:          <input type="text" class="sidebar-search" id="tree-search" placeholder="Search...">
+packages/coding-agent/src/core/export-html/template.html:29:      <div class="tree-container" id="tree-container"></div>
+packages/coding-agent/src/core/export-html/template.html:30:      <div class="tree-status" id="tree-status"></div>
+packages/coding-agent/src/core/export-html/template.html:32:    <div id="sidebar-resizer" role="separator" aria-orientation="vertical" aria-label="Resize session tree sidebar"></div>
+packages/coding-agent/src/core/tools/bash.ts:104:				// Handle abort signal by killing the entire process tree.
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:189:/** A session tree node for hierarchical display */
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:195:/** Flattened node for display with tree structure info */
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:205: * Build a tree structure from sessions based on parentSessionPath.
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:243: * Flatten tree into display list with tree structure metadata.
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:359:			// Threaded mode without search: show tree structure
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:414:					emptyMessage = `  No named sessions in current folder. Press ${toggleKey} to show all, or Tab to view all.`;
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:420:				// "Current folder" scope - hint to try "all"
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:421:				emptyMessage = "  No sessions in current folder. Press Tab to view all.";
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:434:		// Render visible sessions (one line each with tree structure)
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:442:			// Build tree prefix
+packages/coding-agent/src/modes/interactive/components/visual-truncate.ts:11:	/** Number of visual lines that were skipped (hidden) */
+packages/coding-agent/src/core/export-html/template.js:70:       * Build tree structure from flat entries.
+packages/coding-agent/src/core/export-html/template.js:148:      let treeNodeMap = null;
+packages/coding-agent/src/core/export-html/template.js:156:        // Build tree node map lazily
+packages/coding-agent/src/core/export-html/template.js:157:        if (!treeNodeMap) {
+packages/coding-agent/src/core/export-html/template.js:158:          treeNodeMap = new Map();
+packages/coding-agent/src/core/export-html/template.js:159:          const tree = buildTree();
+packages/coding-agent/src/core/export-html/template.js:161:            treeNodeMap.set(node.entry.id, node);
+packages/coding-agent/src/core/export-html/template.js:164:          tree.forEach(mapNodes);
+packages/coding-agent/src/core/export-html/template.js:167:        const node = treeNodeMap.get(nodeId);
+packages/coding-agent/src/core/export-html/template.js:179:       * Flatten tree into list with indentation and connector info.
+packages/coding-agent/src/core/export-html/template.js:181:       * Matches tree-selector.ts logic exactly.
+packages/coding-agent/src/core/export-html/template.js:187:        // Mark which subtrees contain the active leaf
+packages/coding-agent/src/core/export-html/template.js:224:          // Calculate child indent (matches tree-selector.ts)
+packages/coding-agent/src/core/export-html/template.js:256:       * Build ASCII prefix string for tree node.
+packages/coding-agent/src/core/export-html/template.js:344:          case 'custom_message':
+packages/coding-agent/src/core/export-html/template.js:420:        // Recalculate visual structure based on visible tree
+packages/coding-agent/src/core/export-html/template.js:437:        // Build entry map for parent lookup (using full tree)
+packages/coding-agent/src/core/export-html/template.js:455:        // Build visible tree structure
+packages/coding-agent/src/core/export-html/template.js:481:        // DFS traversal of visible tree, applying same indentation rules as flattenTree()
+packages/coding-agent/src/core/export-html/template.js:625:       * Get display text for tree node (returns HTML string).
+packages/coding-agent/src/core/export-html/template.js:629:        const labelHtml = label ? `<span class="tree-label">[${escapeHtml(label)}]</span> ` : '';
+packages/coding-agent/src/core/export-html/template.js:638:                let treeHtml = labelHtml + `<span class="tree-role-skill">skill:</span> ${escapeHtml(skillBlock.name)}`;
+packages/coding-agent/src/core/export-html/template.js:640:                  treeHtml += ` · <span class="tree-role-user">user:</span> ${escapeHtml(truncate(normalize(skillBlock.userMessage)))}`;
+packages/coding-agent/src/core/export-html/template.js:642:                return treeHtml;
+packages/coding-agent/src/core/export-html/template.js:645:              return labelHtml + `<span class="tree-role-user">user:</span> ${escapeHtml(content)}`;
+packages/coding-agent/src/core/export-html/template.js:650:                return labelHtml + `<span class="tree-role-assistant">assistant:</span> ${escapeHtml(textContent)}`;
+packages/coding-agent/src/core/export-html/template.js:653:                return labelHtml + `<span class="tree-role-assistant">assistant:</span> <span class="tree-muted">(aborted)</span>`;
+packages/coding-agent/src/core/export-html/template.js:656:                return labelHtml + `<span class="tree-role-assistant">assistant:</span> <span class="tree-error">${escapeHtml(truncate(msg.errorMessage))}</span>`;
+packages/coding-agent/src/core/export-html/template.js:658:              return labelHtml + `<span class="tree-role-assistant">assistant:</span> <span class="tree-muted">(no text)</span>`;
+packages/coding-agent/src/core/export-html/template.js:663:                return labelHtml + `<span class="tree-role-tool">${escapeHtml(formatToolCall(toolCall.name, toolCall.arguments))}</span>`;
+packages/coding-agent/src/core/export-html/template.js:665:              return labelHtml + `<span class="tree-role-tool">[${escapeHtml(msg.toolName || 'tool')}]</span>`;
+packages/coding-agent/src/core/export-html/template.js:669:              return labelHtml + `<span class="tree-role-tool">[bash]:</span> ${escapeHtml(cmd)}`;
+packages/coding-agent/src/core/export-html/template.js:671:            return labelHtml + `<span class="tree-muted">[${escapeHtml(msg.role)}]</span>`;
+packages/coding-agent/src/core/export-html/template.js:674:            return labelHtml + `<span class="tree-compaction">[compaction: ${Math.round(entry.tokensBefore/1000)}k tokens]</span>`;
+packages/coding-agent/src/core/export-html/template.js:677:            return labelHtml + `<span class="tree-branch-summary">[branch summary]:</span> ${escapeHtml(summary)}`;
+packages/coding-agent/src/core/export-html/template.js:679:          case 'custom_message': {
+packages/coding-agent/src/core/export-html/template.js:681:            return labelHtml + `<span class="tree-custom">[${escapeHtml(entry.customType)}]:</span> ${escapeHtml(truncate(normalize(content)))}`;
+packages/coding-agent/src/core/export-html/template.js:684:            return labelHtml + `<span class="tree-muted">[model: ${escapeHtml(entry.modelId)}]</span>`;
+packages/coding-agent/src/core/export-html/template.js:686:            return labelHtml + `<span class="tree-muted">[thinking: ${escapeHtml(entry.thinkingLevel)}]</span>`;
+packages/coding-agent/src/core/export-html/template.js:688:            return labelHtml + `<span class="tree-muted">[${escapeHtml(entry.type)}]</span>`;
+packages/coding-agent/src/core/export-html/template.js:698:      let treeRendered = false;
+packages/coding-agent/src/core/export-html/template.js:701:        const tree = buildTree();
+packages/coding-agent/src/core/export-html/template.js:703:        const flatNodes = flattenTree(tree, activePathIds);
+packages/coding-agent/src/core/export-html/template.js:705:        const container = document.getElementById('tree-container');
+packages/coding-agent/src/core/export-html/template.js:708:        if (!treeRendered) {
+packages/coding-agent/src/core/export-html/template.js:717:            div.className = 'tree-node';
+packages/coding-agent/src/core/export-html/template.js:724:            prefixSpan.className = 'tree-prefix';
+packages/coding-agent/src/core/export-html/template.js:728:            marker.className = 'tree-marker';
+packages/coding-agent/src/core/export-html/template.js:732:            content.className = 'tree-content';
+packages/coding-agent/src/core/export-html/template.js:748:          treeRendered = true;
+packages/coding-agent/src/core/export-html/template.js:751:          const nodes = container.querySelectorAll('.tree-node');
+packages/coding-agent/src/core/export-html/template.js:760:            const marker = node.querySelector('.tree-marker');
+packages/coding-agent/src/core/export-html/template.js:767:        document.getElementById('tree-status').textContent = `${filtered.length} / ${flatNodes.length} entries`;
+packages/coding-agent/src/core/export-html/template.js:771:          const activeNode = container.querySelector('.tree-node.active');
+packages/coding-agent/src/core/export-html/template.js:779:        treeRendered = false;
+packages/coding-agent/src/core/export-html/template.js:1024:                // Both collapsed and expanded differ - render expandable section
+packages/coding-agent/src/core/export-html/template.js:1030:                // Only expanded exists (or collapsed is identical) - show directly
+packages/coding-agent/src/core/export-html/template.js:1183:              // Skill invocation (collapsed by default, click to expand)
+packages/coding-agent/src/core/export-html/template.js:1186:                <div class="skill-invocation-collapsed">${escapeHtml(skillBlock.name)} (click to expand)</div>
+packages/coding-agent/src/core/export-html/template.js:1240:                  <div class="thinking-collapsed">Thinking ...</div>
+packages/coding-agent/src/core/export-html/template.js:1285:            <div class="compaction-collapsed">Compacted from ${entry.tokensBefore.toLocaleString()} tokens</div>
+packages/coding-agent/src/core/export-html/template.js:1297:        if (entry.type === 'custom_message' && entry.display) {
+packages/coding-agent/src/core/export-html/template.js:1344:          } else if (entry.type === 'custom_message') {
+packages/coding-agent/src/core/export-html/template.js:1632:      const searchInput = document.getElementById('tree-search');
+packages/coding-agent/src/core/export-html/template.js:1784:        document.querySelectorAll('.thinking-collapsed').forEach(el => {
+packages/coding-agent/src/core/tools/grep.ts:214:						const args: string[] = ["--json", "--line-number", "--color=never", "--hidden"];
+packages/coding-agent/src/core/export-html/vendor/highlight.min.js:36:n.children.forEach((n=>this._walk(e,n))),e.closeNode(n)),e}static _collapse(e){
+packages/coding-agent/src/core/export-html/vendor/highlight.min.js:38:o._collapse(e)})))}}class l extends o{constructor(e){super(),this.options=e}
+packages/coding-agent/src/core/export-html/vendor/highlight.min.js:317:}),re=["a","abbr","address","article","aside","audio","b","blockquote","body","button","canvas","caption","cite","code","dd","del","details","dfn","div","dl","dt","em","fieldset","figcaption","figure","footer","form","h1","h2","h3","h4","h5","h6","header","hgroup","html","i","iframe","img","input","ins","kbd","label","legend","li","main","mark","menu","nav","object","ol","p","q","quote","samp","section","span","strong","summary","sup","table","tbody","td","textarea","tfoot","th","thead","time","tr","ul","var","video"],se=["any-hover","any-pointer","aspect-ratio","color","color-gamut","color-index","device-aspect-ratio","device-height","device-width","display-mode","forced-colors","grid","height","hover","inverted-colors","monochrome","orientation","overflow-block","overflow-inline","pointer","prefers-color-scheme","prefers-contrast","prefers-reduced-motion","prefers-reduced-transparency","resolution","scan","scripting","update","width","min-width","max-width","min-height","max-height"],oe=["active","any-link","blank","checked","current","default","defined","dir","disabled","drop","empty","enabled","first","first-child","first-of-type","fullscreen","future","focus","focus-visible","focus-within","has","host","host-context","hover","indeterminate","in-range","invalid","is","lang","last-child","last-of-type","left","link","local-link","not","nth-child","nth-col","nth-last-child","nth-last-col","nth-last-of-type","nth-of-type","only-child","only-of-type","optional","out-of-range","past","placeholder-shown","read-only","read-write","required","right","root","scope","target","target-within","user-invalid","valid","visited","where"],le=["after","backdrop","before","cue","cue-region","first-letter","first-line","grammar-error","marker","part","placeholder","selection","slotted","spelling-error"],ce=["align-content","align-items","align-self","all","animation","animation-delay","animation-direction","animation-duration","animation-fill-mode","animation-iteration-count","animation-name","animation-play-state","animation-timing-function","backface-visibility","background","background-attachment","background-blend-mode","background-clip","background-color","background-image","background-origin","background-position","background-repeat","background-size","block-size","border","border-block","border-block-color","border-block-end","border-block-end-color","border-block-end-style","border-block-end-width","border-block-start","border-block-start-color","border-block-start-style","border-block-start-width","border-block-style","border-block-width","border-bottom","border-bottom-color","border-bottom-left-radius","border-bottom-right-radius","border-bottom-style","border-bottom-width","border-collapse","border-color","border-image","border-image-outset","border-image-repeat","border-image-slice","border-image-source","border-image-width","border-inline","border-inline-color","border-inline-end","border-inline-end-color","border-inline-end-style","border-inline-end-width","border-inline-start","border-inline-start-color","border-inline-start-style","border-inline-start-width","border-inline-style","border-inline-width","border-left","border-left-color","border-left-style","border-left-width","border-radius","border-right","border-right-color","border-right-style","border-right-width","border-spacing","border-style","border-top","border-top-color","border-top-left-radius","border-top-right-radius","border-top-style","border-top-width","border-width","bottom","box-decoration-break","box-shadow","box-sizing","break-after","break-before","break-inside","caption-side","caret-color","clear","clip","clip-path","clip-rule","color","column-count","column-fill","column-gap","column-rule","column-rule-color","column-rule-style","column-rule-width","column-span","column-width","columns","contain","content","content-visibility","counter-increment","counter-reset","cue","cue-after","cue-before","cursor","direction","display","empty-cells","filter","flex","flex-basis","flex-direction","flex-flow","flex-grow","flex-shrink","flex-wrap","float","flow","font","font-display","font-family","font-feature-settings","font-kerning","font-language-override","font-size","font-size-adjust","font-smoothing","font-stretch","font-style","font-synthesis","font-variant","font-variant-caps","font-variant-east-asian","font-variant-ligatures","font-variant-numeric","font-variant-position","font-variation-settings","font-weight","gap","glyph-orientation-vertical","grid","grid-area","grid-auto-columns","grid-auto-flow","grid-auto-rows","grid-column","grid-column-end","grid-column-start","grid-gap","grid-row","grid-row-end","grid-row-start","grid-template","grid-template-areas","grid-template-columns","grid-template-rows","hanging-punctuation","height","hyphens","icon","image-orientation","image-rendering","image-resolution","ime-mode","inline-size","isolation","justify-content","left","letter-spacing","line-break","line-height","list-style","list-style-image","list-style-position","list-style-type","margin","margin-block","margin-block-end","margin-block-start","margin-bottom","margin-inline","margin-inline-end","margin-inline-start","margin-left","margin-right","margin-top","marks","mask","mask-border","mask-border-mode","mask-border-outset","mask-border-repeat","mask-border-slice","mask-border-source","mask-border-width","mask-clip","mask-composite","mask-image","mask-mode","mask-origin","mask-position","mask-repeat","mask-size","mask-type","max-block-size","max-height","max-inline-size","max-width","min-block-size","min-height","min-inline-size","min-width","mix-blend-mode","nav-down","nav-index","nav-left","nav-right","nav-up","none","normal","object-fit","object-position","opacity","order","orphans","outline","outline-color","outline-offset","outline-style","outline-width","overflow","overflow-wrap","overflow-x","overflow-y","padding","padding-block","padding-block-end","padding-block-start","padding-bottom","padding-inline","padding-inline-end","padding-inline-start","padding-left","padding-right","padding-top","page-break-after","page-break-before","page-break-inside","pause","pause-after","pause-before","perspective","perspective-origin","pointer-events","position","quotes","resize","rest","rest-after","rest-before","right","row-gap","scroll-margin","scroll-margin-block","scroll-margin-block-end","scroll-margin-block-start","scroll-margin-bottom","scroll-margin-inline","scroll-margin-inline-end","scroll-margin-inline-start","scroll-margin-left","scroll-margin-right","scroll-margin-top","scroll-padding","scroll-padding-block","scroll-padding-block-end","scroll-padding-block-start","scroll-padding-bottom","scroll-padding-inline","scroll-padding-inline-end","scroll-padding-inline-start","scroll-padding-left","scroll-padding-right","scroll-padding-top","scroll-snap-align","scroll-snap-stop","scroll-snap-type","scrollbar-color","scrollbar-gutter","scrollbar-width","shape-image-threshold","shape-margin","shape-outside","speak","speak-as","src","tab-size","table-layout","text-align","text-align-all","text-align-last","text-combine-upright","text-decoration","text-decoration-color","text-decoration-line","text-decoration-style","text-emphasis","text-emphasis-color","text-emphasis-position","text-emphasis-style","text-indent","text-justify","text-orientation","text-overflow","text-rendering","text-shadow","text-transform","text-underline-position","top","transform","transform-box","transform-origin","transform-style","transition","transition-delay","transition-duration","transition-property","transition-timing-function","unicode-bidi","vertical-align","visibility","voice-balance","voice-duration","voice-family","voice-pitch","voice-range","voice-rate","voice-stress","voice-volume","white-space","widows","width","will-change","word-break","word-spacing","word-wrap","writing-mode","z-index"].reverse(),de=oe.concat(le)
+packages/coding-agent/src/core/export-html/vendor/highlight.min.js:420:built_in:["break","cd","continue","eval","exec","exit","export","getopts","hash","pwd","readonly","return","shift","test","times","trap","umask","unset","alias","bind","builtin","caller","command","declare","echo","enable","help","let","local","logout","mapfile","printf","read","readarray","source","type","typeset","ulimit","unalias","set","shopt","autoload","bg","bindkey","bye","cap","chdir","clone","comparguments","compcall","compctl","compdescribe","compfiles","compgroups","compquote","comptags","comptry","compvalues","dirs","disable","disown","echotc","echoti","emulate","fc","fg","float","functions","getcap","getln","history","integer","jobs","kill","limit","log","noglob","popd","print","pushd","pushln","rehash","sched","setcap","setopt","stat","suspend","ttyctl","unfunction","unhash","unlimit","unsetopt","vared","wait","whence","where","which","zcompile","zformat","zftp","zle","zmodload","zparseopts","zprof","zpty","zregexparse","zsocket","zstyle","ztcp","chcon","chgrp","chown","chmod","cp","dd","df","dir","dircolors","ln","ls","mkdir","mkfifo","mknod","mktemp","mv","realpath","rm","rmdir","shred","sync","touch","truncate","vdir","b2sum","base32","base64","cat","cksum","comm","csplit","cut","expand","fmt","fold","head","join","md5sum","nl","numfmt","od","paste","ptx","pr","sha1sum","sha224sum","sha256sum","sha384sum","sha512sum","shuf","sort","split","sum","tac","tail","tr","tsort","unexpand","uniq","wc","arch","basename","chroot","date","dirname","du","echo","env","expr","factor","groups","hostid","id","link","logname","nice","nohup","nproc","pathchk","pinky","printenv","printf","pwd","readlink","runcon","seq","sleep","stat","stdbuf","stty","tee","test","timeout","tty","uname","unlink","uptime","users","who","whoami","yes"]
+packages/coding-agent/src/core/export-html/vendor/highlight.min.js:1029:begin:"\\b(whitespace|wait|w-resize|visible|vertical-text|vertical-ideographic|uppercase|upper-roman|upper-alpha|underline|transparent|top|thin|thick|text|text-top|text-bottom|tb-rl|table-header-group|table-footer-group|sw-resize|super|strict|static|square|solid|small-caps|separate|se-resize|scroll|s-resize|rtl|row-resize|ridge|right|repeat|repeat-y|repeat-x|relative|progress|pointer|overline|outside|outset|oblique|nowrap|not-allowed|normal|none|nw-resize|no-repeat|no-drop|newspaper|ne-resize|n-resize|move|middle|medium|ltr|lr-tb|lowercase|lower-roman|lower-alpha|loose|list-item|line|line-through|line-edge|lighter|left|keep-all|justify|italic|inter-word|inter-ideograph|inside|inset|inline|inline-block|inherit|inactive|ideograph-space|ideograph-parenthesis|ideograph-numeric|ideograph-alpha|horizontal|hidden|help|hand|groove|fixed|ellipsis|e-resize|double|dotted|distribute|distribute-space|distribute-letter|distribute-all-lines|disc|disabled|default|decimal|dashed|crosshair|collapse|col-resize|circle|char|center|capitalize|break-word|break-all|bottom|both|bolder|bold|block|bidi-override|below|baseline|auto|always|all-scroll|absolute|table|table-cell)\\b"
+packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts:7: * Component that renders a branch summary message with collapsed/expanded state.
+packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts:7: * Component that renders a compaction message with collapsed/expanded state.
+packages/coding-agent/src/modes/interactive/components/footer.ts:12:	// Replace newlines, tabs, carriage returns with space, then collapse multiple spaces
+packages/coding-agent/src/modes/interactive/components/index.ts:29:export { TreeSelectorComponent } from "./tree-selector.ts";
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:121:import { TreeSelectorComponent } from "./components/tree-selector.ts";
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:141:/** Interface for components that can be expanded/collapsed */
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:263:	private hiddenThinkingLabel = this.defaultHiddenThinkingLabel;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1303:			collapsedBody: string,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1304:			expandedBody = collapsedBody,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1308:				() => `${sectionHeader(name, color)}\n${collapsedBody}`,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1730:		this.hiddenThinkingLabel = label ?? this.defaultHiddenThinkingLabel;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1733:				child.setHiddenThinkingLabel(this.hiddenThinkingLabel);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1737:			this.streamingComponent.setHiddenThinkingLabel(this.hiddenThinkingLabel);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1986:			setWidget: (key, content, options) => this.setExtensionWidget(key, content, options),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2394:				// Double-escape with empty editor triggers /tree, /fork, or nothing based on setting
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2399:						if (action === "tree") {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2429:		this.defaultEditor.onAction("app.session.tree", () => this.showTreeSelector());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2541:			if (text === "/tree") {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2720:						this.hiddenThinkingLabel,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3107:					this.hiddenThinkingLabel,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3514:		this.showStatus(`Thinking blocks: ${this.hideThinkingBlock ? "hidden" : "visible"}`);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3862:					collapseChangelog: this.settingsManager.getCollapseChangelog(),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3865:					treeFilterMode: this.settingsManager.getTreeFilterMode(),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3940:					onHideThinkingBlockChange: (hidden) => {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3941:						this.hideThinkingBlock = hidden;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3942:						this.settingsManager.setHideThinkingBlock(hidden);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3945:								child.setHideThinkingBlock(hidden);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3951:					onCollapseChangelogChange: (collapsed) => {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3952:						this.settingsManager.setCollapseChangelog(collapsed);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4258:		const tree = this.sessionManager.getTree();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4262:		if (tree.length === 0) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4269:				tree,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4283:					// Loop until user makes a complete choice or cancels to tree
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4297:								// User pressed escape - re-show tree selector with same selection
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4343:							// Summarization aborted - re-show tree selector with same selection
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:16:	private hiddenThinkingLabel: string;
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:24:		hiddenThinkingLabel = "Thinking...",
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:30:		this.hiddenThinkingLabel = hiddenThinkingLabel;
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:56:		this.hiddenThinkingLabel = label;
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:102:					// Show static thinking label when hidden
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:104:						new Text(theme.italic(theme.fg("thinkingText", this.hiddenThinkingLabel)), 1, 0),
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:68:	 * Set whether the output is expanded (shows full output) or collapsed (preview only).
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:132:		const hiddenLineCount = availableLines.length - previewLogicalLines.length;
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:176:			// Show how many lines are hidden (collapsed preview)
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:177:			if (hiddenLineCount > 0) {
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:179:					statusParts.push(`(${keyHint("app.tools.expand", "to collapse")})`);
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:182:						`${theme.fg("muted", `... ${hiddenLineCount} more lines`)} (${keyHint("app.tools.expand", "to expand")})`,
+packages/coding-agent/src/modes/interactive/components/skill-invocation-message.ts:7: * Component that renders a skill invocation message with collapsed/expanded state.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:23:/** Flattened tree node for navigation */
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:38:/** Filter mode for tree display */
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:65:	private foldedNodes: Set<string> = new Set();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:72:		tree: SessionTreeNode[],
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:81:		this.multipleRoots = tree.length > 1;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:82:		this.flatNodes = this.flattenTree(tree);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:149:		// - At indent 1: children always go to indent 2 (visual grouping of subtree)
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:156:		// Determine which subtrees contain the active leaf (to sort current branch first)
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:300:			// Entry types hidden in default view (settings/bookkeeping)
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:342:		// Filter out descendants of folded nodes.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:343:		if (this.foldedNodes.size > 0) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:347:				if (parentId != null && (this.foldedNodes.has(parentId) || skipSet.has(parentId))) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:354:		// Recalculate visual structure (indent, connectors, gutters) based on visible tree
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:382:		// Build entry map for efficient parent lookup (using full tree)
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:400:		// Build visible tree structure:
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:428:		// DFS over the visible tree using flattenTree() indentation semantics
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:497:		// Store visible tree maps for ancestor/descendant lookups in navigation
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:524:			case "custom_message": {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:640:			const isFolded = this.foldedNodes.has(entry.id);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:654:					// Connector at this level, with fold indicator
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:658:						const foldable = this.isFoldable(entry.id);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:659:						prefixChars.push(isFolded ? "⊞" : foldable ? "⊟" : "─");
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:671:			const foldMarker = isFolded && !showsFoldInConnector ? theme.fg("accent", "⊞ ") : "";
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:684:			let line = cursor + theme.fg("dim", prefix) + foldMarker + pathMarker + label + labelTimestamp + content;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:744:			case "custom_message": {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:905:		} else if (kb.matches(keyData, "app.tree.foldOrUp")) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:907:			if (currentId && this.isFoldable(currentId) && !this.foldedNodes.has(currentId)) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:908:				this.foldedNodes.add(currentId);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:913:		} else if (kb.matches(keyData, "app.tree.unfoldOrDown")) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:915:			if (currentId && this.foldedNodes.has(currentId)) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:916:				this.foldedNodes.delete(currentId);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:935:				this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:940:		} else if (kb.matches(keyData, "app.tree.filter.default")) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:943:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:945:		} else if (kb.matches(keyData, "app.tree.filter.noTools")) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:948:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:950:		} else if (kb.matches(keyData, "app.tree.filter.userOnly")) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:953:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:955:		} else if (kb.matches(keyData, "app.tree.filter.labeledOnly")) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:958:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:960:		} else if (kb.matches(keyData, "app.tree.filter.all")) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:963:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:965:		} else if (kb.matches(keyData, "app.tree.filter.cycleBackward")) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:970:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:972:		} else if (kb.matches(keyData, "app.tree.filter.cycleForward")) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:977:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:982:				this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:985:		} else if (kb.matches(keyData, "app.tree.editLabel")) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:990:		} else if (kb.matches(keyData, "app.tree.toggleLabelTimestamp")) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:999:				this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1006:	 * Whether a node can be folded. A node is foldable if it has visible children
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1059:	private treeList: TreeList;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1061:	constructor(treeList: TreeList) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1062:		this.treeList = treeList;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1068:		const query = this.treeList.getSearchQuery();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1134: * Component that renders a session tree selector for navigation
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1137:	private treeList: TreeList;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1140:	private treeContainer: Container;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1157:		tree: SessionTreeNode[],
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1171:		this.treeList = new TreeList(tree, currentLeafId, maxVisibleLines, initialSelectedId, initialFilterMode);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1172:		this.treeList.onSelect = onSelect;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1173:		this.treeList.onCancel = onCancel;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1174:		this.treeList.onLabelEdit = (entryId, currentLabel) => this.showLabelInput(entryId, currentLabel);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1176:		this.treeContainer = new Container();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1177:		this.treeContainer.addChild(this.treeList);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1185:			keyText("app.tree.filter.default"),
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1186:			keyText("app.tree.filter.noTools"),
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1187:			keyText("app.tree.filter.userOnly"),
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1188:			keyText("app.tree.filter.labeledOnly"),
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1189:			keyText("app.tree.filter.all"),
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1191:		const cycleKeys = `${keyText("app.tree.filter.cycleForward")}/${keyText("app.tree.filter.cycleBackward")}`;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1192:		const branchKeys = `${keyText("app.tree.foldOrUp")}/${keyText("app.tree.unfoldOrDown")}`;
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1197:					`  ↑/↓: move. ←/→: page. ${branchKeys}: fold/branch. ${keyText("app.tree.editLabel")}: label. ${filterKeys}: filters (${cycleKeys} cycle). ${keyText("app.tree.toggleLabelTimestamp")}: label time`,
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1203:		this.addChild(new SearchLine(this.treeList));
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1206:		this.addChild(this.treeContainer);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1211:		if (tree.length === 0) {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1219:			this.treeList.updateNodeLabel(id, label);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1228:		this.treeContainer.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1236:		this.treeContainer.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1237:		this.treeContainer.addChild(this.treeList);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1244:			this.treeList.handleInput(keyData);
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1249:		return this.treeList;
+packages/coding-agent/src/core/tools/find.ts:232:							"--hidden",
+
+[Showing lines 122-454 of 454 (50.0KB limit). Full output: /var/folders/7m/csfvhz791k527kby7nxl7cbc0000h_/T/pi-bash-5096113434854fe7.log]

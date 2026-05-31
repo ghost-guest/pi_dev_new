@@ -1,0 +1,388 @@
+
+--- 430-590 ---
+430:     def _check_plan_completion(self):
+431:         if not os.path.isfile(p:=self._in_plan_mode() or ''): return None
+432:         try: return len(re.findall(r'\[ \]', open(p, encoding='utf-8', errors='replace').read()))
+433:         except: return None
+434:     
+435:     def do_update_working_checkpoint(self, args, response):
+436:         '''为整个任务设定后续需要临时记忆的重点。'''
+437:         key_info = args.get("key_info", "")
+438:         related_sop = args.get("related_sop", "")
+439:         if "key_info" in args: self.working['key_info'] = key_info
+440:         if "related_sop" in args: self.working['related_sop'] = related_sop
+441:         self.working['passed_sessions'] = 0
+442:         yield f"[Info] Updated key_info and related_sop.\n"
+443:         next_prompt = self._get_anchor_prompt(skip=args.get('_index', 0) > 0)
+444:         #next_prompt += '\n[SYSTEM TIPS] 此函数一般在任务开始或中间时调用，如果任务已成功完成应该是start_long_term_update用于结算长期记忆。\n'
+445:         return StepOutcome({"result": "working key_info updated"}, next_prompt=next_prompt)
+446: 
+447:     def _retry_or_exit(self, prompt):
+448:         self._empty_ct = getattr(self, '_empty_ct', 0) + 1
+449:         if self._empty_ct >= 3: return StepOutcome({}, should_exit=True)
+450:         return StepOutcome({}, next_prompt=prompt)
+451: 
+452:     def do_no_tool(self, args, response):
+453:         '''这是一个特殊工具，由引擎自主调用，不要包含在TOOLS_SCHEMA里。
+454:         当模型在一轮中未显式调用任何工具时，由引擎自动触发。
+455:         二次确认仅在回复几乎只包含<thinking>/<summary>和一段大代码块时触发。'''
+456:         content = getattr(response, 'content', '') or ""
+457:         thinking = getattr(response, 'thinking', '') or ""
+458:         if not response or (not content.strip() and not thinking.strip()):
+459:             yield "[Warn] LLM returned an empty response. Retrying...\n"
+460:             return self._retry_or_exit("[System] Blank response, regenerate and tooluse")
+461:         if '[!!! 流异常中断' in content[-100:] or '!!!Error:' in content[-100:]:
+462:             return self._retry_or_exit("[System] Incomplete response. Regenerate and tooluse.")
+463:         if 'max_tokens !!!]' in content[-100:]:
+464:             return self._retry_or_exit("[System] max_tokens limit reached. Use multi small steps to do it.")
+465:         
+466:         if self._in_plan_mode() and any(kw in content for kw in ['任务完成', '全部完成', '已完成所有', '🏁']):
+467:             if 'VERDICT' not in content and '[VERIFY]' not in content and '验证subagent' not in content:
+468:                 yield "[Warn] Plan模式完成声明拦截。\n"
+469:                 return StepOutcome({}, next_prompt="⛔ [验证拦截] 检测到你在plan模式下声称完成，但未执行[VERIFY]验证步骤。请先按plan_sop §四启动验证subagent，获得VERDICT后才能声称完成。")
+470:             
+471:         # 2. 检测"包含较大代码块但未调用工具"的情况
+472:         # 关键特征：恰好1个大代码块 + 代码块直接结尾（后面只有空白）
+473:         code_block_pattern = r"```[a-zA-Z0-9_]*\n[\s\S]{50,}?```"
+474:         blocks = re.findall(code_block_pattern, content)
+475:         if len(blocks) == 1:
+476:             m = re.search(code_block_pattern, content)
+477:             after_block = content[m.end():]
+478:             if not after_block.strip():
+479:                 residual = content.replace(m.group(0), "")
+480:                 residual = re.sub(r"<thinking>[\s\S]*?</thinking>", "", residual, flags=re.IGNORECASE)
+481:                 residual = re.sub(r"<summary>[\s\S]*?</summary>", "", residual, flags=re.IGNORECASE)
+482:                 clean_residual = re.sub(r"\s+", "", residual)
+483:                 if len(clean_residual) <= 30:
+484:                     yield "[Info] Detected large code block without tool call and no extra natural language. Requesting clarification.\n"
+485:                     next_prompt = (
+486:                         "[System] 检测到你在上一轮回复中主要内容是较大代码块，且本轮未调用任何工具。\n"
+487:                         "如果这些代码需要执行、写入文件或进一步分析，请重新组织回复并显式调用相应工具"
+488:                         "（例如：code_run、file_write、file_patch 等）；\n"
+489:                         "如果只是向用户展示或讲解代码片段，请在回复中补充自然语言说明，"
+490:                         "并明确是否还需要额外的实际操作。"
+491:                     )
+492:                     return StepOutcome({}, next_prompt=next_prompt)
+493:                 
+494:         if self._in_plan_mode():
+495:             remaining = self._check_plan_completion()
+496:             if remaining == 0:
+497:                 self._exit_plan_mode(); yield "[Info] Plan完成：plan.md中0个[ ]残留，退出plan模式。\n"
+498:         
+499:         yield "[Info] Final response to user.\n"
+500:         return StepOutcome(response, next_prompt=None)
+501:     
+502:     def do_start_long_term_update(self, args, response):
+503:         '''Agent觉得当前任务完成后有重要信息需要记忆时调用此工具。'''
+504:         prompt = '''### [总结提炼经验] 既然你觉得当前任务有重要信息需要记忆，请提取最近一次任务中【事实验证成功且长期有效】的环境事实、用户偏好、重要步骤，更新记忆。
+505: 本工具是标记开启结算过程，若已在更新记忆过程或没有值得记忆的点，忽略本次调用。
+506: **如果没有经验证的，未来能用上的信息，忽略本次调用！**
+507: **只能提取行动验证成功的信息**：
+508: - **环境事实**（路径/凭证/配置）→ `file_patch` 更新 L2，同步 L1
+509: - **复杂任务经验**（关键坑点/前置条件/重要步骤）→ L3 精简 SOP（只记你被坑得多次重试的核心要点）
+510: **禁止**：临时变量、具体推理过程、未验证信息、通用常识、你可以轻松复现的细节、只是做了但没有验证的信息
+511: **操作**：严格遵循提供的L0的记忆更新SOP。先 `file_read` 看现有 → 判断类型 → 最小化更新 → 无新内容跳过，保证对记忆库最小局部修改。\n
+512: ''' + get_global_memory()
+513:         yield "[Info] Start distilling good memory for long-term storage.\n"
+514:         path = './memory/memory_management_sop.md'
+515:         if os.path.exists(path): result = 'This is L0:\n' + file_read(path, show_linenos=False)
+516:         else: result = "Memory Management SOP not found. Do not update memory."
+517:         return StepOutcome(result, next_prompt=prompt)
+518: 
+519:     def _fold_earlier(self, lines):
+520:         FALLBACK = '直接回答了用户问题'
+521:         parts, cnt, last = [], 0, ''
+522:         def flush():
+523:             if cnt:
+524:                 if FALLBACK in last: parts.append(f'[Agent]（{cnt} turns）')
+525:                 else: parts.append(f'{last}（{cnt} turns）')
+526:         for line in lines:
+527:             if line.startswith('[USER]'):
+528:                 flush(); parts.append(line); cnt = 0; last = ''
+529:             else: cnt += 1; last = line
+530:         flush()
+531:         return "\n".join(parts[-100:])
+532: 
+533:     def _get_anchor_prompt(self, skip=False):
+534:         if skip: return "\n"
+535:         h = self.history_info; W = 30
+536:         earlier = f'<earlier_context>\n{self._fold_earlier(h[:-W])}\n</earlier_context>\n' if len(h) > W else ""
+537:         h_str = "\n".join(h[-W:])
+538:         prompt = f"\n### [WORKING MEMORY]\n{earlier}<history>\n{h_str}\n</history>"
+539:         prompt += f"\nCurrent turn: {self.current_turn}\n"
+540:         if self.working.get('key_info'): prompt += f"\n<key_info>{self.working.get('key_info')}</key_info>"
+541:         if self.working.get('related_sop'): prompt += f"\n有不清晰的地方请再次读取{self.working.get('related_sop')}"
+542:         if getattr(self.parent, 'verbose', False):
+543:             try: print(prompt)
+544:             except: pass
+545:         return prompt
+546:     
+547:     def turn_end_callback(self, response, tool_calls, tool_results, turn, next_prompt, exit_reason):
+548:         _c = re.sub(r'```.*?```|<thinking>.*?</thinking>', '', response.content, flags=re.DOTALL)
+549:         rsumm = re.search(r"<summary>(.*?)</summary>", _c, re.DOTALL)
+550:         if rsumm: summary = rsumm.group(1).strip()
+551:         else:
+552:             tc = tool_calls[0]; tool_name, args = tc['tool_name'], tc['args']   # at least one because no_tool
+553:             clean_args = {k: v for k, v in args.items() if not k.startswith('_')}
+554:             summary = f"调用工具{tool_name}, args: {clean_args}"
+555:             if tool_name == 'no_tool': summary = "直接回答了用户问题"
+556:             next_prompt += "\n\n\n[SYSTEM] 必须在回复文本中包含<summary>！\n\n"
+557:             summary = smart_format(summary.replace('\n', ''), max_str_len=40)
+558:         summary = smart_format(summary.replace('\n', ''), max_str_len=80)
+559:         self.history_info.append(f'[Agent] {summary}')
+560:         _plan = self._in_plan_mode()
+561: 
+562:         if turn % 75 == 0 and (not _plan):
+563:             next_prompt += f"\n\n[DANGER] 已连续执行第 {turn} 轮。必须总结情况进行ask_user，不允许继续重试。"
+564:         elif turn % 7 == 0:
+565:             next_prompt += f"\n\n[DANGER] 已连续执行第 {turn} 轮。禁止无效重试。若无有效进展，必须切换策略：1. 探测物理边界 2. 请求用户协助。如有需要，可调用 update_working_checkpoint 保存关键上下文。"
+566:         elif turn % 10 == 0: next_prompt += get_global_memory()
+567: 
+568:         if _plan and turn >= 10 and turn % 5 == 0:
+569:             next_prompt = f"[Plan Hint] 正在计划模式。必须 file_read({_plan}) 确认当前步骤，回复开头引用：📌 当前步骤：...\n\n" + next_prompt
+570:         if _plan and turn >= 120: next_prompt += f"\n\n[DANGER] Plan模式已运行 {turn} 轮，已达上限。必须 ask_user 汇报进度并确认是否继续。"
+571: 
+572:         injkeyinfo = consume_file(self.parent.task_dir, '_keyinfo')
+573:         injprompt = consume_file(self.parent.task_dir, '_intervene')
+574:         if injkeyinfo: self.working['key_info'] = self.working.get('key_info', '') + f"\n[MASTER] {injkeyinfo}"
+575:         if injprompt: next_prompt += f"\n\n[MASTER] {injprompt}\n"
+576:         for hook in getattr(self.parent, '_turn_end_hooks', {}).values(): hook(locals())  # current readonly
+577:         return next_prompt
+578: 
+579: def get_global_memory():
+580:     prompt = "\n"
+581:     try:
+582:         suffix = '_en' if os.environ.get('GA_LANG', '') == 'en' else ''
+583:         with open(os.path.join(script_dir, 'memory/global_mem_insight.txt'), 'r', encoding='utf-8', errors='replace') as f: insight = f.read()
+584:         with open(os.path.join(script_dir, f'assets/insight_fixed_structure{suffix}.txt'), 'r', encoding='utf-8') as f: structure = f.read()
+585:         prompt += f'cwd = {os.path.join(script_dir, "temp")} (./)\n'
+586:         prompt += f"\n[Memory] (../memory)\n"
+587:         prompt += structure + '\n../memory/global_mem_insight.txt:\n'
+588:         prompt += insight + "\n"
+589:     except FileNotFoundError: pass
+590:     return prompt
+
+--- 1-120 ---
+1: import sys, os, re, json, time, threading, importlib
+2: from datetime import datetime
+3: from pathlib import Path
+4: import tempfile, traceback, subprocess, itertools, collections, difflib
+5: if sys.stdout is None: sys.stdout = open(os.devnull, "w")
+6: if sys.stderr is None: sys.stderr = open(os.devnull, "w")
+7: sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+8: 
+9: from agent_loop import BaseHandler, StepOutcome, json_default
+10: script_dir = os.path.dirname(os.path.abspath(__file__))
+11: 
+12: def code_run(code, code_type="python", timeout=60, cwd=None, code_cwd=None, stop_signal=None, maxlen=10000):
+13:     """代码执行器
+14:     python: 运行复杂的 .py 脚本（文件模式）
+15:     powershell/bash: 运行单行指令（命令模式）
+16:     优先使用python，仅在必要系统操作时使用powershell"""
+17:     preview = (code[:60].replace('\n', ' ') + '...') if len(code) > 60 else code.strip()
+18:     yield f"[Action] Running {code_type} in {os.path.basename(cwd)}: {preview}\n"
+19:     cwd = cwd or os.path.join(script_dir, 'temp'); tmp_path = None
+20:     if code_type in ["python", "py"]:
+21:         tmp_file = tempfile.NamedTemporaryFile(suffix=".ai.py", delete=False, mode='w', encoding='utf-8', dir=code_cwd)
+22:         cr_header = os.path.join(script_dir, 'assets', 'code_run_header.py')
+23:         if os.path.exists(cr_header): tmp_file.write(open(cr_header, encoding='utf-8').read())
+24:         tmp_file.write(code)
+25:         tmp_path = tmp_file.name
+26:         tmp_file.close()
+27:         cmd = [sys.executable, "-X", "utf8", "-u", tmp_path]   
+28:     elif code_type in ["powershell", "bash", "sh", "shell", "ps1", "pwsh"]:
+29:         if os.name == 'nt': cmd = ["powershell", "-NoProfile", "-NonInteractive", "-Command", code]
+30:         else: cmd = ["bash", "-c", code]
+31:     else:
+32:         return {"status": "error", "msg": f"不支持的类型: {code_type}"}
+33:     print("code run output:") 
+34:     startupinfo = None
+35:     if os.name == 'nt':
+36:         startupinfo = subprocess.STARTUPINFO()
+37:         startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+38:         startupinfo.wShowWindow = 0 # SW_HIDE
+39:     full_stdout = []
+40: 
+41:     def stream_reader(proc, logs):
+42:         try:
+43:             for line_bytes in iter(proc.stdout.readline, b''):
+44:                 try: line = line_bytes.decode('utf-8')
+45:                 except UnicodeDecodeError: line = line_bytes.decode('gbk', errors='ignore')
+46:                 logs.append(line)
+47:                 try: print(line, end="") 
+48:                 except: pass
+49:         except: pass
+50: 
+51:     try:
+52:         process = subprocess.Popen(
+53:             cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+54:             bufsize=0, cwd=cwd, startupinfo=startupinfo,
+55:             creationflags=0x08000000 if os.name == 'nt' else 0
+56:         )
+57:         start_t = time.time()
+58:         t = threading.Thread(target=stream_reader, args=(process, full_stdout), daemon=True)
+59:         t.start()
+60: 
+61:         while t.is_alive():
+62:             istimeout = time.time() - start_t > timeout
+63:             if istimeout or stop_signal:
+64:                 process.kill()
+65:                 print("[Debug] Process killed due to timeout or stop signal.")
+66:                 if istimeout: full_stdout.append("\n[Timeout Error] 超时强制终止")
+67:                 else: full_stdout.append("\n[Stopped] 用户强制终止")
+68:                 break
+69:             time.sleep(1)
+70: 
+71:         t.join(timeout=1)
+72:         exit_code = process.poll()
+73: 
+74:         stdout_str = "".join(full_stdout)
+75:         status = "success" if exit_code == 0 else "error"
+76:         status_icon = "✅" if exit_code == 0 else "❌"
+77:         if exit_code is None: status_icon = "⏳" 
+78:         output_snippet = smart_format(stdout_str, max_str_len=600, omit_str='\n\n[omitted long output]\n\n')
+79:         output_snippet = re.sub(r'`{4,}', lambda m: m.group(0)[:3] + '\u200b' + m.group(0)[3:], output_snippet)
+80:         yield f"[Status] {status_icon} Exit Code: {exit_code}\n[Stdout]\n{output_snippet}\n"
+81:         if process.stdout: threading.Thread(target=process.stdout.close, daemon=True).start()
+82:         return {
+83:             "status": status,
+84:             "stdout": smart_format(stdout_str, max_str_len=maxlen, omit_str='\n\n[omitted long output]\n\n'),
+85:             "exit_code": exit_code
+86:         }
+87:     except Exception as e:
+88:         if 'process' in locals(): process.kill()
+89:         return {"status": "error", "msg": str(e)}
+90:     finally:
+91:         if code_type == "python" and tmp_path and os.path.exists(tmp_path): os.remove(tmp_path)
+92: 
+93: 
+94: def ask_user(question, candidates=None):
+95:     """question: 向用户提出的问题。candidates: 可选的候选项列表"""
+96:     return {"status": "INTERRUPT", "intent": "HUMAN_INTERVENTION",
+97:         "data": {"question": question, "candidates": candidates or []}}
+98: 
+99: import simphtml
+100: driver = None
+101: def first_init_driver():
+102:     global driver
+103:     from TMWebDriver import TMWebDriver
+104:     driver = TMWebDriver()
+105:     for i in range(20):
+106:         time.sleep(1)
+107:         sess = driver.get_all_sessions()
+108:         if len(sess) > 0: break
+109:     if len(sess) == 0: return 
+110:     if len(sess) == 1: 
+111:         #driver.newtab()
+112:         time.sleep(3)
+113: 
+114: def web_scan(tabs_only=False, switch_tab_id=None, text_only=False, maxlen=35000):
+115:     """获取当前页面的简化HTML内容和标签页列表。注意：简化过程会过滤边栏、浮动元素等非主体内容。
+116:     tabs_only: 仅返回标签页列表，不获取HTML内容（节省token）。
+117:     switch_tab_id: 可选参数，如果提供，则在扫描前切换到该标签页。
+118:     应当多用execute_js，少全量观察html"""
+119:     global driver
+120:     try:
+
+--- 120-220 ---
+120:     try:
+121:         if driver is None: first_init_driver()
+122:         if len(driver.get_all_sessions()) == 0:
+123:             return {"status": "error", "msg": "没有可用的浏览器标签页，查L3记忆分析原因。"}
+124:         tabs = []
+125:         for sess in driver.get_all_sessions(): 
+126:             sess.pop('connected_at', None)
+127:             sess.pop('type', None)
+128:             sess['url'] = sess.get('url', '')[:50] + ("..." if len(sess.get('url', '')) > 50 else "")
+129:             tabs.append(sess)
+130:         if switch_tab_id: driver.default_session_id = switch_tab_id
+131:         result = {
+132:             "status": "success",
+133:             "metadata": {
+134:                 "tabs_count": len(tabs), "tabs": tabs,
+135:                 "active_tab": driver.default_session_id
+136:             }
+137:         }
+138:         if not tabs_only: 
+139:             importlib.reload(simphtml); result["content"] = simphtml.get_html(driver, cutlist=True, maxchars=maxlen, text_only=text_only)
+140:             if text_only: result['content'] = smart_format(result['content'], max_str_len=maxlen//3, omit_str='\n\n[omitted long content]\n\n')
+141:         return result
+142:     except Exception as e:
+143:         return {"status": "error", "msg": format_error(e)}
+144:     
+145: def format_error(e):
+146:     exc_type, exc_value, exc_traceback = sys.exc_info()
+147:     tb = traceback.extract_tb(exc_traceback)
+148:     if tb:
+149:         f = tb[-1]
+150:         fname = os.path.basename(f.filename)
+151:         return f"{exc_type.__name__}: {str(e)} @ {fname}:{f.lineno}, {f.name} -> `{f.line}`"
+152:     return f"{exc_type.__name__}: {str(e)}"
+153: 
+154: def log_memory_access(path):
+155:     if 'memory' not in path: return
+156:     stats_file = os.path.join(script_dir, 'memory/file_access_stats.json')
+157:     try:
+158:         with open(stats_file, 'r', encoding='utf-8') as f: stats = json.load(f)
+159:     except: stats = {}
+160:     fname = os.path.basename(path)
+161:     stats[fname] = {'count': stats.get(fname, {}).get('count', 0) + 1, 'last': datetime.now().strftime('%Y-%m-%d')}
+162:     with open(stats_file, 'w', encoding='utf-8') as f: json.dump(stats, f, indent=2, ensure_ascii=False)
+163: 
+164: def web_execute_js(script, switch_tab_id=None, no_monitor=False):
+165:     """执行 JS 脚本来控制浏览器，并捕获结果和页面变化"""
+166:     global driver
+167:     try:
+168:         if driver is None: first_init_driver()
+169:         if len(driver.get_all_sessions()) == 0: return {"status": "error", "msg": "没有可用的浏览器标签页，查L3记忆分析原因。"}
+170:         if switch_tab_id: driver.default_session_id = switch_tab_id
+171:         result = simphtml.execute_js_rich(script, driver, no_monitor=no_monitor)
+172:         return result
+173:     except Exception as e: return {"status": "error", "msg": format_error(e)}
+174: 
+175: def expand_file_refs(text, base_dir=None):
+176:     """展开文本中的 {{file:路径:起始行:结束行}} 引用为实际文件内容。
+177:     可与普通文本混排。展开失败抛 ValueError。
+178:     base_dir: 相对路径的基准目录，默认为进程 cwd"""
+179:     pattern = r'\{\{file:(.+?):(\d+):(\d+)\}\}'
+180:     def replacer(match):
+181:         path, start, end = match.group(1), int(match.group(2)), int(match.group(3))
+182:         path = os.path.abspath(os.path.join(base_dir or '.', path))
+183:         if not os.path.isfile(path): raise ValueError(f"引用文件不存在: {path}")
+184:         with open(path, 'r', encoding='utf-8') as f: lines = f.readlines()
+185:         if start < 1 or end > len(lines) or start > end: raise ValueError(f"行号越界: {path} 共{len(lines)}行, 请求{start}-{end}")
+186:         return ''.join(lines[start-1:end])
+187:     return re.sub(pattern, replacer, text)
+188:     
+189: def file_patch(path: str, old_content: str, new_content: str):
+190:     """在文件中寻找唯一的 old_content 块并替换为 new_content"""
+191:     path = str(Path(path).resolve())
+192:     try:
+193:         if not os.path.exists(path): return {"status": "error", "msg": "文件不存在"}
+194:         with open(path, 'r', encoding='utf-8') as f: full_text = f.read()
+195:         if not old_content: return {"status": "error", "msg": "old_content 为空，请确认 arguments"}
+196:         count = full_text.count(old_content)
+197:         if count == 0: return {"status": "error", "msg": "未找到匹配的旧文本块，建议：先用 file_read 确认当前内容，再分小段进行 patch。若多次失败则询问用户，严禁自行使用 overwrite 或代码替换。"}
+198:         if count > 1: return {"status": "error", "msg": f"找到 {count} 处匹配，无法确定唯一位置。请提供更长、更具体的旧文本块以确保唯一性。建议：包含上下文行来增强特征，或分小段逐个修改。"}
+199:         updated_text = full_text.replace(old_content, new_content)
+200:         with open(path, 'w', encoding='utf-8') as f: f.write(updated_text)
+201:         return {"status": "success", "msg": "文件局部修改成功"}
+202:     except Exception as e: return {"status": "error", "msg": str(e)}
+203: 
+204: _read_dirs = set()
+205: def _scan_files(base, depth=2):
+206:     try:
+207:         for e in os.scandir(base):
+208:             if e.is_file(): yield (e.name, e.path)
+209:             elif depth > 0 and e.is_dir(follow_symlinks=False): yield from _scan_files(e.path, depth - 1)
+210:     except (PermissionError, OSError): pass
+211: def file_read(path, start=1, keyword=None, count=200, show_linenos=True):
+212:     try:
+213:         with open(path, 'r', encoding='utf-8', errors='replace') as f:
+214:             stream = ((i, l.rstrip('\r\n')) for i, l in enumerate(f, 1))
+215:             stream = itertools.dropwhile(lambda x: x[0] < start, stream)
+216:             if keyword:
+217:                 before = collections.deque(maxlen=count//3)
+218:                 for i, l in stream:
+219:                     if keyword.lower() in l.lower():
+220:                         res = list(before) + [(i, l)] + list(itertools.islice(stream, count - len(before) - 1))

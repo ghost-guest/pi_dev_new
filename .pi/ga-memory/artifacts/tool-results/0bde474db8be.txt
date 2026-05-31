@@ -1,0 +1,257 @@
+/opt/homebrew/bin/pi
+pi - AI coding assistant with read, bash, edit, write tools
+
+Usage:
+  pi [options] [@files...] [messages...]
+
+Commands:
+  pi install <source> [-l]     Install extension source and add to settings
+  pi remove <source> [-l]      Remove extension source from settings
+  pi uninstall <source> [-l]   Alias for remove
+  pi update [source|self|pi]   Update pi and installed extensions
+  pi list                      List installed extensions from settings
+  pi config                    Open TUI to enable/disable package resources
+  pi <command> --help          Show help for install/remove/uninstall/update/list
+
+Options:
+  --provider <name>              Provider name (default: google)
+  --model <pattern>              Model pattern or ID (supports "provider/id" and optional ":<thinking>")
+  --api-key <key>                API key (defaults to env vars)
+  --system-prompt <text>         System prompt (default: coding assistant prompt)
+  --append-system-prompt <text>  Append text or file contents to the system prompt (can be used multiple times)
+  --mode <mode>                  Output mode: text (default), json, or rpc
+  --print, -p                    Non-interactive mode: process prompt and exit
+  --continue, -c                 Continue previous session
+  --resume, -r                   Select a session to resume
+  --session <path|id>            Use specific session file or partial UUID
+  --session-id <id>              Use exact project session ID, creating it if missing
+  --fork <path|id>               Fork specific session file or partial UUID into a new session
+  --session-dir <dir>            Directory for session storage and lookup
+  --no-session                   Don't save session (ephemeral)
+  --name, -n <name>              Set session display name
+  --models <patterns>            Comma-separated model patterns for Ctrl+P cycling
+                                 Supports globs (anthropic/*, *sonnet*) and fuzzy matching
+  --no-tools, -nt                Disable all tools by default (built-in and extension)
+  --no-builtin-tools, -nbt       Disable built-in tools by default but keep extension/custom tools enabled
+  --tools, -t <tools>            Comma-separated allowlist of tool names to enable
+                                 Applies to built-in, extension, and custom tools
+  --exclude-tools, -xt <tools>   Comma-separated denylist of tool names to disable
+                                 Applies to built-in, extension, and custom tools
+  --thinking <level>             Set thinking level: off, minimal, low, medium, high, xhigh
+  --extension, -e <path>         Load an extension file (can be used multiple times)
+  --no-extensions, -ne           Disable extension discovery (explicit -e paths still work)
+  --skill <path>                 Load a skill file or directory (can be used multiple times)
+  --no-skills, -ns               Disable skills discovery and loading
+  --prompt-template <path>       Load a prompt template file or directory (can be used multiple times)
+  --no-prompt-templates, -np     Disable prompt template discovery and loading
+  --theme <path>                 Load a theme file or directory (can be used multiple times)
+  --no-themes                    Disable theme discovery and loading
+  --no-context-files, -nc        Disable AGENTS.md and CLAUDE.md discovery and loading
+  --export <file>                Export session file to HTML and exit
+  --list-models [search]         List available models (with optional fuzzy search)
+  --verbose                      Force verbose startup (overrides quietStartup setting)
+  --offline                      Disable startup network operations (same as PI_OFFLINE=1)
+  --help, -h                     Show this help
+  --version, -v                  Show version number
+
+Extensions can register additional flags (e.g., --plan from plan-mode extension).
+Extension CLI Flags:
+  --retry-stall-timeout-ms <value>Abort and auto-retry stalled provider streams after this many ms; use 0/off/false to disable. Defaults to 90000.
+
+
+Examples:
+  # Interactive mode
+  pi
+
+  # Interactive mode with initial prompt
+  pi "List all .ts files in src/"
+
+  # Include files in initial message
+  pi @prompt.md @image.png "What color is the sky?"
+
+  # Non-interactive mode (process and exit)
+  pi -p "List all .ts files in src/"
+
+  # Multiple messages (interactive)
+  pi "Read package.json" "What dependencies do we have?"
+
+  # Continue previous session
+  pi --continue "What did we discuss?"
+
+  # Start a named session
+  pi --name "Refactor auth module"
+
+  # Use different model
+  pi --provider openai --model gpt-4o-mini "Help me refactor this code"
+
+  # Use model with provider prefix (no --provider needed)
+  pi --model openai/gpt-4o "Help me refactor this code"
+
+  # Use model with thinking level shorthand
+  pi --model sonnet:high "Solve this complex problem"
+
+  # Limit model cycling to specific models
+  pi --models claude-sonnet,claude-haiku,gpt-4o
+
+  # Limit to a specific provider with glob pattern
+  pi --models "github-copilot/*"
+
+  # Cycle models with fixed thinking levels
+  pi --models sonnet:high,haiku:low
+
+  # Start with a specific thinking level
+  pi --thinking high "Solve this complex problem"
+
+  # Read-only mode (no file modifications possible)
+  pi --tools read,grep,find,ls -p "Review the code in src/"
+
+  # Disable one tool while keeping the rest available
+  pi --exclude-tools ask_question
+
+  # Export a session file to HTML
+  pi --export ~/.pi/agent/sessions/--path--/session.jsonl
+  pi --export session.jsonl output.html
+
+Environment Variables:
+  ANTHROPIC_API_KEY                - Anthropic Claude API key
+  ANTHROPIC_OAUTH_TOKEN            - Anthropic OAuth token (alternative to API key)
+  OPENAI_API_KEY                   - OpenAI GPT API key
+  AZURE_OPENAI_API_KEY             - Azure OpenAI API key
+  AZURE_OPENAI_BASE_URL            - Azure OpenAI/Cognitive Services base URL (e.g. https://{resource}.openai.azure.com)
+  AZURE_OPENAI_RESOURCE_NAME       - Azure OpenAI resource name (alternative to base URL)
+  AZURE_OPENAI_API_VERSION         - Azure OpenAI API version (default: v1)
+  AZURE_OPENAI_DEPLOYMENT_NAME_MAP - Azure OpenAI model=deployment map (comma-separated)
+  DEEPSEEK_API_KEY                 - DeepSeek API key
+  GEMINI_API_KEY                   - Google Gemini API key
+  GROQ_API_KEY                     - Groq API key
+  CEREBRAS_API_KEY                 - Cerebras API key
+  XAI_API_KEY                      - xAI Grok API key
+  FIREWORKS_API_KEY                - Fireworks API key
+  TOGETHER_API_KEY                 - Together AI API key
+  OPENROUTER_API_KEY               - OpenRouter API key
+  AI_GATEWAY_API_KEY               - Vercel AI Gateway API key
+  ZAI_API_KEY                      - ZAI API key
+  MISTRAL_API_KEY                  - Mistral API key
+  MINIMAX_API_KEY                  - MiniMax API key
+  MOONSHOT_API_KEY                 - Moonshot AI API key
+  OPENCODE_API_KEY                 - OpenCode Zen/OpenCode Go API key
+  KIMI_API_KEY                     - Kimi For Coding API key
+  CLOUDFLARE_API_KEY               - Cloudflare API token (Workers AI and AI Gateway)
+  CLOUDFLARE_ACCOUNT_ID            - Cloudflare account id (required for both)
+  CLOUDFLARE_GATEWAY_ID            - Cloudflare AI Gateway slug (required for AI Gateway)
+  XIAOMI_API_KEY                   - Xiaomi MiMo API key (api.xiaomimimo.com billing)
+  XIAOMI_TOKEN_PLAN_CN_API_KEY     - Xiaomi MiMo Token Plan API key (China region)
+  XIAOMI_TOKEN_PLAN_AMS_API_KEY    - Xiaomi MiMo Token Plan API key (Amsterdam region)
+  XIAOMI_TOKEN_PLAN_SGP_API_KEY    - Xiaomi MiMo Token Plan API key (Singapore region)
+  AWS_PROFILE                      - AWS profile for Amazon Bedrock
+  AWS_ACCESS_KEY_ID                - AWS access key for Amazon Bedrock
+  AWS_SECRET_ACCESS_KEY            - AWS secret key for Amazon Bedrock
+  AWS_BEARER_TOKEN_BEDROCK         - Bedrock API key (bearer token)
+  AWS_REGION                       - AWS region for Amazon Bedrock (e.g., us-east-1)
+  PI_CODING_AGENT_DIR              - Config directory (default: ~/.pi/agent)
+  PI_CODING_AGENT_SESSION_DIR      - Session storage directory (overridden by --session-dir)
+  PI_PACKAGE_DIR                   - Override package directory (for Nix/Guix store paths)
+  PI_OFFLINE                       - Disable startup network operations when set to 1/true/yes
+  PI_TELEMETRY                     - Override install telemetry when set to 1/true/yes or 0/false/no
+  PI_SHARE_VIEWER_URL              - Base URL for /share command (default: https://pi.dev/session/)
+
+Built-in Tool Names:
+  read   - Read file contents
+  bash   - Execute bash commands
+  edit   - Edit files with find/replace
+  write  - Write files (creates/overwrites)
+  grep   - Search file contents (read-only, off by default)
+  find   - Find files by glob pattern (read-only, off by default)
+  ls     - List directory contents (read-only, off by default)
+
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:20:Pi is a minimal terminal coding harness. Adapt pi to your workflows, not the other way around, without having to fork and modify pi internals. Extend it with TypeScript [Extensions](#extensions), [Skills](#skills), [Prompt Templates](#prompt-templates), and [Themes](#themes). Put your extensions, skills, prompt templates, and themes in [Pi Packages](#pi-packages) and share them with others via npm or git.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:58:  - [Skills](#skills)
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:96:Then just talk to pi. By default, pi gives the model four tools: `read`, `write`, `edit`, and `bash`. The model uses these to fulfill your requests. Add capabilities via [skills](#skills), [prompt templates](#prompt-templates), [extensions](#extensions), or [pi packages](#pi-packages).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:152:- **Startup header** - Shows shortcuts (`/hotkeys` for all), loaded AGENTS.md files, prompt templates, skills, and extensions
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:173:Type `/` in the editor to trigger commands. [Extensions](#extensions) can register custom commands, [skills](#skills) are available as `/skill:name`, and [prompt templates](#prompt-templates) expand via `/templatename`.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:192:| `/reload` | Reload keybindings, extensions, skills, prompts, and context files (themes hot-reload automatically) |
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:332:On-demand capability packages following the [Agent Skills standard](https://agentskills.io). Invoke via `/skill:name` or let the agent load them automatically.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:335:<!-- ~/.pi/agent/skills/my-skill/SKILL.md -->
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:344:Place in `~/.pi/agent/skills/`, `~/.agents/skills/`, `.pi/skills/`, or `.agents/skills/` (from `cwd` up through parent directories) or a [pi package](#pi-packages) to share with others. See [docs/skills.md](docs/skills.md).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:386:Bundle and share extensions, skills, prompts, and themes via npm or git. Find packages on [npmjs.com](https://www.npmjs.com/search?q=keywords%3Api-package) or [Discord](https://discord.com/channels/1456806362351669492/1457744485428629628).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:388:> **Security:** Pi packages run with full system access. Extensions execute arbitrary code, and skills can instruct the model to perform any action including running executables. Review source code before installing third-party packages.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:409:pi config                               # enable/disable extensions, skills, prompts, themes
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:422:    "skills": ["./skills"],
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:429:Without a `pi` manifest, pi auto-discovers from conventional directories (`extensions/`, `skills/`, `prompts/`, `themes/`).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:473:Pi is aggressively extensible so it doesn't have to dictate your workflow. Features that other tools bake in can be built with [extensions](#extensions), [skills](#skills), or installed from third-party [pi packages](#pi-packages). This keeps the core minimal while letting you shape pi to fit how you work.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:475:**No MCP.** Build CLI tools with READMEs (see [Skills](#skills)), or build an extension that adds MCP support. [Why?](https://mariozechner.at/posts/2025-11-02-what-if-you-dont-need-mcp/)
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:569:| `--no-skills` | Disable skill discovery |
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md:582:| `--system-prompt <text>` | Replace default prompt (context files and skills still appended) |
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/quickstart.md:163:- [Pi Packages](packages.md) - install shared extensions, skills, prompts, and themes.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/index.md:3:Pi is a minimal terminal coding harness. It is designed to stay small at the core while being extended through TypeScript extensions, skills, prompt templates, themes, and pi packages.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/index.md:52:- [Skills](skills.md) - Agent Skills for reusable on-demand capabilities.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/index.md:55:- [Pi packages](packages.md) - bundle and share extensions, skills, prompts, and themes.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:1:> pi can create skills. Ask it to build one for your use case.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:7:Pi implements the [Agent Skills standard](https://agentskills.io/specification), warning about most violations but remaining lenient. Pi allows skill names to differ from their parent directory even though the standard disallows it; that rule is suboptimal for shared skill directories used across multiple agent harnesses.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:12:- [How Skills Work](#how-skills-work)
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:24:Pi loads skills from:
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:27:  - `~/.pi/agent/skills/`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:28:  - `~/.agents/skills/`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:30:  - `.pi/skills/`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:31:  - `.agents/skills/` in `cwd` and ancestor directories (up to git repo root, or filesystem root when not in a repo)
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:32:- Packages: `skills/` directories or `pi.skills` entries in `package.json`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:33:- Settings: `skills` array with files or directories
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:34:- CLI: `--skill <path>` (repeatable, additive even with `--no-skills`)
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:37:- In `~/.pi/agent/skills/` and `.pi/skills/`, direct root `.md` files are discovered as individual skills
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:39:- In `~/.agents/skills/` and project `.agents/skills/`, root `.md` files are ignored
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:41:Disable discovery with `--no-skills` (explicit `--skill` paths still load).
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:45:To use skills from Claude Code or OpenAI Codex, add their directories to settings:
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:49:  "skills": [
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:50:    "~/.claude/skills",
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:51:    "~/.codex/skills"
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:56:For project-level Claude Code skills, add to `.pi/settings.json`:
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:60:  "skills": ["../.claude/skills"]
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:67:2. The system prompt includes available skills in XML format per the [specification](https://agentskills.io/integrate-skills)
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:139:Per the [Agent Skills specification](https://agentskills.io/specification#frontmatter-required):
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:178:Pi validates skills against the Agent Skills standard. Most issues produce warnings but still load the skill:
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:230:- [Anthropic Skills](https://github.com/anthropics/skills) - Document processing (docx, pdf, pptx, xlsx), web development
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md:231:- [Pi Skills](https://github.com/badlogic/pi-skills) - Web search, browser automation, Google APIs, transcription
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/usage.md:11:- **Startup header** - shortcuts, loaded context files, prompt templates, skills, and extensions
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/usage.md:34:Type `/` in the editor to open command completion. Extensions can register custom commands, skills are available as `/skill:name`, and prompt templates expand via `/templatename`.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/usage.md:53:| `/reload` | Reload keybindings, extensions, skills, prompts, and context files |
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/usage.md:202:| `--no-skills` | Disable skill discovery |
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/usage.md:219:| `--system-prompt <text>` | Replace default prompt; context files and skills are still appended |
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/usage.md:284:Pi keeps the core small and pushes workflow-specific behavior into extensions, skills, prompt templates, and packages.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/packages.md:1:> pi can help you create pi packages. Ask it to bundle your extensions, skills, prompt templates, or themes.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/packages.md:5:Pi packages bundle extensions, skills, prompt templates, and themes so you can share them through npm or git. A package can declare resources in `package.json` under the `pi` key, or use conventional directories.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/packages.md:20:> **Security:** Pi packages run with full system access. Extensions execute arbitrary code, and skills can instruct the model to perform any action including running executables. Review source code before installing third-party packages.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/packages.md:124:    "skills": ["./skills"],
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/packages.md:161:- `skills/` recursively finds `SKILL.md` folders and loads top-level `.md` files as skills
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/packages.md:167:Third party runtime dependencies belong in `dependencies` in `package.json`. Dependencies that do not register extensions, skills, prompt templates, or themes also belong in `dependencies`. When pi installs a package from npm or git, it runs `npm install`, so those dependencies are installed automatically.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/packages.md:169:Pi bundles core packages for extensions and skills. If you import any of these, list them in `peerDependencies` with a `"*"` range and do not bundle them: `@earendil-works/pi-ai`, `@earendil-works/pi-agent-core`, `@earendil-works/pi-coding-agent`, `@earendil-works/pi-tui`, `typebox`.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/packages.md:183:    "skills": ["skills", "node_modules/shitty-extensions/skills"]
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/packages.md:199:      "skills": [],
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/packages.md:218:Use `pi config` to enable or disable extensions, skills, prompt templates, and themes from installed packages and local directories. Works for both global (`~/.pi/agent`) and project (`.pi/`) scopes.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/settings.md:194:These settings define where to load extensions, skills, prompts, and themes from.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/settings.md:202:| `skills` | string[] | `[]` | Local skill file paths or directories |
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/settings.md:205:| `enableSkillCommands` | boolean | `true` | Register skills as `/skill:name` commands |
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/settings.md:215:  "packages": ["pi-skills", "@org/my-extension"]
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/settings.md:225:      "source": "pi-skills",
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/settings.md:226:      "skills": ["brave-search", "transcribe"],
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/settings.md:256:  "packages": ["pi-skills"]
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/sdk.md:54:`createAgentSession()` uses a `ResourceLoader` to supply extensions, skills, prompt templates, themes, and context files. If you do not provide one, it uses `DefaultResourceLoader` with standard discovery.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/sdk.md:347:- Project skills:
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/sdk.md:348:  - `.pi/skills/`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/sdk.md:349:  - `.agents/skills/` in `cwd` and ancestor directories (up to git repo root, or filesystem root when not in a repo)
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/sdk.md:356:- Global skills:
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/sdk.md:357:  - `skills/` under `agentDir` (for example `~/.pi/agent/skills/`)
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/sdk.md:358:  - `~/.agents/skills/`
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/sdk.md:615:  skillsOverride: (current) => ({
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/sdk.md:616:    skills: [...current.skills, customSkill],
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/sdk.md:625:> See [examples/sdk/04-skills.ts](../examples/sdk/04-skills.ts)
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/sdk.md:833:Use `DefaultResourceLoader` to discover extensions, skills, prompts, themes, and context files.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/sdk.md:848:const skills = loader.getSkills();
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/rpc.md:704:Get available commands (extension commands, prompt templates, and skills). These can be invoked via the `prompt` command by prefixing with `/`.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/rpc.md:720:      {"name": "skill:brave-search", "description": "Web search via Brave API", "source": "skill", "location": "user", "path": "/home/user/.pi/agent/skills/brave-search/SKILL.md"}
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/extensions.md:349:    skillPaths: ["/path/to/skills"],
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/extensions.md:484:  //   .skills - loaded skills
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/extensions.md:499:The `systemPromptOptions` field gives extensions access to the same structured data Pi uses to build the system prompt. This lets you inspect what Pi has loaded — custom prompts, guidelines, tool snippets, context files, skills — without re-discovering resources or re-parsing flags. Use it when your extension needs to make deep, informed changes to the system prompt while respecting user-provided configuration.
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/extensions.md:1164:  description: "Reload extensions, skills, prompts, and themes",
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/extensions.md:1192:    description: "Reload extensions, skills, prompts, and themes",
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/extensions.md:1202:    description: "Reload extensions, skills, prompts, and themes",
+/opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs/extensions.md:1413:The list matches the RPC `get_commands` ordering: extensions first, then templates, then skills.

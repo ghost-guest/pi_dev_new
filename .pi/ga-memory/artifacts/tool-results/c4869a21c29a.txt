@@ -1,0 +1,436 @@
+packages/coding-agent/src/core/resource-loader.ts:82:	const contextFiles: Array<{ path: string; content: string }> = [];
+packages/coding-agent/src/core/resource-loader.ts:85:	const globalContext = loadContextFileFromDir(resolvedAgentDir);
+packages/coding-agent/src/core/resource-loader.ts:87:		contextFiles.push(globalContext);
+packages/coding-agent/src/core/resource-loader.ts:91:	const ancestorContextFiles: Array<{ path: string; content: string }> = [];
+packages/coding-agent/src/core/resource-loader.ts:97:		const contextFile = loadContextFileFromDir(currentDir);
+packages/coding-agent/src/core/resource-loader.ts:98:		if (contextFile && !seenPaths.has(contextFile.path)) {
+packages/coding-agent/src/core/resource-loader.ts:99:			ancestorContextFiles.unshift(contextFile);
+packages/coding-agent/src/core/resource-loader.ts:100:			seenPaths.add(contextFile.path);
+packages/coding-agent/src/core/resource-loader.ts:110:	contextFiles.push(...ancestorContextFiles);
+packages/coding-agent/src/core/resource-loader.ts:112:	return contextFiles;
+packages/coding-agent/src/core/resource-loader.ts:225:		this.noContextFiles = options.noContextFiles ?? false;
+packages/coding-agent/src/core/resource-loader.ts:469:			agentsFiles: this.noContextFiles ? [] : loadProjectContextFiles({ cwd: this.cwd, agentDir: this.agentDir }),
+packages/coding-agent/examples/extensions/preset.ts:20: *     "instructions": "You are in PLANNING MODE. Your job is to deeply understand the problem and create a detailed implementation plan.\n\nRules:\n- DO NOT make any changes. You cannot edit or write files.\n- Read files IN FULL (no offset/limit) to get complete context. Partial reads miss critical details.\n- Explore thoroughly: grep for related code, find similar patterns, understand the architecture.\n- Ask clarifying questions if requirements are ambiguous. Do not assume.\n- Identify risks, edge cases, and dependencies before proposing solutions.\n\nOutput:\n- Create a structured plan with numbered steps.\n- For each step: what to change, why, and potential risks.\n- List files that will be modified.\n- Note any tests that should be added or updated.\n\nWhen done, ask the user if they want you to:\n1. Write the plan to a markdown file (e.g., PLAN.md)\n2. Create a GitHub issue with the plan\n3. Proceed to implementation (they should switch to 'implement' preset)"
+packages/coding-agent/examples/extensions/preset.ts:44:import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
+packages/coding-agent/examples/extensions/preset.ts:122:	async function applyPreset(name: string, preset: Preset, ctx: ExtensionContext): Promise<boolean> {
+packages/coding-agent/examples/extensions/preset.ts:199:	async function showPresetSelector(ctx: ExtensionContext): Promise<void> {
+packages/coding-agent/examples/extensions/preset.ts:296:	function updateStatus(ctx: ExtensionContext) {
+packages/coding-agent/examples/extensions/preset.ts:308:	async function cyclePreset(ctx: ExtensionContext): Promise<void> {
+packages/coding-agent/examples/extensions/preset.ts:354:	pi.registerCommand("preset", {
+packages/coding-agent/src/core/slash-commands.ts:36:	{ name: "compact", description: "Manually compact the session context" },
+packages/coding-agent/examples/extensions/custom-provider-gitlab-duo/index.ts:54:	contextWindow: number;
+packages/coding-agent/examples/extensions/custom-provider-gitlab-duo/index.ts:68:		contextWindow: 200000,
+packages/coding-agent/examples/extensions/custom-provider-gitlab-duo/index.ts:79:		contextWindow: 200000,
+packages/coding-agent/examples/extensions/custom-provider-gitlab-duo/index.ts:90:		contextWindow: 200000,
+packages/coding-agent/examples/extensions/custom-provider-gitlab-duo/index.ts:102:		contextWindow: 128000,
+packages/coding-agent/examples/extensions/custom-provider-gitlab-duo/index.ts:113:		contextWindow: 128000,
+packages/coding-agent/examples/extensions/custom-provider-gitlab-duo/index.ts:124:		contextWindow: 128000,
+packages/coding-agent/examples/extensions/custom-provider-gitlab-duo/index.ts:268:	context: Context,
+packages/coding-agent/examples/extensions/custom-provider-gitlab-duo/index.ts:288:					? streamSimpleAnthropic(modelWithBaseUrl as Model<"anthropic-messages">, context, streamOptions)
+packages/coding-agent/examples/extensions/custom-provider-gitlab-duo/index.ts:289:					: streamSimpleOpenAIResponses(modelWithBaseUrl as Model<"openai-responses">, context, streamOptions);
+packages/coding-agent/examples/extensions/custom-provider-gitlab-duo/index.ts:332:		models: MODELS.map(({ id, name, reasoning, input, cost, contextWindow, maxTokens }) => ({
+packages/coding-agent/examples/extensions/custom-provider-gitlab-duo/index.ts:338:			contextWindow,
+packages/coding-agent/examples/extensions/qna.ts:31:	pi.registerCommand("qna", {
+packages/coding-agent/examples/extensions/trigger-compact.ts:1:import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
+packages/coding-agent/examples/extensions/trigger-compact.ts:8:	const triggerCompaction = (ctx: ExtensionContext, customInstructions?: string) => {
+packages/coding-agent/examples/extensions/trigger-compact.ts:28:		const usage = ctx.getContextUsage();
+packages/coding-agent/examples/extensions/trigger-compact.ts:43:	pi.registerCommand("trigger-compact", {
+packages/coding-agent/examples/extensions/custom-provider-gitlab-duo/test.ts:56:		contextWindow: cfg.contextWindow,
+packages/coding-agent/examples/extensions/custom-provider-gitlab-duo/test.ts:60:	const context: Context = {
+packages/coding-agent/examples/extensions/custom-provider-gitlab-duo/test.ts:66:	const stream = streamSimple(model, context, {
+packages/coding-agent/src/core/session-manager.ts:95: * Does NOT participate in LLM context (ignored by buildSessionContext).
+packages/coding-agent/src/core/session-manager.ts:96: * For injecting content into context, see CustomMessageEntry.
+packages/coding-agent/src/core/session-manager.ts:118: * Custom message entry for extensions to inject messages into LLM context.
+packages/coding-agent/src/core/session-manager.ts:121: * Unlike CustomEntry, this DOES participate in LLM context.
+packages/coding-agent/src/core/session-manager.ts:122: * The content is converted to a user message in buildSessionContext().
+packages/coding-agent/src/core/session-manager.ts:162:export interface SessionContext {
+packages/coding-agent/src/core/session-manager.ts:311: * Build the session context from entries using tree traversal.
+packages/coding-agent/src/core/session-manager.ts:315:export function buildSessionContext(
+packages/coding-agent/src/core/session-manager.ts:319:): SessionContext {
+packages/coding-agent/src/core/session-manager.ts:708: * Use buildSessionContext() to get the resolved message list for the LLM, which
+packages/coding-agent/src/core/session-manager.ts:980:	 * Append a custom message entry (for extensions) that participates in LLM context.
+packages/coding-agent/src/core/session-manager.ts:1074:	 * Use buildSessionContext() to get the resolved messages for the LLM.
+packages/coding-agent/src/core/session-manager.ts:1088:	 * Build the session context (what gets sent to the LLM).
+packages/coding-agent/src/core/session-manager.ts:1091:	buildSessionContext(): SessionContext {
+packages/coding-agent/src/core/session-manager.ts:1092:		return buildSessionContext(this.getEntries(), this.leafId, this.byId);
+packages/coding-agent/src/core/session-manager.ts:1186:	 * context from the abandoned conversation path.
+packages/coding-agent/examples/extensions/summarize.ts:2:import type { ExtensionAPI, ExtensionCommandContext } from "@earendil-works/pi-coding-agent";
+packages/coding-agent/examples/extensions/summarize.ts:117:const showSummaryUi = async (summary: string, ctx: ExtensionCommandContext) => {
+packages/coding-agent/examples/extensions/summarize.ts:146:	pi.registerCommand("summarize", {
+packages/coding-agent/src/core/messages.ts:38:	/** If true, this message is excluded from LLM context (!! prefix) */
+packages/coding-agent/src/core/messages.ts:43: * Message type for extension-injected messages via sendMessage().
+packages/coding-agent/src/core/messages.ts:80: * Convert a BashExecutionMessage to user message text for LLM context.
+packages/coding-agent/src/core/messages.ts:153:					// Skip messages excluded from context (!! prefix)
+packages/coding-agent/examples/extensions/border-status-editor.ts:4:	type ExtensionContext,
+packages/coding-agent/examples/extensions/border-status-editor.ts:50:function formatContext(ctx: ExtensionContext): string {
+packages/coding-agent/examples/extensions/border-status-editor.ts:51:	const usage = ctx.getContextUsage();
+packages/coding-agent/examples/extensions/border-status-editor.ts:52:	const contextWindow = usage?.contextWindow ?? ctx.model?.contextWindow;
+packages/coding-agent/examples/extensions/border-status-editor.ts:53:	if (!contextWindow || !usage || usage.percent === null) {
+packages/coding-agent/examples/extensions/border-status-editor.ts:56:	return `ctx ${Math.round(usage.percent)}%/${(contextWindow / 1000).toFixed(0)}k`;
+packages/coding-agent/src/core/tools/edit-diff.ts:161:			`Found ${occurrences} occurrences of the text in ${path}. The text must be unique. Please provide more context to make it unique.`,
+packages/coding-agent/src/core/tools/edit-diff.ts:165:		`Found ${occurrences} occurrences of edits[${editIndex}] in ${path}. Each oldText must be unique. Please provide more context to make it unique.`,
+packages/coding-agent/src/core/tools/edit-diff.ts:263:export function generateUnifiedPatch(path: string, oldContent: string, newContent: string, contextLines = 4): string {
+packages/coding-agent/src/core/tools/edit-diff.ts:265:		context: contextLines,
+packages/coding-agent/src/core/tools/edit-diff.ts:271: * Generate a display-oriented diff string with line numbers and context.
+packages/coding-agent/src/core/tools/edit-diff.ts:277:	contextLines = 4,
+packages/coding-agent/src/core/tools/edit-diff.ts:326:				if (raw.length <= contextLines * 2) {
+packages/coding-agent/src/core/tools/edit-diff.ts:334:					const leadingLines = raw.slice(0, contextLines);
+packages/coding-agent/src/core/tools/edit-diff.ts:335:					const trailingLines = raw.slice(raw.length - contextLines);
+packages/coding-agent/src/core/tools/edit-diff.ts:357:				const shownLines = raw.slice(0, contextLines);
+packages/coding-agent/src/core/tools/edit-diff.ts:373:				const skippedLines = Math.max(0, raw.length - contextLines);
+packages/coding-agent/src/core/tools/edit-diff.ts:387:				// Skip these context lines entirely
+packages/coding-agent/examples/extensions/tools.ts:12:import type { ExtensionAPI, ExtensionContext, ToolInfo } from "@earendil-works/pi-coding-agent";
+packages/coding-agent/examples/extensions/tools.ts:39:	function restoreFromBranch(ctx: ExtensionContext) {
+packages/coding-agent/examples/extensions/tools.ts:67:	pi.registerCommand("tools", {
+packages/coding-agent/src/core/system-prompt.ts:2: * System prompt construction and project context loading
+packages/coding-agent/src/core/system-prompt.ts:21:	/** Pre-loaded context files. */
+packages/coding-agent/src/core/system-prompt.ts:22:	contextFiles?: Array<{ path: string; content: string }>;
+packages/coding-agent/src/core/system-prompt.ts:27:/** Build the system prompt with tools, guidelines, and context */
+packages/coding-agent/src/core/system-prompt.ts:36:		contextFiles: providedContextFiles,
+packages/coding-agent/src/core/system-prompt.ts:50:	const contextFiles = providedContextFiles ?? [];
+packages/coding-agent/src/core/system-prompt.ts:60:		// Append project context files
+packages/coding-agent/src/core/system-prompt.ts:61:		if (contextFiles.length > 0) {
+packages/coding-agent/src/core/system-prompt.ts:62:			prompt += "\n\n<project_context>\n\n";
+packages/coding-agent/src/core/system-prompt.ts:64:			for (const { path: filePath, content } of contextFiles) {
+packages/coding-agent/src/core/system-prompt.ts:67:			prompt += "</project_context>\n";
+packages/coding-agent/src/core/system-prompt.ts:155:	// Append project context files
+packages/coding-agent/src/core/system-prompt.ts:156:	if (contextFiles.length > 0) {
+packages/coding-agent/src/core/system-prompt.ts:157:		prompt += "\n\n<project_context>\n\n";
+packages/coding-agent/src/core/system-prompt.ts:159:		for (const { path: filePath, content } of contextFiles) {
+packages/coding-agent/src/core/system-prompt.ts:162:		prompt += "</project_context>\n";
+packages/coding-agent/examples/extensions/snake.ts:310:	pi.registerCommand("snake", {
+packages/coding-agent/src/core/agent-session-runtime.ts:6:import type { ReplacedSessionContext, SessionShutdownEvent, SessionStartEvent } from "./extensions/index.ts";
+packages/coding-agent/src/core/agent-session-runtime.ts:121:	 * context becomes stale.
+packages/coding-agent/src/core/agent-session-runtime.ts:178:	private async finishSessionReplacement(withSession?: (ctx: ReplacedSessionContext) => Promise<void>): Promise<void> {
+packages/coding-agent/src/core/agent-session-runtime.ts:183:			await withSession(this.session.createReplacedSessionContext());
+packages/coding-agent/src/core/agent-session-runtime.ts:189:		options?: { cwdOverride?: string; withSession?: (ctx: ReplacedSessionContext) => Promise<void> },
+packages/coding-agent/src/core/agent-session-runtime.ts:215:		withSession?: (ctx: ReplacedSessionContext) => Promise<void>;
+packages/coding-agent/src/core/agent-session-runtime.ts:240:			this.session.agent.state.messages = this.session.sessionManager.buildSessionContext().messages;
+packages/coding-agent/src/core/agent-session-runtime.ts:248:		options?: { position?: "before" | "at"; withSession?: (ctx: ReplacedSessionContext) => Promise<void> },
+packages/coding-agent/src/core/tools/ls.ts:214:		renderCall(args, theme, context) {
+packages/coding-agent/src/core/tools/ls.ts:215:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/tools/ls.ts:219:		renderResult(result, options, theme, context) {
+packages/coding-agent/src/core/tools/ls.ts:220:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/tools/ls.ts:221:			text.setText(formatLsResult(result as any, options, theme, context.showImages));
+packages/coding-agent/src/modes/interactive/components/footer.ts:45: * Footer component that shows pwd, token stats, and context usage.
+packages/coding-agent/src/modes/interactive/components/footer.ts:46: * Computes token/context stats from session, gets git branch and extension statuses from provider.
+packages/coding-agent/src/modes/interactive/components/footer.ts:102:		// Calculate context usage from session (handles compaction correctly).
+packages/coding-agent/src/modes/interactive/components/footer.ts:104:		const contextUsage = this.session.getContextUsage();
+packages/coding-agent/src/modes/interactive/components/footer.ts:105:		const contextWindow = contextUsage?.contextWindow ?? state.model?.contextWindow ?? 0;
+packages/coding-agent/src/modes/interactive/components/footer.ts:106:		const contextPercentValue = contextUsage?.percent ?? 0;
+packages/coding-agent/src/modes/interactive/components/footer.ts:107:		const contextPercent = contextUsage?.percent !== null ? contextPercentValue.toFixed(1) : "?";
+packages/coding-agent/src/modes/interactive/components/footer.ts:138:		// Colorize context percentage based on usage
+packages/coding-agent/src/modes/interactive/components/footer.ts:139:		let contextPercentStr: string;
+packages/coding-agent/src/modes/interactive/components/footer.ts:141:		const contextPercentDisplay =
+packages/coding-agent/src/modes/interactive/components/footer.ts:142:			contextPercent === "?"
+packages/coding-agent/src/modes/interactive/components/footer.ts:143:				? `?/${formatTokens(contextWindow)}${autoIndicator}`
+packages/coding-agent/src/modes/interactive/components/footer.ts:144:				: `${contextPercent}%/${formatTokens(contextWindow)}${autoIndicator}`;
+packages/coding-agent/src/modes/interactive/components/footer.ts:145:		if (contextPercentValue > 90) {
+packages/coding-agent/src/modes/interactive/components/footer.ts:146:			contextPercentStr = theme.fg("error", contextPercentDisplay);
+packages/coding-agent/src/modes/interactive/components/footer.ts:147:		} else if (contextPercentValue > 70) {
+packages/coding-agent/src/modes/interactive/components/footer.ts:148:			contextPercentStr = theme.fg("warning", contextPercentDisplay);
+packages/coding-agent/src/modes/interactive/components/footer.ts:150:			contextPercentStr = contextPercentDisplay;
+packages/coding-agent/src/modes/interactive/components/footer.ts:152:		statsParts.push(contextPercentStr);
+packages/coding-agent/src/modes/interactive/components/footer.ts:210:		// Apply dim to each part separately. statsLeft may contain color codes (for context %)
+packages/coding-agent/src/core/tools/read.ts:343:		renderCall(args, theme, context) {
+packages/coding-agent/src/core/tools/read.ts:344:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/tools/read.ts:345:			const classification = !context.expanded ? getCompactReadClassification(args, context.cwd) : undefined;
+packages/coding-agent/src/core/tools/read.ts:351:		renderResult(result, options, theme, context) {
+packages/coding-agent/src/core/tools/read.ts:352:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/tools/read.ts:354:				formatReadResult(context.args, result, options, theme, context.showImages, context.cwd, context.isError),
+packages/coding-agent/src/core/tools/find.ts:354:		renderCall(args, theme, context) {
+packages/coding-agent/src/core/tools/find.ts:355:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/tools/find.ts:359:		renderResult(result, options, theme, context) {
+packages/coding-agent/src/core/tools/find.ts:360:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/tools/find.ts:361:			text.setText(formatFindResult(result as any, options, theme, context.showImages));
+packages/coding-agent/src/core/tools/write.ts:227:		renderCall(args, theme, context) {
+packages/coding-agent/src/core/tools/write.ts:232:				(context.lastComponent as WriteCallRenderComponent | undefined) ?? new WriteCallRenderComponent();
+packages/coding-agent/src/core/tools/write.ts:234:				component.cache = context.argsComplete
+packages/coding-agent/src/core/tools/write.ts:243:					{ expanded: context.expanded, isPartial: context.isPartial },
+packages/coding-agent/src/core/tools/write.ts:250:		renderResult(result, _options, theme, context) {
+packages/coding-agent/src/core/tools/write.ts:251:			const output = formatWriteResult({ ...result, isError: context.isError }, theme);
+packages/coding-agent/src/core/tools/write.ts:253:				const component = (context.lastComponent as Container | undefined) ?? new Container();
+packages/coding-agent/src/core/tools/write.ts:257:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/compaction/branch-summarization.ts:5: * a summary of the branch being left so context isn't lost.
+packages/coding-agent/src/core/compaction/branch-summarization.ts:91: * summaries become context.
+packages/coding-agent/src/core/compaction/branch-summarization.ts:149:			// Skip tool results - context is in assistant's tool call
+packages/coding-agent/src/core/compaction/branch-summarization.ts:176: * This ensures we keep the most recent context when the branch is too long.
+packages/coding-agent/src/core/compaction/branch-summarization.ts:221:			// If this is a summary entry, try to fit it anyway as it's important context
+packages/coding-agent/src/core/compaction/branch-summarization.ts:248:const BRANCH_SUMMARY_PROMPT = `Create a structured summary of this conversation branch for context when returning later.
+packages/coding-agent/src/core/compaction/branch-summarization.ts:289:	// Token budget = context window minus reserved space for prompt + response
+packages/coding-agent/src/core/compaction/branch-summarization.ts:290:	const contextWindow = model.contextWindow || 128000;
+packages/coding-agent/src/core/compaction/branch-summarization.ts:291:	const tokenBudget = contextWindow - reserveTokens;
+packages/coding-agent/src/core/compaction/branch-summarization.ts:343:	// Prepend preamble to provide context about the branch summary
+packages/coding-agent/src/core/extensions/runner.ts:24:	ExtensionCommandContext,
+packages/coding-agent/src/core/extensions/runner.ts:25:	ExtensionCommandContextActions,
+packages/coding-agent/src/core/extensions/runner.ts:26:	ExtensionContext,
+packages/coding-agent/src/core/extensions/runner.ts:27:	ExtensionContextActions,
+packages/coding-agent/src/core/extensions/runner.ts:33:	ExtensionUIContext,
+packages/coding-agent/src/core/extensions/runner.ts:43:	ReplacedSessionContext,
+packages/coding-agent/src/core/extensions/runner.ts:47:	SessionBeforeCompactResult,
+packages/coding-agent/src/core/extensions/runner.ts:48:	SessionBeforeForkResult,
+packages/coding-agent/src/core/extensions/runner.ts:49:	SessionBeforeSwitchResult,
+packages/coding-agent/src/core/extensions/runner.ts:50:	SessionBeforeTreeResult,
+packages/coding-agent/src/core/extensions/runner.ts:128:type SessionBeforeEvent = Extract<
+packages/coding-agent/src/core/extensions/runner.ts:133:type SessionBeforeEventResult =
+packages/coding-agent/src/core/extensions/runner.ts:134:	| SessionBeforeSwitchResult
+packages/coding-agent/src/core/extensions/runner.ts:135:	| SessionBeforeForkResult
+packages/coding-agent/src/core/extensions/runner.ts:136:	| SessionBeforeCompactResult
+packages/coding-agent/src/core/extensions/runner.ts:137:	| SessionBeforeTreeResult;
+packages/coding-agent/src/core/extensions/runner.ts:140:	? SessionBeforeSwitchResult | undefined
+packages/coding-agent/src/core/extensions/runner.ts:142:		? SessionBeforeForkResult | undefined
+packages/coding-agent/src/core/extensions/runner.ts:144:			? SessionBeforeCompactResult | undefined
+packages/coding-agent/src/core/extensions/runner.ts:146:				? SessionBeforeTreeResult | undefined
+packages/coding-agent/src/core/extensions/runner.ts:154:	withSession?: (ctx: ReplacedSessionContext) => Promise<void>;
+packages/coding-agent/src/core/extensions/runner.ts:159:	options?: { position?: "before" | "at"; withSession?: (ctx: ReplacedSessionContext) => Promise<void> },
+packages/coding-agent/src/core/extensions/runner.ts:169:	options?: { withSession?: (ctx: ReplacedSessionContext) => Promise<void> },
+packages/coding-agent/src/core/extensions/runner.ts:191:const noOpUIContext: ExtensionUIContext = {
+packages/coding-agent/src/core/extensions/runner.ts:196:	clearChat: () => {},
+packages/coding-agent/src/core/extensions/runner.ts:203:	setWidget: () => {},
+packages/coding-agent/src/core/extensions/runner.ts:228:	private uiContext: ExtensionUIContext;
+packages/coding-agent/src/core/extensions/runner.ts:239:	private getContextUsageFn: () => ContextUsage | undefined = () => undefined;
+packages/coding-agent/src/core/extensions/runner.ts:261:		this.uiContext = noOpUIContext;
+packages/coding-agent/src/core/extensions/runner.ts:269:		contextActions: ExtensionContextActions,
+packages/coding-agent/src/core/extensions/runner.ts:276:		this.runtime.sendMessage = actions.sendMessage;
+packages/coding-agent/src/core/extensions/runner.ts:292:		this.getModel = contextActions.getModel;
+packages/coding-agent/src/core/extensions/runner.ts:293:		this.isIdleFn = contextActions.isIdle;
+packages/coding-agent/src/core/extensions/runner.ts:294:		this.getSignalFn = contextActions.getSignal;
+packages/coding-agent/src/core/extensions/runner.ts:295:		this.abortFn = contextActions.abort;
+packages/coding-agent/src/core/extensions/runner.ts:296:		this.hasPendingMessagesFn = contextActions.hasPendingMessages;
+packages/coding-agent/src/core/extensions/runner.ts:297:		this.shutdownHandler = contextActions.shutdown;
+packages/coding-agent/src/core/extensions/runner.ts:298:		this.getContextUsageFn = contextActions.getContextUsage;
+packages/coding-agent/src/core/extensions/runner.ts:299:		this.compactFn = contextActions.compact;
+packages/coding-agent/src/core/extensions/runner.ts:300:		this.getSystemPromptFn = contextActions.getSystemPrompt;
+packages/coding-agent/src/core/extensions/runner.ts:339:	bindCommandContext(actions?: ExtensionCommandContextActions): void {
+packages/coding-agent/src/core/extensions/runner.ts:358:	setUIContext(uiContext?: ExtensionUIContext): void {
+packages/coding-agent/src/core/extensions/runner.ts:359:		this.uiContext = uiContext ?? noOpUIContext;
+packages/coding-agent/src/core/extensions/runner.ts:362:	getUIContext(): ExtensionUIContext {
+packages/coding-agent/src/core/extensions/runner.ts:367:		return this.uiContext !== noOpUIContext;
+packages/coding-agent/src/core/extensions/runner.ts:571:	 * Create an ExtensionContext for use in event handlers and tool execution.
+packages/coding-agent/src/core/extensions/runner.ts:574:	createContext(): ExtensionContext {
+packages/coding-agent/src/core/extensions/runner.ts:637:	createCommandContext(): ExtensionCommandContext {
+packages/coding-agent/src/core/extensions/runner.ts:641:		const context = Object.defineProperties(
+packages/coding-agent/src/core/extensions/runner.ts:644:		) as ExtensionCommandContext;
+packages/coding-agent/src/core/extensions/runner.ts:645:		context.waitForIdle = () => {
+packages/coding-agent/src/core/extensions/runner.ts:649:		context.newSession = (options) => {
+packages/coding-agent/src/core/extensions/runner.ts:653:		context.fork = (entryId, options) => {
+packages/coding-agent/src/core/extensions/runner.ts:657:		context.navigateTree = (targetId, options) => {
+packages/coding-agent/src/core/extensions/runner.ts:661:		context.switchSession = (sessionPath, options) => {
+packages/coding-agent/src/core/extensions/runner.ts:665:		context.reload = () => {
+packages/coding-agent/src/core/extensions/runner.ts:669:		return context;
+packages/coding-agent/src/core/extensions/runner.ts:672:	private isSessionBeforeEvent(event: RunnerEmitEvent): event is SessionBeforeEvent {
+packages/coding-agent/src/core/extensions/runner.ts:682:		const ctx = this.createContext();
+packages/coding-agent/src/core/extensions/runner.ts:683:		let result: SessionBeforeEventResult | undefined;
+packages/coding-agent/src/core/extensions/runner.ts:693:					if (this.isSessionBeforeEvent(event) && handlerResult) {
+packages/coding-agent/src/core/extensions/runner.ts:694:						result = handlerResult as SessionBeforeEventResult;
+packages/coding-agent/src/core/extensions/runner.ts:716:		const ctx = this.createContext();
+packages/coding-agent/src/core/extensions/runner.ts:758:		const ctx = this.createContext();
+packages/coding-agent/src/core/extensions/runner.ts:808:		const ctx = this.createContext();
+packages/coding-agent/src/core/extensions/runner.ts:831:		const ctx = this.createContext();
+packages/coding-agent/src/core/extensions/runner.ts:860:		const ctx = this.createContext();
+packages/coding-agent/src/core/extensions/runner.ts:864:			const handlers = ext.handlers.get("context");
+packages/coding-agent/src/core/extensions/runner.ts:869:					const event: ContextEvent = { type: "context", messages: currentMessages };
+packages/coding-agent/src/core/extensions/runner.ts:880:						event: "context",
+packages/coding-agent/src/core/extensions/runner.ts:892:		const ctx = this.createContext();
+packages/coding-agent/src/core/extensions/runner.ts:935:		) as ExtensionContext;
+packages/coding-agent/src/core/extensions/runner.ts:999:		const ctx = this.createContext();
+packages/coding-agent/src/core/extensions/runner.ts:1041:		const ctx = this.createContext();
+packages/coding-agent/src/core/tools/grep.ts:31:	context: Type.Optional(
+packages/coding-agent/src/core/tools/grep.ts:53:	/** Read file contents for context lines */
+packages/coding-agent/src/core/tools/grep.ts:141:				context,
+packages/coding-agent/src/core/tools/grep.ts:149:				context?: number;
+packages/coding-agent/src/core/tools/grep.ts:187:						const contextValue = context && context > 0 ? context : 0;
+packages/coding-agent/src/core/tools/grep.ts:254:							const start = contextValue > 0 ? Math.max(1, lineNumber - contextValue) : lineNumber;
+packages/coding-agent/src/core/tools/grep.ts:255:							const end = contextValue > 0 ? Math.min(lines.length, lineNumber + contextValue) : lineNumber;
+packages/coding-agent/src/core/tools/grep.ts:317:								if (contextValue === 0 && match.lineText !== undefined) {
+packages/coding-agent/src/core/tools/grep.ts:369:		renderCall(args, theme, context) {
+packages/coding-agent/src/core/tools/grep.ts:370:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/tools/grep.ts:374:		renderResult(result, options, theme, context) {
+packages/coding-agent/src/core/tools/grep.ts:375:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/tools/grep.ts:376:			text.setText(formatGrepResult(result as any, options, theme, context.showImages));
+packages/coding-agent/src/core/compaction/utils.ts:168:export const SUMMARIZATION_SYSTEM_PROMPT = `You are a context summarization assistant. Your task is to read a conversation between a user and an AI coding assistant, then produce a structured summary following the exact format specified.
+packages/coding-agent/src/core/tools/bash.ts:134:export type BashSpawnHook = (context: BashSpawnContext) => BashSpawnContext;
+packages/coding-agent/src/core/tools/bash.ts:136:function resolveSpawnContext(command: string, cwd: string, spawnHook?: BashSpawnHook): BashSpawnContext {
+packages/coding-agent/src/core/tools/bash.ts:137:	const baseContext: BashSpawnContext = { command, cwd, env: { ...getShellEnv() } };
+packages/coding-agent/src/core/tools/bash.ts:138:	return spawnHook ? spawnHook(baseContext) : baseContext;
+packages/coding-agent/src/core/tools/bash.ts:290:			const spawnContext = resolveSpawnContext(resolvedCommand, cwd, spawnHook);
+packages/coding-agent/src/core/tools/bash.ts:375:					const result = await ops.exec(spawnContext.command, spawnContext.cwd, {
+packages/coding-agent/src/core/tools/bash.ts:405:		renderCall(args, _theme, context) {
+packages/coding-agent/src/core/tools/bash.ts:406:			const state = context.state;
+packages/coding-agent/src/core/tools/bash.ts:407:			if (context.executionStarted && state.startedAt === undefined) {
+packages/coding-agent/src/core/tools/bash.ts:411:			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
+packages/coding-agent/src/core/tools/bash.ts:415:		renderResult(result, options, _theme, context) {
+packages/coding-agent/src/core/tools/bash.ts:416:			const state = context.state;
+packages/coding-agent/src/core/tools/bash.ts:418:				state.interval = setInterval(() => context.invalidate(), 1000);
+packages/coding-agent/src/core/tools/bash.ts:420:			if (!options.isPartial || context.isError) {
+packages/coding-agent/src/core/tools/bash.ts:428:				(context.lastComponent as BashResultRenderComponent | undefined) ?? new BashResultRenderComponent();
+packages/coding-agent/src/core/tools/bash.ts:433:				context.showImages,
+packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:2:import type { ExtensionContext, ToolDefinition } from "../extensions/types.ts";
+packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:7:	ctxFactory?: () => ExtensionContext,
+packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:17:			definition.execute(toolCallId, params, signal, onUpdate, ctxFactory?.() as ExtensionContext),
+packages/coding-agent/src/core/tools/tool-definition-wrapper.ts:24:	ctxFactory?: () => ExtensionContext,
+packages/coding-agent/src/core/extensions/wrapper.ts:4: * These wrappers only adapt tool execution so extension tools receive the runner context.
+packages/coding-agent/src/core/extensions/wrapper.ts:15: * Uses the runner's createContext() for consistent context across tools and event handlers.
+packages/coding-agent/src/core/extensions/wrapper.ts:18:	return wrapToolDefinition(registeredTool.definition, () => runner.createContext());
+packages/coding-agent/src/core/extensions/wrapper.ts:23: * Uses the runner's createContext() for consistent context across tools and event handlers.
+packages/coding-agent/src/core/extensions/index.ts:59:	ExtensionCommandContext,
+packages/coding-agent/src/core/extensions/index.ts:60:	ExtensionCommandContextActions,
+packages/coding-agent/src/core/extensions/index.ts:61:	ExtensionContext,
+packages/coding-agent/src/core/extensions/index.ts:62:	ExtensionContextActions,
+packages/coding-agent/src/core/extensions/index.ts:72:	ExtensionUIContext,
+packages/coding-agent/src/core/extensions/index.ts:108:	ReplacedSessionContext,
+packages/coding-agent/src/core/extensions/index.ts:115:	SessionBeforeCompactEvent,
+packages/coding-agent/src/core/extensions/index.ts:116:	SessionBeforeCompactResult,
+packages/coding-agent/src/core/extensions/index.ts:117:	SessionBeforeForkEvent,
+packages/coding-agent/src/core/extensions/index.ts:118:	SessionBeforeForkResult,
+packages/coding-agent/src/core/extensions/index.ts:119:	SessionBeforeSwitchEvent,
+packages/coding-agent/src/core/extensions/index.ts:120:	SessionBeforeSwitchResult,
+packages/coding-agent/src/core/extensions/index.ts:121:	SessionBeforeTreeEvent,
+packages/coding-agent/src/core/extensions/index.ts:122:	SessionBeforeTreeResult,
+packages/coding-agent/src/core/tools/edit.ts:367:		renderCall(args, theme, context) {
+packages/coding-agent/src/core/tools/edit.ts:368:			const component = getEditCallRenderComponent(context.state, context.lastComponent);
+packages/coding-agent/src/core/tools/edit.ts:381:			if (context.argsComplete && previewInput && !component.preview && !component.previewPending) {
+packages/coding-agent/src/core/tools/edit.ts:384:				void computeEditsDiff(previewInput.path, previewInput.edits, context.cwd).then((preview) => {
+packages/coding-agent/src/core/tools/edit.ts:387:						context.invalidate();
+packages/coding-agent/src/core/tools/edit.ts:394:		renderResult(result, _options, theme, context) {
+packages/coding-agent/src/core/tools/edit.ts:395:			const callComponent = context.state.callComponent;
+packages/coding-agent/src/core/tools/edit.ts:396:			const previewInput = getRenderablePreviewInput(context.args as RenderableEditArgs | undefined);
+packages/coding-agent/src/core/tools/edit.ts:401:			const resultDiff = !context.isError ? typedResult.details?.diff : undefined;
+packages/coding-agent/src/core/tools/edit.ts:412:				if (callComponent.settledError !== context.isError) {
+packages/coding-agent/src/core/tools/edit.ts:413:					callComponent.settledError = context.isError;
+packages/coding-agent/src/core/tools/edit.ts:417:					buildEditCallComponent(callComponent, context.args as RenderableEditArgs | undefined, theme);
+packages/coding-agent/src/core/tools/edit.ts:421:			const output = formatEditResult(context.args, callComponent?.preview, typedResult, theme, context.isError);
+packages/coding-agent/src/core/tools/edit.ts:422:			const component = (context.lastComponent as Container | undefined) ?? new Container();
+packages/coding-agent/src/core/extensions/types.ts:121: * UI context for extensions to request interactive UI.
+packages/coding-agent/src/core/extensions/types.ts:124:export interface ExtensionUIContext {
+packages/coding-agent/src/core/extensions/types.ts:138:	clearChat(): void;
+packages/coding-agent/src/core/extensions/types.ts:166:	setWidget(key: string, content: string[] | undefined, options?: ExtensionWidgetOptions): void;
+packages/coding-agent/src/core/extensions/types.ts:167:	setWidget(
+packages/coding-agent/src/core/extensions/types.ts:281:// Extension Context
+packages/coding-agent/src/core/extensions/types.ts:285:	/** Estimated context tokens, or null if unknown (e.g. right after compaction, before next LLM response). */
+packages/coding-agent/src/core/extensions/types.ts:287:	contextWindow: number;
+packages/coding-agent/src/core/extensions/types.ts:288:	/** Context usage as percentage of context window, or null if tokens is unknown. */
+packages/coding-agent/src/core/extensions/types.ts:301:export interface ExtensionContext {
+packages/coding-agent/src/core/extensions/types.ts:303:	ui: ExtensionUIContext;
+packages/coding-agent/src/core/extensions/types.ts:322:	/** Gracefully shutdown pi and exit. Available in all contexts. */
+packages/coding-agent/src/core/extensions/types.ts:324:	/** Get current context usage for the active model. */
+packages/coding-agent/src/core/extensions/types.ts:325:	getContextUsage(): ContextUsage | undefined;
+packages/coding-agent/src/core/extensions/types.ts:333: * Extended context for command handlers.
+packages/coding-agent/src/core/extensions/types.ts:336:export interface ExtensionCommandContext extends ExtensionContext {
+packages/coding-agent/src/core/extensions/types.ts:344:		withSession?: (ctx: ReplacedSessionContext) => Promise<void>;
+packages/coding-agent/src/core/extensions/types.ts:350:		options?: { position?: "before" | "at"; withSession?: (ctx: ReplacedSessionContext) => Promise<void> },
+packages/coding-agent/src/core/extensions/types.ts:362:		options?: { withSession?: (ctx: ReplacedSessionContext) => Promise<void> },
+packages/coding-agent/src/core/extensions/types.ts:370: * Fresh command-capable context bound to the replacement session after a session switch.
+packages/coding-agent/src/core/extensions/types.ts:374:export interface ReplacedSessionContext extends ExtensionCommandContext {
+packages/coding-agent/src/core/extensions/types.ts:375:	sendMessage<T = unknown>(
+packages/coding-agent/src/core/extensions/types.ts:463:		ctx: ExtensionContext,
+packages/coding-agent/src/core/extensions/types.ts:467:	renderCall?: (args: Static<TParams>, theme: Theme, context: ToolRenderContext<TState, Static<TParams>>) => Component;
+packages/coding-agent/src/core/extensions/types.ts:474:		context: ToolRenderContext<TState, Static<TParams>>,
+packages/coding-agent/src/core/extensions/types.ts:484: * as `customTools`, where contextual typing would otherwise widen params to
+packages/coding-agent/src/core/extensions/types.ts:525:export interface SessionBeforeSwitchEvent {
+packages/coding-agent/src/core/extensions/types.ts:532:export interface SessionBeforeForkEvent {
+packages/coding-agent/src/core/extensions/types.ts:538:/** Fired before context compaction (can be cancelled or customized) */
+packages/coding-agent/src/core/extensions/types.ts:539:export interface SessionBeforeCompactEvent {
+packages/coding-agent/src/core/extensions/types.ts:547:/** Fired after context compaction */
+packages/coding-agent/src/core/extensions/types.ts:578:export interface SessionBeforeTreeEvent {
+packages/coding-agent/src/core/extensions/types.ts:595:	| SessionBeforeSwitchEvent
+packages/coding-agent/src/core/extensions/types.ts:596:	| SessionBeforeForkEvent
+packages/coding-agent/src/core/extensions/types.ts:597:	| SessionBeforeCompactEvent
+packages/coding-agent/src/core/extensions/types.ts:600:	| SessionBeforeTreeEvent
+packages/coding-agent/src/core/extensions/types.ts:609:	type: "context";
+packages/coding-agent/src/core/extensions/types.ts:740:	/** True if !! prefix was used (excluded from LLM context) */
+packages/coding-agent/src/core/extensions/types.ts:1018:export interface SessionBeforeSwitchResult {
+packages/coding-agent/src/core/extensions/types.ts:1022:export interface SessionBeforeForkResult {
+packages/coding-agent/src/core/extensions/types.ts:1027:export interface SessionBeforeCompactResult {
+packages/coding-agent/src/core/extensions/types.ts:1032:export interface SessionBeforeTreeResult {
+packages/coding-agent/src/core/extensions/types.ts:1069:	handler: (args: string, ctx: ExtensionCommandContext) => Promise<void>;
+packages/coding-agent/src/core/extensions/types.ts:1082:export type ExtensionHandler<E, R = undefined> = (event: E, ctx: ExtensionContext) => Promise<R | void> | R | void;
+packages/coding-agent/src/core/extensions/types.ts:1096:		handler: ExtensionHandler<SessionBeforeSwitchEvent, SessionBeforeSwitchResult>,
+packages/coding-agent/src/core/extensions/types.ts:1098:	on(event: "session_before_fork", handler: ExtensionHandler<SessionBeforeForkEvent, SessionBeforeForkResult>): void;
+packages/coding-agent/src/core/extensions/types.ts:1101:		handler: ExtensionHandler<SessionBeforeCompactEvent, SessionBeforeCompactResult>,
+packages/coding-agent/src/core/extensions/types.ts:1105:	on(event: "session_before_tree", handler: ExtensionHandler<SessionBeforeTreeEvent, SessionBeforeTreeResult>): void;
+packages/coding-agent/src/core/extensions/types.ts:1107:	on(event: "context", handler: ExtensionHandler<ContextEvent, ContextEventResult>): void;
+packages/coding-agent/src/core/extensions/types.ts:1145:	registerCommand(name: string, options: Omit<RegisteredCommand, "name" | "sourceInfo">): void;
+packages/coding-agent/src/core/extensions/types.ts:1152:			handler: (ctx: ExtensionContext) => Promise<void> | void;
+packages/coding-agent/src/core/extensions/types.ts:1181:	sendMessage<T = unknown>(
+packages/coding-agent/src/core/extensions/types.ts:1252:	 * runner has bound its context. After that it takes effect immediately, so
+packages/coding-agent/src/core/extensions/types.ts:1269:	 *       contextWindow: 200000,
+packages/coding-agent/src/core/extensions/types.ts:1331:	streamSimple?: (model: Model<Api>, context: Context, options?: SimpleStreamOptions) => AssistantMessageEventStream;
+packages/coding-agent/src/core/extensions/types.ts:1371:	/** Maximum context window size in tokens. */
+packages/coding-agent/src/core/extensions/types.ts:1372:	contextWindow: number;
+packages/coding-agent/src/core/extensions/types.ts:1404:	handler: (ctx: ExtensionContext) => Promise<void> | void;
+packages/coding-agent/src/core/extensions/types.ts:1476:	sendMessage: SendMessageHandler;
+packages/coding-agent/src/core/extensions/types.ts:1493: * Actions for ExtensionContext (ctx.* in event handlers).
+packages/coding-agent/src/core/extensions/types.ts:1496:export interface ExtensionContextActions {
+packages/coding-agent/src/core/extensions/types.ts:1503:	getContextUsage: () => ContextUsage | undefined;
+packages/coding-agent/src/core/extensions/types.ts:1509: * Actions for ExtensionCommandContext (ctx.* in command handlers).
+packages/coding-agent/src/core/extensions/types.ts:1512:export interface ExtensionCommandContextActions {
+packages/coding-agent/src/core/extensions/types.ts:1517:		withSession?: (ctx: ReplacedSessionContext) => Promise<void>;
+packages/coding-agent/src/core/extensions/types.ts:1521:		options?: { position?: "before" | "at"; withSession?: (ctx: ReplacedSessionContext) => Promise<void> },
+packages/coding-agent/src/core/extensions/types.ts:1529:		options?: { withSession?: (ctx: ReplacedSessionContext) => Promise<void> },
+packages/coding-agent/src/core/compaction/compaction.ts:17:import { buildSessionContext, type CompactionEntry, type SessionEntry } from "../session-manager.ts";
+packages/coding-agent/src/core/compaction/compaction.ts:77: * Returns undefined for entries that don't contribute to LLM context.
+packages/coding-agent/src/core/compaction/compaction.ts:132: * Calculate total context tokens from usage.
+packages/coding-agent/src/core/compaction/compaction.ts:135:export function calculateContextTokens(usage: Usage): number {
+packages/coding-agent/src/core/compaction/compaction.ts:183: * Estimate context tokens from messages, using the last assistant usage when available.
+packages/coding-agent/src/core/compaction/compaction.ts:186:export function estimateContextTokens(messages: AgentMessage[]): ContextUsageEstimate {
+packages/coding-agent/src/core/compaction/compaction.ts:202:	const usageTokens = calculateContextTokens(usageInfo.usage);
+packages/coding-agent/src/core/compaction/compaction.ts:217: * Check if compaction should trigger based on context usage.
+packages/coding-agent/src/core/compaction/compaction.ts:219:export function shouldCompact(contextTokens: number, contextWindow: number, settings: CompactionSettings): boolean {
+packages/coding-agent/src/core/compaction/compaction.ts:221:	return contextTokens > contextWindow - settings.reserveTokens;
+packages/coding-agent/src/core/compaction/compaction.ts:297: * BashExecutionMessage is treated like a user message (user-initiated context).
+packages/coding-agent/src/core/compaction/compaction.ts:454:const SUMMARIZATION_PROMPT = `The messages above are a conversation to summarize. Create a structured context checkpoint summary that another LLM will use to continue the work.
+packages/coding-agent/src/core/compaction/compaction.ts:491:- ADD new progress, decisions, and context from the new messages
+packages/coding-agent/src/core/compaction/compaction.ts:522:- [Preserve important context, add new if needed]
+packages/coding-agent/src/core/compaction/compaction.ts:543:	context: Context,
+packages/coding-agent/src/core/compaction/compaction.ts:548:		return completeSimple(model, context, options);
+packages/coding-agent/src/core/compaction/compaction.ts:550:	const stream = await streamFn(model, context, options);
+packages/coding-agent/src/core/compaction/compaction.ts:670:	const tokensBefore = estimateContextTokens(buildSessionContext(pathEntries).messages).tokens;
+packages/coding-agent/src/core/compaction/compaction.ts:727:Summarize the prefix to provide context for the retained suffix:
+packages/coding-agent/src/core/extensions/loader.ts:136:		sendMessage: notInitialized,
+packages/coding-agent/src/core/extensions/loader.ts:201:		registerCommand(name: string, options: Omit<RegisteredCommand, "name" | "sourceInfo">): void {
+packages/coding-agent/src/core/extensions/loader.ts:214:				handler: (ctx: import("./types.ts").ExtensionContext) => Promise<void> | void;
+packages/coding-agent/src/core/extensions/loader.ts:245:		sendMessage(message, options): void {
+packages/coding-agent/src/core/extensions/loader.ts:247:			runtime.sendMessage(message, options);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:66:	ExtensionCommandContext,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:67:	ExtensionContext,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:69:	ExtensionUIContext,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:82:import { type SessionContext, SessionManager } from "../../core/session-manager.ts";
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:621:				rawKeyHint("!!", "to run bash (no context)"),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1350:			const contextFiles = this.session.resourceLoader.getAgentsFiles().agentsFiles;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1351:			if (contextFiles.length > 0) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1353:				const contextList = contextFiles
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1356:				const contextCompactList = formatCompactList(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1357:					contextFiles.map((contextFile) => this.formatContextPath(contextFile.path)),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1360:				addLoadedSection("Context", contextCompactList, contextList);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1481:	 * Initialize the extension system with TUI-based UI context.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1484:		const uiContext = this.createExtensionUIContext();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1630:		// Create a context for shortcut handlers
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1631:		const createContext = (): ExtensionContext => ({
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1632:			ui: this.createExtensionUIContext(),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1647:			getContextUsage: () => this.session.getContextUsage(),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1962:	 * Create the ExtensionUIContext for extensions.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1964:	private createExtensionUIContext(): ExtensionUIContext {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1970:			clearChat: () => {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1986:			setWidget: (key, content, options) => this.setExtensionWidget(key, content, options),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2598:			// Handle bash command (! for normal, !! for excluded from context)
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2880:						? `Compacting context... ${cancelHint}`
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2881:						: `${event.reason === "overflow" ? "Context overflow detected, " : ""}Auto-compacting... ${cancelHint}`;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3033:				const component = new BashExecutionComponent(message.command, this.ui, message.excludeFromContext);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3123:	 * Render session context to chat. Used for initial load and rebuild after compaction.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3124:	 * @param sessionContext Session context to render
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3128:	private renderSessionContext(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3129:		sessionContext: SessionContext,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3140:		for (const message of sessionContext.messages) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3199:		// Get aligned messages and entries from session context
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3200:		const context = this.sessionManager.buildSessionContext();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3201:		this.renderSessionContext(context, {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3226:		const context = this.sessionManager.buildSessionContext();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3227:		this.renderSessionContext(context);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4423:		options?: Parameters<ExtensionCommandContext["switchSession"]>[1],
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5335:| \`!!\` | Run bash command (excluded from context) |
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5456:			this.bashComponent = new BashExecutionComponent(command, this.ui, excludeFromContext);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5476:			this.session.recordBashResult(command, result, { excludeFromContext });
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5484:		this.bashComponent = new BashExecutionComponent(command, this.ui, excludeFromContext);
+
+[Showing lines 396-829 of 829 (50.0KB limit). Full output: /var/folders/7m/csfvhz791k527kby7nxl7cbc0000h_/T/pi-bash-1787a6124c3a755f.log]

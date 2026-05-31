@@ -1,0 +1,318 @@
+packages/coding-agent/src/modes/interactive/components/bordered-loader.ts(33,8): error TS2339: Property 'addChild' does not exist on type 'BorderedLoader'.
+packages/coding-agent/src/modes/interactive/components/bordered-loader.ts(35,9): error TS2339: Property 'addChild' does not exist on type 'BorderedLoader'.
+packages/coding-agent/src/modes/interactive/components/bordered-loader.ts(36,9): error TS2339: Property 'addChild' does not exist on type 'BorderedLoader'.
+packages/coding-agent/src/modes/interactive/components/bordered-loader.ts(38,8): error TS2339: Property 'addChild' does not exist on type 'BorderedLoader'.
+packages/coding-agent/src/modes/interactive/components/bordered-loader.ts(39,8): error TS2339: Property 'addChild' does not exist on type 'BorderedLoader'.
+packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts(1,65): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts(16,16): error TS7006: Parameter 't' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts(27,11): error TS4112: This member cannot have an 'override' modifier because its containing class 'BranchSummaryMessageComponent' does not extend another class.
+packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts(33,8): error TS2339: Property 'clear' does not exist on type 'BranchSummaryMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts(36,8): error TS2339: Property 'addChild' does not exist on type 'BranchSummaryMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts(37,8): error TS2339: Property 'addChild' does not exist on type 'BranchSummaryMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts(41,9): error TS2339: Property 'addChild' does not exist on type 'BranchSummaryMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts(47,9): error TS2339: Property 'addChild' does not exist on type 'BranchSummaryMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts(1,65): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts(16,16): error TS7006: Parameter 't' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts(27,11): error TS4112: This member cannot have an 'override' modifier because its containing class 'CompactionSummaryMessageComponent' does not extend another class.
+packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts(33,8): error TS2339: Property 'clear' does not exist on type 'CompactionSummaryMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts(37,8): error TS2339: Property 'addChild' does not exist on type 'CompactionSummaryMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts(38,8): error TS2339: Property 'addChild' does not exist on type 'CompactionSummaryMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts(42,9): error TS2339: Property 'addChild' does not exist on type 'CompactionSummaryMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts(48,9): error TS2339: Property 'addChild' does not exist on type 'CompactionSummaryMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/config-selector.ts(17,8): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/config-selector.ts(607,8): error TS2339: Property 'addChild' does not exist on type 'ConfigSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/config-selector.ts(608,8): error TS2339: Property 'addChild' does not exist on type 'ConfigSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/config-selector.ts(609,8): error TS2339: Property 'addChild' does not exist on type 'ConfigSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/config-selector.ts(610,8): error TS2339: Property 'addChild' does not exist on type 'ConfigSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/config-selector.ts(611,8): error TS2339: Property 'addChild' does not exist on type 'ConfigSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/config-selector.ts(618,8): error TS2339: Property 'addChild' does not exist on type 'ConfigSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/config-selector.ts(621,8): error TS2339: Property 'addChild' does not exist on type 'ConfigSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/config-selector.ts(622,8): error TS2339: Property 'addChild' does not exist on type 'ConfigSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/countdown-timer.ts(5,26): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/custom-editor.ts(1,72): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/custom-editor.ts(37,24): error TS2339: Property 'matches' does not exist on type 'KeybindingsManager'.
+packages/coding-agent/src/modes/interactive/components/custom-editor.ts(45,24): error TS2339: Property 'matches' does not exist on type 'KeybindingsManager'.
+packages/coding-agent/src/modes/interactive/components/custom-editor.ts(46,14): error TS2339: Property 'isShowingAutocomplete' does not exist on type 'CustomEditor'.
+packages/coding-agent/src/modes/interactive/components/custom-editor.ts(60,24): error TS2339: Property 'matches' does not exist on type 'KeybindingsManager'.
+packages/coding-agent/src/modes/interactive/components/custom-editor.ts(61,13): error TS2339: Property 'getText' does not exist on type 'CustomEditor'.
+packages/coding-agent/src/modes/interactive/components/custom-editor.ts(71,80): error TS2339: Property 'matches' does not exist on type 'KeybindingsManager'.
+packages/coding-agent/src/modes/interactive/components/custom-message.ts(1,34): error TS2307: Cannot find module '@earendil-works/pi-ai' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/custom-message.ts(2,32): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/custom-message.ts(3,76): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/custom-message.ts(30,8): error TS2339: Property 'addChild' does not exist on type 'CustomMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/custom-message.ts(33,29): error TS7006: Parameter 't' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/custom-message.ts(45,11): error TS4112: This member cannot have an 'override' modifier because its containing class 'CustomMessageComponent' does not extend another class.
+packages/coding-agent/src/modes/interactive/components/custom-message.ts(53,9): error TS2339: Property 'removeChild' does not exist on type 'CustomMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/custom-message.ts(56,8): error TS2339: Property 'removeChild' does not exist on type 'CustomMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/custom-message.ts(65,11): error TS2339: Property 'addChild' does not exist on type 'CustomMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/custom-message.ts(74,8): error TS2339: Property 'addChild' does not exist on type 'CustomMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/daxnuts.ts(7,37): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/dynamic-border.ts(1,32): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts(2,48): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts(31,8): error TS2339: Property 'addChild' does not exist on type 'EarendilAnnouncementComponent'.
+packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts(32,8): error TS2339: Property 'addChild' does not exist on type 'EarendilAnnouncementComponent'.
+packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts(33,8): error TS2339: Property 'addChild' does not exist on type 'EarendilAnnouncementComponent'.
+packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts(34,8): error TS2339: Property 'addChild' does not exist on type 'EarendilAnnouncementComponent'.
+packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts(35,8): error TS2339: Property 'addChild' does not exist on type 'EarendilAnnouncementComponent'.
+packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts(36,8): error TS2339: Property 'addChild' does not exist on type 'EarendilAnnouncementComponent'.
+packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts(40,9): error TS2339: Property 'addChild' does not exist on type 'EarendilAnnouncementComponent'.
+packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts(44,24): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts(48,9): error TS2339: Property 'addChild' does not exist on type 'EarendilAnnouncementComponent'.
+packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts(51,8): error TS2339: Property 'addChild' does not exist on type 'EarendilAnnouncementComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-editor.ts(19,8): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/extension-editor.ts(58,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionEditorComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-editor.ts(59,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionEditorComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-editor.ts(62,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionEditorComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-editor.ts(63,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionEditorComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-editor.ts(74,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionEditorComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-editor.ts(76,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionEditorComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-editor.ts(87,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionEditorComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-editor.ts(89,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionEditorComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-editor.ts(92,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionEditorComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-editor.ts(104,24): error TS2339: Property 'matches' does not exist on type 'KeybindingsManager'.
+packages/coding-agent/src/modes/interactive/components/extension-input.ts(5,90): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/extension-input.ts(47,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionInputComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-input.ts(48,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionInputComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-input.ts(51,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionInputComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-input.ts(52,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionInputComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-input.ts(64,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionInputComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-input.ts(65,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionInputComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-input.ts(66,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionInputComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-input.ts(69,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionInputComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-input.ts(70,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionInputComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-selector.ts(6,67): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/extension-selector.ts(44,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-selector.ts(45,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-selector.ts(48,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-selector.ts(49,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-selector.ts(61,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-selector.ts(62,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-selector.ts(63,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-selector.ts(74,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/extension-selector.ts(75,8): error TS2339: Property 'addChild' does not exist on type 'ExtensionSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/footer.ts(2,63): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/keybinding-hints.ts(5,61): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/login-dialog.ts(1,61): error TS2307: Cannot find module '@earendil-works/pi-ai/oauth' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/login-dialog.ts(2,90): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/login-dialog.ts(41,50): error TS7006: Parameter 'p' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/login-dialog.ts(46,8): error TS2339: Property 'addChild' does not exist on type 'LoginDialogComponent'.
+packages/coding-agent/src/modes/interactive/components/login-dialog.ts(49,8): error TS2339: Property 'addChild' does not exist on type 'LoginDialogComponent'.
+packages/coding-agent/src/modes/interactive/components/login-dialog.ts(53,8): error TS2339: Property 'addChild' does not exist on type 'LoginDialogComponent'.
+packages/coding-agent/src/modes/interactive/components/login-dialog.ts(69,8): error TS2339: Property 'addChild' does not exist on type 'LoginDialogComponent'.
+packages/coding-agent/src/modes/interactive/components/model-selector.ts(1,44): error TS2307: Cannot find module '@earendil-works/pi-ai' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/model-selector.ts(11,8): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/model-selector.ts(86,8): error TS2339: Property 'addChild' does not exist on type 'ModelSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/model-selector.ts(87,8): error TS2339: Property 'addChild' does not exist on type 'ModelSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/model-selector.ts(92,9): error TS2339: Property 'addChild' does not exist on type 'ModelSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/model-selector.ts(94,9): error TS2339: Property 'addChild' does not exist on type 'ModelSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/model-selector.ts(97,9): error TS2339: Property 'addChild' does not exist on type 'ModelSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/model-selector.ts(99,8): error TS2339: Property 'addChild' does not exist on type 'ModelSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/model-selector.ts(112,8): error TS2339: Property 'addChild' does not exist on type 'ModelSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/model-selector.ts(114,8): error TS2339: Property 'addChild' does not exist on type 'ModelSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/model-selector.ts(118,8): error TS2339: Property 'addChild' does not exist on type 'ModelSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/model-selector.ts(120,8): error TS2339: Property 'addChild' does not exist on type 'ModelSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/model-selector.ts(123,8): error TS2339: Property 'addChild' does not exist on type 'ModelSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/model-selector.ts(223,9): error TS7031: Binding element 'id' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/model-selector.ts(223,13): error TS7031: Binding element 'provider' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts(9,8): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts(65,8): error TS2339: Property 'addChild' does not exist on type 'OAuthSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts(66,8): error TS2339: Property 'addChild' does not exist on type 'OAuthSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts(70,8): error TS2339: Property 'addChild' does not exist on type 'OAuthSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts(71,8): error TS2339: Property 'addChild' does not exist on type 'OAuthSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts(80,8): error TS2339: Property 'addChild' does not exist on type 'OAuthSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts(81,8): error TS2339: Property 'addChild' does not exist on type 'OAuthSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts(85,8): error TS2339: Property 'addChild' does not exist on type 'OAuthSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts(87,8): error TS2339: Property 'addChild' does not exist on type 'OAuthSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts(90,8): error TS2339: Property 'addChild' does not exist on type 'OAuthSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts(98,45): error TS7006: Parameter 'provider' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts(1,28): error TS2307: Cannot find module '@earendil-works/pi-ai' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts(12,8): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts(127,8): error TS2339: Property 'addChild' does not exist on type 'ScopedModelsSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts(128,8): error TS2339: Property 'addChild' does not exist on type 'ScopedModelsSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts(129,8): error TS2339: Property 'addChild' does not exist on type 'ScopedModelsSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts(130,8): error TS2339: Property 'addChild' does not exist on type 'ScopedModelsSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts(133,8): error TS2339: Property 'addChild' does not exist on type 'ScopedModelsSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts(137,8): error TS2339: Property 'addChild' does not exist on type 'ScopedModelsSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts(138,8): error TS2339: Property 'addChild' does not exist on type 'ScopedModelsSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts(142,8): error TS2339: Property 'addChild' does not exist on type 'ScopedModelsSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts(145,8): error TS2339: Property 'addChild' does not exist on type 'ScopedModelsSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts(147,8): error TS2339: Property 'addChild' does not exist on type 'ScopedModelsSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts(149,8): error TS2339: Property 'addChild' does not exist on type 'ScopedModelsSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts(185,59): error TS7006: Parameter 'i' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/session-selector-search.ts(1,28): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/session-selector.ts(15,8): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/session-selector.ts(549,24): error TS2339: Property 'matches' does not exist on type 'KeybindingsManager'.
+packages/coding-agent/src/modes/interactive/components/session-selector.ts(723,8): error TS2339: Property 'clear' does not exist on type 'SessionSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/session-selector.ts(724,8): error TS2339: Property 'addChild' does not exist on type 'SessionSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/session-selector.ts(725,8): error TS2339: Property 'addChild' does not exist on type 'SessionSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/session-selector.ts(726,8): error TS2339: Property 'addChild' does not exist on type 'SessionSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/session-selector.ts(728,9): error TS2339: Property 'addChild' does not exist on type 'SessionSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/session-selector.ts(729,9): error TS2339: Property 'addChild' does not exist on type 'SessionSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/session-selector.ts(731,8): error TS2339: Property 'addChild' does not exist on type 'SessionSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/session-selector.ts(732,8): error TS2339: Property 'addChild' does not exist on type 'SessionSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/session-selector.ts(733,8): error TS2339: Property 'addChild' does not exist on type 'SessionSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/session-selector.ts(774,32): error TS7006: Parameter 'value' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(1,36): error TS2307: Cannot find module '@earendil-works/pi-agent-core' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(2,32): error TS2307: Cannot find module '@earendil-works/pi-ai' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(13,8): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(118,5): error TS7006: Parameter 'id' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(118,9): error TS7006: Parameter 'newValue' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(129,8): error TS2339: Property 'addChild' does not exist on type 'WarningSettingsSubmenu'.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(152,8): error TS2339: Property 'addChild' does not exist on type 'SelectSubmenu'.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(156,9): error TS2339: Property 'addChild' does not exist on type 'SelectSubmenu'.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(157,9): error TS2339: Property 'addChild' does not exist on type 'SelectSubmenu'.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(161,8): error TS2339: Property 'addChild' does not exist on type 'SelectSubmenu'.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(177,31): error TS7006: Parameter 'item' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(184,41): error TS7006: Parameter 'item' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(189,8): error TS2339: Property 'addChild' does not exist on type 'SelectSubmenu'.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(192,8): error TS2339: Property 'addChild' does not exist on type 'SelectSubmenu'.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(193,8): error TS2339: Property 'addChild' does not exist on type 'SelectSubmenu'.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(299,15): error TS7006: Parameter '_currentValue' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(299,30): error TS7006: Parameter 'done' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(314,15): error TS7006: Parameter 'currentValue' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(314,29): error TS7006: Parameter 'done' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(336,15): error TS7006: Parameter 'currentValue' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(336,29): error TS7006: Parameter 'done' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(461,8): error TS2339: Property 'addChild' does not exist on type 'SettingsSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(467,5): error TS7006: Parameter 'id' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(467,9): error TS7006: Parameter 'newValue' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(544,8): error TS2339: Property 'addChild' does not exist on type 'SettingsSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts(545,8): error TS2339: Property 'addChild' does not exist on type 'SettingsSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/show-images-selector.ts(1,86): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/show-images-selector.ts(25,8): error TS2339: Property 'addChild' does not exist on type 'ShowImagesSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/show-images-selector.ts(33,31): error TS7006: Parameter 'item' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/show-images-selector.ts(41,8): error TS2339: Property 'addChild' does not exist on type 'ShowImagesSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/show-images-selector.ts(44,8): error TS2339: Property 'addChild' does not exist on type 'ShowImagesSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/skill-invocation-message.ts(1,57): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/skill-invocation-message.ts(17,16): error TS7006: Parameter 't' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/skill-invocation-message.ts(28,11): error TS4112: This member cannot have an 'override' modifier because its containing class 'SkillInvocationMessageComponent' does not extend another class.
+packages/coding-agent/src/modes/interactive/components/skill-invocation-message.ts(34,8): error TS2339: Property 'clear' does not exist on type 'SkillInvocationMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/skill-invocation-message.ts(39,9): error TS2339: Property 'addChild' does not exist on type 'SkillInvocationMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/skill-invocation-message.ts(41,9): error TS2339: Property 'addChild' does not exist on type 'SkillInvocationMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/skill-invocation-message.ts(52,9): error TS2339: Property 'addChild' does not exist on type 'SkillInvocationMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/theme-selector.ts(1,86): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/theme-selector.ts(35,8): error TS2339: Property 'addChild' does not exist on type 'ThemeSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/theme-selector.ts(46,31): error TS7006: Parameter 'item' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/theme-selector.ts(54,40): error TS7006: Parameter 'item' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/theme-selector.ts(58,8): error TS2339: Property 'addChild' does not exist on type 'ThemeSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/theme-selector.ts(61,8): error TS2339: Property 'addChild' does not exist on type 'ThemeSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/thinking-selector.ts(1,36): error TS2307: Cannot find module '@earendil-works/pi-agent-core' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/thinking-selector.ts(2,86): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/thinking-selector.ts(41,8): error TS2339: Property 'addChild' does not exist on type 'ThinkingSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/thinking-selector.ts(57,31): error TS7006: Parameter 'item' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/thinking-selector.ts(65,8): error TS2339: Property 'addChild' does not exist on type 'ThinkingSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/thinking-selector.ts(68,8): error TS2339: Property 'addChild' does not exist on type 'ThinkingSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/tool-execution.ts(1,96): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/tool-execution.ts(63,8): error TS2339: Property 'addChild' does not exist on type 'ToolExecutionComponent'.
+packages/coding-agent/src/modes/interactive/components/tool-execution.ts(73,9): error TS2339: Property 'addChild' does not exist on type 'ToolExecutionComponent'.
+packages/coding-agent/src/modes/interactive/components/tool-execution.ts(75,9): error TS2339: Property 'addChild' does not exist on type 'ToolExecutionComponent'.
+packages/coding-agent/src/modes/interactive/components/tool-execution.ts(216,11): error TS4112: This member cannot have an 'override' modifier because its containing class 'ToolExecutionComponent' does not extend another class.
+packages/coding-agent/src/modes/interactive/components/tool-execution.ts(221,11): error TS4112: This member cannot have an 'override' modifier because its containing class 'ToolExecutionComponent' does not extend another class.
+packages/coding-agent/src/modes/interactive/components/tool-execution.ts(297,9): error TS2339: Property 'removeChild' does not exist on type 'ToolExecutionComponent'.
+packages/coding-agent/src/modes/interactive/components/tool-execution.ts(301,9): error TS2339: Property 'removeChild' does not exist on type 'ToolExecutionComponent'.
+packages/coding-agent/src/modes/interactive/components/tool-execution.ts(317,11): error TS2339: Property 'addChild' does not exist on type 'ToolExecutionComponent'.
+packages/coding-agent/src/modes/interactive/components/tool-execution.ts(326,11): error TS2339: Property 'addChild' does not exist on type 'ToolExecutionComponent'.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts(11,8): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts(1110,56): error TS7006: Parameter 'line' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts(1181,8): error TS2339: Property 'addChild' does not exist on type 'TreeSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts(1182,8): error TS2339: Property 'addChild' does not exist on type 'TreeSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts(1183,8): error TS2339: Property 'addChild' does not exist on type 'TreeSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts(1193,8): error TS2339: Property 'addChild' does not exist on type 'TreeSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts(1203,8): error TS2339: Property 'addChild' does not exist on type 'TreeSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts(1204,8): error TS2339: Property 'addChild' does not exist on type 'TreeSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts(1205,8): error TS2339: Property 'addChild' does not exist on type 'TreeSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts(1206,8): error TS2339: Property 'addChild' does not exist on type 'TreeSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts(1207,8): error TS2339: Property 'addChild' does not exist on type 'TreeSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts(1208,8): error TS2339: Property 'addChild' does not exist on type 'TreeSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts(1209,8): error TS2339: Property 'addChild' does not exist on type 'TreeSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/user-message-selector.ts(1,90): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/user-message-selector.ts(122,8): error TS2339: Property 'addChild' does not exist on type 'UserMessageSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/user-message-selector.ts(123,8): error TS2339: Property 'addChild' does not exist on type 'UserMessageSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/user-message-selector.ts(124,8): error TS2339: Property 'addChild' does not exist on type 'UserMessageSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/user-message-selector.ts(131,8): error TS2339: Property 'addChild' does not exist on type 'UserMessageSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/user-message-selector.ts(132,8): error TS2339: Property 'addChild' does not exist on type 'UserMessageSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/user-message-selector.ts(133,8): error TS2339: Property 'addChild' does not exist on type 'UserMessageSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/user-message-selector.ts(140,8): error TS2339: Property 'addChild' does not exist on type 'UserMessageSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/user-message-selector.ts(143,8): error TS2339: Property 'addChild' does not exist on type 'UserMessageSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/user-message-selector.ts(144,8): error TS2339: Property 'addChild' does not exist on type 'UserMessageSelectorComponent'.
+packages/coding-agent/src/modes/interactive/components/user-message.ts(1,62): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/components/user-message.ts(22,8): error TS2339: Property 'addChild' does not exist on type 'UserMessageComponent'.
+packages/coding-agent/src/modes/interactive/components/user-message.ts(25,11): error TS4112: This member cannot have an 'override' modifier because its containing class 'UserMessageComponent' does not extend another class.
+packages/coding-agent/src/modes/interactive/components/visual-truncate.ts(6,22): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(10,35): error TS2307: Cannot find module '@earendil-works/pi-agent-core' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(19,8): error TS2307: Cannot find module '@earendil-works/pi-ai' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(30,8): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(49,8): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(167,8): error TS2339: Property 'setText' does not exist on type 'ExpandableText'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(474,50): error TS7006: Parameter 'item' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(478,26): error TS7006: Parameter 'item' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(532,22): error TS2339: Property 'setAutocompleteProvider' does not exist on type 'CustomEditor'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(588,39): error TS2339: Property 'getKeys' does not exist on type 'KeybindingsManager'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(1579,22): error TS2339: Property 'setPaddingX' does not exist on type 'CustomEditor'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(1580,22): error TS2339: Property 'setAutocompleteMaxVisible' does not exist on type 'CustomEditor'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(1693,5): error TS7006: Parameter 'spinner' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(1694,5): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(2211,44): error TS2339: Property 'onSubmit' does not exist on type 'CustomEditor'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(2212,44): error TS2339: Property 'onChange' does not exist on type 'CustomEditor'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(2219,48): error TS2339: Property 'borderColor' does not exist on type 'CustomEditor'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(2222,46): error TS2339: Property 'getPaddingX' does not exist on type 'CustomEditor'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(2255,23): error TS2339: Property 'setText' does not exist on type 'CustomEditor'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(2433,22): error TS2339: Property 'onChange' does not exist on type 'CustomEditor'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(2470,22): error TS2339: Property 'onSubmit' does not exist on type 'CustomEditor'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(2884,7): error TS7006: Parameter 'spinner' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(2885,7): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(2949,7): error TS7006: Parameter 'spinner' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(2950,7): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(3001,26): error TS7006: Parameter 'c' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(3117,11): error TS2322: Type 'AgentMessage' is not assignable to type 'never'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(3180,23): error TS2339: Property 'getTheme' does not exist on type 'InteractiveMode'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(3224,23): error TS2339: Property 'getTheme' does not exist on type 'InteractiveMode'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(3718,14): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(4076,26): error TS2339: Property 'setPaddingX' does not exist on type 'CustomEditor'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(4083,26): error TS2339: Property 'setAutocompleteMaxVisible' does not exist on type 'CustomEditor'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(4432,9): error TS7006: Parameter 'spinner' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(4433,9): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(4569,56): error TS7006: Parameter 'provider' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(4570,63): error TS7006: Parameter 'provider' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(4578,43): error TS2345: Argument of type 'Set<unknown>' is not assignable to parameter of type 'ReadonlySet<string>'.
+  Types of property 'forEach' are incompatible.
+    Type '(callbackfn: (value: unknown, value2: unknown, set: Set<unknown>) => void, thisArg?: any) => void' is not assignable to type '(callbackfn: (value: string, value2: string, set: ReadonlySet<string>) => void, thisArg?: any) => void'.
+      Types of parameters 'callbackfn' and 'callbackfn' are incompatible.
+        Types of parameters 'value' and 'value' are incompatible.
+          Type 'unknown' is not assignable to type 'string'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(4853,39): error TS7006: Parameter 'option' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(4859,35): error TS7006: Parameter 'option' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(4876,11): error TS7006: Parameter 'provider' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(4939,20): error TS7006: Parameter 'info' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(5028,23): error TS2339: Property 'setPaddingX' does not exist on type 'CustomEditor'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(5029,23): error TS2339: Property 'setAutocompleteMaxVisible' does not exist on type 'CustomEditor'.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(5499,21): error TS7006: Parameter 'line' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts(5499,27): error TS7006: Parameter 'idx' implicitly has an 'any' type.
+packages/coding-agent/src/modes/interactive/theme/theme.ts(9,8): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/modes/print-mode.ts(9,53): error TS2307: Cannot find module '@earendil-works/pi-ai' or its corresponding type declarations.
+packages/coding-agent/src/modes/rpc/rpc-client.ts(8,62): error TS2307: Cannot find module '@earendil-works/pi-agent-core' or its corresponding type declarations.
+packages/coding-agent/src/modes/rpc/rpc-client.ts(9,35): error TS2307: Cannot find module '@earendil-works/pi-ai' or its corresponding type declarations.
+packages/coding-agent/src/modes/rpc/rpc-types.ts(8,50): error TS2307: Cannot find module '@earendil-works/pi-agent-core' or its corresponding type declarations.
+packages/coding-agent/src/modes/rpc/rpc-types.ts(9,42): error TS2307: Cannot find module '@earendil-works/pi-ai' or its corresponding type declarations.
+packages/coding-agent/src/package-manager-cli.ts(1,46): error TS2307: Cannot find module '@earendil-works/pi-tui' or its corresponding type declarations.
+packages/coding-agent/src/package-manager-cli.ts(29,12): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/package-manager-cli.ts(30,9): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/package-manager-cli.ts(31,12): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/package-manager-cli.ts(32,9): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/package-manager-cli.ts(33,14): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/package-manager-cli.ts(34,20): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/package-manager-cli.ts(35,10): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/package-manager-cli.ts(36,16): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/package-manager-cli.ts(37,7): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/package-manager-cli.ts(38,15): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/package-manager-cli.ts(39,9): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/package-manager-cli.ts(40,11): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/package-manager-cli.ts(41,18): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/package-manager-cli.ts(42,14): error TS7006: Parameter 'text' implicitly has an 'any' type.
+packages/coding-agent/src/package-manager-cli.ts(326,10): error TS7006: Parameter 'line' implicitly has an 'any' type.
+packages/coding-agent/src/utils/syntax-highlight.ts(1,18): error TS7016: Could not find a declaration file for module 'highlight.js/lib/index.js'. '/Users/mac_522/Desktop/pi_dev/pi/node_modules/highlight.js/lib/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/highlight.js` if it exists or add a new declaration (.d.ts) file containing `declare module 'highlight.js/lib/index.js';`
+
+[Showing lines 160-473 of 473 (50.0KB limit). Full output: /var/folders/7m/csfvhz791k527kby7nxl7cbc0000h_/T/pi-bash-df1799d5f181ab5d.log]
+
+Command exited with code 2

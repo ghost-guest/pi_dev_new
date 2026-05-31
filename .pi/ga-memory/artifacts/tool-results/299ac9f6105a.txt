@@ -1,0 +1,155 @@
+packages/coding-agent/src/core/session-manager.ts:126: * - false: hidden entirely
+packages/coding-agent/src/core/session-manager.ts:383:				createCustomMessage(entry.customType, entry.content, entry.display, entry.details, entry.timestamp),
+packages/coding-agent/src/core/session-manager.ts:983:	 * @param display Whether to show in TUI (true = styled display, false = hidden)
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3: * Handles TUI rendering and user interaction, delegating business logic to AgentSession.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:104:import { CustomMessageComponent } from "./components/custom-message.ts";
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:240:	private chatContainer: Container;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:263:	private hiddenThinkingLabel = this.defaultHiddenThinkingLabel;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:372:		this.chatContainer = new Container();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:548:		if (this.chatContainer.children.length > 0) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:549:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:551:		this.chatContainer.addChild(new DynamicBorder());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:556:			this.chatContainer.addChild(new Text(condensedText, 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:558:			this.chatContainer.addChild(new Text(theme.bold(theme.fg("accent", "What's New")), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:559:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:560:			this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:563:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:565:		this.chatContainer.addChild(new DynamicBorder());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:660:		this.ui.addChild(this.chatContainer);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1314:			this.chatContainer.addChild(section);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1315:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1352:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1435:				this.chatContainer.addChild(new Text(`${theme.fg("warning", "[Skill conflicts]")}\n${warningLines}`, 0, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1436:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1442:				this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1445:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1465:				this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1468:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1474:				this.chatContainer.addChild(new Text(`${theme.fg("warning", "[Theme conflicts]")}\n${warningLines}`, 0, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1475:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1501:							this.renderCurrentSessionState();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1513:							this.renderCurrentSessionState();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1533:					this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1606:	private renderCurrentSessionState(): void {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1607:		this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1730:		this.hiddenThinkingLabel = label ?? this.defaultHiddenThinkingLabel;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1731:		for (const child of this.chatContainer.children) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1733:				child.setHiddenThinkingLabel(this.hiddenThinkingLabel);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1737:			this.streamingComponent.setHiddenThinkingLabel(this.hiddenThinkingLabel);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2357:		this.chatContainer.addChild(errorText);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2366:				this.chatContainer.addChild(new Text(stackLines, 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2715:						this.hiddenThinkingLabel,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2718:					this.chatContainer.addChild(this.streamingComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2745:								this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2814:					this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2851:					this.chatContainer.removeChild(this.streamingComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2908:					this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2922:						this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2923:						this.chatContainer.addChild(new Text(theme.fg("error", event.errorMessage), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3006:		const children = this.chatContainer.children;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3018:		this.chatContainer.addChild(spacer);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3019:		this.chatContainer.addChild(text);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3038:				this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3042:				if (message.display) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3044:					const component = new CustomMessageComponent(message, renderer, this.getMarkdownThemeWithSettings());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3046:					this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3051:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3054:				this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3058:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3061:				this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3067:					if (this.chatContainer.children.length > 0) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3068:						this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3078:						this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3085:							this.chatContainer.addChild(userComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3089:						this.chatContainer.addChild(userComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3102:					this.hiddenThinkingLabel,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3104:				this.chatContainer.addChild(assistantComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3123:	private renderSessionContext(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3155:						this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3196:		this.renderSessionContext(context, {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3220:		this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3222:		this.renderSessionContext(context);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3486:		for (const child of this.chatContainer.children) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3499:		this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3506:			this.chatContainer.addChild(this.streamingComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3509:		this.showStatus(`Thinking blocks: ${this.hideThinkingBlock ? "hidden" : "visible"}`);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3578:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3579:		this.chatContainer.addChild(new Text(theme.fg("error", `Error: ${errorMessage}`), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3580:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3585:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3586:		this.chatContainer.addChild(new Text(theme.fg("warning", `Warning: ${warningMessage}`), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3600:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3601:		this.chatContainer.addChild(new DynamicBorder((text) => theme.fg("warning", text)));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3602:		this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3606:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3607:			this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3612:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3614:		this.chatContainer.addChild(new Text(changelogLine, 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3615:		this.chatContainer.addChild(new DynamicBorder((text) => theme.fg("warning", text)));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3624:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3625:		this.chatContainer.addChild(new DynamicBorder((text) => theme.fg("warning", text)));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3626:		this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3633:		this.chatContainer.addChild(new DynamicBorder((text) => theme.fg("warning", text)));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3812:			this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3876:						for (const child of this.chatContainer.children) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3884:						for (const child of this.chatContainer.children) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3935:					onHideThinkingBlockChange: (hidden) => {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3936:						this.hideThinkingBlock = hidden;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3937:						this.settingsManager.setHideThinkingBlock(hidden);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3938:						for (const child of this.chatContainer.children) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3940:								child.setHideThinkingBlock(hidden);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3943:						this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4211:						this.renderCurrentSessionState();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4244:			this.renderCurrentSessionState();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4320:						this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4349:						this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4432:			this.renderCurrentSessionState();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4449:				this.renderCurrentSessionState();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5016:			this.renderCurrentSessionState();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5030:				this.renderCurrentSessionState();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5156:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5157:				this.chatContainer.addChild(new Text(theme.fg("dim", `Session name: ${currentName}`), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5166:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5167:		this.chatContainer.addChild(new Text(theme.fg("dim", `Session name set: ${name}`), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5203:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5204:		this.chatContainer.addChild(new Text(info, 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5220:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5221:		this.chatContainer.addChild(new DynamicBorder());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5222:		this.chatContainer.addChild(new Text(theme.bold(theme.fg("accent", "What's New")), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5223:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5224:		this.chatContainer.addChild(new Markdown(changelogMarkdown, 1, 1, this.getMarkdownThemeWithSettings()));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5225:		this.chatContainer.addChild(new DynamicBorder());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5349:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5350:		this.chatContainer.addChild(new DynamicBorder());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5351:		this.chatContainer.addChild(new Text(theme.bold(theme.fg("accent", "Keyboard Shortcuts")), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5352:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5353:		this.chatContainer.addChild(new Markdown(hotkeys.trim(), 1, 1, this.getMarkdownThemeWithSettings()));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5354:		this.chatContainer.addChild(new DynamicBorder());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5369:			this.renderCurrentSessionState();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5370:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5371:			this.chatContainer.addChild(new Text(`${theme.fg("accent", "✓ New session started")}`, 1, 1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5404:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5405:		this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5412:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5413:		this.chatContainer.addChild(new ArminComponent(this.ui));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5418:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5419:		this.chatContainer.addChild(new EarendilAnnouncementComponent());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5424:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5425:		this.chatContainer.addChild(new DaxnutsComponent(this.ui));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5456:				this.chatContainer.addChild(this.bashComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5487:			this.chatContainer.addChild(this.bashComponent);
+packages/coding-agent/src/modes/interactive/components/custom-message.ts:12:export class CustomMessageComponent extends Container {
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:77:	onHideThinkingBlockChange: (hidden: boolean) => void;
+packages/coding-agent/src/modes/interactive/components/visual-truncate.ts:11:	/** Number of visual lines that were skipped (hidden) */
+packages/coding-agent/src/modes/interactive/components/index.ts:9:export { CustomMessageComponent } from "./custom-message.ts";
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:16:	private hiddenThinkingLabel: string;
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:24:		hiddenThinkingLabel = "Thinking...",
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:30:		this.hiddenThinkingLabel = hiddenThinkingLabel;
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:56:		this.hiddenThinkingLabel = label;
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:102:					// Show static thinking label when hidden
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:104:						new Text(theme.italic(theme.fg("thinkingText", this.hiddenThinkingLabel)), 1, 0),
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:132:		const hiddenLineCount = availableLines.length - previewLogicalLines.length;
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:176:			// Show how many lines are hidden (collapsed preview)
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:177:			if (hiddenLineCount > 0) {
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:182:						`${theme.fg("muted", `... ${hiddenLineCount} more lines`)} (${keyHint("app.tools.expand", "to expand")})`,
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:300:			// Entry types hidden in default view (settings/bookkeeping)

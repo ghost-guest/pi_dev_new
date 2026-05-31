@@ -1,0 +1,302 @@
+packages/coding-agent/src/core/extensions/types.ts:89:export interface ExtensionUIDialogOptions {
+packages/coding-agent/src/core/extensions/types.ts:110:	/** Animation frames. Use an empty array to hide the indicator entirely. Custom frames are rendered verbatim. */
+packages/coding-agent/src/core/extensions/types.ts:124:export interface ExtensionUIContext {
+packages/coding-agent/src/core/extensions/types.ts:149:	/** Show or hide the built-in interactive working loader row during streaming. */
+packages/coding-agent/src/core/extensions/types.ts:157:	 * - Use `frames: []` to hide the indicator entirely.
+packages/coding-agent/src/core/extensions/types.ts:166:	setWidget(key: string, content: string[] | undefined, options?: ExtensionWidgetOptions): void;
+packages/coding-agent/src/core/extensions/types.ts:167:	setWidget(
+packages/coding-agent/src/core/extensions/types.ts:208:	/** Paste text into the editor, triggering paste handling (collapse for large content). */
+packages/tui/src/terminal.ts:57:	hideCursor(): void; // Hide the cursor
+packages/tui/src/terminal.ts:373:	hideCursor(): void {
+packages/tui/src/keybindings.ts:168:		this.keysById.clear();
+packages/coding-agent/src/modes/interactive/theme/theme.ts:769:	registeredThemes.clear();
+packages/tui/src/undo-stack.ts:21:	clear(): void {
+packages/tui/src/utils.ts:517:	clear(): void {
+packages/tui/src/utils.ts:1087:	pooledStyleTracker.clear();
+packages/tui/src/stdin-buffer.ts:416:	clear(): void {
+packages/tui/src/stdin-buffer.ts:432:		this.clear();
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:49:	hideThinkingBlock: boolean;
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:50:	collapseChangelog: boolean;
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:78:	onCollapseChangelogChange: (collapsed: boolean) => void;
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:253:				id: "hide-thinking",
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:256:				currentValue: config.hideThinkingBlock ? "true" : "false",
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:260:				id: "collapse-changelog",
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:263:				currentValue: config.collapseChangelog ? "true" : "false",
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:503:					case "hide-thinking":
+packages/coding-agent/src/modes/interactive/components/settings-selector.ts:506:					case "collapse-changelog":
+packages/tui/src/tui.ts:184:	hide(): void;
+packages/tui/src/tui.ts:185:	/** Temporarily hide or show the overlay */
+packages/tui/src/tui.ts:207:	removeChild(component: Component): void {
+packages/tui/src/tui.ts:214:	clear(): void {
+packages/tui/src/tui.ts:293:			this.terminal.hideCursor();
+packages/tui/src/tui.ts:342:		this.terminal.hideCursor();
+packages/tui/src/tui.ts:347:			hide: () => {
+packages/tui/src/tui.ts:356:					if (this.overlayStack.length === 0) this.terminal.hideCursor();
+packages/tui/src/tui.ts:399:	hideOverlay(): void {
+packages/tui/src/tui.ts:407:		if (this.overlayStack.length === 0) this.terminal.hideCursor();
+packages/tui/src/tui.ts:447:		this.terminal.hideCursor();
+packages/tui/src/tui.ts:1036:		// but Termux changes height when the software keyboard shows or hides.
+packages/tui/src/tui.ts:1289:			this.terminal.hideCursor();
+packages/tui/src/tui.ts:1316:			this.terminal.hideCursor();
+packages/coding-agent/src/modes/interactive/components/scoped-models-selector.ts:196:		this.listContainer.clear();
+packages/coding-agent/src/modes/interactive/components/footer.ts:12:	// Replace newlines, tabs, carriage returns with space, then collapse multiple spaces
+packages/coding-agent/src/modes/interactive/components/oauth-selector.ts:105:		this.listContainer.clear();
+packages/coding-agent/src/modes/interactive/components/login-dialog.ts:90:		this.contentContainer.clear();
+packages/coding-agent/src/modes/interactive/components/login-dialog.ts:114:		this.contentContainer.clear();
+packages/coding-agent/src/modes/interactive/components/login-dialog.ts:186:		this.contentContainer.clear();
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:14:	private hideThinkingBlock: boolean;
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:22:		hideThinkingBlock = false,
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:28:		this.hideThinkingBlock = hideThinkingBlock;
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:48:	setHideThinkingBlock(hide: boolean): void {
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:49:		this.hideThinkingBlock = hide;
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:77:		this.contentContainer.clear();
+packages/coding-agent/src/modes/interactive/components/assistant-message.ts:101:				if (this.hideThinkingBlock) {
+packages/coding-agent/src/modes/interactive/components/session-selector.ts:723:		this.clear();
+packages/coding-agent/src/modes/interactive/components/extension-selector.ts:81:		this.listContainer.clear();
+packages/tui/src/components/box.ts:34:	removeChild(component: Component): void {
+packages/tui/src/components/box.ts:42:	clear(): void {
+packages/coding-agent/src/modes/interactive/components/tool-execution.ts:41:	private hideComponent = false;
+packages/coding-agent/src/modes/interactive/components/tool-execution.ts:222:		if (this.hideComponent) {
+packages/coding-agent/src/modes/interactive/components/tool-execution.ts:236:		this.hideComponent = false;
+packages/coding-agent/src/modes/interactive/components/tool-execution.ts:242:			renderContainer.clear();
+packages/coding-agent/src/modes/interactive/components/tool-execution.ts:297:			this.removeChild(img);
+packages/coding-agent/src/modes/interactive/components/tool-execution.ts:301:			this.removeChild(spacer);
+packages/coding-agent/src/modes/interactive/components/tool-execution.ts:332:			this.hideComponent = true;
+packages/coding-agent/src/modes/interactive/components/model-selector.ts:231:		this.listContainer.clear();
+packages/tui/src/components/loader.ts:5:	/** Animation frames. Use an empty array to hide the indicator. */
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:68:	 * Set whether the output is expanded (shows full output) or collapsed (preview only).
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:135:		this.contentContainer.clear();
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:176:			// Show how many lines are hidden (collapsed preview)
+packages/coding-agent/src/modes/interactive/components/bash-execution.ts:179:					statusParts.push(`(${keyHint("app.tools.expand", "to collapse")})`);
+packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts:7: * Component that renders a compaction message with collapsed/expanded state.
+packages/coding-agent/src/modes/interactive/components/compaction-summary-message.ts:33:		this.clear();
+packages/coding-agent/src/modes/interactive/components/skill-invocation-message.ts:7: * Component that renders a skill invocation message with collapsed/expanded state.
+packages/coding-agent/src/modes/interactive/components/skill-invocation-message.ts:34:		this.clear();
+packages/coding-agent/src/modes/interactive/components/custom-message.ts:53:			this.removeChild(this.customComponent);
+packages/coding-agent/src/modes/interactive/components/custom-message.ts:56:		this.removeChild(this.box);
+packages/coding-agent/src/modes/interactive/components/custom-message.ts:75:		this.box.clear();
+packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts:7: * Component that renders a branch summary message with collapsed/expanded state.
+packages/coding-agent/src/modes/interactive/components/branch-summary-message.ts:33:		this.clear();
+packages/tui/src/components/editor.ts:1193:		this.pastes.clear();
+packages/tui/src/components/editor.ts:1197:		this.undoStack.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:141:/** Interface for components that can be expanded/collapsed */
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:240:	private chatContainer: Container;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:286:	private hideThinkingBlock = false;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:372:		this.chatContainer = new Container();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:392:		// Load hide thinking block setting
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:393:		this.hideThinkingBlock = this.settingsManager.getHideThinkingBlock();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:505:		this.skillCommands.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:548:		if (this.chatContainer.children.length > 0) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:549:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:551:		this.chatContainer.addChild(new DynamicBorder());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:556:			this.chatContainer.addChild(new Text(condensedText, 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:558:			this.chatContainer.addChild(new Text(theme.bold(theme.fg("accent", "What's New")), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:559:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:560:			this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:563:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:565:		this.chatContainer.addChild(new DynamicBorder());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:660:		this.ui.addChild(this.chatContainer);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1303:			collapsedBody: string,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1304:			expandedBody = collapsedBody,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1308:				() => `${sectionHeader(name, color)}\n${collapsedBody}`,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1314:			this.chatContainer.addChild(section);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1315:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1352:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1435:				this.chatContainer.addChild(new Text(`${theme.fg("warning", "[Skill conflicts]")}\n${warningLines}`, 0, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1436:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1442:				this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1445:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1465:				this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1468:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1474:				this.chatContainer.addChild(new Text(`${theme.fg("warning", "[Theme conflicts]")}\n${warningLines}`, 0, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1475:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1497:					this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1533:					this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1574:		this.hideThinkingBlock = this.settingsManager.getHideThinkingBlock();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1607:		this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1608:		this.pendingMessagesContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1612:		this.pendingTools.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1705:		this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1716:			this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1731:		for (const child of this.chatContainer.children) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1794:		this.extensionWidgetsAbove.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1795:		this.extensionWidgetsBelow.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1801:			this.hideExtensionSelector();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1804:			this.hideExtensionInput();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1807:			this.hideExtensionEditor();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1809:		this.ui.hideOverlay();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1849:		container.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1881:			this.ui.removeChild(this.customFooter);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1883:			this.ui.removeChild(this.footer);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1958:		this.extensionTerminalInputUnsubscribers.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1971:				this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1972:				this.pendingMessagesContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2041:				this.hideExtensionSelector();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2051:					this.hideExtensionSelector();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2056:					this.hideExtensionSelector();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2062:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2072:	private hideExtensionSelector(): void {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2074:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2116:				this.hideExtensionInput();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2126:					this.hideExtensionInput();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2131:					this.hideExtensionInput();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2137:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2147:	private hideExtensionInput(): void {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2149:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2167:					this.hideExtensionEditor();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2171:					this.hideExtensionEditor();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2176:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2186:	private hideExtensionEditor(): void {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2187:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2204:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2295:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2309:				if (isOverlay) this.ui.hideOverlay();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2342:						this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2362:		this.chatContainer.addChild(errorText);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2371:				this.chatContainer.addChild(new Text(stackLines, 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2665:				this.pendingTools.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2718:						this.hideThinkingBlock,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2723:					this.chatContainer.addChild(this.streamingComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2750:								this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2789:						this.pendingTools.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2819:					this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2853:					this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2856:					this.chatContainer.removeChild(this.streamingComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2860:				this.pendingTools.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2876:				this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2904:					this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2913:					this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2927:						this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2928:						this.chatContainer.addChild(new Text(theme.fg("error", event.errorMessage), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2943:				this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2982:					this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3011:		const children = this.chatContainer.children;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3023:		this.chatContainer.addChild(spacer);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3024:		this.chatContainer.addChild(text);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3043:				this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3051:					this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3056:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3059:				this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3063:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3066:				this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3072:					if (this.chatContainer.children.length > 0) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3073:						this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3083:						this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3090:							this.chatContainer.addChild(userComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3094:						this.chatContainer.addChild(userComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3105:					this.hideThinkingBlock,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3109:				this.chatContainer.addChild(assistantComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3132:		this.pendingTools.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3160:						this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3225:		this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3281:	 * mode and hides the cursor; without this handler, an uncaught throw from
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3491:		for (const child of this.chatContainer.children) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3500:		this.hideThinkingBlock = !this.hideThinkingBlock;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3501:		this.settingsManager.setHideThinkingBlock(this.hideThinkingBlock);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3504:		this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3509:			this.streamingComponent.setHideThinkingBlock(this.hideThinkingBlock);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3511:			this.chatContainer.addChild(this.streamingComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3514:		this.showStatus(`Thinking blocks: ${this.hideThinkingBlock ? "hidden" : "visible"}`);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3583:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3584:		this.chatContainer.addChild(new Text(theme.fg("error", `Error: ${errorMessage}`), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3585:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3590:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3591:		this.chatContainer.addChild(new Text(theme.fg("warning", `Warning: ${warningMessage}`), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3605:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3606:		this.chatContainer.addChild(new DynamicBorder((text) => theme.fg("warning", text)));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3607:		this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3611:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3612:			this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3617:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3619:		this.chatContainer.addChild(new Text(changelogLine, 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3620:		this.chatContainer.addChild(new DynamicBorder((text) => theme.fg("warning", text)));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3629:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3630:		this.chatContainer.addChild(new DynamicBorder((text) => theme.fg("warning", text)));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3631:		this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3638:		this.chatContainer.addChild(new DynamicBorder((text) => theme.fg("warning", text)));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3679:		this.pendingMessagesContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3816:			this.pendingMessagesContainer.removeChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3817:			this.chatContainer.addChild(component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3832:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3837:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3861:					hideThinkingBlock: this.hideThinkingBlock,
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3862:					collapseChangelog: this.settingsManager.getCollapseChangelog(),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3881:						for (const child of this.chatContainer.children) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3889:						for (const child of this.chatContainer.children) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3941:						this.hideThinkingBlock = hidden;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3943:						for (const child of this.chatContainer.children) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3948:						this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3951:					onCollapseChangelogChange: (collapsed) => {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3952:						this.settingsManager.setCollapseChangelog(collapsed);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4325:						this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4354:						this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4366:							this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4429:		this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4672:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4692:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4710:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4716:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4744:				this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4762:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4789:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4804:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4894:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4901:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4916:			this.hideThinkingBlock = this.settingsManager.getHideThinkingBlock();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5015:			this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5071:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5078:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5161:				this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5162:				this.chatContainer.addChild(new Text(theme.fg("dim", `Session name: ${currentName}`), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5171:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5172:		this.chatContainer.addChild(new Text(theme.fg("dim", `Session name set: ${name}`), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5208:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5209:		this.chatContainer.addChild(new Text(info, 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5225:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5226:		this.chatContainer.addChild(new DynamicBorder());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5227:		this.chatContainer.addChild(new Text(theme.bold(theme.fg("accent", "What's New")), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5228:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5229:		this.chatContainer.addChild(new Markdown(changelogMarkdown, 1, 1, this.getMarkdownThemeWithSettings()));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5230:		this.chatContainer.addChild(new DynamicBorder());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5354:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5355:		this.chatContainer.addChild(new DynamicBorder());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5356:		this.chatContainer.addChild(new Text(theme.bold(theme.fg("accent", "Keyboard Shortcuts")), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5357:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5358:		this.chatContainer.addChild(new Markdown(hotkeys.trim(), 1, 1, this.getMarkdownThemeWithSettings()));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5359:		this.chatContainer.addChild(new DynamicBorder());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5368:		this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5375:			this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5376:			this.chatContainer.addChild(new Text(`${theme.fg("accent", "✓ New session started")}`, 1, 1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5409:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5410:		this.chatContainer.addChild(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5417:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5418:		this.chatContainer.addChild(new ArminComponent(this.ui));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5423:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5424:		this.chatContainer.addChild(new EarendilAnnouncementComponent());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5429:		this.chatContainer.addChild(new Spacer(1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5430:		this.chatContainer.addChild(new DaxnutsComponent(this.ui));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5461:				this.chatContainer.addChild(this.bashComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5492:			this.chatContainer.addChild(this.bashComponent);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5540:		this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:124:		this.activePathIds.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:145:		this.toolCallMap.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:292:				// Only hide if no text AND not an error/aborted message
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:326:					// Default mode: hide settings/bookkeeping entries
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:374:	 * Filtering can hide intermediate entries; descendants attach to the nearest visible ancestor.
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:935:				this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:943:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:948:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:953:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:958:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:963:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:970:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:977:			this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:982:				this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:999:				this.foldedNodes.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1221:			this.hideLabelInput();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1223:		this.labelInput.onCancel = () => this.hideLabelInput();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1228:		this.treeContainer.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1229:		this.labelInputContainer.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1233:	private hideLabelInput(): void {
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1235:		this.labelInputContainer.clear();
+packages/coding-agent/src/modes/interactive/components/tree-selector.ts:1236:		this.treeContainer.clear();

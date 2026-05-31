@@ -1,0 +1,214 @@
+packages/coding-agent/src/core/extensions/types.ts:89:export interface ExtensionUIDialogOptions {
+packages/coding-agent/src/core/extensions/types.ts:101:	/** Where the widget is rendered. Defaults to "aboveEditor". */
+packages/coding-agent/src/core/extensions/types.ts:110:	/** Animation frames. Use an empty array to hide the indicator entirely. Custom frames are rendered verbatim. */
+packages/coding-agent/src/core/extensions/types.ts:124:export interface ExtensionUIContext {
+packages/coding-agent/src/core/extensions/types.ts:140:	/** Set status text in the footer/status bar. Pass undefined to clear. */
+packages/coding-agent/src/core/extensions/types.ts:155:	 * - Custom frames are rendered as provided, so extensions must add their own colors.
+packages/coding-agent/src/core/extensions/types.ts:163:	setWidget(key: string, content: string[] | undefined, options?: ExtensionWidgetOptions): void;
+packages/coding-agent/src/core/extensions/types.ts:164:	setWidget(
+packages/coding-agent/src/core/extensions/types.ts:338:	newSession(options?: {
+packages/coding-agent/src/core/extensions/types.ts:357:	switchSession(
+packages/coding-agent/src/core/extensions/types.ts:369: * This is passed to `withSession()` callbacks on `newSession()`, `fork()`, and `switchSession()`.
+packages/coding-agent/src/core/extensions/types.ts:395:/** Context passed to tool renderers. */
+packages/coding-agent/src/core/extensions/types.ts:397:	/** Current tool call arguments. Shared across call/result renders for the same tool call. */
+packages/coding-agent/src/core/extensions/types.ts:399:	/** Unique id for this tool execution. Stable across call/result renders for the same tool call. */
+packages/coding-agent/src/core/extensions/types.ts:403:	/** Previously returned component for this render slot, if any. */
+packages/coding-agent/src/core/extensions/types.ts:405:	/** Shared renderer state for this tool row. Initialized by tool-execution.ts. */
+packages/coding-agent/src/core/extensions/types.ts:439:	/** Controls whether ToolExecutionComponent renders the standard colored shell or the tool renders its own framing. */
+packages/coding-agent/src/core/extensions/types.ts:440:	renderShell?: "default" | "self";
+packages/coding-agent/src/core/extensions/types.ts:463:	/** Custom rendering for tool call display */
+packages/coding-agent/src/core/extensions/types.ts:464:	renderCall?: (args: Static<TParams>, theme: Theme, context: ToolRenderContext<TState, Static<TParams>>) => Component;
+packages/coding-agent/src/core/extensions/types.ts:466:	/** Custom rendering for tool result display */
+packages/coding-agent/src/core/extensions/types.ts:467:	renderResult?: (
+packages/coding-agent/src/core/extensions/types.ts:1170:	/** Register a custom renderer for CustomMessageEntry. */
+packages/coding-agent/src/core/extensions/types.ts:1171:	registerMessageRenderer<T = unknown>(customType: string, renderer: MessageRenderer<T>): void;
+packages/coding-agent/src/core/extensions/types.ts:1193:	appendEntry<T = unknown>(customType: string, data?: T): void;
+packages/coding-agent/src/core/extensions/types.ts:1205:	/** Set or clear a label on an entry. Labels are user-defined markers for bookmarking/navigation. */
+packages/coding-agent/src/core/extensions/types.ts:1475:	appendEntry: AppendEntryHandler;
+packages/coding-agent/src/core/extensions/types.ts:1511:	newSession: (options?: {
+packages/coding-agent/src/core/extensions/types.ts:1524:	switchSession: (
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3: * Handles TUI rendering and user interaction, delegating business logic to AgentSession.
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:325:	// Extension widgets (components rendered above/below the editor)
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:505:		this.skillCommands.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:608:				hint("app.clear", "to clear"),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:609:				rawKeyHint(`${keyText("app.clear")} twice`, "to exit"),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:629:				rawKeyHint(`${keyText("app.clear")}/${keyText("app.exit")}`, "clear/exit"),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:663:		this.renderWidgets(); // Initialize with default spacer
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:681:		this.renderInitialMessages();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:827:					clearTimeout(timer);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:831:					clearTimeout(timer);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1492:				newSession: async (options) => {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1497:					this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1499:						const result = await this.runtimeHost.newSession(options);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1501:							this.renderCurrentSessionState();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1513:							this.renderCurrentSessionState();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1533:					this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1534:					this.renderInitialMessages();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1542:				switchSession: async (sessionPath, options) => {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1606:	private renderCurrentSessionState(): void {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1607:		this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1608:		this.pendingMessagesContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1612:		this.pendingTools.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1613:		this.renderInitialMessages();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1617:	 * Get a registered tool definition by name (for custom rendering).
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1705:		this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1716:			this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1761:			this.renderWidgets();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1784:		this.renderWidgets();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1787:	private clearExtensionWidgets(): void {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1794:		this.extensionWidgetsAbove.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1795:		this.extensionWidgetsBelow.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1796:		this.renderWidgets();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1810:		this.clearExtensionTerminalInputListeners();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1813:		this.clearExtensionWidgets();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1814:		this.footerDataProvider.clearExtensionStatuses();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1836:	private renderWidgets(): void {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1838:		this.renderWidgetContainer(this.widgetContainerAbove, this.extensionWidgetsAbove, true, true);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1839:		this.renderWidgetContainer(this.widgetContainerBelow, this.extensionWidgetsBelow, false, false);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1843:	private renderWidgetContainer(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1849:		container.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1954:	private clearExtensionTerminalInputListeners(): void {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1958:		this.extensionTerminalInputUnsubscribers.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:1981:			setWidget: (key, content, options) => this.setExtensionWidget(key, content, options),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2057:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2069:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2132:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2144:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2171:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2182:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2199:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2241:				// Copy action handlers (clear, suspend, model switching, etc.)
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2272:	/** Show a custom component with keyboard focus. Overlay mode renders on top of existing content. */
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2290:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2337:						this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2408:		this.defaultEditor.onAction("app.clear", () => this.handleCtrlC());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2660:				this.pendingTools.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2784:						this.pendingTools.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2848:					this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2855:				this.pendingTools.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2871:				this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2899:					this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2908:					this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2938:				this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:2977:					this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3043:					const renderer = this.session.extensionRunner.getMessageRenderer(message.customType);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3044:					const component = new CustomMessageComponent(message, renderer, this.getMarkdownThemeWithSettings());
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3108:				// Tool results are rendered inline with tool calls, handled separately
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3119:	 * @param sessionContext Session context to render
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3123:	private renderSessionContext(
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3127:		this.pendingTools.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3128:		const renderedPendingTools = new Map<string, ToolExecutionComponent>();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3170:							renderedPendingTools.set(content.id, component);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3176:				const component = renderedPendingTools.get(message.toolCallId);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3179:					renderedPendingTools.delete(message.toolCallId);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3182:				// All other messages use standard rendering
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3187:		for (const [toolCallId, component] of renderedPendingTools) {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3193:	renderInitialMessages(): void {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3196:		this.renderSessionContext(context, {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3220:		this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3222:		this.renderSessionContext(context);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3234:			this.clearEditor();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3376:			clearInterval(suspendKeepAlive);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3389:			clearInterval(suspendKeepAlive);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3499:		this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3502:		// If streaming, re-add the streaming component with updated visibility and re-render
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3563:			// Force full re-render since external editor uses alternate screen
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3572:	clearEditor(): void {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3658:	private clearAllQueues(): { steering: string[]; followUp: string[] } {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3659:		const { steering, followUp } = this.session.clearQueue();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3674:		this.pendingMessagesContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3693:		const { steering, followUp } = this.clearAllQueues();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3741:			this.session.clearQueue();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3827:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3832:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3865:					clearOnShrink: this.settingsManager.getClearOnShrink(),
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:3943:						this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4174:								? undefined // All enabled = clear filter
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4211:						this.renderCurrentSessionState();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4244:			this.renderCurrentSessionState();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4349:						this.chatContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4350:						this.renderInitialMessages();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4361:							this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4418:		options?: Parameters<ExtensionCommandContext["switchSession"]>[1],
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4424:		this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4426:			const result = await this.runtimeHost.switchSession(sessionPath, {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4432:			this.renderCurrentSessionState();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4442:				const result = await this.runtimeHost.switchSession(sessionPath, {
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4449:				this.renderCurrentSessionState();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4667:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4687:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4705:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4711:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4739:				this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4757:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4784:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4799:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4889:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:4896:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5010:			this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5016:			this.renderCurrentSessionState();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5030:				this.renderCurrentSessionState();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5066:		this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5073:			this.editorContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5272:		const clear = this.getAppKeyDisplay("app.clear");
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5316:| \`${clear}\` | Clear editor (first) / exit (second) |
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5363:		this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5365:			const result = await this.runtimeHost.newSession();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5369:			this.renderCurrentSessionState();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5381:		const allLines = this.ui.render(width);
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5389:			"=== All rendered lines with visible widths ===",
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5535:		this.statusContainer.clear();
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5553:		this.clearExtensionTerminalInputListeners();
+packages/coding-agent/src/core/extensions/runner.ts:64:	"app.clear",
+packages/coding-agent/src/core/extensions/runner.ts:202:	setWidget: () => {},
+packages/coding-agent/src/core/extensions/runner.ts:224:export class ExtensionRunner {
+packages/coding-agent/src/core/extensions/runner.ts:241:	private newSessionHandler: NewSessionHandler = async () => ({ cancelled: false });
+packages/coding-agent/src/core/extensions/runner.ts:244:	private switchSessionHandler: SwitchSessionHandler = async () => ({ cancelled: false });
+packages/coding-agent/src/core/extensions/runner.ts:277:		this.runtime.appendEntry = actions.appendEntry;
+packages/coding-agent/src/core/extensions/runner.ts:341:			this.newSessionHandler = actions.newSession;
+packages/coding-agent/src/core/extensions/runner.ts:344:			this.switchSessionHandler = actions.switchSession;
+packages/coding-agent/src/core/extensions/runner.ts:350:		this.newSessionHandler = async () => ({ cancelled: false });
+packages/coding-agent/src/core/extensions/runner.ts:353:		this.switchSessionHandler = async () => ({ cancelled: false });
+packages/coding-agent/src/core/extensions/runner.ts:467:		message = "This extension ctx is stale after session replacement or reload. Do not use a captured pi or command ctx after ctx.newSession(), ctx.fork(), ctx.switchSession(), or ctx.reload(). For newSession, fork, and switchSession, move post-replacement work into withSession and use the ctx passed to withSession. For reload, do not use the old ctx after await ctx.reload().",
+packages/coding-agent/src/core/extensions/runner.ts:504:			const renderer = ext.messageRenderers.get(customType);
+packages/coding-agent/src/core/extensions/runner.ts:505:			if (renderer) {
+packages/coding-agent/src/core/extensions/runner.ts:506:				return renderer;
+packages/coding-agent/src/core/extensions/runner.ts:648:		context.newSession = (options) => {
+packages/coding-agent/src/core/extensions/runner.ts:650:			return this.newSessionHandler(options);
+packages/coding-agent/src/core/extensions/runner.ts:660:		context.switchSession = (sessionPath, options) => {
+packages/coding-agent/src/core/extensions/runner.ts:662:			return this.switchSessionHandler(sessionPath, options);
+packages/coding-agent/src/core/extensions/types.ts:89:export interface ExtensionUIDialogOptions {
+packages/coding-agent/src/core/extensions/types.ts:101:	/** Where the widget is rendered. Defaults to "aboveEditor". */
+packages/coding-agent/src/core/extensions/types.ts:110:	/** Animation frames. Use an empty array to hide the indicator entirely. Custom frames are rendered verbatim. */
+packages/coding-agent/src/core/extensions/types.ts:124:export interface ExtensionUIContext {
+packages/coding-agent/src/core/extensions/types.ts:140:	/** Set status text in the footer/status bar. Pass undefined to clear. */
+packages/coding-agent/src/core/extensions/types.ts:155:	 * - Custom frames are rendered as provided, so extensions must add their own colors.
+packages/coding-agent/src/core/extensions/types.ts:163:	setWidget(key: string, content: string[] | undefined, options?: ExtensionWidgetOptions): void;
+packages/coding-agent/src/core/extensions/types.ts:164:	setWidget(
+packages/coding-agent/src/core/extensions/types.ts:338:	newSession(options?: {
+packages/coding-agent/src/core/extensions/types.ts:357:	switchSession(
+packages/coding-agent/src/core/extensions/types.ts:369: * This is passed to `withSession()` callbacks on `newSession()`, `fork()`, and `switchSession()`.
+packages/coding-agent/src/core/extensions/types.ts:395:/** Context passed to tool renderers. */
+packages/coding-agent/src/core/extensions/types.ts:397:	/** Current tool call arguments. Shared across call/result renders for the same tool call. */
+packages/coding-agent/src/core/extensions/types.ts:399:	/** Unique id for this tool execution. Stable across call/result renders for the same tool call. */
+packages/coding-agent/src/core/extensions/types.ts:403:	/** Previously returned component for this render slot, if any. */
+packages/coding-agent/src/core/extensions/types.ts:405:	/** Shared renderer state for this tool row. Initialized by tool-execution.ts. */
+packages/coding-agent/src/core/extensions/types.ts:439:	/** Controls whether ToolExecutionComponent renders the standard colored shell or the tool renders its own framing. */
+packages/coding-agent/src/core/extensions/types.ts:440:	renderShell?: "default" | "self";
+packages/coding-agent/src/core/extensions/types.ts:463:	/** Custom rendering for tool call display */
+packages/coding-agent/src/core/extensions/types.ts:464:	renderCall?: (args: Static<TParams>, theme: Theme, context: ToolRenderContext<TState, Static<TParams>>) => Component;
+packages/coding-agent/src/core/extensions/types.ts:466:	/** Custom rendering for tool result display */
+packages/coding-agent/src/core/extensions/types.ts:467:	renderResult?: (
+packages/coding-agent/src/core/extensions/types.ts:1170:	/** Register a custom renderer for CustomMessageEntry. */
+packages/coding-agent/src/core/extensions/types.ts:1171:	registerMessageRenderer<T = unknown>(customType: string, renderer: MessageRenderer<T>): void;
+packages/coding-agent/src/core/extensions/types.ts:1193:	appendEntry<T = unknown>(customType: string, data?: T): void;
+packages/coding-agent/src/core/extensions/types.ts:1205:	/** Set or clear a label on an entry. Labels are user-defined markers for bookmarking/navigation. */
+packages/coding-agent/src/core/extensions/types.ts:1475:	appendEntry: AppendEntryHandler;
+packages/coding-agent/src/core/extensions/types.ts:1511:	newSession: (options?: {
+packages/coding-agent/src/core/extensions/types.ts:1524:	switchSession: (
+packages/coding-agent/src/core/extensions/loader.ts:138:		appendEntry: notInitialized,
+packages/coding-agent/src/core/extensions/loader.ts:157:				"This extension ctx is stale after session replacement or reload. Do not use a captured pi or command ctx after ctx.newSession(), ctx.fork(), ctx.switchSession(), or ctx.reload(). For newSession, fork, and switchSession, move post-replacement work into withSession and use the ctx passed to withSession. For reload, do not use the old ctx after await ctx.reload().";
+packages/coding-agent/src/core/extensions/loader.ts:232:		registerMessageRenderer<T>(customType: string, renderer: MessageRenderer<T>): void {
+packages/coding-agent/src/core/extensions/loader.ts:234:			extension.messageRenderers.set(customType, renderer as MessageRenderer);
+packages/coding-agent/src/core/extensions/loader.ts:255:		appendEntry(customType: string, data?: unknown): void {
+packages/coding-agent/src/core/extensions/loader.ts:257:			runtime.appendEntry(customType, data);

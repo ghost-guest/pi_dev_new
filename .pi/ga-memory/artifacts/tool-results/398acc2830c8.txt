@@ -1,0 +1,453 @@
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12151:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12166:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12168:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12183:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12185:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12200:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12202:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12217:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12219:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12234:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12236:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12251:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12253:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12268:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12270:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12285:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12287:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12302:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12304:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12319:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12321:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12336:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12338:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12353:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12355:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12370:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12372:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12387:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12389:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12404:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12406:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12421:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12423:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12438:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12440:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12455:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12457:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12472:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12474:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12489:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12491:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12506:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12508:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12523:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12525:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12540:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12542:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12557:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12559:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12574:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12576:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12591:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12593:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12608:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12610:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12625:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12627:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12642:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12644:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12659:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12661:			baseUrl: "https://openrouter.ai/api/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12678:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12680:			baseUrl: "https://api.together.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12697:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12699:			baseUrl: "https://api.together.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12716:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12718:			baseUrl: "https://api.together.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12735:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12737:			baseUrl: "https://api.together.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12753:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12755:			baseUrl: "https://api.together.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12772:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12774:			baseUrl: "https://api.together.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12791:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12793:			baseUrl: "https://api.together.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12810:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12812:			baseUrl: "https://api.together.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12829:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12831:			baseUrl: "https://api.together.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12848:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12850:			baseUrl: "https://api.together.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12867:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12869:			baseUrl: "https://api.together.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12886:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12888:			baseUrl: "https://api.together.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12904:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12906:			baseUrl: "https://api.together.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12923:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12925:			baseUrl: "https://api.together.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12941:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12943:			baseUrl: "https://api.together.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12960:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12962:			baseUrl: "https://api.together.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12979:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12981:			baseUrl: "https://api.together.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:12998:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13000:			baseUrl: "https://api.together.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13019:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13036:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13053:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13070:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13087:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13104:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13121:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13138:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13155:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13172:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13189:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13206:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13223:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13240:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13257:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13274:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13291:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13308:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13325:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13342:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13359:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13376:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13393:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13410:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13427:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13444:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13463:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13482:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13501:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13518:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13535:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13553:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13570:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13587:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13604:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13621:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13638:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13655:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13672:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13689:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13706:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13723:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13740:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13757:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13774:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13791:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13808:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13825:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13842:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13859:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13876:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13893:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13910:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13927:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13944:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13961:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13978:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:13995:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14012:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14029:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14046:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14063:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14080:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14097:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14114:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14131:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14148:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14165:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14182:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14199:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14216:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14233:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14250:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14267:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14284:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14301:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14318:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14335:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14352:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14369:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14386:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14403:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14420:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14437:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14454:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14471:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14488:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14505:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14522:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14539:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14556:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14573:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14590:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14607:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14624:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14641:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14658:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14675:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14692:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14709:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14726:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14743:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14760:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14777:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14794:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14811:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14828:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14845:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14862:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14879:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14896:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14914:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14932:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14950:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14968:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:14986:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15004:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15022:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15040:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15058:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15076:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15094:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15112:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15129:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15146:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15163:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15180:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15197:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15214:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15231:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15248:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15265:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15282:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15299:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15316:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15333:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15350:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15367:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15384:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15401:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15418:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15435:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15452:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15469:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15486:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15503:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15520:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15537:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15554:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15571:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15588:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15605:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15622:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15639:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15656:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15673:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15690:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15707:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15724:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15741:			api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15760:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15762:			baseUrl: "https://api.x.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15777:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15779:			baseUrl: "https://api.x.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15794:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15796:			baseUrl: "https://api.x.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15811:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15813:			baseUrl: "https://api.x.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15828:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15830:			baseUrl: "https://api.x.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15845:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15847:			baseUrl: "https://api.x.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15862:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15864:			baseUrl: "https://api.x.ai/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15881:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15883:			baseUrl: "https://api.xiaomimimo.com/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15899:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15901:			baseUrl: "https://api.xiaomimimo.com/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15917:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15919:			baseUrl: "https://api.xiaomimimo.com/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15935:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15937:			baseUrl: "https://api.xiaomimimo.com/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15953:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15955:			baseUrl: "https://api.xiaomimimo.com/v1",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15973:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:15991:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16009:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16027:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16045:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16065:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16083:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16101:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16119:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16137:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16157:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16175:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16193:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16211:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16229:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16249:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16251:			baseUrl: "https://api.z.ai/api/coding/paas/v4",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16267:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16269:			baseUrl: "https://api.z.ai/api/coding/paas/v4",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16285:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16287:			baseUrl: "https://api.z.ai/api/coding/paas/v4",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16303:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16305:			baseUrl: "https://api.z.ai/api/coding/paas/v4",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16321:			api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/models.generated.ts:16323:			baseUrl: "https://api.z.ai/api/coding/paas/v4",
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/src/core/sdk.ts:156:		model.baseUrl.includes("api.cloudflare.com") ||
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/src/core/sdk.ts:346:				apiKey: auth.apiKey,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/images/openrouter.ts:9:import { getEnvApiKey } from "../../env-api-keys.ts";
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/images/openrouter.ts:44:		api: model.api,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/images/openrouter.ts:53:		const apiKey = options?.apiKey || getEnvApiKey(model.provider);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/images/openrouter.ts:54:		if (!apiKey) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/images/openrouter.ts:57:		const client = createClient(model, apiKey, options?.headers);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/images/openrouter.ts:109:	apiKey: string,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/images/openrouter.ts:113:		apiKey,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google.ts:7:import { getEnvApiKey } from "../env-api-keys.ts";
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google.ts:59:			api: "google-generative-ai" as Api,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google.ts:75:			const apiKey = options?.apiKey || getEnvApiKey(model.provider) || "";
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google.ts:76:			const client = createClient(model, apiKey, options?.headers);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google.ts:283:	const apiKey = options?.apiKey || getEnvApiKey(model.provider);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google.ts:284:	if (!apiKey) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google.ts:288:	const base = buildBaseOptions(model, options, apiKey);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google.ts:318:	apiKey?: string,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google.ts:321:	const httpOptions: { baseUrl?: string; apiVersion?: string; headers?: Record<string, string> } = {};
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google.ts:324:		httpOptions.apiVersion = ""; // baseUrl already includes version path, don't append
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google.ts:331:		apiKey,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/mistral.ts:9:import { getEnvApiKey } from "../env-api-keys.ts";
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/mistral.ts:60:			const apiKey = options?.apiKey || getEnvApiKey(model.provider);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/mistral.ts:61:			if (!apiKey) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/mistral.ts:67:				apiKey,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/mistral.ts:116:	const apiKey = options?.apiKey || getEnvApiKey(model.provider);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/mistral.ts:117:	if (!apiKey) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/mistral.ts:121:	const base = buildBaseOptions(model, options, apiKey);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/mistral.ts:138:		api: model.api,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google-shared.ts:31: * See: https://ai.google.dev/gemini-api/docs/thought-signatures
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:13:import { getEnvApiKey } from "../env-api-keys.ts";
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:123:			api: model.api,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:139:			const apiKey = options?.apiKey || getEnvApiKey(model.provider) || "";
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:143:			const client = createClient(model, context, apiKey, options?.headers, cacheSessionId, compat);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:431:	const apiKey = options?.apiKey || getEnvApiKey(model.provider);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:432:	if (!apiKey) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:436:	const base = buildBaseOptions(model, options, apiKey);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:451:	apiKey?: string,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:456:	if (!apiKey) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:462:		apiKey = process.env.OPENAI_API_KEY;
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:481:	// Merge options headers last so they can override defaults
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:491:					"cf-aig-authorization": `Bearer ${apiKey}`,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:496:		apiKey,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:518:			(model.baseUrl.includes("api.openai.com") && cacheRetention !== "none") ||
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:1074:	const isZai = provider === "zai" || baseUrl.includes("api.z.ai");
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:1076:		provider === "together" || baseUrl.includes("api.together.ai") || baseUrl.includes("api.together.xyz");
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:1077:	const isMoonshot = provider === "moonshotai" || provider === "moonshotai-cn" || baseUrl.includes("api.moonshot.");
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:1078:	const isCloudflareWorkersAI = provider === "cloudflare-workers-ai" || baseUrl.includes("api.cloudflare.com");
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:1085:		baseUrl.includes("api.x.ai") ||
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/openai-completions.ts:1098:	const isGrok = provider === "xai" || baseUrl.includes("api.x.ai");
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:24:	api: TApi;
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:30:	api: Api;
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:40:const apiProviderRegistry = new Map<string, RegisteredApiProvider>();
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:43:	api: TApi,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:47:		if (model.api !== api) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:48:			throw new Error(`Mismatched api: ${model.api} expected ${api}`);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:55:	api: TApi,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:59:		if (model.api !== api) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:60:			throw new Error(`Mismatched api: ${model.api} expected ${api}`);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:70:	apiProviderRegistry.set(provider.api, {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:72:			api: provider.api,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:73:			stream: wrapStream(provider.api, provider.stream),
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:74:			streamSimple: wrapStreamSimple(provider.api, provider.streamSimple),
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:80:export function getApiProvider(api: Api): ApiProviderInternal | undefined {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:81:	return apiProviderRegistry.get(api)?.provider;
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:85:	return Array.from(apiProviderRegistry.values(), (entry) => entry.provider);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:89:	for (const [api, entry] of apiProviderRegistry.entries()) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:91:			apiProviderRegistry.delete(api);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/api-registry.ts:97:	apiProviderRegistry.clear();
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/cloudflare.ts:5:	"https://api.cloudflare.com/client/v4/accounts/{CLOUDFLARE_ACCOUNT_ID}/ai/v1";
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/cloudflare.ts:7:/** AI Gateway Unified API. https://developers.cloudflare.com/ai-gateway/usage/unified-api/ */
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/register-builtins.ts:1:import { clearApiProviders, registerApiProvider } from "../api-registry.ts";
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/register-builtins.ts:145:		api: model.api,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/register-builtins.ts:347:		api: "anthropic-messages",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/register-builtins.ts:353:		api: "openai-completions",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/register-builtins.ts:359:		api: "mistral-conversations",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/register-builtins.ts:365:		api: "openai-responses",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/register-builtins.ts:371:		api: "azure-openai-responses",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/register-builtins.ts:377:		api: "openai-codex-responses",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/register-builtins.ts:383:		api: "google-generative-ai",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/register-builtins.ts:389:		api: "google-vertex",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/register-builtins.ts:395:		api: "bedrock-converse-stream",
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/stream.ts:3:import { getApiProvider } from "./api-registry.ts";
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/stream.ts:15:export { getEnvApiKey } from "./env-api-keys.ts";
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/stream.ts:17:function resolveApiProvider(api: Api) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/stream.ts:18:	const provider = getApiProvider(api);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/stream.ts:20:		throw new Error(`No API provider registered for api: ${api}`);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/stream.ts:30:	const provider = resolveApiProvider(model.api);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/stream.ts:48:	const provider = resolveApiProvider(model.api);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/azure-openai-responses.ts:3:import { getEnvApiKey } from "../env-api-keys.ts";
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/azure-openai-responses.ts:87:			api: "azure-openai-responses" as Api,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/azure-openai-responses.ts:104:			const apiKey = options?.apiKey || getEnvApiKey(model.provider) || "";
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/azure-openai-responses.ts:105:			const client = createClient(model, apiKey, options);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/azure-openai-responses.ts:153:	const apiKey = options?.apiKey || getEnvApiKey(model.provider);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/azure-openai-responses.ts:154:	if (!apiKey) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/azure-openai-responses.ts:158:	const base = buildBaseOptions(model, options, apiKey);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/azure-openai-responses.ts:182:	// can append /deployments/<model>/... and ?api-version=v1 correctly.
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/azure-openai-responses.ts:198:): { baseUrl: string; apiVersion: string } {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/azure-openai-responses.ts:199:	const apiVersion = options?.azureApiVersion || process.env.AZURE_OPENAI_API_VERSION || DEFAULT_AZURE_API_VERSION;
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/azure-openai-responses.ts:222:		apiVersion,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/azure-openai-responses.ts:226:function createClient(model: Model<"azure-openai-responses">, apiKey: string, options?: AzureOpenAIResponsesOptions) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/azure-openai-responses.ts:227:	if (!apiKey) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/azure-openai-responses.ts:233:		apiKey = process.env.AZURE_OPENAI_API_KEY;
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/azure-openai-responses.ts:242:	const { baseUrl, apiVersion } = resolveAzureConfig(model, options);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/azure-openai-responses.ts:245:		apiKey,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/azure-openai-responses.ts:246:		apiVersion,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/types.ts:88:	apiKey?: string;
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/types.ts:117:	 * Merged with provider defaults; can override default headers.
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/types.ts:151:	apiKey?: string;
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/types.ts:163:	 * Merged with provider defaults; can override default headers.
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/types.ts:280:	api: Api;
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/types.ts:314:	api: ImagesApi;
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/types.ts:363: * Use this to override URL-based auto-detection for custom providers.
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/types.ts:541:	api: TApi;
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/types.ts:560:	/** Compatibility overrides for OpenAI-compatible APIs. If not set, auto-detected from baseUrl. */
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/types.ts:571:	extends Omit<Model<Api>, "api" | "provider" | "reasoning" | "contextWindow" | "maxTokens" | "compat"> {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/types.ts:572:	api: TApi;
+/Users/mac_522/Desktop/pi_dev/pi/packages/coding-agent/src/core/export-html/index.ts:159:	// Base64 encode session data to avoid escaping issues
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/transform-messages.ts:94:				assistantMsg.api === model.api &&
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google-vertex.ts:74:			api: "google-vertex" as Api,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google-vertex.ts:90:			const apiKey = resolveApiKey(options);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google-vertex.ts:92:			const client = apiKey
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google-vertex.ts:93:				? createClientWithApiKey(model, apiKey, options?.headers)
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google-vertex.ts:341:		apiVersion: API_VERSION,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google-vertex.ts:348:	apiKey: string,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google-vertex.ts:353:		apiKey,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google-vertex.ts:354:		apiVersion: API_VERSION,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google-vertex.ts:369:			httpOptions.apiVersion = "";
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google-vertex.ts:398:	const apiKey = options?.apiKey?.trim() || process.env.GOOGLE_CLOUD_API_KEY?.trim();
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google-vertex.ts:399:	if (!apiKey || apiKey === GCP_VERTEX_CREDENTIALS_MARKER || isPlaceholderApiKey(apiKey)) {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google-vertex.ts:402:	return apiKey;
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google-vertex.ts:405:function isPlaceholderApiKey(apiKey: string): boolean {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/providers/google-vertex.ts:406:	return /^<[^>]+>$/.test(apiKey);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/utils/json-parse.ts:29: * - escaping raw control characters inside strings
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/utils/oauth/openai-codex.ts:30:const JWT_CLAIM_PATH = "https://api.openai.com/auth";
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/utils/oauth/anthropic.ts:36:	"org:create_api_key user:profile user:inference user:sessions:claude_code user:mcp_servers user:file_upload";
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/utils/oauth/github-copilot.ts:62:		copilotTokenUrl: `https://api.${domain}/copilot_internal/v2/token`,
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/utils/oauth/github-copilot.ts:69: * Returns API URL like https://api.individual.githubcopilot.com
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/utils/oauth/github-copilot.ts:75:	// Convert proxy.xxx to api.xxx
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/utils/oauth/github-copilot.ts:76:	const apiHost = proxyHost.replace(/^proxy\./, "api.");
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/utils/oauth/github-copilot.ts:77:	return `https://${apiHost}`;
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/utils/oauth/github-copilot.ts:87:	if (enterpriseDomain) return `https://copilot-api.${enterpriseDomain}`;
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/utils/oauth/github-copilot.ts:88:	return "https://api.individual.githubcopilot.com";
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/utils/oauth/index.ts:131:): Promise<{ newCredentials: OAuthCredentials; apiKey: string } | null> {
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/utils/oauth/index.ts:151:	const apiKey = provider.getApiKey(creds);
+/Users/mac_522/Desktop/pi_dev/pi/packages/ai/src/utils/oauth/index.ts:152:	return { newCredentials: creds, apiKey };
+
+[Showing lines 1520-1970 of 1970 (50.0KB limit). Full output: /var/folders/7m/csfvhz791k527kby7nxl7cbc0000h_/T/pi-bash-9701f4da58a72830.log]

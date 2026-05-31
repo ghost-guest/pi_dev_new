@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed Claude Opus 4.8 model metadata and adaptive-thinking/xhigh support.
+
 ## [0.75.5] - 2026-05-23
 
 ### Breaking Changes

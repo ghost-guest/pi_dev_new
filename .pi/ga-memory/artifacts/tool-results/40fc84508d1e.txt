@@ -1,0 +1,110 @@
+rg: /Users/mac_522/.pi/extensions: No such file or directory (os error 2)
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/types.ts:74:Why use context_prune:
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/types.ts:78:How to decide when to prune:
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/types.ts:86:When NOT to use context_prune:
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/types.ts:90:What happens when you call context_prune:
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/commands.ts:51:  let text = `prune: ${config.enabled ? "ON" : "OFF"} (${mode})`;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/commands.ts:64:    ctx.ui.setStatus(STATUS_WIDGET_ID, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/commands.ts:67:  ctx.ui.setStatus(STATUS_WIDGET_ID, typeof value === "string" ? value : pruneStatusText(config, value));
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/commands.ts:155:  const base = config.remindUnprunedCount ? "ON" : "OFF";
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/commands.ts:163:  const base = config.showPruneStatusLine ? "ON" : "OFF";
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/commands.ts:296:  ctx.ui.setWidget(
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/commands.ts:338:      ctx.ui.setWidget(PROGRESS_WIDGET_ID, undefined);
+.pi/extensions/prompt-url-widget.ts:63:		ctx.ui.setWidget("prompt-url", (_tui, thm) => {
+.pi/extensions/prompt-url-widget.ts:101:		setWidget(ctx, match);
+.pi/extensions/prompt-url-widget.ts:106:			setWidget(ctx, match, title, authorText);
+.pi/extensions/prompt-url-widget.ts:141:			ctx.ui.setWidget("prompt-url", undefined);
+.pi/extensions/prompt-url-widget.ts:145:		setWidget(ctx, match);
+.pi/extensions/prompt-url-widget.ts:150:			setWidget(ctx, match, title, authorText);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/AGENTS.md:49:- **`flushPending(ctx, options?)`** — summarizes + indexes all unsummarized batches in parallel by default, or sequentially (one call per batch) when `options.onProgress` is provided. Accepts `FlushOptions`: `{ delivery?, onProgress?, onBatchTextProgress?, previewedBatches? }`. When `previewedBatches` is set the internal capture step is skipped (avoids double-capture from `/pruner now`). While summarization is running, `onBatchTextProgress` receives the streamed summary character count for the active batch so callers can surface live progress in richer UIs (the `/pruner now` overlay and `context_prune` tool updates), while the footer itself stays at the simpler `prune: summarizing…` state. Returns a typed `FlushResult`.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/AGENTS.md:175:- **`pruneStatusText(config, stats?)`** — formats the footer widget string including mode label and optional stats suffix: e.g. `prune: ON (Every turn) │ ↑1.2k ↓340 $0.003`.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/AGENTS.md:224:| Status widget includes stats suffix | Footer shows `prune: ON (Every turn) │ ↑1.2k ↓340 $0.003` after summarizer calls, giving users visibility into pruner overhead |
+/Users/mac_522/.pi/agent/extensions/token-saver.ts:419:			ctx.ui.setStatus("token-saver", undefined);
+/Users/mac_522/.pi/agent/extensions/token-saver.ts:424:			ctx.ui.setStatus("token-saver", "ts: idle");
+/Users/mac_522/.pi/agent/extensions/token-saver.ts:428:		ctx.ui.setStatus(
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/index.ts:195:      setPruneStatusWidget(ctx, currentConfig.value, "prune: summarizing…");
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/index.ts:412:      `pruner loaded — pruning ${currentConfig.value.enabled ? "ON" : "OFF"} | model: ${currentConfig.value.summarizerModel}`,
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/index.ts:477:        setPruneStatusWidget(ctx, currentConfig.value, `prune: ${n} pending`);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/index.ts:513:    setPruneStatusWidget(ctx, currentConfig.value, `prune: ${pendingBatches.length} pending`);
+/Users/mac_522/.pi/agent/extensions/fold.ts:252:  ctx.ui.setWidget("fold-status", undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/README.md:335:- `prune: OFF (On agent message)` — pruning disabled, showing what mode it would use
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/README.md:336:- `prune: ON (On agent message)` — pruning active with the current trigger mode
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/README.md:337:- `prune: ON (Every turn) │ ↑1.2k ↓340 $0.003` — pruning active with cumulative stats (input/output tokens, cost)
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/README.md:338:- `prune: 3 pending` — batches queued, waiting for the trigger
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/README.md:339:- `prune: summarizing…` — currently running the summarizer LLM call
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-caffeinate/src/caffeinate.ts:52:		ctx.ui.setStatus(STATUS_KEY, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-caffeinate/src/caffeinate.ts:318:		ctx.ui.setStatus(STATUS_KEY, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-caffeinate/src/caffeinate.ts:323:		ctx.ui.setStatus(STATUS_KEY, "💊 awake");
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-caffeinate/src/caffeinate.ts:328:		ctx.ui.setStatus(STATUS_KEY, "💊 unavailable");
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-caffeinate/src/caffeinate.ts:332:	ctx.ui.setStatus(STATUS_KEY, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-firecrawl/src/firecrawl.ts:276:		ctx.ui.setStatus(STATUS_KEY, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-firecrawl/src/firecrawl.ts:288:		ctx.ui.setStatus(STATUS_KEY, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-firecrawl/src/firecrawl.ts:800:	ctx.ui.setStatus(STATUS_KEY, status);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-firecrawl/src/firecrawl.ts:804:		ctx.ui.setStatus(STATUS_KEY, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-statusline/src/statusline.ts:80:		ctx.ui.setStatus(STATUSLINE_KEY, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-statusline/src/statusline.ts:82:		ctx.ui.setFooter((tui, theme, footerData) => {
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-statusline/src/statusline.ts:121:		ctx.ui.setFooter(undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-statusline/src/statusline.ts:122:		ctx.ui.setStatus(STATUSLINE_KEY, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-statusline/README.md:71:`pi-statusline` is extension-agnostic: it consumes Pi's generic extension status API and does not import or depend on status-producing extensions. If an extension wants a custom icon, it should include that icon at the start of its status text, for example `ctx.ui.setStatus("goal", "🎯 active")`. Statuses without a leading icon use the generic `🔌` icon.
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-goal/src/goal.ts:107:		ctx.ui.setStatus(STATUS_KEY, completedGoal ? formatStatus(activeGoal) : undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-goal/src/goal.ts:160:		else ctx.ui.setStatus(STATUS_KEY, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-goal/src/goal.ts:166:		ctx.ui.setStatus(STATUS_KEY, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-goal/src/goal.ts:296:		ctx.ui.setStatus(STATUS_KEY, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-goal/src/goal.ts:339:		ctx.ui.setStatus(STATUS_KEY, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-goal/src/goal.ts:523:	ctx.ui.setStatus(STATUS_KEY, formatStatus(goal));
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-goal/src/goal.ts:727:	ctx.ui.setStatus(STATUS_KEY, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-goal/src/goal.ts:732:	ctx.ui.setStatus(STATUS_KEY, "🎯 complete");
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-goal/src/goal.ts:733:	completionStatusTimer = setTimeout(() => ctx.ui.setStatus(STATUS_KEY, undefined), 8_000);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-retry/src/retry.ts:60:		ctx.ui.setStatus(STATUS_KEY, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-retry/src/retry.ts:65:		if (statusMode !== mode) ctx.ui.setStatus(STATUS_KEY, text);
+/Users/mac_522/.pi/agent/npm/node_modules/@narumitw/pi-retry/src/retry.ts:71:			ctx.ui.setStatus(STATUS_KEY, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/slash/slash-commands.ts:202:			if (ctx.hasUI) ctx.ui.setStatus("subagent-slash", "running...");
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/slash/slash-commands.ts:221:			ctx.ui.setStatus("subagent-slash", `${count} tools${tool} | Ctrl+O live detail`);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/slash/slash-commands.ts:338:			ctx.ui.setStatus("subagent-slash", undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/slash/slash-commands.ts:354:			ctx.ui.setStatus("subagent-slash", undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/koffi/src/koffi/src/init.js:84:        handle: util.deprecate(native.opaque, 'The koffi.handle() function was deprecated in Koffi 2.1, use koffi.opaque() instead', 'KOFFI001'),
+/Users/mac_522/.pi/agent/npm/node_modules/koffi/src/koffi/src/init.js:85:        callback: util.deprecate(native.proto, 'The koffi.callback() function was deprecated in Koffi 2.4, use koffi.proto() instead', 'KOFFI002')
+/Users/mac_522/.pi/agent/npm/node_modules/koffi/src/koffi/src/init.js:91:        lib.cdecl = util.deprecate((...args) => lib.func('__cdecl', ...args), 'The koffi.cdecl() function was deprecated in Koffi 2.7, use koffi.func(...) instead', 'KOFFI003');
+/Users/mac_522/.pi/agent/npm/node_modules/koffi/src/koffi/src/init.js:92:        lib.stdcall = util.deprecate((...args) => lib.func('__stdcall', ...args), 'The koffi.stdcall() function was deprecated in Koffi 2.7, use koffi.func("__stdcall", ...) instead', 'KOFFI004');
+/Users/mac_522/.pi/agent/npm/node_modules/koffi/src/koffi/src/init.js:93:        lib.fastcall = util.deprecate((...args) => lib.func('__fastcall', ...args), 'The koffi.fastcall() function was deprecated in Koffi 2.7, use koffi.func("__fastcall", ...) instead', 'KOFFI005');
+/Users/mac_522/.pi/agent/npm/node_modules/koffi/src/koffi/src/init.js:94:        lib.thiscall = util.deprecate((...args) => lib.func('__thiscall', ...args), 'The koffi.thiscall() function was deprecated in Koffi 2.7, use koffi.func("__thiscall", ...) instead', 'KOFFI006');
+/Users/mac_522/.pi/agent/npm/node_modules/koffi/indirect.js:509:        handle: util.deprecate(native2.opaque, "The koffi.handle() function was deprecated in Koffi 2.1, use koffi.opaque() instead", "KOFFI001"),
+/Users/mac_522/.pi/agent/npm/node_modules/koffi/indirect.js:510:        callback: util.deprecate(native2.proto, "The koffi.callback() function was deprecated in Koffi 2.4, use koffi.proto() instead", "KOFFI002")
+/Users/mac_522/.pi/agent/npm/node_modules/koffi/indirect.js:514:        lib.cdecl = util.deprecate((...args2) => lib.func("__cdecl", ...args2), "The koffi.cdecl() function was deprecated in Koffi 2.7, use koffi.func(...) instead", "KOFFI003");
+/Users/mac_522/.pi/agent/npm/node_modules/koffi/indirect.js:515:        lib.stdcall = util.deprecate((...args2) => lib.func("__stdcall", ...args2), 'The koffi.stdcall() function was deprecated in Koffi 2.7, use koffi.func("__stdcall", ...) instead', "KOFFI004");
+/Users/mac_522/.pi/agent/npm/node_modules/koffi/indirect.js:516:        lib.fastcall = util.deprecate((...args2) => lib.func("__fastcall", ...args2), 'The koffi.fastcall() function was deprecated in Koffi 2.7, use koffi.func("__fastcall", ...) instead', "KOFFI005");
+/Users/mac_522/.pi/agent/npm/node_modules/koffi/indirect.js:517:        lib.thiscall = util.deprecate((...args2) => lib.func("__thiscall", ...args2), 'The koffi.thiscall() function was deprecated in Koffi 2.7, use koffi.func("__thiscall", ...) instead', "KOFFI006");
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:1015:		if (ctx.hasUI) ctx.ui.setWidget(WIDGET_KEY, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/tui/render.ts:1019:	ctx.ui.setWidget(WIDGET_KEY, buildWidgetComponent(jobs, ctx.ui.getToolsExpanded?.() ?? false));
+/Users/mac_522/.pi/agent/npm/node_modules/pi-subagents/src/extension/index.ts:568:				state.lastUiContext.ui.setWidget(WIDGET_KEY, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/koffi/index.js:509:        handle: util.deprecate(native3.opaque, "The koffi.handle() function was deprecated in Koffi 2.1, use koffi.opaque() instead", "KOFFI001"),
+/Users/mac_522/.pi/agent/npm/node_modules/koffi/index.js:510:        callback: util.deprecate(native3.proto, "The koffi.callback() function was deprecated in Koffi 2.4, use koffi.proto() instead", "KOFFI002")
+/Users/mac_522/.pi/agent/npm/node_modules/koffi/index.js:514:        lib.cdecl = util.deprecate((...args2) => lib.func("__cdecl", ...args2), "The koffi.cdecl() function was deprecated in Koffi 2.7, use koffi.func(...) instead", "KOFFI003");
+/Users/mac_522/.pi/agent/npm/node_modules/koffi/index.js:515:        lib.stdcall = util.deprecate((...args2) => lib.func("__stdcall", ...args2), 'The koffi.stdcall() function was deprecated in Koffi 2.7, use koffi.func("__stdcall", ...) instead', "KOFFI004");
+/Users/mac_522/.pi/agent/npm/node_modules/koffi/index.js:516:        lib.fastcall = util.deprecate((...args2) => lib.func("__fastcall", ...args2), 'The koffi.fastcall() function was deprecated in Koffi 2.7, use koffi.func("__fastcall", ...) instead', "KOFFI005");
+/Users/mac_522/.pi/agent/npm/node_modules/koffi/index.js:517:        lib.thiscall = util.deprecate((...args2) => lib.func("__thiscall", ...args2), 'The koffi.thiscall() function was deprecated in Koffi 2.7, use koffi.func("__thiscall", ...) instead', "KOFFI006");
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/index.ts:195:      setPruneStatusWidget(ctx, currentConfig.value, "prune: summarizing…");
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/index.ts:412:      `pruner loaded — pruning ${currentConfig.value.enabled ? "ON" : "OFF"} | model: ${currentConfig.value.summarizerModel}`,
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/index.ts:477:        setPruneStatusWidget(ctx, currentConfig.value, `prune: ${n} pending`);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/index.ts:513:    setPruneStatusWidget(ctx, currentConfig.value, `prune: ${pendingBatches.length} pending`);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/README.md:335:- `prune: OFF (On agent message)` — pruning disabled, showing what mode it would use
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/README.md:336:- `prune: ON (On agent message)` — pruning active with the current trigger mode
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/README.md:337:- `prune: ON (Every turn) │ ↑1.2k ↓340 $0.003` — pruning active with cumulative stats (input/output tokens, cost)
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/README.md:338:- `prune: 3 pending` — batches queued, waiting for the trigger
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/README.md:339:- `prune: summarizing…` — currently running the summarizer LLM call
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/types.ts:74:Why use context_prune:
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/types.ts:78:How to decide when to prune:
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/types.ts:86:When NOT to use context_prune:
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/types.ts:90:What happens when you call context_prune:
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/commands.ts:51:  let text = `prune: ${config.enabled ? "ON" : "OFF"} (${mode})`;
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/commands.ts:64:    ctx.ui.setStatus(STATUS_WIDGET_ID, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/commands.ts:67:  ctx.ui.setStatus(STATUS_WIDGET_ID, typeof value === "string" ? value : pruneStatusText(config, value));
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/commands.ts:155:  const base = config.remindUnprunedCount ? "ON" : "OFF";
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/commands.ts:163:  const base = config.showPruneStatusLine ? "ON" : "OFF";
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/commands.ts:296:  ctx.ui.setWidget(
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/src/commands.ts:338:      ctx.ui.setWidget(PROGRESS_WIDGET_ID, undefined);
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/AGENTS.md:49:- **`flushPending(ctx, options?)`** — summarizes + indexes all unsummarized batches in parallel by default, or sequentially (one call per batch) when `options.onProgress` is provided. Accepts `FlushOptions`: `{ delivery?, onProgress?, onBatchTextProgress?, previewedBatches? }`. When `previewedBatches` is set the internal capture step is skipped (avoids double-capture from `/pruner now`). While summarization is running, `onBatchTextProgress` receives the streamed summary character count for the active batch so callers can surface live progress in richer UIs (the `/pruner now` overlay and `context_prune` tool updates), while the footer itself stays at the simpler `prune: summarizing…` state. Returns a typed `FlushResult`.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/AGENTS.md:175:- **`pruneStatusText(config, stats?)`** — formats the footer widget string including mode label and optional stats suffix: e.g. `prune: ON (Every turn) │ ↑1.2k ↓340 $0.003`.
+/Users/mac_522/.pi/agent/npm/node_modules/pi-context-prune/AGENTS.md:224:| Status widget includes stats suffix | Footer shows `prune: ON (Every turn) │ ↑1.2k ↓340 $0.003` after summarizer calls, giving users visibility into pruner overhead |
+/Users/mac_522/.pi/agent/npm/node_modules/@earendil-works/pi-tui/dist/components/editor.d.ts:108:     * Used for programmatic insertion (e.g., clipboard image markers).
+/Users/mac_522/.pi/agent/npm/node_modules/@earendil-works/pi-tui/dist/components/editor.js:806:     * Used for programmatic insertion (e.g., clipboard image markers).

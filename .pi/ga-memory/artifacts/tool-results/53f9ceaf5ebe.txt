@@ -1,0 +1,415 @@
+ 321:     case "low":
+ 322:       return "low";
+ 323:     case "medium":
+ 324:       return "medium";
+ 325:     case "xhigh":
+ 326:       return "xhigh";
+ 327:     case "high":
+ 328:     default:
+ 329:       return "high";
+ 330:   }
+ 331: }
+ 332: 
+ 333: function buildPayload(model: Model<Api>, context: Context, options?: SimpleStreamOptions): any {
+ 334:   let messages = convertMessages(context.messages);
+ 335:   messages = injectSystemPromptIntoFirstUser(messages, context.systemPrompt);
+ 336: 
+ 337:   const thinkingEnabled = !!options?.reasoning && options.reasoning !== "off";
+ 338:   const payload: any = {
+ 339:     model: stripOneMillionAlias(model.id),
+ 340:     messages,
+ 341:     max_tokens: options?.maxTokens || model.maxTokens,
+ 342:     stream: true,
+ 343:     thinking: thinkingEnabled ? { type: "adaptive" } : { type: "disabled" },
+ 344:     metadata: {
+ 345:       user_id: JSON.stringify({
+ 346:         device_id: crypto.randomUUID().replace(/-/g, "") + crypto.randomUUID().replace(/-/g, "").slice(0, 32),
+ 347:         account_uuid: crypto.randomUUID(),
+ 348:         session_id: crypto.randomUUID(),
+ 349:       }),
+ 350:     },
+ 351:     system: [{ type: "text", text: "You are Claude Code, Anthropic's official CLI for Claude." }],
+ 352:   };
+ 353: 
+ 354:   if (thinkingEnabled) payload.output_config = { effort: mapThinkingEffort(options.reasoning) };
+ 355:   if (context.tools?.length) payload.tools = convertTools(context.tools);
+ 356:   return payload;
+ 357: }
+ 358: 
+ 359: function usageFromResponse(usage: any) {
+ 360:   const input = usage?.input_tokens ?? 0;
+ 361:   const output = usage?.output_tokens ?? 0;
+ 362:   const cacheRead = usage?.cache_read_input_tokens ?? 0;
+ 363:   const cacheWrite = usage?.cache_creation_input_tokens ?? 0;
+ 364:   return { input, output, cacheRead, cacheWrite };
+ 365: }
+ 366: 
+ 367: async function sleep(ms: number) {
+ 368:   await new Promise((resolve) => setTimeout(resolve, ms));
+ 369: }
+ 370: 
+ 371: function isTransientStatus(status: number) {
+ 372:   return [502, 503, 504, 520, 522, 524].includes(status);
+ 373: }
+ 374: 
+ 375: type AnyrouterStreamBlock = (ThinkingContent | TextContent | (ToolCall & { partialJson: string })) & { index: number };
+ 376: 
+ 377: function maybeNumber(value: unknown): number | undefined {
+ 378:   return typeof value === "number" && Number.isFinite(value) ? value : undefined;
+ 379: }
+ 380: 
+ 381: function applyUsage(model: Model<Api>, output: AssistantMessage, usage: unknown) {
+ 382:   if (!usage || typeof usage !== "object") return;
+ 383:   const source = usage as Record<string, unknown>;
+ 384:   const input = maybeNumber(source.input_tokens);
+ 385:   const outputTokens = maybeNumber(source.output_tokens);
+ 386:   const cacheRead = maybeNumber(source.cache_read_input_tokens);
+ 387:   const cacheWrite = maybeNumber(source.cache_creation_input_tokens);
+ 388: 
+ 389:   if (input !== undefined) output.usage.input = input;
+ 390:   if (outputTokens !== undefined) output.usage.output = outputTokens;
+ 391:   if (cacheRead !== undefined) output.usage.cacheRead = cacheRead;
+ 392:   if (cacheWrite !== undefined) output.usage.cacheWrite = cacheWrite;
+ 393:   output.usage.totalTokens = output.usage.input + output.usage.output + output.usage.cacheRead + output.usage.cacheWrite;
+ 394:   calculateCost(model, output.usage);
+ 395: }
+ 396: 
+ 397: function cleanupInternalBlockFields(output: AssistantMessage) {
+ 398:   for (const block of output.content as AnyrouterStreamBlock[]) {
+ 399:     delete (block as { index?: number }).index;
+ 400:     delete (block as { partialJson?: string }).partialJson;
+ 401:   }
+ 402: }
+ 403: 
+ 404: function mapContentBlockIndex(output: AssistantMessage, index: number): number {
+ 405:   return (output.content as AnyrouterStreamBlock[]).findIndex((block) => block.index === index);
+ 406: }
+ 407: 
+ 408: function createIdleWatchdog(upstreamSignal?: AbortSignal): {
+ 409:   signal: AbortSignal;
+ 410:   reset: () => void;
+ 411:   cleanup: () => void;
+ 412: } {
+ 413:   const configuredTimeoutMs = Number(process.env.ANYROUTER_IDLE_TIMEOUT_MS || 600000);
+ 414:   const timeoutMs = Number.isFinite(configuredTimeoutMs) && configuredTimeoutMs > 0 ? configuredTimeoutMs : 600000;
+ 415:   const controller = new AbortController();
+ 416:   let timer: ReturnType<typeof setTimeout> | undefined;
+ 417: 
+ 418:   const abortFromUpstream = () => controller.abort(upstreamSignal?.reason || new Error("Request was aborted"));
+ 419:   const reset = () => {
+ 420:     if (!Number.isFinite(timeoutMs) || timeoutMs <= 0) return;
+ 421:     if (timer) clearTimeout(timer);
+ 422:     timer = setTimeout(() => {
+ 423:       controller.abort(new Error(`Anyrouter stream idle timeout after ${timeoutMs}ms`));
+ 424:     }, timeoutMs);
+ 425:   };
+ 426:   const cleanup = () => {
+ 427:     if (timer) clearTimeout(timer);
+ 428:     upstreamSignal?.removeEventListener("abort", abortFromUpstream);
+ 429:   };
+ 430: 
+ 431:   if (upstreamSignal?.aborted) abortFromUpstream();
+ 432:   else upstreamSignal?.addEventListener("abort", abortFromUpstream, { once: true });
+ 433:   reset();
+ 434: 
+ 435:   return { signal: controller.signal, reset, cleanup };
+ 436: }
+ 437: 
+ 438: function emitNonStreamingResponse(
+ 439:   model: Model<Api>,
+ 440:   stream: AssistantMessageEventStream,
+ 441:   output: AssistantMessage,
+ 442:   json: any,
+ 443:   tools?: Tool[],
+ 444: ) {
+ 445:   const blocks = Array.isArray(json?.content) ? json.content : [];
+ 446: 
+ 447:   for (const block of blocks) {
+ 448:     if (block?.type === "text") {
+ 449:       output.content.push({ type: "text", text: block.text || "" });
+ 450:       const idx = output.content.length - 1;
+ 451:       stream.push({ type: "text_start", contentIndex: idx, partial: output });
+ 452:       if (block.text) stream.push({ type: "text_delta", contentIndex: idx, delta: block.text, partial: output });
+ 453:       stream.push({ type: "text_end", contentIndex: idx, content: block.text || "", partial: output });
+ 454:     } else if (block?.type === "thinking") {
+ 455:       output.content.push({
+ 456:         type: "thinking",
+ 457:         thinking: block.thinking || "",
+ 458:         thinkingSignature: block.signature,
+ 459:       } as any);
+ 460:       const idx = output.content.length - 1;
+ 461:       stream.push({ type: "thinking_start", contentIndex: idx, partial: output });
+ 462:       if (block.thinking) stream.push({ type: "thinking_delta", contentIndex: idx, delta: block.thinking, partial: output });
+ 463:       stream.push({ type: "thinking_end", contentIndex: idx, content: block.thinking || "", partial: output });
+ 464:     } else if (block?.type === "redacted_thinking") {
+ 465:       output.content.push({
+ 466:         type: "thinking",
+ 467:         thinking: "[Reasoning redacted]",
+ 468:         thinkingSignature: block.data,
+ 469:         redacted: true,
+ 470:       } as any);
+ 471:       const idx = output.content.length - 1;
+ 472:       stream.push({ type: "thinking_start", contentIndex: idx, partial: output });
+ 473:       stream.push({ type: "thinking_end", contentIndex: idx, content: "[Reasoning redacted]", partial: output });
+ 474:     } else if (block?.type === "tool_use") {
+ 475:       const toolCall: ToolCall = {
+ 476:         type: "toolCall",
+ 477:         id: block.id,
+ 478:         name: fromClaudeCodeToolName(block.name, tools),
+ 479:         arguments: block.input || {},
+ 480:       };
+ 481:       output.content.push(toolCall as any);
+ 482:       const idx = output.content.length - 1;
+ 483:       stream.push({ type: "toolcall_start", contentIndex: idx, partial: output });
+ 484:       stream.push({ type: "toolcall_delta", contentIndex: idx, delta: JSON.stringify(block.input || {}), partial: output });
+ 485:       stream.push({ type: "toolcall_end", contentIndex: idx, toolCall, partial: output });
+ 486:     }
+ 487:   }
+ 488: 
+ 489:   applyUsage(model, output, json?.usage);
+ 490:   output.stopReason = mapStopReason(json?.stop_reason);
+ 491: }
+ 492: 
+ 493: function applyAnyrouterStreamEvent(
+ 494:   model: Model<Api>,
+ 495:   stream: AssistantMessageEventStream,
+ 496:   output: AssistantMessage,
+ 497:   event: any,
+ 498:   tools?: Tool[],
+ 499: ) {
+ 500:   if (!event || typeof event !== "object") return;
+ 501: 
+ 502:   if (event.type === "error") {
+ 503:     throw new Error(event.error?.message || event.message || JSON.stringify(event));
+ 504:   }
+ 505: 
+ 506:   if (event.type === "message_start") {
+ 507:     if (typeof event.message?.id === "string") output.responseId = event.message.id;
+ 508:     if (typeof event.message?.model === "string") output.responseModel = event.message.model;
+ 509:     applyUsage(model, output, event.message?.usage);
+ 510:     return;
+ 511:   }
+ 512: 
+ 513:   if (event.type === "content_block_start") {
+ 514:     if (event.content_block?.type === "text") {
+ 515:       output.content.push({ type: "text", text: event.content_block.text || "", index: event.index } as any);
+ 516:       const idx = output.content.length - 1;
+ 517:       stream.push({ type: "text_start", contentIndex: idx, partial: output });
+ 518:       if (event.content_block.text) {
+ 519:         stream.push({ type: "text_delta", contentIndex: idx, delta: event.content_block.text, partial: output });
+ 520:       }
+ 521:     } else if (event.content_block?.type === "thinking") {
+ 522:       output.content.push({
+ 523:         type: "thinking",
+ 524:         thinking: event.content_block.thinking || "",
+ 525:         thinkingSignature: event.content_block.signature || "",
+ 526:         index: event.index,
+ 527:       } as any);
+ 528:       const idx = output.content.length - 1;
+ 529:       stream.push({ type: "thinking_start", contentIndex: idx, partial: output });
+ 530:       if (event.content_block.thinking) {
+ 531:         stream.push({ type: "thinking_delta", contentIndex: idx, delta: event.content_block.thinking, partial: output });
+ 532:       }
+ 533:     } else if (event.content_block?.type === "redacted_thinking") {
+ 534:       output.content.push({
+ 535:         type: "thinking",
+ 536:         thinking: "",
+ 537:         thinkingSignature: event.content_block.data || "",
+ 538:         redacted: true,
+ 539:         index: event.index,
+ 540:       } as any);
+ 541:       const idx = output.content.length - 1;
+ 542:       stream.push({ type: "thinking_start", contentIndex: idx, partial: output });
+ 543:     } else if (event.content_block?.type === "tool_use") {
+ 544:       const input = event.content_block.input && typeof event.content_block.input === "object" ? event.content_block.input : {};
+ 545:       output.content.push({
+ 546:         type: "toolCall",
+ 547:         id: event.content_block.id,
+ 548:         name: fromClaudeCodeToolName(event.content_block.name, tools),
+ 549:         arguments: input,
+ 550:         partialJson: "",
+ 551:         index: event.index,
+ 552:       } as any);
+ 553:       stream.push({ type: "toolcall_start", contentIndex: output.content.length - 1, partial: output });
+ 554:     }
+ 555:     return;
+ 556:   }
+ 557: 
+ 558:   if (event.type === "content_block_delta") {
+ 559:     const idx = mapContentBlockIndex(output, event.index);
+ 560:     const block = (output.content as AnyrouterStreamBlock[])[idx];
+ 561:     if (!block) return;
+ 562: 
+ 563:     if (event.delta?.type === "text_delta" && block.type === "text") {
+ 564:       block.text += event.delta.text || "";
+ 565:       if (event.delta.text) stream.push({ type: "text_delta", contentIndex: idx, delta: event.delta.text, partial: output });
+ 566:     } else if (event.delta?.type === "thinking_delta" && block.type === "thinking") {
+ 567:       block.thinking += event.delta.thinking || "";
+ 568:       if (event.delta.thinking) {
+ 569:         stream.push({ type: "thinking_delta", contentIndex: idx, delta: event.delta.thinking, partial: output });
+ 570:       }
+ 571:     } else if (event.delta?.type === "signature_delta" && block.type === "thinking") {
+ 572:       block.thinkingSignature = (block.thinkingSignature || "") + (event.delta.signature || "");
+ 573:     } else if (event.delta?.type === "input_json_delta" && block.type === "toolCall") {
+ 574:       block.partialJson += event.delta.partial_json || "";
+ 575:       try {
+ 576:         block.arguments = block.partialJson ? JSON.parse(block.partialJson) : {};
+ 577:       } catch {}
+ 578:       if (event.delta.partial_json) {
+ 579:         stream.push({ type: "toolcall_delta", contentIndex: idx, delta: event.delta.partial_json, partial: output });
+ 580:       }
+ 581:     }
+ 582:     return;
+ 583:   }
+ 584: 
+ 585:   if (event.type === "content_block_stop") {
+ 586:     const idx = mapContentBlockIndex(output, event.index);
+ 587:     const block = (output.content as AnyrouterStreamBlock[])[idx];
+ 588:     if (!block) return;
+ 589: 
+ 590:     delete (block as { index?: number }).index;
+ 591:     if (block.type === "text") {
+ 592:       stream.push({ type: "text_end", contentIndex: idx, content: block.text, partial: output });
+ 593:     } else if (block.type === "thinking") {
+ 594:       stream.push({ type: "thinking_end", contentIndex: idx, content: block.thinking, partial: output });
+ 595:     } else if (block.type === "toolCall") {
+ 596:       try {
+ 597:         block.arguments = block.partialJson ? JSON.parse(block.partialJson) : block.arguments;
+ 598:       } catch {}
+ 599:       delete (block as { partialJson?: string }).partialJson;
+ 600:       stream.push({ type: "toolcall_end", contentIndex: idx, toolCall: block, partial: output });
+ 601:     }
+ 602:     return;
+ 603:   }
+ 604: 
+ 605:   if (event.type === "message_delta") {
+ 606:     if (event.delta?.stop_reason) output.stopReason = mapStopReason(event.delta.stop_reason);
+ 607:     applyUsage(model, output, event.usage);
+ 608:   }
+ 609: }
+ 610: 
+ 611: async function consumeAnyrouterBody(
+ 612:   model: Model<Api>,
+ 613:   response: Response,
+ 614:   stream: AssistantMessageEventStream,
+ 615:   output: AssistantMessage,
+ 616:   resetIdleTimer: () => void,
+ 617:   tools?: Tool[],
+ 618: ): Promise<boolean> {
+ 619:   if (!response.body) throw new Error("Anyrouter response has no body");
+ 620: 
+ 621:   const decoder = new TextDecoder();
+ 622:   let buffer = "";
+ 623:   let rawBody = "";
+ 624:   let sawSseEvent = false;
+ 625: 
+ 626:   const handleFrame = (frame: string) => {
+ 627:     const data = frame
+ 628:       .split(/\r?\n/)
+ 629:       .filter((line) => line.startsWith("data:"))
+ 630:       .map((line) => line.slice(5).trimStart())
+ 631:       .join("\n");
+ 632:     if (!data || data === "[DONE]") return;
+ 633:     sawSseEvent = true;
+ 634:     const event = JSON.parse(data);
+ 635:     logAnyrouter("stream_event", { type: event.type });
+ 636:     applyAnyrouterStreamEvent(model, stream, output, event, tools);
+ 637:   };
+ 638: 
+ 639:   for await (const chunk of response.body as any) {
+ 640:     resetIdleTimer();
+ 641:     const text = decoder.decode(chunk, { stream: true });
+ 642:     rawBody += text;
+ 643:     buffer += text;
+ 644: 
+ 645:     const frames = buffer.split(/\r?\n\r?\n/);
+ 646:     buffer = frames.pop() || "";
+ 647:     for (const frame of frames) handleFrame(frame);
+ 648:   }
+ 649: 
+ 650:   const tail = decoder.decode();
+ 651:   if (tail) {
+ 652:     rawBody += tail;
+ 653:     buffer += tail;
+ 654:   }
+ 655:   if (buffer.trim()) handleFrame(buffer);
+ 656: 
+ 657:   if (!sawSseEvent) {
+ 658:     logAnyrouter("non_sse_response", { body: rawBody.slice(0, 4000) });
+ 659:     emitNonStreamingResponse(model, stream, output, JSON.parse(rawBody), tools);
+ 660:   }
+ 661: 
+ 662:   return sawSseEvent;
+ 663: }
+ 664: 
+ 665: async function requestAnyrouterStream(
+ 666:   model: Model<Api>,
+ 667:   context: Context,
+ 668:   options: SimpleStreamOptions | undefined,
+ 669:   stream: AssistantMessageEventStream,
+ 670:   output: AssistantMessage,
+ 671: ) {
+ 672:   const apiKey = options?.apiKey || "";
+ 673:   const url = `${String(model.baseUrl || DEFAULT_BASE_URL).replace(/\/$/, "")}/v1/messages?beta=true`;
+ 674:   const payload = buildPayload(model, context, options);
+ 675:   const headers = {
+ 676:     ...buildHeaders(apiKey),
+ 677:     ...(options?.headers || {}),
+ 678:   };
+ 679: 
+ 680:   const configuredMaxAttempts = Number(process.env.ANYROUTER_MAX_ATTEMPTS || 1);
+ 681:   const maxAttempts = Number.isFinite(configuredMaxAttempts) && configuredMaxAttempts > 0 ? Math.trunc(configuredMaxAttempts) : 1;
+ 682:   let lastError: Error | undefined;
+ 683:   let sawSseEvent = false;
+ 684: 
+ 685:   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+ 686:     const watchdog = createIdleWatchdog(options?.signal);
+ 687:     logAnyrouter("request", {
+ 688:       attempt,
+ 689:       url,
+ 690:       model: payload.model,
+ 691:       stream: payload.stream,
+ 692:       thinking: payload.thinking,
+ 693:       max_tokens: payload.max_tokens,
+ 694:       headerKeys: Object.keys(headers),
+ 695:     });
+ 696: 
+ 697:     try {
+ 698:       const response = await fetch(url, {
+ 699:         method: "POST",
+ 700:         headers,
+ 701:         body: JSON.stringify(payload),
+ 702:         signal: watchdog.signal,
+ 703:       });
+ 704: 
+ 705:       logAnyrouter("response_headers", {
+ 706:         attempt,
+ 707:         status: response.status,
+ 708:         ok: response.ok,
+ 709:         contentType: response.headers.get("content-type"),
+ 710:       });
+ 711: 
+ 712:       if (!response.ok) {
+ 713:         const text = await response.text();
+ 714:         logAnyrouter("response_error", { attempt, status: response.status, body: text.slice(0, 4000) });
+ 715:         if (isTransientStatus(response.status) && attempt < maxAttempts) {
+ 716:           await sleep(1000 * attempt);
+ 717:           continue;
+ 718:         }
+ 719:         throw new Error(`HTTP ${response.status}: ${text}`);
+ 720:       }
+ 721: 
+ 722:       sawSseEvent = await consumeAnyrouterBody(model, response, stream, output, watchdog.reset, context.tools);
+ 723:       return;
+ 724:     } catch (error) {
+ 725:       lastError = error instanceof Error ? error : new Error(String(error));
+ 726:       logAnyrouter("error", { attempt, message: lastError.message, sawSseEvent });
+ 727:       if (options?.signal?.aborted || watchdog.signal.aborted || sawSseEvent) throw lastError;
+ 728:       if (attempt < maxAttempts) {
+ 729:         await sleep(1000 * attempt);
+ 730:         continue;
+ 731:       }
+ 732:     } finally {
+ 733:       watchdog.cleanup();
+ 734:     }
+ 735:   }

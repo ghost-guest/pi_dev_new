@@ -1,0 +1,300 @@
+/tmp/Trellis/CLAUDE.md:13:- If multiple interpretations exist, present them - don't pick silently.
+/tmp/Trellis/package.json:5:    "build": "pnpm --filter @mindfoldhq/trellis build",
+/tmp/Trellis/package.json:6:    "test": "pnpm --filter @mindfoldhq/trellis test",
+/tmp/Trellis/package.json:7:    "lint": "pnpm --filter @mindfoldhq/trellis lint",
+/tmp/Trellis/package.json:8:    "typecheck": "pnpm --filter @mindfoldhq/trellis typecheck",
+/tmp/Trellis/package.json:9:    "release": "pnpm --filter @mindfoldhq/trellis release",
+/tmp/Trellis/package.json:10:    "release:minor": "pnpm --filter @mindfoldhq/trellis release:minor",
+/tmp/Trellis/package.json:11:    "release:beta": "pnpm --filter @mindfoldhq/trellis release:beta",
+/tmp/Trellis/package.json:12:    "release:rc": "pnpm --filter @mindfoldhq/trellis release:rc"
+/tmp/Trellis/README_CN.md:2:<picture>
+/tmp/Trellis/README_CN.md:6:</picture>
+/tmp/Trellis/README_CN.md:11:<sub>支持 Claude Code、Cursor、OpenCode、Codex、Kiro、Kilo、Gemini CLI、Antigravity、Windsurf、Qoder、CodeBuddy、GitHub Copilot、Droid 和 Pi Agent。</sub>
+/tmp/Trellis/README_CN.md:23:<a href="https://www.npmjs.com/package/@mindfoldhq/trellis"><img src="https://img.shields.io/npm/v/@mindfoldhq/trellis.svg?style=flat-square&color=2563eb" alt="npm version" /></a>
+/tmp/Trellis/README_CN.md:24:<a href="https://www.npmjs.com/package/@mindfoldhq/trellis"><img src="https://img.shields.io/npm/dw/@mindfoldhq/trellis?style=flat-square&color=cb3837&label=downloads" alt="npm downloads" /></a>
+/tmp/Trellis/README_CN.md:58:npm install -g @mindfoldhq/trellis@latest
+/tmp/Trellis/README_CN.md:61:trellis init -u your-name
+/tmp/Trellis/README_CN.md:64:trellis init --cursor --opencode --codex -u your-name
+/tmp/Trellis/README_CN.md:136:[![Star History Chart](https://api.star-history.com/svg?repos=mindfold-ai/Trellis&type=Date)](https://star-history.com/#mindfold-ai/Trellis&Date)
+/tmp/Trellis/LICENSE:6:Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
+/tmp/Trellis/LICENSE:14:When we speak of free software, we are referring to freedom, not price.  Our General Public Licenses are designed to make sure that you have the freedom to distribute copies of free software (and charge for them if you wish), that you receive source code or can get it if you want it, that you can change the software or use pieces of it in new free programs, and that you know you can do these things.
+/tmp/Trellis/LICENSE:34:"The Program" refers to any copyrightable work licensed under this License.  Each licensee is addressed as "you".  "Licensees" and "recipients" may be individuals or organizations.
+/tmp/Trellis/LICENSE:42:To "convey" a work means any kind of propagation that enables other parties to make or receive copies.  Mere interaction with a user through a computer network, with no transfer of a copy, is not conveying.
+/tmp/Trellis/LICENSE:51:The "System Libraries" of an executable work include anything, other than the work as a whole, that (a) is included in the normal form of packaging a Major Component, but which is not part of that Major Component, and (b) serves only to enable use of the work with that Major Component, or to implement a Standard Interface for which an implementation is available to the public in source code form.  A "Major Component", in this context, means a major essential component (kernel, window system, and so on) of the specific operating system (if any) on which the executable work runs, or a compiler used to produce the work, or an object code interpreter used to run it.
+/tmp/Trellis/LICENSE:63:You may make, run and propagate covered works that you do not convey, without conditions so long as your license otherwise remains in force.  You may convey covered works to others for the sole purpose of having them make modifications exclusively for you, or provide you with facilities for running those works, provided that you comply with the terms of this License in conveying all material for which you do not control copyright.  Those thus making or running the covered works for you must do so exclusively on your behalf, under your direction and control, on terms that prohibit them from making any copies of your copyrighted material outside their relationship with you.
+/tmp/Trellis/LICENSE:72:4. Conveying Verbatim Copies.
+/tmp/Trellis/LICENSE:73:You may convey verbatim copies of the Program's source code as you receive it, in any medium, provided that you conspicuously and appropriately publish on each copy an appropriate copyright notice; keep intact all notices stating that this License and any non-permissive terms added in accord with section 7 apply to the code; keep intact all notices of the absence of any warranty; and give all recipients a copy of this License along with the Program.
+/tmp/Trellis/LICENSE:88:A compilation of a covered work with other separate and independent works, which are not by their nature extensions of the covered work, and which are not combined with it such as to form a larger program, in or on a volume of a storage or distribution medium, is called an "aggregate" if the compilation and its resulting copyright are not used to limit the access or legal rights of the compilation's users beyond what the individual works permit.  Inclusion of a covered work in an aggregate does not cause this License to apply to the other parts of the aggregate.
+/tmp/Trellis/LICENSE:97:    c) Convey individual copies of the object code with a copy of the written offer to provide the Corresponding Source.  This alternative is allowed only occasionally and noncommercially, and only if you received the object code with such an offer, in accord with subsection 6b.
+/tmp/Trellis/LICENSE:99:    d) Convey the object code by offering access from a designated place (gratis or for a charge), and offer equivalent access to the Corresponding Source in the same way through the same place at no further charge.  You need not require recipients to copy the Corresponding Source along with the object code.  If the place to copy the object code is a network server, the Corresponding Source may be on a different server (operated by you or a third party) that supports equivalent copying facilities, provided you maintain clear directions next to the object code saying where to find the Corresponding Source.  Regardless of what server hosts the Corresponding Source, you remain obligated to ensure that it is available for as long as needed to satisfy these requirements.
+/tmp/Trellis/LICENSE:105:A "User Product" is either (1) a "consumer product", which means any tangible personal property which is normally used for personal, family, or household purposes, or (2) anything designed or sold for incorporation into a dwelling.  In determining whether a product is a consumer product, doubtful cases shall be resolved in favor of coverage.  For a particular product received by a particular user, "normally used" refers to a typical or common use of that class of product, regardless of the status of the particular user or of the way in which the particular user actually uses, or expects or is expected to use, the product.  A product is a consumer product regardless of whether the product has substantial commercial, industrial or non-consumer uses, unless such uses represent the only significant mode of use of the product.
+/tmp/Trellis/LICENSE:109:If you convey an object code work under this section in, or with, or specifically for use in, a User Product, and the conveying occurs as part of a transaction in which the right of possession and use of the User Product is transferred to the recipient in perpetuity or for a fixed term (regardless of how the transaction is characterized), the Corresponding Source conveyed under this section must be accompanied by the Installation Information.  But this requirement does not apply if neither you nor any third party retains the ability to install modified object code on the User Product (for example, the work has been installed in ROM).
+/tmp/Trellis/LICENSE:111:The requirement to provide Installation Information does not include a requirement to continue to provide support service, warranty, or updates for a work that has been modified or installed by the recipient, or for the User Product in which it has been modified or installed.  Access to a network may be denied when the modification itself materially and adversely affects the operation of the network or violates the rules and protocols for communication across the network.
+/tmp/Trellis/LICENSE:132:    f) Requiring indemnification of licensors and authors of that material by anyone who conveys the material (or modified versions of it) with contractual assumptions of liability to the recipient, for any liability that these contractual assumptions directly impose on those licensors and authors.
+/tmp/Trellis/LICENSE:148:Termination of your rights under this section does not terminate the licenses of parties who have received copies or rights from you under this License.  If your rights have been terminated and not permanently reinstated, you do not qualify to receive new licenses for the same material under section 10.
+/tmp/Trellis/LICENSE:150:9. Acceptance Not Required for Having Copies.
+/tmp/Trellis/LICENSE:154:10. Automatic Licensing of Downstream Recipients.
+/tmp/Trellis/LICENSE:156:Each time you convey a covered work, the recipient automatically receives a license from the original licensors, to run, modify and propagate that work, subject to this License.  You are not responsible for enforcing compliance by third parties with this License.
+/tmp/Trellis/LICENSE:173:license to downstream recipients.  "Knowingly relying" means you have actual knowledge that, but for the patent license, your conveying the covered work in a country, or your recipient's use of the covered work in a country, would infringe one or more identifiable patents in that country that you have reason to believe are valid.
+/tmp/Trellis/LICENSE:175:If, pursuant to or in connection with a single transaction or arrangement, you convey, or propagate by procuring conveyance of, a covered work, and grant a patent license to some of the parties receiving the covered work authorizing them to use, propagate, modify or convey a specific copy of the covered work, then the patent license you grant is automatically extended to all recipients of the covered work and works based on it.
+/tmp/Trellis/LICENSE:177:A patent license is "discriminatory" if it does not include within the scope of its coverage, prohibits the exercise of, or is conditioned on the non-exercise of one or more of the rights that are specifically granted under this License.  You may not convey a covered work if you are a party to an arrangement with a third party that is in the business of distributing software, under which you make payment to the third party based on the extent of your activity of conveying the work, and under which the third party grants, to any of the parties who would receive the covered work from you, a discriminatory patent license (a) in connection with copies of the covered work conveyed by you (or copies made from those copies), or (b) primarily for and in connection with specific products or compilations that contain the covered work, unless you entered into that arrangement, or that patent license was granted, prior to 28 March 2007.
+/tmp/Trellis/LICENSE:194:The Free Software Foundation may publish revised and/or new versions of the GNU Affero General Public License from time to time.  Such new versions will be similar in spirit to the present version, but may differ in detail to address new problems or concerns.
+/tmp/Trellis/AGENTS.md:16:- `.agents/skills/` — reusable Trellis skills
+/tmp/Trellis/README.md:2:<picture>
+/tmp/Trellis/README.md:6:</picture>
+/tmp/Trellis/README.md:11:<sub>A team AI coding harness for progressive specs, custom workflows, task context, and memory across Claude Code, Cursor, OpenCode, Codex, Kiro, Kilo, Gemini CLI, Antigravity, Windsurf, Qoder, CodeBuddy, GitHub Copilot, Droid, and Pi Agent.</sub>
+/tmp/Trellis/README.md:23:<a href="https://www.npmjs.com/package/@mindfoldhq/trellis"><img src="https://img.shields.io/npm/v/@mindfoldhq/trellis.svg?style=flat-square&color=2563eb" alt="npm version" /></a>
+/tmp/Trellis/README.md:24:<a href="https://www.npmjs.com/package/@mindfoldhq/trellis"><img src="https://img.shields.io/npm/dw/@mindfoldhq/trellis?style=flat-square&color=cb3837&label=downloads" alt="npm downloads" /></a>
+/tmp/Trellis/README.md:58:npm install -g @mindfoldhq/trellis@latest
+/tmp/Trellis/README.md:61:trellis init -u your-name
+/tmp/Trellis/README.md:64:trellis init --cursor --opencode --codex -u your-name
+/tmp/Trellis/README.md:80:Trellis runs a 4-phase loop with auto-invoked skills and sub-agents:
+/tmp/Trellis/README.md:136:[![Star History Chart](https://api.star-history.com/svg?repos=mindfold-ai/Trellis&type=Date)](https://star-history.com/#mindfold-ai/Trellis&Date)
+/tmp/Trellis/CONTRIBUTING.md:89:│   ├── templates/          # Templates copied to user projects ←
+/tmp/Trellis/drafts/v0.5.0-beta-forum-post.md:6:npm install -g @mindfoldhq/trellis@beta
+/tmp/Trellis/drafts/v0.5.0-beta-forum-post.md:23:每个平台下，对应位置从 `commands/<name>.md` 迁移到 `skills/trellis-<name>/SKILL.md`。升级时有 65 条 `rename` migration 自动处理，用户本地改过的文件会在 confirm prompt 里让你选。
+/tmp/Trellis/drafts/v0.5.0-beta-forum-post.md:29:Qoder / CodeBuddy / Factory Droid / Cursor / Gemini CLI / Kiro / GitHub Copilot 从 "仅命令" 升级到完整的 agent-capable：
+/tmp/Trellis/drafts/v0.5.0-beta-forum-post.md:45:Codex / Copilot / Gemini / Qoder（class-2）无法可靠地通过 hook 改写 sub-agent prompt（上游 bug 或架构限制）。这 4 个平台改走 **pull-based prelude** —— sub-agent 定义的最前面加一段指令，让 sub-agent 在第一轮自己 Read `.current-task` + `prd.md` + `implement.jsonl`。
+/tmp/Trellis/drafts/v0.5.0-beta-forum-post.md:112:- **Multi-agent pipeline**（`.trellis/scripts/multi_agent/` + `worktree.yaml`）—— 目前基本主流的 agent cli/ide 都有原生 worktree 支持了
+/tmp/Trellis/pnpm-lock.yaml:326:  '@jridgewell/trace-mapping@0.3.31':
+/tmp/Trellis/pnpm-lock.yaml:503:    resolution: {integrity: sha512-npiaib8XzbjtzS2N4HlqPvlpxpmZ14FjSJrteZpPxGUaYPlvhzlzUZ4mZyABo0EFrOWnvyd0Xxroq//hKhtAWg==}
+/tmp/Trellis/pnpm-lock.yaml:692:  cli-spinners@2.9.2:
+/tmp/Trellis/pnpm-lock.yaml:835:      picomatch: ^3 || ^4
+/tmp/Trellis/pnpm-lock.yaml:837:      picomatch:
+/tmp/Trellis/pnpm-lock.yaml:870:    resolution: {integrity: sha512-QZjmEOC+IT1uk6Rx0sX22V6uHWVwbdbxf1faPqJ1QhLdGgsRGCZoyaQBm/piRdJy/D2um6hM1UP7ZEeQ4EkP+Q==}
+/tmp/Trellis/pnpm-lock.yaml:1107:  picocolors@1.1.1:
+/tmp/Trellis/pnpm-lock.yaml:1110:  picomatch@2.3.1:
+/tmp/Trellis/pnpm-lock.yaml:1114:  picomatch@4.0.3:
+/tmp/Trellis/pnpm-lock.yaml:1118:  pidtree@0.6.0:
+/tmp/Trellis/pnpm-lock.yaml:1145:    resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
+/tmp/Trellis/pnpm-lock.yaml:1268:  ts-api-utils@2.4.0:
+/tmp/Trellis/pnpm-lock.yaml:1356:      '@opentelemetry/api': ^1.9.0
+/tmp/Trellis/pnpm-lock.yaml:1367:      '@opentelemetry/api':
+/tmp/Trellis/pnpm-lock.yaml:1587:  '@jridgewell/trace-mapping@0.3.31':
+/tmp/Trellis/pnpm-lock.yaml:1706:      ts-api-utils: 2.4.0(typescript@5.9.3)
+/tmp/Trellis/pnpm-lock.yaml:1748:      ts-api-utils: 2.4.0(typescript@5.9.3)
+/tmp/Trellis/pnpm-lock.yaml:1765:      ts-api-utils: 2.4.0(typescript@5.9.3)
+/tmp/Trellis/pnpm-lock.yaml:1876:      '@jridgewell/trace-mapping': 0.3.31
+/tmp/Trellis/pnpm-lock.yaml:1933:  cli-spinners@2.9.2: {}
+/tmp/Trellis/pnpm-lock.yaml:2093:  fdir@6.5.0(picomatch@4.0.3):
+/tmp/Trellis/pnpm-lock.yaml:2095:      picomatch: 4.0.3
+/tmp/Trellis/pnpm-lock.yaml:2236:      pidtree: 0.6.0
+/tmp/Trellis/pnpm-lock.yaml:2285:      picomatch: 2.3.1
+/tmp/Trellis/pnpm-lock.yaml:2333:      cli-spinners: 2.9.2
+/tmp/Trellis/pnpm-lock.yaml:2358:  picocolors@1.1.1: {}
+/tmp/Trellis/pnpm-lock.yaml:2360:  picomatch@2.3.1: {}
+/tmp/Trellis/pnpm-lock.yaml:2362:  picomatch@4.0.3: {}
+/tmp/Trellis/pnpm-lock.yaml:2364:  pidtree@0.6.0: {}
+/tmp/Trellis/pnpm-lock.yaml:2369:      picocolors: 1.1.1
+/tmp/Trellis/pnpm-lock.yaml:2507:      fdir: 6.5.0(picomatch@4.0.3)
+/tmp/Trellis/pnpm-lock.yaml:2508:      picomatch: 4.0.3
+/tmp/Trellis/pnpm-lock.yaml:2516:  ts-api-utils@2.4.0(typescript@5.9.3):
+/tmp/Trellis/pnpm-lock.yaml:2554:      fdir: 6.5.0(picomatch@4.0.3)
+/tmp/Trellis/pnpm-lock.yaml:2555:      picomatch: 4.0.3
+/tmp/Trellis/pnpm-lock.yaml:2578:      picomatch: 4.0.3
+/tmp/Trellis/drafts/v0.5.0-forum-post.md:4:npm install -g @mindfoldhq/trellis
+/tmp/Trellis/drafts/v0.5.0-forum-post.md:25:每个平台下，对应位置从 `commands/<name>.md` 迁移到 `skills/trellis-<name>/SKILL.md`。65 条 `rename` migration 自动处理升级，本地改过的文件会在 confirm prompt 里让你选。
+/tmp/Trellis/drafts/v0.5.0-forum-post.md:62:`trellis init` 三分支判定（基于 `.trellis/` × `.trellis/.developer` 的存在状态）：
+/tmp/Trellis/drafts/v0.5.0-forum-post.md:70:Qoder / CodeBuddy / Factory Droid / Cursor / Gemini CLI / Kiro / GitHub Copilot 从"仅命令"升级到完整的 agent-capable：
+/tmp/Trellis/drafts/v0.5.0-forum-post.md:80:Codex / Copilot / Gemini / Qoder（class-2）无法可靠地通过 hook 改写 sub-agent prompt（上游 bug 或架构限制）。这 4 个平台只能通过在 sub-agent 定义最前面加一段指令，让 sub-agent 第一轮自己 Read `prd.md` 和 `implement.jsonl`。
+/tmp/Trellis/drafts/v0.5.0-forum-post.md:112:- **Multi-agent pipeline**（`scripts/multi_agent/` + `worktree.yaml`）—— 主流 agent CLI/IDE 都有原生 worktree 支持了
+/tmp/Trellis/packages/cli/scripts/create-manifest.js:12: * Stdin JSON mode (auto-detected when stdin is piped, or force with --stdin):
+/tmp/Trellis/packages/cli/scripts/create-manifest.js:19: *   Best for AI/scripting — avoids shell escaping issues with multi-line text.
+/tmp/Trellis/packages/cli/scripts/create-manifest.js:47:const PACKAGE_NAME = "@mindfoldhq/trellis";
+/tmp/Trellis/packages/cli/scripts/create-manifest.js:200:        "Also recommend aiInstructions (AI hints for helping users migrate)."
+/tmp/Trellis/packages/cli/scripts/create-manifest.js:335:      aiInstructions = "TODO: AI hints for helping users migrate (what to check, common pitfalls).";
+/tmp/Trellis/packages/cli/src/index.ts:4: * Based on Anthropic's "Effective Harnesses for Long-Running Agents"
+/tmp/Trellis/packages/cli/src/index.ts:5: * https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
+/tmp/Trellis/packages/cli/tsconfig.json:2:  "compilerOptions": {
+/tmp/Trellis/packages/cli/scripts/check-manifest-continuity.js:12: *   1. Query npm for all published versions of @mindfoldhq/trellis
+/tmp/Trellis/packages/cli/scripts/check-manifest-continuity.js:34:const PACKAGE_NAME = "@mindfoldhq/trellis";
+/tmp/Trellis/packages/cli/scripts/check-manifest-continuity.js:72:      stdio: ["pipe", "pipe", "pipe"],
+/tmp/Trellis/packages/cli/test/registry-invariants.test.ts:4: * Cross-module consistency checks inspired by:
+/tmp/Trellis/packages/cli/test/registry-invariants.test.ts:47:  it("platforms with supportsAgentSkills do not use .agents/skills as configDir", () => {
+/tmp/Trellis/packages/cli/test/registry-invariants.test.ts:50:        expect(AI_TOOLS[id].configDir).not.toBe(".agents/skills");
+/tmp/Trellis/packages/cli/test/registry-invariants.test.ts:120:      // (Claude Code naming we initially copied) to `BeforeAgent`. The
+/tmp/Trellis/packages/cli/test/registry-invariants.test.ts:127:      platform: "copilot",
+/tmp/Trellis/packages/cli/test/registry-invariants.test.ts:128:      path: "copilot/hooks.json",
+/tmp/Trellis/packages/cli/test/commands/init-internals.test.ts:50:      stdio: "pipe",
+/tmp/Trellis/packages/cli/scripts/copy-templates.js:6: * This script copies src/templates/ to dist/templates/ (excluding .ts files).
+/tmp/Trellis/packages/cli/scripts/copy-templates.js:14: * - src/templates/codex/ - Codex skills
+/tmp/Trellis/packages/cli/scripts/copy-templates.js:17: * - src/templates/kiro/ - Kiro Code skills
+/tmp/Trellis/packages/cli/scripts/copy-templates.js:41: * directories can exist in src/templates; they must not be copied into the npm
+/tmp/Trellis/packages/cli/scripts/copy-templates.js:69:console.log("Copied src/templates/ to dist/templates/");
+/tmp/Trellis/packages/cli/scripts/copy-templates.js:73:console.log("Copied src/migrations/manifests/ to dist/migrations/manifests/");
+/tmp/Trellis/packages/cli/src/cli/index.ts:67:  .option("--codex", "Include Codex skills")
+/tmp/Trellis/packages/cli/src/cli/index.ts:69:  .option("--kiro", "Include Kiro Code skills")
+/tmp/Trellis/packages/cli/src/cli/index.ts:75:  .option("--copilot", "Include GitHub Copilot hooks")
+/tmp/Trellis/packages/cli/src/cli/index.ts:77:  .option("--pi", "Include Pi Agent extension assets")
+/tmp/Trellis/packages/cli/src/cli/index.ts:121:  .option("-n, --create-new", "Create .new copies for all changed files")
+/tmp/Trellis/packages/cli/src/configurators/qoder.ts:22: * `wrapWithCommandFrontmatter`; auto-trigger workflows stay as plain skills.
+/tmp/Trellis/packages/cli/src/configurators/qoder.ts:42:    path.join(configRoot, "skills"),
+/tmp/Trellis/packages/cli/src/commands/update.ts:539: * Old Trellis versions used `.agents/skills/` as codex's configDir.
+/tmp/Trellis/packages/cli/src/commands/update.ts:540: * New versions use `.codex/` for Codex-specific config and `.agents/skills/`
+/tmp/Trellis/packages/cli/src/commands/update.ts:543: * Detection: Trellis-tracked hashes contain `.agents/skills/` entries
+/tmp/Trellis/packages/cli/src/commands/update.ts:545: * have `.agents/skills/` from other tools (Kimi CLI, Amp, etc.).
+/tmp/Trellis/packages/cli/src/commands/update.ts:557:  // `trellis-finish-work/SKILL.md` under `.agents/skills/`. Other platforms
+/tmp/Trellis/packages/cli/src/commands/update.ts:558:  // that share `.agents/skills/` (e.g. Gemini CLI 0.40+ via the workspace
+/tmp/Trellis/packages/cli/src/commands/update.ts:559:  // alias — issue #224) only write the 5 workflow skills (brainstorm,
+/tmp/Trellis/packages/cli/src/commands/update.ts:567:    keys.some((key) => key === ".agents/skills/trellis-continue/SKILL.md") ||
+/tmp/Trellis/packages/cli/src/commands/update.ts:568:    keys.some((key) => key === ".agents/skills/trellis-finish-work/SKILL.md")
+/tmp/Trellis/packages/cli/src/commands/update.ts:973:  // project copies) and explode the scan. Same normalization pattern
+/tmp/Trellis/packages/cli/src/commands/update.ts:1330:    console.log(chalk.gray("  ○ Skipping (old file not found):"));
+/tmp/Trellis/packages/cli/src/commands/update.ts:1390:          `  for this path — usually local customization. If unsure, pick [b].`,
+/tmp/Trellis/packages/cli/src/commands/update.ts:1687:    console.log(chalk.gray("Run 'trellis init' first."));
+/tmp/Trellis/packages/cli/src/commands/update.ts:1766:        "⚠️  No version file found. Skipping migrations — run trellis init to fix.",
+/tmp/Trellis/packages/cli/src/commands/update.ts:1775:  // Detect legacy Codex (has .agents/skills/ tracked by Trellis but no .codex/)
+/tmp/Trellis/packages/cli/src/commands/update.ts:1777:  // detector reads the raw manifest looking for .agents/skills/ markers that
+/tmp/Trellis/packages/cli/src/commands/update.ts:1784:        "  Legacy Codex detected: .agents/skills/ tracked without .codex/ — will create .codex/ directory",
+/tmp/Trellis/packages/cli/src/commands/update.ts:1791:  // buggy versions of `trellis init` over-hashed (e.g. .codex/sessions/*).
+/tmp/Trellis/packages/cli/src/commands/update.ts:1793:  // markers under .agents/skills/ survive into the upgrade flow.
+/tmp/Trellis/packages/cli/src/commands/update.ts:2296:  // Only hash overwritten files (not skipped or .new copies)
+/tmp/Trellis/packages/cli/src/commands/update.ts:2325:    console.log(`  Created .new copies: ${createdNew} file(s)`);
+/tmp/Trellis/packages/cli/src/commands/update.ts:2427:            prdContent += `When helping with this migration:\n\n`;
+/tmp/Trellis/packages/cli/test/templates/codex.test.ts:22:// Shared skills are now sourced from common/ via resolveAllAsSkills
+/tmp/Trellis/packages/cli/test/templates/codex.test.ts:23:describe("codex shared skills (from common source)", () => {
+/tmp/Trellis/packages/cli/test/templates/codex.test.ts:25:    const skills = resolveAllAsSkills(AI_TOOLS.codex.templateContext);
+/tmp/Trellis/packages/cli/test/templates/codex.test.ts:26:    expect(skills.length).toBeGreaterThan(0);
+/tmp/Trellis/packages/cli/test/templates/codex.test.ts:27:    for (const skill of skills) {
+/tmp/Trellis/packages/cli/test/templates/codex.test.ts:34:    const skills = resolveAllAsSkills(AI_TOOLS.codex.templateContext);
+/tmp/Trellis/packages/cli/test/templates/codex.test.ts:35:    for (const skill of skills) {
+/tmp/Trellis/packages/cli/test/templates/codex.test.ts:63:    const skills = getAllCodexSkills();
+/tmp/Trellis/packages/cli/test/templates/codex.test.ts:64:    expect(skills).toEqual([]);
+/tmp/Trellis/packages/cli/package.json:2:  "name": "@mindfoldhq/trellis",
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:78:    expect(fs.existsSync(path.join(tmpDir, ".agents", "skills"))).toBe(false);
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:80:    expect(fs.existsSync(path.join(tmpDir, ".kiro", "skills"))).toBe(false);
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:87:    expect(fs.existsSync(path.join(tmpDir, ".github", "copilot"))).toBe(false);
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:89:    expect(fs.existsSync(path.join(tmpDir, ".pi"))).toBe(false);
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:94:    // Built-in multi-file skills are installed for default platforms.
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:97:        path.join(tmpDir, ".claude", "skills", "trellis-meta", "SKILL.md"),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:105:          "skills",
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:116:          "skills",
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:147:    expect(fs.existsSync(path.join(tmpDir, ".agents", "skills"))).toBe(false);
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:149:    expect(fs.existsSync(path.join(tmpDir, ".kiro", "skills"))).toBe(false);
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:156:    expect(fs.existsSync(path.join(tmpDir, ".github", "copilot"))).toBe(false);
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:158:    expect(fs.existsSync(path.join(tmpDir, ".pi"))).toBe(false);
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:161:        path.join(tmpDir, ".claude", "skills", "trellis-meta", "SKILL.md"),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:173:    expect(fs.existsSync(path.join(tmpDir, ".agents", "skills"))).toBe(false);
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:175:    expect(fs.existsSync(path.join(tmpDir, ".kiro", "skills"))).toBe(false);
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:182:    expect(fs.existsSync(path.join(tmpDir, ".github", "copilot"))).toBe(false);
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:183:    expect(fs.existsSync(path.join(tmpDir, ".pi"))).toBe(false);
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:186:  it("#3b codex platform creates skills plus .codex assets", async () => {
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:189:    expect(fs.existsSync(path.join(tmpDir, ".agents", "skills"))).toBe(true);
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:195:        path.join(tmpDir, ".agents", "skills", "trellis-start", "SKILL.md"),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:203:          "skills",
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:211:        path.join(tmpDir, ".agents", "skills", "trellis-continue", "SKILL.md"),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:216:        path.join(tmpDir, ".agents", "skills", "trellis-meta", "SKILL.md"),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:224:          "skills",
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:234:        path.join(tmpDir, ".codex", "skills", "trellis-meta", "SKILL.md"),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:265:    expect(trackedPaths).toContain(".agents/skills/trellis-meta/SKILL.md");
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:267:      ".agents/skills/trellis-meta/references/local-architecture/overview.md",
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:270:      ".agents/skills/trellis-spec-bootstarp/SKILL.md",
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:273:      ".agents/skills/trellis-spec-bootstarp/references/spec-writing.md",
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:277:  it("#3c kiro platform creates .kiro/skills", async () => {
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:280:    expect(fs.existsSync(path.join(tmpDir, ".kiro", "skills"))).toBe(true);
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:284:        path.join(tmpDir, ".kiro", "skills", "trellis-start", "SKILL.md"),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:289:        path.join(tmpDir, ".kiro", "skills", "trellis-finish-work", "SKILL.md"),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:294:        path.join(tmpDir, ".kiro", "skills", "trellis-continue", "SKILL.md"),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:299:        path.join(tmpDir, ".kiro", "skills", "trellis-check", "SKILL.md"),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:333:  it("#3g qoder platform creates .qoder/commands + .qoder/skills", async () => {
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:343:        path.join(tmpDir, ".qoder", "skills", "trellis-brainstorm", "SKILL.md"),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:382:  it("#3i copilot platform creates .github/copilot hooks and discovery config", async () => {
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:383:    await init({ yes: true, copilot: true });
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:386:    // Copilot is agent-capable → start.prompt.md not emitted.
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:402:      fs.existsSync(path.join(tmpDir, ".github", "copilot", "hooks")),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:406:        path.join(tmpDir, ".github", "copilot", "hooks", "session-start.py"),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:410:      fs.existsSync(path.join(tmpDir, ".github", "copilot", "hooks.json")),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:430:    expect(trackedPaths).toContain(".github/copilot/hooks.json");
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:462:  it("#3j droid platform creates commands + skills", async () => {
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:483:        path.join(tmpDir, ".factory", "skills", "trellis-check", "SKILL.md"),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:490:  it("#3k pi platform creates extension-backed prompts, skills, and agents", async () => {
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:491:    await init({ yes: true, pi: true });
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:493:    expect(fs.existsSync(path.join(tmpDir, ".pi", "settings.json"))).toBe(true);
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:495:      fs.existsSync(path.join(tmpDir, ".pi", "prompts", "trellis-start.md")),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:499:        path.join(tmpDir, ".pi", "prompts", "trellis-finish-work.md"),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:503:      fs.existsSync(path.join(tmpDir, ".pi", "prompts", "trellis-continue.md")),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:507:        path.join(tmpDir, ".pi", "skills", "trellis-check", "SKILL.md"),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:511:      fs.existsSync(path.join(tmpDir, ".pi", "agents", "trellis-implement.md")),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:515:        path.join(tmpDir, ".pi", "extensions", "trellis", "index.ts"),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:518:    expect(fs.existsSync(path.join(tmpDir, ".pi", "hooks"))).toBe(false);
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:533:    const piTemplates = collectPlatformTemplates("pi");
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:534:    expect(piTemplates).toBeInstanceOf(Map);
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:535:    if (!piTemplates) {
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:538:    const expectedPiPaths = [...piTemplates.keys()];
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:750:    // @app/api: package.json + go.mod → fullstack (both indicators present)
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:757:      { rel: "packages/api", name: "@app/api", files: { "go.mod": "" } },
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:765:    expect(fs.existsSync(path.join(specDir, "api"))).toBe(true);
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:773:    // api: fullstack (package.json + go.mod) → has both backend/ and frontend/
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:775:      fs.existsSync(path.join(specDir, "api", "backend", "index.md")),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:778:      fs.existsSync(path.join(specDir, "api", "frontend", "index.md")),
+/tmp/Trellis/packages/cli/test/commands/init.integration.test.ts:918:    // Two sibling .git directories — polyrepo fallback should pick them up
+/tmp/Trellis/packages/cli/src/commands/uninstall.ts:2: * `trellis uninstall` — remove every file written by `trellis init` / `update`
+/tmp/Trellis/packages/cli/src/commands/uninstall.ts:92:    ...([".cursor/hooks.json", ".github/copilot/hooks.json"] as const).map(
+/tmp/Trellis/packages/cli/src/commands/uninstall.ts:106:      posixPath: ".pi/settings.json",
+/tmp/Trellis/packages/cli/src/commands/uninstall.ts:108:        "Strip trellis extension/skills/prompts entries; preserve user fields",
+/tmp/Trellis/packages/cli/src/commands/uninstall.ts:330:  // `.agents/skills`, …) that is now empty. We deliberately handle this here
+/tmp/Trellis/packages/cli/src/commands/uninstall.ts:334:  // Process deepest-first so that nested managed dirs (e.g. `.agents/skills`)
+/tmp/Trellis/packages/cli/src/configurators/index.ts:32:import { configureCopilot } from "./copilot.js";
+/tmp/Trellis/packages/cli/src/configurators/index.ts:34:import { configurePi, collectPiTemplates } from "./pi.js";
+/tmp/Trellis/packages/cli/src/configurators/index.ts:51:  normalizeCopilotMarkdownAgents,
+/tmp/Trellis/packages/cli/src/configurators/index.ts:54:// Platform-specific template content (hooks, agents, settings — NOT commands/skills)
+/tmp/Trellis/packages/cli/src/configurators/index.ts:67:  getAllHooks as getCopilotHooks,
+/tmp/Trellis/packages/cli/src/configurators/index.ts:68:  getHooksConfig as getCopilotHooksConfig,
+/tmp/Trellis/packages/cli/src/configurators/index.ts:69:} from "../templates/copilot/index.js";
+/tmp/Trellis/packages/cli/src/configurators/index.ts:135:/** Helper: collect commands + skills for "both" platforms */
+/tmp/Trellis/packages/cli/src/configurators/index.ts:165:        ".claude/skills",
+/tmp/Trellis/packages/cli/src/configurators/index.ts:187:        ".cursor/skills",
+/tmp/Trellis/packages/cli/src/configurators/index.ts:212:        ".agents/skills",
+/tmp/Trellis/packages/cli/src/configurators/index.ts:219:      // picks up the file (was missing pre-0.5.7 — upgrade path silently
+/tmp/Trellis/packages/cli/src/configurators/index.ts:224:          `.agents/skills/${trellisStart.name}/SKILL.md`,
+/tmp/Trellis/packages/cli/src/configurators/index.ts:229:        files.set(`.codex/skills/${skill.name}/SKILL.md`, skill.content);
+/tmp/Trellis/packages/cli/src/configurators/index.ts:256:        ".kilocode/skills",
+/tmp/Trellis/packages/cli/src/configurators/index.ts:265:        ".kiro/skills",
+/tmp/Trellis/packages/cli/src/configurators/index.ts:292:      // Shared skills written to `.agents/skills/` (Gemini CLI 0.40+ workspace
+/tmp/Trellis/packages/cli/src/configurators/index.ts:296:        ".agents/skills",
+/tmp/Trellis/packages/cli/src/configurators/index.ts:321:        ".agent/skills",
+/tmp/Trellis/packages/cli/src/configurators/index.ts:330:        ".windsurf/skills",
+/tmp/Trellis/packages/cli/src/configurators/index.ts:339:        ".qoder/skills",
+/tmp/Trellis/packages/cli/src/configurators/index.ts:365:        ".codebuddy/skills",
+/tmp/Trellis/packages/cli/src/configurators/index.ts:384:  copilot: {
+/tmp/Trellis/packages/cli/src/configurators/index.ts:385:    configure: configureCopilot,
+/tmp/Trellis/packages/cli/src/configurators/index.ts:387:      const ctx = AI_TOOLS.copilot.templateContext;
+/tmp/Trellis/packages/cli/src/configurators/index.ts:393:        ".github/skills",
+/tmp/Trellis/packages/cli/src/configurators/index.ts:399:      // Copilot's own session-start hook
+/tmp/Trellis/packages/cli/src/configurators/index.ts:400:      for (const hook of getCopilotHooks()) {
+/tmp/Trellis/packages/cli/src/configurators/index.ts:401:        files.set(`.github/copilot/hooks/${hook.name}`, hook.content);
+/tmp/Trellis/packages/cli/src/configurators/index.ts:403:      // Shared hooks (inject-workflow-state.py only). Copilot bundles its own
+/tmp/Trellis/packages/cli/src/configurators/index.ts:406:        ".github/copilot/hooks",
+/tmp/Trellis/packages/cli/src/configurators/index.ts:407:        "copilot",
+/tmp/Trellis/packages/cli/src/configurators/index.ts:412:      // normalize Cursor's Claude-style tools frontmatter for Copilot.
+/tmp/Trellis/packages/cli/src/configurators/index.ts:414:        normalizeCopilotMarkdownAgents(getCursorAgents()),
+/tmp/Trellis/packages/cli/src/configurators/index.ts:418:      const hooksConfig = resolvePlaceholders(getCopilotHooksConfig());
+/tmp/Trellis/packages/cli/src/configurators/index.ts:419:      files.set(".github/copilot/hooks.json", hooksConfig);
+/tmp/Trellis/packages/cli/src/configurators/index.ts:430:        ".factory/skills",
+/tmp/Trellis/packages/cli/src/configurators/index.ts:446:  pi: {
+/tmp/Trellis/packages/cli/src/configurators/index.ts:474: * NOT shared layers like `.agents/skills/`. This prevents false positives
+/tmp/Trellis/packages/cli/src/utils/cwd-guard.ts:4: * Running `trellis init` / `trellis uninstall` in `$HOME` is catastrophic:
+/tmp/Trellis/packages/cli/src/utils/cwd-guard.ts:9: * picks up runtime data, uninstall would later unlink it.
+/tmp/Trellis/packages/cli/src/utils/cwd-guard.ts:47: * Error message printed by both `trellis init` and `trellis uninstall` when
+/tmp/Trellis/packages/cli/test/templates/copilot.test.ts:6:} from "../../src/templates/copilot/index.js";
+/tmp/Trellis/packages/cli/test/templates/copilot.test.ts:10:describe("copilot getAllHooks", () => {
+/tmp/Trellis/packages/cli/test/templates/copilot.test.ts:25:	it("session-start.py does not emit a misleading 'Copilot ignores' systemMessage", () => {
+/tmp/Trellis/packages/cli/test/templates/copilot.test.ts:27:		// user-visible systemMessage claiming Copilot ignores SessionStart output.
+/tmp/Trellis/packages/cli/test/templates/copilot.test.ts:37:		expect(content).not.toMatch(/Copilot[^\n]*ignores hook output/);
+/tmp/Trellis/packages/cli/test/templates/copilot.test.ts:41:describe("copilot getHooksConfig", () => {
+/tmp/Trellis/packages/cli/test/templates/copilot.test.ts:53:			"{{PYTHON_CMD}} .github/copilot/hooks/session-start.py",
+/tmp/Trellis/packages/cli/test/templates/copilot.test.ts:76:describe("copilot getAllPrompts", () => {
+/tmp/Trellis/packages/cli/test/templates/copilot.test.ts:90:	it("loads prompt names from local copilot prompts directory", () => {
+/tmp/Trellis/packages/cli/test/templates/trellis.test.ts:92:    // Without this line, codex/copilot/gemini/qoder sub-agents cannot
+/tmp/Trellis/packages/cli/test/templates/trellis.test.ts:97:    expect(block).toMatch(/codex|copilot|gemini|qoder/);
+/tmp/Trellis/packages/cli/test/templates/cursor.test.ts:51:      // No leading pipe / gt that would indicate a block scalar header
+/tmp/Trellis/packages/cli/test/commands/uninstall.integration.test.ts:235:    for (const sub of ["agents", "commands", "hooks", "skills"]) {
+/tmp/Trellis/packages/cli/test/configurators/platforms.test.ts:19:  getAllHooks as getAllCopilotHooks,
+/tmp/Trellis/packages/cli/test/configurators/platforms.test.ts:20:  getHooksConfig as getCopilotHooksConfig,
+/tmp/Trellis/packages/cli/test/configurators/platforms.test.ts:21:} from "../../src/templates/copilot/index.js";
+/tmp/Trellis/packages/cli/test/configurators/platforms.test.ts:27:} from "../../src/templates/pi/index.js";
+/tmp/Trellis/packages/cli/test/configurators/platforms.test.ts:101:  it(".agents/skills alone does NOT detect as codex (shared standard)", () => {
+/tmp/Trellis/packages/cli/test/configurators/platforms.test.ts:102:    fs.mkdirSync(path.join(tmpDir, ".agents", "skills"), { recursive: true });
+/tmp/Trellis/packages/cli/test/configurators/platforms.test.ts:123:  it("detects .kiro/skills directory as kiro", () => {
+/tmp/Trellis/packages/cli/test/configurators/platforms.test.ts:124:    fs.mkdirSync(path.join(tmpDir, ".kiro", "skills"), { recursive: true });
+/tmp/Trellis/packages/cli/test/configurators/platforms.test.ts:147:  it("detects .github/copilot directory as copilot", () => {

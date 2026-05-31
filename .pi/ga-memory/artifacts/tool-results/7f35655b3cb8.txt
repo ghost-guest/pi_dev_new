@@ -1,0 +1,564 @@
+/**
+ * token-saver v2 — Smarter port of GenericAgent's `compress_history_tags`.
+ *
+ * v1 did head+tail truncation of old toolResult/thinking bodies.
+ * v2 adds four protection layers (don't get dumber) and three optimizations
+ * GA itself doesn't do (cut even more in the cases that matter most).
+ *
+ * Protection layers (correctness):
+ *   1. Protected-pattern whitelist: <summary>...</summary>, URLs, abs paths,
+ *      commit hashes, env-var lines, secrets-shaped tokens, emails are
+ *      extracted from any truncated middle and appended back as
+ *      "[kept facts: ...]" so they survive forever.
+ *   2. isError tool_results are never touched (error tails are critical).
+ *   3. Message identity (toolCallId, toolCall.id) and message count are
+ *      preserved — only `content` bodies are mutated. No orphan refs ever.
+ *   4. Sub-threshold content is skipped (not worth the noise).
+ *
+ * Optimizations beyond GA:
+ *   A. Duplicate-call dedup: if the same toolName+args appears more than once
+ *      in the history, all but the most recent occurrence's tool_result body
+ *      is replaced by a 1-line stub pointing forward. Huge wins on sessions
+ *      where the agent re-reads the same file or re-runs `ls` repeatedly.
+ *   B. Per-tool truncation policy (head/tail bias differs by tool type):
+ *        read/cat       — head-heavy   (file headers > EOF)
+ *        bash/exec      — tail-heavy   (errors live at the end)
+ *        grep/rg/find   — line-sampled (keep first matches, drop middle)
+ *        fetch/curl/web — balanced
+ *   C. Cheap whitespace pre-pass (collapse 3+ blank lines, trim line ends).
+ *
+ * Idempotent: re-running the compressor on already-compressed messages does
+ * not change them, so the prompt-cache prefix above each turn stays stable.
+ *
+ * Config (env vars):
+ *   PI_TOKEN_SAVER_DISABLE=1
+ *   PI_TOKEN_SAVER_VERBOSE=1
+ *   PI_TOKEN_SAVER_KEEP_RECENT=14
+ *   PI_TOKEN_SAVER_MAX_LEN=1600
+ *   PI_TOKEN_SAVER_HEAD_TAIL=1200
+ *   PI_TOKEN_SAVER_NO_DEDUP=1       — disable duplicate-call dedup
+ *   PI_TOKEN_SAVER_NO_PROTECT=1     — disable key-facts extraction
+ *
+ * Commands:
+ *   /token-saver                show stats + settings
+ *   /token-saver on|off|reset   control
+ *   /token-saver explain        explain what was compressed last turn
+ */
+
+import type {
+	ExtensionAPI,
+	ExtensionCommandContext,
+} from "@earendil-works/pi-coding-agent";
+
+// ---- Config -----------------------------------------------------------------
+
+interface Cfg {
+	enabled: boolean;
+	keepRecent: number;
+	maxLen: number;
+	keepHeadTail: number;
+	verbose: boolean;
+	dedup: boolean;
+	protect: boolean;
+}
+
+function loadConfig(): Cfg {
+	const envBool = (v: string | undefined) =>
+		v != null && /^(1|true|yes|on)$/i.test(v);
+	const envInt = (v: string | undefined, d: number) => {
+		const n = v == null ? NaN : parseInt(v, 10);
+		return Number.isFinite(n) && n > 0 ? n : d;
+	};
+	return {
+		enabled: !envBool(process.env.PI_TOKEN_SAVER_DISABLE),
+		keepRecent: envInt(process.env.PI_TOKEN_SAVER_KEEP_RECENT, 14),
+		maxLen: envInt(process.env.PI_TOKEN_SAVER_MAX_LEN, 1600),
+		keepHeadTail: envInt(process.env.PI_TOKEN_SAVER_HEAD_TAIL, 1200),
+		verbose: envBool(process.env.PI_TOKEN_SAVER_VERBOSE),
+		dedup: !envBool(process.env.PI_TOKEN_SAVER_NO_DEDUP),
+		protect: !envBool(process.env.PI_TOKEN_SAVER_NO_PROTECT),
+	};
+}
+
+// ---- Stats ------------------------------------------------------------------
+
+interface Stats {
+	turns: number;
+	bytesBefore: number;
+	bytesAfter: number;
+	truncatedBlocks: number;
+	dedupedBlocks: number;
+	lastTurnSaved: number;
+	lastTurnReport: string[];
+}
+
+function newStats(): Stats {
+	return {
+		turns: 0,
+		bytesBefore: 0,
+		bytesAfter: 0,
+		truncatedBlocks: 0,
+		dedupedBlocks: 0,
+		lastTurnSaved: 0,
+		lastTurnReport: [],
+	};
+}
+
+function humanBytes(n: number): string {
+	if (n < 1024) return `${n}B`;
+	if (n < 1024 * 1024) return `${(n / 1024).toFixed(1)}KB`;
+	return `${(n / 1024 / 1024).toFixed(2)}MB`;
+}
+
+// ---- Protected patterns -----------------------------------------------------
+//
+// Things we never want to lose even if they fall in the truncated middle.
+// Each match is extracted and appended back to the truncated output as a
+// "[kept facts]" annotation. Use `flags: "g"` and non-overlapping patterns.
+
+const PROTECTED_PATTERNS: RegExp[] = [
+	// GA-style facts blocks
+	/<summary>[\s\S]{1,400}?<\/summary>/g,
+	/<key_info>[\s\S]{1,400}?<\/key_info>/g,
+	// URLs
+	/\bhttps?:\/\/[^\s<>"')]+/g,
+	// Absolute filesystem paths (unix + windows drive letter)
+	/(?:^|\s)(\/[A-Za-z0-9._\-/]{4,}|[A-Z]:\\[A-Za-z0-9._\-\\]{2,})/g,
+	// Long hex identifiers (commit hashes, content hashes)
+	/\b[a-f0-9]{12,64}\b/g,
+	// Env-var-shaped declarations
+	/\b[A-Z][A-Z0-9_]{2,}=[\S]{2,}/g,
+	// Secrets-shaped tokens (sk-..., gh*_..., bearer-ish strings)
+	/\b(?:sk|gh[opsur]|xox[abposr]|AKIA|ASIA|ya29|Bearer)[\w_.\-]{16,}/gi,
+	// Emails
+	/\b[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}\b/g,
+];
+
+function extractProtected(s: string): string[] {
+	const out = new Set<string>();
+	for (const re of PROTECTED_PATTERNS) {
+		re.lastIndex = 0;
+		let m: RegExpExecArray | null;
+		while ((m = re.exec(s)) !== null) {
+			out.add(m[0].trim());
+			if (out.size > 32) return [...out]; // cap to avoid blowup
+		}
+	}
+	return [...out];
+}
+
+// ---- Whitespace pre-pass ----------------------------------------------------
+
+function collapseWhitespace(s: string): string {
+	// Collapse 3+ blank lines into 2, strip trailing spaces on each line.
+	// Cheap, lossless for human reading, saves real bytes on noisy logs.
+	return s
+		.replace(/[ \t]+(\r?\n)/g, "$1")
+		.replace(/(\r?\n){3,}/g, "\n\n");
+}
+
+// ---- Smart truncation -------------------------------------------------------
+
+const TRUNC_MARK = "\n...[truncated by token-saver]...\n";
+const PROTECT_PREFIX = "\n[kept facts: ";
+const PROTECT_SUFFIX = "]\n";
+
+type ToolKind = "read" | "bash" | "search" | "fetch" | "default";
+
+interface Policy {
+	headBias: number; // 0..1, fraction of `keep` allocated to head
+	maxLen: number;
+	keepHeadTail: number;
+}
+
+function policyFor(name: string | undefined, cfg: Cfg): Policy {
+	const n = (name || "").toLowerCase();
+	const kind: ToolKind =
+		/^(read|cat|view|open|file_read|fileread)$/.test(n)
+			? "read"
+			: /^(bash|exec|shell|sh|run|python|node)$/.test(n) || n.includes("exec")
+			? "bash"
+			: /^(grep|rg|ripgrep|find|search|glob|ls)$/.test(n)
+			? "search"
+			: /(fetch|curl|http|web|url|wget)/.test(n)
+			? "fetch"
+			: "default";
+	switch (kind) {
+		case "read":
+			return { headBias: 0.7, maxLen: cfg.maxLen, keepHeadTail: cfg.keepHeadTail };
+		case "bash":
+			return { headBias: 0.3, maxLen: cfg.maxLen, keepHeadTail: cfg.keepHeadTail };
+		case "search":
+			// Searches: keep more, since each line is high signal
+			return { headBias: 0.65, maxLen: cfg.maxLen * 1.25, keepHeadTail: cfg.keepHeadTail * 1.25 };
+		case "fetch":
+			return { headBias: 0.5, maxLen: cfg.maxLen, keepHeadTail: cfg.keepHeadTail };
+		default:
+			return { headBias: 0.5, maxLen: cfg.maxLen, keepHeadTail: cfg.keepHeadTail };
+	}
+}
+
+function truncateSmart(
+	s: string,
+	policy: Policy,
+	cfg: Cfg,
+): { out: string; shrunk: boolean } {
+	const collapsed = collapseWhitespace(s);
+	if (collapsed.length <= policy.maxLen) {
+		return { out: collapsed, shrunk: collapsed.length !== s.length };
+	}
+	const headLen = Math.floor(policy.keepHeadTail * policy.headBias);
+	const tailLen = Math.max(64, policy.keepHeadTail - headLen);
+	const head = collapsed.slice(0, headLen);
+	const tail = collapsed.slice(collapsed.length - tailLen);
+	const middle = collapsed.slice(headLen, collapsed.length - tailLen);
+
+	let suffix = "";
+	if (cfg.protect && middle.length > 0) {
+		const facts = extractProtected(middle).filter(
+			(f) => !head.includes(f) && !tail.includes(f),
+		);
+		if (facts.length > 0) {
+			// Cap total fact bytes so a pathological match can't blow past savings
+			const joined = facts.join(" · ");
+			const capped = joined.length > 600 ? joined.slice(0, 600) + "…" : joined;
+			suffix = PROTECT_PREFIX + capped + PROTECT_SUFFIX;
+		}
+	}
+	return { out: head + TRUNC_MARK + suffix + tail, shrunk: true };
+}
+
+// ---- Message compression ----------------------------------------------------
+
+interface CompressResult {
+	blocks: number;
+	saved: number;
+	notes: string[];
+}
+
+function compressMessage(
+	msg: any,
+	toolName: string | undefined,
+	cfg: Cfg,
+): CompressResult {
+	const result: CompressResult = { blocks: 0, saved: 0, notes: [] };
+	if (!msg || typeof msg !== "object") return result;
+
+	// Layer 2: errors are never compressed
+	if (msg.role === "toolResult" && msg.isError) {
+		return result;
+	}
+
+	const role = msg.role;
+	if (role !== "user" && role !== "assistant" && role !== "toolResult") {
+		return result;
+	}
+
+	const policy = policyFor(toolName, cfg);
+
+	const shrink = (text: string, kind: string): string => {
+		if (typeof text !== "string" || text.length <= policy.maxLen) return text;
+		const before = text.length;
+		const { out, shrunk } = truncateSmart(text, policy, cfg);
+		if (!shrunk || out.length >= before) return text;
+		result.saved += before - out.length;
+		result.blocks++;
+		result.notes.push(
+			`  ${kind}${toolName ? `[${toolName}]` : ""}: ${before} -> ${out.length} (-${humanBytes(before - out.length)})`,
+		);
+		return out;
+	};
+
+	const c = msg.content;
+	if (typeof c === "string") {
+		msg.content = shrink(c, role);
+		return result;
+	}
+	if (!Array.isArray(c)) return result;
+
+	for (const part of c) {
+		if (!part || typeof part !== "object") continue;
+		if (part.type === "text" && typeof part.text === "string") {
+			part.text = shrink(part.text, "text");
+		} else if (part.type === "thinking" && typeof part.thinking === "string") {
+			part.thinking = shrink(part.thinking, "thinking");
+		}
+		// toolCall.arguments, image data: untouched
+	}
+	return result;
+}
+
+// ---- Duplicate-call dedup ---------------------------------------------------
+//
+// Build a map: toolCallKey -> [indices of messages that produce that result].
+// For any key with >1 occurrence, replace all OLD occurrences (older than
+// keepRecent) with a single-line stub pointing at the latest occurrence.
+
+function keyOfToolCall(name: string, args: any): string {
+	let argStr: string;
+	try {
+		argStr = JSON.stringify(args);
+	} catch {
+		argStr = String(args);
+	}
+	// Only dedup deterministic-looking calls. Skip anything with "command" that
+	// produces time-varying output (date, top, ps...) is hard to detect — but in
+	// practice dedup-by-args is safe: if the agent ran the same exact command
+	// twice and got different output, the latest one is what matters anyway.
+	return `${name}\u0000${argStr}`;
+}
+
+interface DedupPlan {
+	// for each message index, the index of the latest-occurrence we should
+	// point to with a stub. If absent, leave the message alone.
+	stubs: Map<number, number>;
+}
+
+function planDedup(messages: any[], cutoff: number): DedupPlan {
+	const stubs = new Map<number, number>();
+	// Walk assistant messages to find toolCalls, pair each with the next
+	// toolResult message that has matching toolCallId.
+	const calls: { idx: number; key: string }[] = [];
+	const idToCallIdx = new Map<string, number>(); // tool_call_id -> calls[] index
+
+	for (let i = 0; i < messages.length; i++) {
+		const m = messages[i];
+		if (m.role === "assistant" && Array.isArray(m.content)) {
+			for (const p of m.content) {
+				if (p && p.type === "toolCall" && p.id && p.name) {
+					const k = keyOfToolCall(p.name, p.arguments);
+					idToCallIdx.set(p.id, calls.length);
+					calls.push({ idx: i, key: k });
+				}
+			}
+		} else if (m.role === "toolResult" && m.toolCallId) {
+			const callIdx = idToCallIdx.get(m.toolCallId);
+			if (callIdx != null) {
+				// Tag this result message with the call key via a parallel array
+				(m as any).__tsKey = calls[callIdx].key;
+				(m as any).__tsMsgIdx = i;
+			}
+		}
+	}
+
+	// Group result messages by key
+	const byKey = new Map<string, number[]>();
+	for (let i = 0; i < messages.length; i++) {
+		const m = messages[i];
+		const k = (m as any).__tsKey;
+		if (k) {
+			const arr = byKey.get(k) || [];
+			arr.push(i);
+			byKey.set(k, arr);
+		}
+	}
+
+	// For groups with >1 occurrence, stub all but the latest, but only if they
+	// fall in the compressible range (i < cutoff).
+	for (const [, indices] of byKey) {
+		if (indices.length < 2) continue;
+		const latest = indices[indices.length - 1];
+		for (let j = 0; j < indices.length - 1; j++) {
+			const idx = indices[j];
+			if (idx < cutoff) stubs.set(idx, latest);
+		}
+	}
+
+	// Clean up scratch fields
+	for (const m of messages) {
+		delete (m as any).__tsKey;
+		delete (m as any).__tsMsgIdx;
+	}
+	return { stubs };
+}
+
+function applyDedup(messages: any[], plan: DedupPlan): { saved: number; count: number } {
+	let saved = 0;
+	let count = 0;
+	for (const [idx, latest] of plan.stubs) {
+		const m = messages[idx];
+		if (!m || m.role !== "toolResult") continue;
+		if (m.isError) continue; // never stub errors
+		const before = JSON.stringify(m.content || "").length;
+		const stub = `[token-saver: identical call repeated later — see message #${latest + 1} for full result]`;
+		m.content = [{ type: "text", text: stub }];
+		const after = JSON.stringify(m.content).length;
+		if (after < before) {
+			saved += before - after;
+			count++;
+		}
+	}
+	return { saved, count };
+}
+
+// ---- Helpers ----------------------------------------------------------------
+
+function estimateBytes(msg: any): number {
+	try {
+		return JSON.stringify(msg).length;
+	} catch {
+		return 0;
+	}
+}
+
+function toolNameOf(msg: any): string | undefined {
+	if (msg && msg.role === "toolResult" && typeof msg.toolName === "string") {
+		return msg.toolName;
+	}
+	return undefined;
+}
+
+// ---- Extension entry --------------------------------------------------------
+
+export default function (pi: ExtensionAPI) {
+	const cfg = loadConfig();
+	const stats = newStats();
+
+	const updateStatus = (ctx: { ui: { setStatus: any } }) => {
+		if (!cfg.enabled) {
+			ctx.ui.setStatus("token-saver", undefined);
+			return;
+		}
+		const totalSaved = stats.bytesBefore - stats.bytesAfter;
+		if (totalSaved <= 0) {
+			ctx.ui.setStatus("token-saver", "ts: idle");
+			return;
+		}
+		const pct = ((totalSaved / Math.max(1, stats.bytesBefore)) * 100).toFixed(0);
+		ctx.ui.setStatus(
+			"token-saver",
+			`ts: -${humanBytes(totalSaved)} (${pct}%)`,
+		);
+	};
+
+	pi.on("session_start", async (_e, ctx) => updateStatus(ctx));
+
+	pi.on("context", async (event, ctx) => {
+		if (!cfg.enabled) return;
+		const messages = event.messages;
+		if (!Array.isArray(messages) || messages.length === 0) return;
+
+		const cutoff = Math.max(0, messages.length - cfg.keepRecent);
+		if (cutoff === 0) return;
+
+		stats.lastTurnReport = [];
+
+		// --- Step 1: measure before ---
+		let before = 0;
+		for (let i = 0; i < cutoff; i++) before += estimateBytes(messages[i]);
+
+		// --- Step 2: dedup pass (biggest single win on long sessions) ---
+		let dedupSaved = 0;
+		let dedupCount = 0;
+		if (cfg.dedup) {
+			const plan = planDedup(messages, cutoff);
+			const r = applyDedup(messages, plan);
+			dedupSaved = r.saved;
+			dedupCount = r.count;
+			if (dedupCount > 0) {
+				stats.lastTurnReport.push(
+					`dedup: ${dedupCount} repeat call(s) stubbed (-${humanBytes(dedupSaved)})`,
+				);
+			}
+		}
+
+		// --- Step 3: per-message body compression ---
+		let blocks = 0;
+		for (let i = 0; i < cutoff; i++) {
+			const m = messages[i];
+			const tn = toolNameOf(m);
+			const r = compressMessage(m, tn, cfg);
+			blocks += r.blocks;
+			if (r.notes.length) {
+				stats.lastTurnReport.push(`msg#${i + 1} (${m.role}${tn ? "/" + tn : ""}):`);
+				stats.lastTurnReport.push(...r.notes);
+			}
+		}
+
+		// --- Step 4: measure after ---
+		let after = 0;
+		for (let i = 0; i < cutoff; i++) after += estimateBytes(messages[i]);
+
+		stats.turns++;
+		stats.bytesBefore += before;
+		stats.bytesAfter += after;
+		stats.truncatedBlocks += blocks;
+		stats.dedupedBlocks += dedupCount;
+		stats.lastTurnSaved = before - after;
+
+		if (cfg.verbose && stats.lastTurnSaved > 0) {
+			console.log(
+				`[token-saver] turn=${stats.turns} ` +
+					`compressed ${cutoff} old msgs: ${before} -> ${after} ` +
+					`(-${humanBytes(stats.lastTurnSaved)}, ${blocks} blocks, ${dedupCount} dedup)`,
+			);
+		}
+		updateStatus(ctx);
+		return { messages };
+	});
+
+	pi.registerCommand("token-saver", {
+		description:
+			"Show stats / 'on'|'off'|'reset'|'explain' — see last turn's detail",
+		handler: async (args: string, ctx: ExtensionCommandContext) => {
+			const arg = (args || "").trim().toLowerCase();
+			if (arg === "on" || arg === "enable") {
+				cfg.enabled = true;
+				ctx.ui.notify("token-saver: enabled", "info");
+				updateStatus(ctx);
+				return;
+			}
+			if (arg === "off" || arg === "disable") {
+				cfg.enabled = false;
+				ctx.ui.notify("token-saver: disabled", "info");
+				updateStatus(ctx);
+				return;
+			}
+			if (arg === "reset") {
+				const fresh = newStats();
+				Object.assign(stats, fresh);
+				ctx.ui.notify("token-saver: stats reset", "info");
+				updateStatus(ctx);
+				return;
+			}
+			if (arg === "explain") {
+				const lines =
+					stats.lastTurnReport.length > 0
+						? stats.lastTurnReport
+						: ["nothing compressed last turn"];
+				ctx.ui.notify(
+					[
+						`last turn saved ${humanBytes(stats.lastTurnSaved)}:`,
+						...lines,
+					].join("\n"),
+					"info",
+				);
+				return;
+			}
+			const saved = stats.bytesBefore - stats.bytesAfter;
+			const pct =
+				stats.bytesBefore > 0
+					? ((saved / stats.bytesBefore) * 100).toFixed(1)
+					: "0.0";
+			ctx.ui.notify(
+				[
+					`token-saver v2  (${cfg.enabled ? "enabled" : "disabled"})`,
+					`  keepRecent=${cfg.keepRecent}  maxLen=${cfg.maxLen}  keepHeadTail=${cfg.keepHeadTail}`,
+					`  dedup=${cfg.dedup}  protect-facts=${cfg.protect}  verbose=${cfg.verbose}`,
+					``,
+					`stats`,
+					`  turns           : ${stats.turns}`,
+					`  blocks shrunk   : ${stats.truncatedBlocks}`,
+					`  duplicates cut  : ${stats.dedupedBlocks}`,
+					`  bytes before    : ${humanBytes(stats.bytesBefore)}`,
+					`  bytes after     : ${humanBytes(stats.bytesAfter)}`,
+					`  total saved     : ${humanBytes(saved)} (${pct}%)`,
+					`  last turn saved : ${humanBytes(stats.lastTurnSaved)}`,
+					``,
+					`tip: '/token-saver explain' to see what got cut last turn`,
+				].join("\n"),
+				"info",
+			);
+		},
+	});
+}

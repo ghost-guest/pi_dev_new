@@ -1,0 +1,380 @@
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5257:		info += `${theme.fg("dim", "Total:")} ${stats.tokens.total.toLocaleString()}\n`;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5261:			info += `${theme.fg("dim", "Total:")} ${stats.cost.toFixed(4)}`;
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5283:		this.chatContainer.addChild(new Text(theme.bold(theme.fg("accent", "What's New")), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5412:		this.chatContainer.addChild(new Text(theme.bold(theme.fg("accent", "Keyboard Shortcuts")), 1, 0));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5432:			this.chatContainer.addChild(new Text(`${theme.fg("accent", "✓ New session started")}`, 1, 1));
+packages/coding-agent/src/modes/interactive/interactive-mode.ts:5467:			new Text(`${theme.fg("accent", "✓ Debug log written")}\n${theme.fg("muted", debugLogPath)}`, 1, 1),
+packages/coding-agent/examples/extensions/subagent/index.ts:698:					theme.fg("toolTitle", theme.bold("subagent ")) +
+packages/coding-agent/examples/extensions/subagent/index.ts:699:					theme.fg("accent", `chain (${args.chain.length} steps)`) +
+packages/coding-agent/examples/extensions/subagent/index.ts:700:					theme.fg("muted", ` [${scope}]`);
+packages/coding-agent/examples/extensions/subagent/index.ts:708:						theme.fg("muted", `${i + 1}.`) +
+packages/coding-agent/examples/extensions/subagent/index.ts:710:						theme.fg("accent", step.agent) +
+packages/coding-agent/examples/extensions/subagent/index.ts:711:						theme.fg("dim", ` ${preview}`);
+packages/coding-agent/examples/extensions/subagent/index.ts:713:				if (args.chain.length > 3) text += `\n  ${theme.fg("muted", `... +${args.chain.length - 3} more`)}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:718:					theme.fg("toolTitle", theme.bold("subagent ")) +
+packages/coding-agent/examples/extensions/subagent/index.ts:719:					theme.fg("accent", `parallel (${args.tasks.length} tasks)`) +
+packages/coding-agent/examples/extensions/subagent/index.ts:720:					theme.fg("muted", ` [${scope}]`);
+packages/coding-agent/examples/extensions/subagent/index.ts:723:					text += `\n  ${theme.fg("accent", t.agent)}${theme.fg("dim", ` ${preview}`)}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:725:				if (args.tasks.length > 3) text += `\n  ${theme.fg("muted", `... +${args.tasks.length - 3} more`)}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:731:				theme.fg("toolTitle", theme.bold("subagent ")) +
+packages/coding-agent/examples/extensions/subagent/index.ts:732:				theme.fg("accent", agentName) +
+packages/coding-agent/examples/extensions/subagent/index.ts:733:				theme.fg("muted", ` [${scope}]`);
+packages/coding-agent/examples/extensions/subagent/index.ts:734:			text += `\n  ${theme.fg("dim", preview)}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:751:				if (skipped > 0) text += theme.fg("muted", `... ${skipped} earlier items\n`);
+packages/coding-agent/examples/extensions/subagent/index.ts:755:						text += `${theme.fg("toolOutput", preview)}\n`;
+packages/coding-agent/examples/extensions/subagent/index.ts:757:						text += `${theme.fg("muted", "→ ") + formatToolCall(item.name, item.args, theme.fg.bind(theme))}\n`;
+packages/coding-agent/examples/extensions/subagent/index.ts:766:				const icon = isError ? theme.fg("error", "✗") : theme.fg("success", "✓");
+packages/coding-agent/examples/extensions/subagent/index.ts:772:					let header = `${icon} ${theme.fg("toolTitle", theme.bold(r.agent))}${theme.fg("muted", ` (${r.agentSource})`)}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:773:					if (isError && r.stopReason) header += ` ${theme.fg("error", `[${r.stopReason}]`)}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:776:						container.addChild(new Text(theme.fg("error", `Error: ${r.errorMessage}`), 0, 0));
+packages/coding-agent/examples/extensions/subagent/index.ts:778:					container.addChild(new Text(theme.fg("muted", "─── Task ───"), 0, 0));
+packages/coding-agent/examples/extensions/subagent/index.ts:779:					container.addChild(new Text(theme.fg("dim", r.task), 0, 0));
+packages/coding-agent/examples/extensions/subagent/index.ts:781:					container.addChild(new Text(theme.fg("muted", "─── Output ───"), 0, 0));
+packages/coding-agent/examples/extensions/subagent/index.ts:783:						container.addChild(new Text(theme.fg("muted", "(no output)"), 0, 0));
+packages/coding-agent/examples/extensions/subagent/index.ts:789:										theme.fg("muted", "→ ") + formatToolCall(item.name, item.args, theme.fg.bind(theme)),
+packages/coding-agent/examples/extensions/subagent/index.ts:803:						container.addChild(new Text(theme.fg("dim", usageStr), 0, 0));
+packages/coding-agent/examples/extensions/subagent/index.ts:808:				let text = `${icon} ${theme.fg("toolTitle", theme.bold(r.agent))}${theme.fg("muted", ` (${r.agentSource})`)}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:809:				if (isError && r.stopReason) text += ` ${theme.fg("error", `[${r.stopReason}]`)}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:810:				if (isError && r.errorMessage) text += `\n${theme.fg("error", `Error: ${r.errorMessage}`)}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:811:				else if (displayItems.length === 0) text += `\n${theme.fg("muted", "(no output)")}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:814:					if (displayItems.length > COLLAPSED_ITEM_COUNT) text += `\n${theme.fg("muted", "(Ctrl+O to expand)")}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:817:				if (usageStr) text += `\n${theme.fg("dim", usageStr)}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:836:				const icon = successCount === details.results.length ? theme.fg("success", "✓") : theme.fg("error", "✗");
+packages/coding-agent/examples/extensions/subagent/index.ts:844:								theme.fg("toolTitle", theme.bold("chain ")) +
+packages/coding-agent/examples/extensions/subagent/index.ts:845:								theme.fg("accent", `${successCount}/${details.results.length} steps`),
+packages/coding-agent/examples/extensions/subagent/index.ts:852:						const rIcon = r.exitCode === 0 ? theme.fg("success", "✓") : theme.fg("error", "✗");
+packages/coding-agent/examples/extensions/subagent/index.ts:859:								`${theme.fg("muted", `─── Step ${r.step}: `) + theme.fg("accent", r.agent)} ${rIcon}`,
+packages/coding-agent/examples/extensions/subagent/index.ts:864:						container.addChild(new Text(theme.fg("muted", "Task: ") + theme.fg("dim", r.task), 0, 0));
+packages/coding-agent/examples/extensions/subagent/index.ts:871:										theme.fg("muted", "→ ") + formatToolCall(item.name, item.args, theme.fg.bind(theme)),
+packages/coding-agent/examples/extensions/subagent/index.ts:886:						if (stepUsage) container.addChild(new Text(theme.fg("dim", stepUsage), 0, 0));
+packages/coding-agent/examples/extensions/subagent/index.ts:892:						container.addChild(new Text(theme.fg("dim", `Total: ${usageStr}`), 0, 0));
+packages/coding-agent/examples/extensions/subagent/index.ts:901:					theme.fg("toolTitle", theme.bold("chain ")) +
+packages/coding-agent/examples/extensions/subagent/index.ts:902:					theme.fg("accent", `${successCount}/${details.results.length} steps`);
+packages/coding-agent/examples/extensions/subagent/index.ts:904:					const rIcon = r.exitCode === 0 ? theme.fg("success", "✓") : theme.fg("error", "✗");
+packages/coding-agent/examples/extensions/subagent/index.ts:906:					text += `\n\n${theme.fg("muted", `─── Step ${r.step}: `)}${theme.fg("accent", r.agent)} ${rIcon}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:907:					if (displayItems.length === 0) text += `\n${theme.fg("muted", "(no output)")}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:911:				if (usageStr) text += `\n\n${theme.fg("dim", `Total: ${usageStr}`)}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:912:				text += `\n${theme.fg("muted", "(Ctrl+O to expand)")}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:922:					? theme.fg("warning", "⏳")
+packages/coding-agent/examples/extensions/subagent/index.ts:924:						? theme.fg("warning", "◐")
+packages/coding-agent/examples/extensions/subagent/index.ts:925:						: theme.fg("success", "✓");
+packages/coding-agent/examples/extensions/subagent/index.ts:934:							`${icon} ${theme.fg("toolTitle", theme.bold("parallel "))}${theme.fg("accent", status)}`,
+packages/coding-agent/examples/extensions/subagent/index.ts:941:						const rIcon = isFailedResult(r) ? theme.fg("error", "✗") : theme.fg("success", "✓");
+packages/coding-agent/examples/extensions/subagent/index.ts:947:							new Text(`${theme.fg("muted", "─── ") + theme.fg("accent", r.agent)} ${rIcon}`, 0, 0),
+packages/coding-agent/examples/extensions/subagent/index.ts:949:						container.addChild(new Text(theme.fg("muted", "Task: ") + theme.fg("dim", r.task), 0, 0));
+packages/coding-agent/examples/extensions/subagent/index.ts:956:										theme.fg("muted", "→ ") + formatToolCall(item.name, item.args, theme.fg.bind(theme)),
+packages/coding-agent/examples/extensions/subagent/index.ts:971:						if (taskUsage) container.addChild(new Text(theme.fg("dim", taskUsage), 0, 0));
+packages/coding-agent/examples/extensions/subagent/index.ts:977:						container.addChild(new Text(theme.fg("dim", `Total: ${usageStr}`), 0, 0));
+packages/coding-agent/examples/extensions/subagent/index.ts:983:				let text = `${icon} ${theme.fg("toolTitle", theme.bold("parallel "))}${theme.fg("accent", status)}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:987:							? theme.fg("warning", "⏳")
+packages/coding-agent/examples/extensions/subagent/index.ts:989:								? theme.fg("error", "✗")
+packages/coding-agent/examples/extensions/subagent/index.ts:990:								: theme.fg("success", "✓");
+packages/coding-agent/examples/extensions/subagent/index.ts:992:					text += `\n\n${theme.fg("muted", "─── ")}${theme.fg("accent", r.agent)} ${rIcon}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:994:						text += `\n${theme.fg("muted", r.exitCode === -1 ? "(running...)" : "(no output)")}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:999:					if (usageStr) text += `\n\n${theme.fg("dim", `Total: ${usageStr}`)}`;
+packages/coding-agent/examples/extensions/subagent/index.ts:1001:				if (!expanded) text += `\n${theme.fg("muted", "(Ctrl+O to expand)")}`;
+packages/coding-agent/test/test-theme-colors.ts:203:		const sample = theme.fg(name as Parameters<typeof theme.fg>[0], "Sample text");
+packages/coding-agent/examples/extensions/status-line.ts:15:		ctx.ui.setStatus("status-demo", theme.fg("dim", "Ready"));
+packages/coding-agent/examples/extensions/status-line.ts:21:		const spinner = theme.fg("accent", "●");
+packages/coding-agent/examples/extensions/status-line.ts:22:		const text = theme.fg("dim", ` Turn ${turnCount}...`);
+packages/coding-agent/examples/extensions/status-line.ts:28:		const check = theme.fg("success", "✓");
+packages/coding-agent/examples/extensions/status-line.ts:29:		const text = theme.fg("dim", ` Turn ${turnCount} complete`);
+packages/coding-agent/examples/extensions/structured-output.ts:54:			theme.fg("toolTitle", theme.bold(details.headline)),
+packages/coding-agent/examples/extensions/structured-output.ts:55:			theme.fg("text", details.summary),
+packages/coding-agent/examples/extensions/structured-output.ts:57:			...details.actionItems.map((item, index) => theme.fg("muted", `${index + 1}. ${item}`)),
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:321:		result.push(th.fg("border", `╭${topLine}`) + th.fg("accent", titleStr) + th.fg("border", `${topLine2}╮`));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:324:			result.push(th.fg("border", "│") + truncateToWidth(line, innerW, "...", true) + th.fg("border", "│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:327:		result.push(th.fg("border", `╰${"─".repeat(innerW)}╯`));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:361:				` Current: ${th.fg("accent", this.anchor)}`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:363:				` ${th.fg("dim", "Space/→ = next anchor")}`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:364:				` ${th.fg("dim", "Enter = confirm")}`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:365:				` ${th.fg("dim", "Esc = cancel")}`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:402:				` ${th.fg("accent", this.config.name)}`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:404:				` ${th.fg("dim", "Space/→ = next config")}`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:405:				` ${th.fg("dim", "Esc = close")}`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:439:		const border = (char: string) => th.fg(color, char);
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:444:		lines.push(border("│") + padLine(` Overlay ${th.fg("accent", `#${this.num}`)}`) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:445:		lines.push(border("│") + padLine(` Layer: ${th.fg(color, this.position)}`) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:452:		lines.push(border("│") + padLine(th.fg("dim", " Press Enter/Esc to close")) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:524:			this.lines.push(this.theme.fg("error", data.toString().trim()));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:552:		const border = (c: string) => th.fg("border", c);
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:557:		result.push(border("╭") + th.fg("accent", title) + border(`${"─".repeat(titlePad)}╮`));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:565:			border("│") + padLine(canScrollUp || canScrollDown ? th.fg("dim", ` ${scrollInfo}`) : "") + border("│"),
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:579:		const status = this.finished ? th.fg("success", "✓ Done") : th.fg("warning", "● Running");
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:580:		result.push(border("│") + padLine(` ${status} ${th.fg("dim", "| ↑↓ scroll | Esc close")}`) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:615:				` ${th.fg("dim", "Verify right border")}`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:616:				` ${th.fg("dim", "aligns with edge.")}`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:618:				` ${th.fg("dim", "Press Esc to close")}`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:655:				` ${th.fg("accent", this.config.name)}`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:657:				` ${th.fg("dim", "Space/→ = next")}`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:658:				` ${th.fg("dim", "Esc = close")}`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:687:			th.fg("warning", " ⚠ Rendering 21 lines, maxHeight: 10"),
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:688:			th.fg("dim", " Lines 11-21 truncated (no bottom border)"),
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:696:		contentLines.push("", th.fg("dim", " Press Esc to close"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:734:		const border = (c: string) => th.fg("border", c);
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:739:		lines.push(border("│") + padLine(th.fg("accent", " Responsive Sidepanel")) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:746:			const prefix = isSelected ? th.fg("accent", "→ ") : "  ";
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:747:			const text = isSelected ? th.fg("accent", item) : item;
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:753:		lines.push(border("│") + padLine(th.fg("warning", " ⚠ Resize terminal < 100 cols")) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:754:		lines.push(border("│") + padLine(th.fg("warning", "   to see panel auto-hide")) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:755:		lines.push(border("│") + padLine(th.fg("dim", " Uses visible: (w) => w >= 100")) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:756:		lines.push(border("│") + padLine(th.fg("dim", " ↑↓ navigate | Esc close")) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:809:		const border = (c: string) => th.fg("border", c);
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:813:		lines.push(border("│") + padLine(th.fg("accent", " Animation Demo (~30 FPS)")) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:815:		lines.push(border("│") + padLine(` Frame: ${th.fg("accent", String(this.frame))}`) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:816:		lines.push(border("│") + padLine(` FPS: ${th.fg("success", String(this.fps))}`) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:822:		const bar = " ".repeat(pos) + th.fg("accent", "██████████") + " ".repeat(Math.max(0, barWidth - 10 - pos));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:828:		lines.push(border("│") + padLine(` Spinner: ${th.fg("warning", spin!)}`) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:837:		lines.push(border("│") + padLine(th.fg("dim", " This proves overlays can handle")) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:838:		lines.push(border("│") + padLine(th.fg("dim", " real-time game-like rendering.")) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:839:		lines.push(border("│") + padLine(th.fg("dim", " (pi-doom uses same approach)")) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:841:		lines.push(border("│") + padLine(th.fg("dim", " Press Esc to close")) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:917:				th.fg("accent", " Toggle Demo"),
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:922:				` Toggle count: ${th.fg("accent", String(this.toggleCount))}`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:924:				th.fg("dim", " Press 't' to hide for 1 second"),
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:925:				th.fg("dim", " (demonstrates setHidden API)"),
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:927:				th.fg("dim", " In real usage, a global keybinding"),
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:928:				th.fg("dim", " would toggle visibility externally."),
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:930:				th.fg("dim", " Press Esc to close"),
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:984:		const display = this.typed.length > 0 ? this.typed : th.fg("dim", "(type here)");
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:988:				` ${th.fg("dim", `focused=${this.focused} inputs=${this.inputCount}`)}`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:989:				` ${th.fg("dim", `last: ${this.lastInputDebug || "none"}`)}`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:993:				th.fg("dim", " Type to prove input goes here."),
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:994:				th.fg("dim", " Press Esc to close both."),
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1028:		return this.box([` ${th.fg("accent", time)}`, th.fg("dim", " nonCapturing: true")], width, "Timer");
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1102:				` Current focus: ${th.fg("accent", focused)}`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1105:				` all ${th.fg("accent", "nonCapturing")}. Press Tab to`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1111:				th.fg("dim", " Tab = cycle focus | Esc = close"),
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1157:		const border = (c: string) => th.fg(this.color, c);
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1162:		lines.push(border("│") + padLine(` ${th.fg("accent", this.label)}`) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1165:			lines.push(border("│") + padLine(th.fg("success", " ● FOCUSED")) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1166:			lines.push(border("│") + padLine(th.fg("dim", " (receiving input)")) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1168:			lines.push(border("│") + padLine(th.fg("dim", " ○ unfocused")) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1169:			lines.push(border("│") + padLine(th.fg("dim", " (passive)")) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1275:				? th.fg("success", "Controller (this panel)")
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1280:			` Current focus: ${th.fg("accent", focusedLabel)}`,
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1283:			th.fg("dim", " ─".repeat((width - 2) / 2)),
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1287:			lines.push(` ${th.fg("dim", line)}`);
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1294:		lines.push(th.fg("dim", " ─".repeat((width - 2) / 2)));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1296:		lines.push(` Three ${th.fg("accent", "nonCapturing")} input panels on the left.`);
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1300:		lines.push(th.fg("dim", " Tab = cycle focus | Esc = close all"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1350:		const border = (c: string) => th.fg(this.color, c);
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1356:		const inputDisplay = this.typed.length > 0 ? this.typed : th.fg("dim", "(type here)");
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1361:		lines.push(border("│") + padLine(` ${th.fg("accent", this.label)}`) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1364:			lines.push(border("│") + padLine(th.fg("success", " ● FOCUSED")) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1365:			lines.push(border("│") + padLine(th.fg("dim", " (receiving input)")) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1367:			lines.push(border("│") + padLine(th.fg("dim", " ○ unfocused")) + border("│"));
+packages/coding-agent/examples/extensions/overlay-qa-tests.ts:1372:		lines.push(border("│") + padLine(th.fg("dim", " Tab | Esc")) + border("│"));
+packages/coding-agent/examples/extensions/custom-footer.ts:48:							const left = theme.fg("dim", `↑${fmt(input)} ↓${fmt(output)} $${cost.toFixed(3)}`);
+packages/coding-agent/examples/extensions/custom-footer.ts:50:							const right = theme.fg("dim", `${ctx.model?.id || "no-model"}${branchStr}`);
+packages/coding-agent/examples/extensions/truncated-tool.ts:139:			let text = theme.fg("toolTitle", theme.bold("rg "));
+packages/coding-agent/examples/extensions/truncated-tool.ts:140:			text += theme.fg("accent", `"${args.pattern}"`);
+packages/coding-agent/examples/extensions/truncated-tool.ts:142:				text += theme.fg("muted", ` in ${args.path}`);
+packages/coding-agent/examples/extensions/truncated-tool.ts:145:				text += theme.fg("dim", ` --glob ${args.glob}`);
+packages/coding-agent/examples/extensions/truncated-tool.ts:156:				return new Text(theme.fg("warning", "Searching..."), 0, 0);
+packages/coding-agent/examples/extensions/truncated-tool.ts:161:				return new Text(theme.fg("dim", "No matches found"), 0, 0);
+packages/coding-agent/examples/extensions/truncated-tool.ts:165:			let text = theme.fg("success", `${details.matchCount} matches`);
+packages/coding-agent/examples/extensions/truncated-tool.ts:169:				text += theme.fg("warning", " (truncated)");
+packages/coding-agent/examples/extensions/truncated-tool.ts:179:						text += `\n${theme.fg("dim", line)}`;
+packages/coding-agent/examples/extensions/truncated-tool.ts:182:						text += `\n${theme.fg("muted", "... (use read tool to see full output)")}`;
+packages/coding-agent/examples/extensions/truncated-tool.ts:188:					text += `\n${theme.fg("dim", `Full output: ${details.fullOutputPath}`)}`;
+packages/coding-agent/examples/extensions/minimal-mode.ts:85:			let pathDisplay = path ? theme.fg("accent", path) : theme.fg("toolOutput", "...");
+packages/coding-agent/examples/extensions/minimal-mode.ts:91:				pathDisplay += theme.fg("warning", `:${startLine}${endLine ? `-${endLine}` : ""}`);
+packages/coding-agent/examples/extensions/minimal-mode.ts:94:			return new Text(`${theme.fg("toolTitle", theme.bold("read"))} ${pathDisplay}`, 0, 0);
+packages/coding-agent/examples/extensions/minimal-mode.ts:110:			const output = lines.map((line) => theme.fg("toolOutput", line)).join("\n");
+packages/coding-agent/examples/extensions/minimal-mode.ts:133:			const timeoutSuffix = timeout ? theme.fg("muted", ` (timeout ${timeout}s)`) : "";
+packages/coding-agent/examples/extensions/minimal-mode.ts:135:			return new Text(theme.fg("toolTitle", theme.bold(`$ ${command}`)) + timeoutSuffix, 0, 0);
+packages/coding-agent/examples/extensions/minimal-mode.ts:153:				.map((line) => theme.fg("toolOutput", line))
+packages/coding-agent/examples/extensions/minimal-mode.ts:181:			const pathDisplay = path ? theme.fg("accent", path) : theme.fg("toolOutput", "...");
+packages/coding-agent/examples/extensions/minimal-mode.ts:183:			const lineInfo = lineCount > 0 ? theme.fg("muted", ` (${lineCount} lines)`) : "";
+packages/coding-agent/examples/extensions/minimal-mode.ts:185:			return new Text(`${theme.fg("toolTitle", theme.bold("write"))} ${pathDisplay}${lineInfo}`, 0, 0);
+packages/coding-agent/examples/extensions/minimal-mode.ts:198:					return new Text(`\n${theme.fg("error", textContent.text)}`, 0, 0);
+packages/coding-agent/examples/extensions/minimal-mode.ts:223:			const pathDisplay = path ? theme.fg("accent", path) : theme.fg("toolOutput", "...");
+packages/coding-agent/examples/extensions/minimal-mode.ts:225:			return new Text(`${theme.fg("toolTitle", theme.bold("edit"))} ${pathDisplay}`, 0, 0);
+packages/coding-agent/examples/extensions/minimal-mode.ts:243:				return new Text(`\n${theme.fg("error", text)}`, 0, 0);
+packages/coding-agent/examples/extensions/minimal-mode.ts:247:			return new Text(`\n${theme.fg("toolOutput", text)}`, 0, 0);
+packages/coding-agent/examples/extensions/minimal-mode.ts:271:			let text = `${theme.fg("toolTitle", theme.bold("find"))} ${theme.fg("accent", pattern)}`;
+packages/coding-agent/examples/extensions/minimal-mode.ts:272:			text += theme.fg("toolOutput", ` in ${path}`);
+packages/coding-agent/examples/extensions/minimal-mode.ts:274:				text += theme.fg("toolOutput", ` (limit ${limit})`);
+packages/coding-agent/examples/extensions/minimal-mode.ts:287:						return new Text(theme.fg("muted", ` → ${count} files`), 0, 0);
+packages/coding-agent/examples/extensions/minimal-mode.ts:302:				.map((line) => theme.fg("toolOutput", line))
+packages/coding-agent/examples/extensions/minimal-mode.ts:330:			let text = `${theme.fg("toolTitle", theme.bold("grep"))} ${theme.fg("accent", `/${pattern}/`)}`;
+packages/coding-agent/examples/extensions/minimal-mode.ts:331:			text += theme.fg("toolOutput", ` in ${path}`);
+packages/coding-agent/examples/extensions/minimal-mode.ts:333:				text += theme.fg("toolOutput", ` (${glob})`);
+packages/coding-agent/examples/extensions/minimal-mode.ts:336:				text += theme.fg("toolOutput", ` limit ${limit}`);
+packages/coding-agent/examples/extensions/minimal-mode.ts:349:						return new Text(theme.fg("muted", ` → ${count} matches`), 0, 0);
+packages/coding-agent/examples/extensions/minimal-mode.ts:364:				.map((line) => theme.fg("toolOutput", line))
+packages/coding-agent/examples/extensions/minimal-mode.ts:390:			let text = `${theme.fg("toolTitle", theme.bold("ls"))} ${theme.fg("accent", path)}`;
+packages/coding-agent/examples/extensions/minimal-mode.ts:392:				text += theme.fg("toolOutput", ` (limit ${limit})`);
+packages/coding-agent/examples/extensions/minimal-mode.ts:405:						return new Text(theme.fg("muted", ` → ${count} entries`), 0, 0);
+packages/coding-agent/examples/extensions/minimal-mode.ts:420:				.map((line) => theme.fg("toolOutput", line))
+packages/coding-agent/examples/extensions/todo.ts:68:		const title = th.fg("accent", " Todos ");
+packages/coding-agent/examples/extensions/todo.ts:70:			th.fg("borderMuted", "─".repeat(3)) + title + th.fg("borderMuted", "─".repeat(Math.max(0, width - 10)));
+packages/coding-agent/examples/extensions/todo.ts:75:			lines.push(truncateToWidth(`  ${th.fg("dim", "No todos yet. Ask the agent to add some!")}`, width));
+packages/coding-agent/examples/extensions/todo.ts:79:			lines.push(truncateToWidth(`  ${th.fg("muted", `${done}/${total} completed`)}`, width));
+packages/coding-agent/examples/extensions/todo.ts:83:				const check = todo.done ? th.fg("success", "✓") : th.fg("dim", "○");
+packages/coding-agent/examples/extensions/todo.ts:84:				const id = th.fg("accent", `#${todo.id}`);
+packages/coding-agent/examples/extensions/todo.ts:85:				const text = todo.done ? th.fg("dim", todo.text) : th.fg("text", todo.text);
+packages/coding-agent/examples/extensions/todo.ts:91:		lines.push(truncateToWidth(`  ${th.fg("dim", "Press Escape to close")}`, width));
+packages/coding-agent/examples/extensions/todo.ts:222:			let text = theme.fg("toolTitle", theme.bold("todo ")) + theme.fg("muted", args.action);
+packages/coding-agent/examples/extensions/todo.ts:223:			if (args.text) text += ` ${theme.fg("dim", `"${args.text}"`)}`;
+packages/coding-agent/examples/extensions/todo.ts:224:			if (args.id !== undefined) text += ` ${theme.fg("accent", `#${args.id}`)}`;
+packages/coding-agent/examples/extensions/todo.ts:236:				return new Text(theme.fg("error", `Error: ${details.error}`), 0, 0);
+packages/coding-agent/examples/extensions/todo.ts:244:						return new Text(theme.fg("dim", "No todos"), 0, 0);
+packages/coding-agent/examples/extensions/todo.ts:246:					let listText = theme.fg("muted", `${todoList.length} todo(s):`);
+packages/coding-agent/examples/extensions/todo.ts:249:						const check = t.done ? theme.fg("success", "✓") : theme.fg("dim", "○");
+packages/coding-agent/examples/extensions/todo.ts:250:						const itemText = t.done ? theme.fg("dim", t.text) : theme.fg("muted", t.text);
+packages/coding-agent/examples/extensions/todo.ts:251:						listText += `\n${check} ${theme.fg("accent", `#${t.id}`)} ${itemText}`;
+packages/coding-agent/examples/extensions/todo.ts:254:						listText += `\n${theme.fg("dim", `... ${todoList.length - 5} more`)}`;
+packages/coding-agent/examples/extensions/todo.ts:262:						theme.fg("success", "✓ Added ") +
+packages/coding-agent/examples/extensions/todo.ts:263:							theme.fg("accent", `#${added.id}`) +
+packages/coding-agent/examples/extensions/todo.ts:265:							theme.fg("muted", added.text),
+packages/coding-agent/examples/extensions/todo.ts:274:					return new Text(theme.fg("success", "✓ ") + theme.fg("muted", msg), 0, 0);
+packages/coding-agent/examples/extensions/todo.ts:278:					return new Text(theme.fg("success", "✓ ") + theme.fg("muted", "Cleared all todos"), 0, 0);
+packages/coding-agent/examples/extensions/ssh.ts:197:			ctx.ui.setStatus("ssh", ctx.ui.theme.fg("accent", `SSH: ${resolvedSsh.remote}:${resolvedSsh.remoteCwd}`));
+packages/coding-agent/examples/extensions/working-indicator.ts:91:		ctx.ui.setStatus("working-indicator", ctx.ui.theme.fg("dim", `Indicator: ${describeMode(mode)}`));
+packages/coding-agent/examples/extensions/message-renderer.ts:21:		const prefix = theme.fg(color, `[${level.toUpperCase()}]`);
+packages/coding-agent/examples/extensions/message-renderer.ts:28:			text += `\n${theme.fg("dim", `  at ${time}`)}`;
+packages/coding-agent/examples/extensions/custom-header.ts:16:	const piBlue = (text: string) => theme.fg("accent", text);
+packages/coding-agent/examples/extensions/custom-header.ts:17:	const white = (text: string) => text; // Use plain white (or theme.fg("text", text))
+packages/coding-agent/examples/extensions/custom-header.ts:18:	const black = (text: string) => theme.fg("dim", text); // Use dim for contrast
+packages/coding-agent/examples/extensions/custom-header.ts:56:						const subtitle = `${theme.fg("muted", "   shitty coding agent")}${theme.fg("dim", ` v${VERSION}`)}`;
+packages/coding-agent/examples/extensions/questionnaire.ts:113:					borderColor: (s) => theme.fg("accent", s),
+packages/coding-agent/examples/extensions/questionnaire.ts:115:						selectedPrefix: (t) => theme.fg("accent", t),
+packages/coding-agent/examples/extensions/questionnaire.ts:116:						selectedText: (t) => theme.fg("accent", t),
+packages/coding-agent/examples/extensions/questionnaire.ts:117:						description: (t) => theme.fg("muted", t),
+packages/coding-agent/examples/extensions/questionnaire.ts:118:						scrollInfo: (t) => theme.fg("dim", t),
+packages/coding-agent/examples/extensions/questionnaire.ts:119:						noMatch: (t) => theme.fg("warning", t),
+packages/coding-agent/examples/extensions/questionnaire.ts:268:					add(theme.fg("accent", "─".repeat(width)));
+packages/coding-agent/examples/extensions/questionnaire.ts:280:							const styled = isActive ? theme.bg("selectedBg", theme.fg("text", text)) : theme.fg(color, text);
+packages/coding-agent/examples/extensions/questionnaire.ts:287:							? theme.bg("selectedBg", theme.fg("text", submitText))
+packages/coding-agent/examples/extensions/questionnaire.ts:288:							: theme.fg(canSubmit ? "success" : "dim", submitText);
+packages/coding-agent/examples/extensions/questionnaire.ts:300:							const prefix = selected ? theme.fg("accent", "> ") : "  ";
+packages/coding-agent/examples/extensions/questionnaire.ts:304:								add(prefix + theme.fg("accent", `${i + 1}. ${opt.label} ✎`));
+packages/coding-agent/examples/extensions/questionnaire.ts:306:								add(prefix + theme.fg(color, `${i + 1}. ${opt.label}`));
+packages/coding-agent/examples/extensions/questionnaire.ts:309:								add(`     ${theme.fg("muted", opt.description)}`);
+packages/coding-agent/examples/extensions/questionnaire.ts:316:						add(theme.fg("text", ` ${q.prompt}`));
+packages/coding-agent/examples/extensions/questionnaire.ts:321:						add(theme.fg("muted", " Your answer:"));
+packages/coding-agent/examples/extensions/questionnaire.ts:326:						add(theme.fg("dim", " Enter to submit • Esc to cancel"));
+packages/coding-agent/examples/extensions/questionnaire.ts:328:						add(theme.fg("accent", theme.bold(" Ready to submit")));
+packages/coding-agent/examples/extensions/questionnaire.ts:334:								add(`${theme.fg("muted", ` ${question.label}: `)}${theme.fg("text", prefix + answer.label)}`);
+packages/coding-agent/examples/extensions/questionnaire.ts:339:							add(theme.fg("success", " Press Enter to submit"));
+packages/coding-agent/examples/extensions/questionnaire.ts:345:							add(theme.fg("warning", ` Unanswered: ${missing}`));
+packages/coding-agent/examples/extensions/questionnaire.ts:348:						add(theme.fg("text", ` ${q.prompt}`));
+packages/coding-agent/examples/extensions/questionnaire.ts:358:						add(theme.fg("dim", help));
+packages/coding-agent/examples/extensions/questionnaire.ts:360:					add(theme.fg("accent", "─".repeat(width)));
+packages/coding-agent/examples/extensions/questionnaire.ts:400:			let text = theme.fg("toolTitle", theme.bold("questionnaire "));
+packages/coding-agent/examples/extensions/questionnaire.ts:401:			text += theme.fg("muted", `${count} question${count !== 1 ? "s" : ""}`);
+packages/coding-agent/examples/extensions/questionnaire.ts:403:				text += theme.fg("dim", ` (${truncateToWidth(labels, 40)})`);
+packages/coding-agent/examples/extensions/questionnaire.ts:415:				return new Text(theme.fg("warning", "Cancelled"), 0, 0);
+packages/coding-agent/examples/extensions/questionnaire.ts:419:					return `${theme.fg("success", "✓ ")}${theme.fg("accent", a.id)}: ${theme.fg("muted", "(wrote) ")}${a.label}`;
+packages/coding-agent/examples/extensions/questionnaire.ts:422:				return `${theme.fg("success", "✓ ")}${theme.fg("accent", a.id)}: ${display}`;
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:48:			let text = theme.fg("toolTitle", theme.bold("read "));
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:49:			text += theme.fg("accent", args.path);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:54:				text += theme.fg("dim", ` (${parts.join(", ")})`);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:60:			if (isPartial) return new Text(theme.fg("warning", "Reading..."), 0, 0);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:66:				return new Text(theme.fg("success", "Image loaded"), 0, 0);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:70:				return new Text(theme.fg("error", "No content"), 0, 0);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:74:			let text = theme.fg("success", `${lineCount} lines`);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:77:				text += theme.fg("warning", ` (truncated from ${details.truncation.totalLines})`);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:83:					text += `\n${theme.fg("dim", line)}`;
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:86:					text += `\n${theme.fg("muted", `... ${lineCount - 15} more lines`)}`;
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:107:			let text = theme.fg("toolTitle", theme.bold("$ "));
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:109:			text += theme.fg("accent", cmd);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:111:				text += theme.fg("dim", ` (timeout: ${args.timeout}s)`);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:117:			if (isPartial) return new Text(theme.fg("warning", "Running..."), 0, 0);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:129:				text += theme.fg("success", "done");
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:131:				text += theme.fg("error", `exit ${exitCode}`);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:133:			text += theme.fg("dim", ` (${lineCount} lines)`);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:136:				text += theme.fg("warning", " [truncated]");
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:142:					text += `\n${theme.fg("dim", line)}`;
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:145:					text += `\n${theme.fg("muted", "... more output")}`;
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:167:			let text = theme.fg("toolTitle", theme.bold("edit "));
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:168:			text += theme.fg("accent", args.path);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:173:			if (isPartial) return new Text(theme.fg("warning", "Editing..."), 0, 0);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:179:				return new Text(theme.fg("error", content.text.split("\n")[0]), 0, 0);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:183:				return new Text(theme.fg("success", "Applied"), 0, 0);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:195:			let text = theme.fg("success", `+${additions}`);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:196:			text += theme.fg("dim", " / ");
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:197:			text += theme.fg("error", `-${removals}`);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:202:						text += `\n${theme.fg("success", line)}`;
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:204:						text += `\n${theme.fg("error", line)}`;
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:206:						text += `\n${theme.fg("dim", line)}`;
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:210:					text += `\n${theme.fg("muted", `... ${diffLines.length - 30} more diff lines`)}`;
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:231:			let text = theme.fg("toolTitle", theme.bold("write "));
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:232:			text += theme.fg("accent", args.path);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:234:			text += theme.fg("dim", ` (${lineCount} lines)`);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:239:			if (isPartial) return new Text(theme.fg("warning", "Writing..."), 0, 0);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:243:				return new Text(theme.fg("error", content.text.split("\n")[0]), 0, 0);
+packages/coding-agent/examples/extensions/built-in-tool-renderer.ts:246:			return new Text(theme.fg("success", "Written"), 0, 0);
+packages/coding-agent/examples/extensions/tic-tac-toe.ts:529:		const dim = (s: string) => this.theme.fg("dim", s);
+packages/coding-agent/examples/extensions/tic-tac-toe.ts:562:		const dim = (s: string) => this.theme.fg("dim", s);
+packages/coding-agent/examples/extensions/tic-tac-toe.ts:574:				title = bold(this.theme.fg("accent", "\u2605 Player X wins \u2605"));
+packages/coding-agent/examples/extensions/tic-tac-toe.ts:578:				title = bold(this.theme.fg("warning", "\u2605 Player O wins \u2605"));
+packages/coding-agent/examples/extensions/tic-tac-toe.ts:582:				title = bold(this.theme.fg("muted", "\u2014 Draw \u2014"));
+packages/coding-agent/examples/extensions/tic-tac-toe.ts:689:				? `${theme.fg("warning", theme.bold("O"))} (Agent)`
+packages/coding-agent/examples/extensions/tic-tac-toe.ts:690:				: `${theme.fg("accent", theme.bold("X"))} (You)`;
+packages/coding-agent/examples/extensions/tic-tac-toe.ts:691:		const title = `${theme.fg("accent", theme.bold("Player X played"))}  ${theme.fg("dim", "\u2192")}  next: ${turnLabel}`;
+packages/coding-agent/examples/extensions/tic-tac-toe.ts:952:			return new Text(theme.fg("toolTitle", theme.bold("tic_tac_toe ")) + theme.fg("muted", action), 0, 0);
+packages/coding-agent/examples/extensions/tic-tac-toe.ts:959:			const prefix = context?.isError ? theme.fg("error", "\u2717 ") : theme.fg("success", "\u2713 ");
+packages/coding-agent/examples/extensions/tic-tac-toe.ts:960:			const summary = prefix + theme.fg("muted", msg);
+packages/coding-agent/examples/extensions/tic-tac-toe.ts:994:			return new Text(theme.fg("toolTitle", theme.bold("tic_tac_toe_see_board")), 0, 0);
+packages/coding-agent/examples/extensions/tic-tac-toe.ts:1000:				theme.fg("success", "\u2713 ") +
+packages/coding-agent/examples/extensions/tic-tac-toe.ts:1001:				theme.fg("muted", `cursor (${details?.agentCursorRow ?? 0},${details?.agentCursorCol ?? 0})`);
+packages/coding-agent/examples/extensions/question.ts:71:						borderColor: (s) => theme.fg("accent", s),
+packages/coding-agent/examples/extensions/question.ts:73:							selectedPrefix: (t) => theme.fg("accent", t),
+packages/coding-agent/examples/extensions/question.ts:74:							selectedText: (t) => theme.fg("accent", t),
+packages/coding-agent/examples/extensions/question.ts:75:							description: (t) => theme.fg("muted", t),
+packages/coding-agent/examples/extensions/question.ts:76:							scrollInfo: (t) => theme.fg("dim", t),
+packages/coding-agent/examples/extensions/question.ts:77:							noMatch: (t) => theme.fg("warning", t),
+packages/coding-agent/examples/extensions/question.ts:144:						add(theme.fg("accent", "─".repeat(width)));
+packages/coding-agent/examples/extensions/question.ts:145:						add(theme.fg("text", ` ${params.question}`));
+packages/coding-agent/examples/extensions/question.ts:152:							const prefix = selected ? theme.fg("accent", "> ") : "  ";
+packages/coding-agent/examples/extensions/question.ts:155:								add(prefix + theme.fg("accent", `${i + 1}. ${opt.label} ✎`));
+packages/coding-agent/examples/extensions/question.ts:157:								add(prefix + theme.fg("accent", `${i + 1}. ${opt.label}`));
+packages/coding-agent/examples/extensions/question.ts:159:								add(`  ${theme.fg("text", `${i + 1}. ${opt.label}`)}`);
+packages/coding-agent/examples/extensions/question.ts:164:								add(`     ${theme.fg("muted", opt.description)}`);
+packages/coding-agent/examples/extensions/question.ts:170:							add(theme.fg("muted", " Your answer:"));
+packages/coding-agent/examples/extensions/question.ts:178:							add(theme.fg("dim", " Enter to submit • Esc to go back"));
+packages/coding-agent/examples/extensions/question.ts:180:							add(theme.fg("dim", " ↑↓ navigate • Enter to select • Esc to cancel"));
+packages/coding-agent/examples/extensions/question.ts:182:						add(theme.fg("accent", "─".repeat(width)));
+packages/coding-agent/examples/extensions/question.ts:231:			let text = theme.fg("toolTitle", theme.bold("question ")) + theme.fg("muted", args.question);
+packages/coding-agent/examples/extensions/question.ts:236:				text += `\n${theme.fg("dim", `  Options: ${numbered.join(", ")}`)}`;
+packages/coding-agent/examples/extensions/question.ts:249:				return new Text(theme.fg("warning", "Cancelled"), 0, 0);
+packages/coding-agent/examples/extensions/question.ts:254:					theme.fg("success", "✓ ") + theme.fg("muted", "(wrote) ") + theme.fg("accent", details.answer),
+packages/coding-agent/examples/extensions/question.ts:261:			return new Text(theme.fg("success", "✓ ") + theme.fg("accent", display), 0, 0);
+packages/coding-agent/examples/extensions/tools.ts:86:							return [theme.fg("accent", theme.bold("Tool Configuration")), ""];
+packages/coding-agent/examples/extensions/overlay-test.ts:98:		const row = (content: string) => th.fg("border", "│") + pad(content, innerW) + th.fg("border", "│");
+packages/coding-agent/examples/extensions/overlay-test.ts:100:		lines.push(th.fg("border", `╭${"─".repeat(innerW)}╮`));
+packages/coding-agent/examples/extensions/overlay-test.ts:101:		lines.push(row(` ${th.fg("accent", "🧪 Overlay Test")}`));
+packages/coding-agent/examples/extensions/overlay-test.ts:105:		lines.push(row(` ${th.fg("dim", "─── Edge Cases (borders should align) ───")}`));
+packages/coding-agent/examples/extensions/overlay-test.ts:106:		lines.push(row(` Wide: ${th.fg("warning", "中文日本語한글テスト漢字繁體简体ひらがなカタカナ가나다라마바")}`));
+packages/coding-agent/examples/extensions/overlay-test.ts:109:				` Styled: ${th.fg("error", "RED")} ${th.fg("success", "GREEN")} ${th.fg("warning", "YELLOW")} ${th.fg("accent", "ACCENT")} ${th.fg("dim", "DIM")} ${th.fg("error", "more")} ${th.fg("success", "colors")}`,
+packages/coding-agent/examples/extensions/overlay-test.ts:116:		lines.push(row(` ${th.fg("dim", "─── Actions ───")}`));
+packages/coding-agent/examples/extensions/overlay-test.ts:125:				const label = isSelected ? th.fg("accent", `${item.label}:`) : th.fg("text", `${item.label}:`);
+packages/coding-agent/examples/extensions/overlay-test.ts:138:				content = prefix + (isSelected ? th.fg("accent", item.label) : th.fg("text", item.label));
+packages/coding-agent/examples/extensions/overlay-test.ts:145:		lines.push(row(` ${th.fg("dim", "↑↓ navigate • type to input • Enter select • Esc cancel")}`));
+packages/coding-agent/examples/extensions/overlay-test.ts:146:		lines.push(th.fg("border", `╰${"─".repeat(innerW)}╯`));
+packages/coding-agent/examples/extensions/preset.ts:227:			container.addChild(new DynamicBorder((str) => theme.fg("accent", str)));
+packages/coding-agent/examples/extensions/preset.ts:230:			container.addChild(new Text(theme.fg("accent", theme.bold("Select Preset"))));
+packages/coding-agent/examples/extensions/preset.ts:234:				selectedPrefix: (text) => theme.fg("accent", text),
+packages/coding-agent/examples/extensions/preset.ts:235:				selectedText: (text) => theme.fg("accent", text),
+packages/coding-agent/examples/extensions/preset.ts:236:				description: (text) => theme.fg("muted", text),
+packages/coding-agent/examples/extensions/preset.ts:237:				scrollInfo: (text) => theme.fg("dim", text),
+packages/coding-agent/examples/extensions/preset.ts:238:				noMatch: (text) => theme.fg("warning", text),
+packages/coding-agent/examples/extensions/preset.ts:247:			container.addChild(new Text(theme.fg("dim", "↑↓ navigate • enter select • esc cancel")));
+packages/coding-agent/examples/extensions/preset.ts:249:			container.addChild(new DynamicBorder((str) => theme.fg("accent", str)));
+packages/coding-agent/examples/extensions/preset.ts:298:			ctx.ui.setStatus("preset", ctx.ui.theme.fg("accent", `preset:${activePresetName}`));
+packages/coding-agent/examples/extensions/plan-mode/index.ts:53:			ctx.ui.setStatus("plan-mode", ctx.ui.theme.fg("accent", `📋 ${completed}/${todoItems.length}`));
+packages/coding-agent/examples/extensions/plan-mode/index.ts:55:			ctx.ui.setStatus("plan-mode", ctx.ui.theme.fg("warning", "⏸ plan"));
+packages/coding-agent/examples/extensions/plan-mode/index.ts:65:						ctx.ui.theme.fg("success", "☑ ") + ctx.ui.theme.fg("muted", ctx.ui.theme.strikethrough(item.text))
+packages/coding-agent/examples/extensions/plan-mode/index.ts:68:				return `${ctx.ui.theme.fg("muted", "☐ ")}${item.text}`;
+packages/coding-agent/examples/extensions/sandbox/index.ts:278:				ctx.ui.theme.fg("accent", `🔒 Sandbox: ${networkCount} domains, ${writeCount} write paths`),
+packages/coding-agent/examples/extensions/border-status-editor.ts:133:				const topLeft = isWorking ? thm.fg("accent", ` ${spinnerFrames[spinnerIndex]} `) : "";
+packages/coding-agent/examples/extensions/border-status-editor.ts:135:				const bottomLeft = thm.fg("muted", ` ${model} · ${formatThinking(thinking)} `);
+packages/coding-agent/examples/extensions/border-status-editor.ts:136:				const bottomRight = thm.fg(
+packages/coding-agent/examples/extensions/summarize.ts:124:		const border = new DynamicBorder((s: string) => theme.fg("accent", s));
+packages/coding-agent/examples/extensions/summarize.ts:128:		container.addChild(new Text(theme.fg("accent", theme.bold("Conversation Summary")), 1, 0));
+packages/coding-agent/examples/extensions/summarize.ts:130:		container.addChild(new Text(theme.fg("dim", "Press Enter or Esc to close"), 1, 0));
+
+[Showing lines 376-753 of 753 (50.0KB limit). Full output: /var/folders/7m/csfvhz791k527kby7nxl7cbc0000h_/T/pi-bash-53f8271cc7aedf47.log]
